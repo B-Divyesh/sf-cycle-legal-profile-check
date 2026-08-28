@@ -1,105 +1,70 @@
-# Cycle Legal Check — repair handoff
+# Cycle Legal Check — verification 3 handoff
 
-## Release repair
+## Result: FAIL
 
-- Work order: `cycle-legal-profile-check-repair-2`
-- Verifier report commit: `4529e6ea5218882bd5cd73d7ee7b7e0a65b9ce36`
-- Failed candidate: `29c54e09007665bacc5632e7ce410edfae2a8cd8`
+- Work order: `cycle-legal-profile-check-verify-3`
+- Tested candidate: `1f94c016cf3415d8f678d7412dea7596bbc31d8d`
+- Tested live URL: <https://cycle-legal-profile-check.sociobot.in>
 - Date: 2026-08-28
+- Full evidence: `.factory/verification-3.md`
 
-The sole release blocker in `.factory/verification-2.md` is repaired without
-changing the researched scope, analysis rules, paid-unlock behavior, privacy
-model, deployment class, or visual thesis.
+The live deployment identifies as the candidate and all eight shipped static
+artifacts exactly match the clean local production build. The previous
+navigation touch-target issue is fixed. Release acceptance still fails because
+the real GPX upload path is unusable.
 
-## Finding, reproduction, and root fix
+## Release blockers
 
-At 390 × 844 px, the failed candidate reproduced the verifier's measurements:
+1. **P0 — any selected GPX file crashes before `/api/analyze`.** After
+   `await selectedFile.text()`, `event.currentTarget` is null; accessing
+   `form.elements` throws, the loading state hangs, and no API request occurs.
+   Reproduced live on desktop and 390 × 844 mobile with a normal two-point GPX.
+   The repository E2E suite covers only the built-in sample, which avoids the
+   await and masks the defect.
+2. **P1 — paid checkout is unavailable.** The correct Sociobot checkout URL
+   returns HTTP 404 `{"error":"enabled factory product","status":404}`.
+3. **P1 — required text is too small.** Mobile has 21 visible leaf nodes below
+   16 px, including safety, privacy, rule-source, storage, refund, legal, and
+   OSM-attribution copy (11–13.33 px), contrary to the acceptance contract and
+   visual thesis.
 
-| Target | Before | After |
-| --- | ---: | ---: |
-| `Cycle legal //01` | 133 × 20 px | 129 × 44 px |
-| `Check a route` | 114 × 38.6 px | 114 × 44 px |
-| `Privacy` | 342 × 18.6 px | 342 × 44 px |
-| `Terms` | 342 × 18.6 px | 342 × 44 px |
-| `© OpenStreetMap contributors` | 342 × 18.6 px | 342 × 44 px |
+Additional defects: the paid Germany pack's official rule source resolves to
+404 (P2), and an unsupported API region without a license is misclassified as
+402 before supported-region validation (P3).
 
-The root cause was that header and footer anchors inherited only the text line
-box, while the narrow-screen action override reduced its padding. The shared
-navigation rule now gives the wordmark, primary navigation, header action, and
-legal-footer links a flex hit area with a 44 px minimum in both dimensions.
-Existing navigation gaps remain at least 8 px.
+## Verification summary
 
-`tests/e2e/app.spec.ts` now measures every visible header/footer navigation
-target in both desktop Chromium and a touch-enabled 390 × 844 project. It
-fails below 44 × 44 px, checks pairwise target spacing, and Tabs through the
-skip link and each visible header link in order. This is manual-product-QA
-geometry that axe does not test.
+- Clean detached checkout at the exact candidate; `npm ci` reported 0
+  vulnerabilities.
+- PASS: `npm test` (2 frontend + 9 Rust), `npm run typecheck`, `npm run lint`,
+  `npm run build`, and `npm run test:e2e` (12/12 declared scenarios).
+- PASS: release build with embedded candidate SHA and runtime with only `PORT`
+  as application configuration.
+- Live `/health`: exact candidate build; local/live SHA-256 parity for shell,
+  PWA files, favicon, JS/CSS, and both hero images.
+- Live direct API analysis: 200, 100% mapped, explicit uncertainty, OSM
+  evidence links, dated Belgium source pack, and complete caveats.
+- Invalid/boundary API handling: 413/415/422/429 as applicable; paid missing or
+  invalid license 402; no cross-origin allowance.
+- Accessibility: factory URL verifier clean; independent desktop/mobile Axe
+  found 0 violations; keyboard focus and repaired 44 px targets pass.
+- PWA: versioned service worker update and offline reload pass.
+- Privacy: initial requests same-origin; no tracking/CDN scripts/fonts; SQLite
+  contains aggregate `page_views` only and persists across restart.
+- Load: local health 100/100 200, page-view 100/100 204, live health 100/100
+  200; eight analysis slots accept eight and reject overflow with 429.
+- Budgets: JS 16.07 kB, CSS 11.50 kB, no fonts, mobile hero 59.8 kB.
+- Fresh Lighthouse mobile: 97 performance / 100 accessibility / 100 best
+  practices / 100 SEO; LCP 1.85 s, TBT 195 ms, CLS 0.
 
-## Verification evidence
+Docker was unavailable locally, so no Docker build is claimed. The Dockerfile
+passes static contract review and the exact live identity/artifact match proves
+the candidate was deployed. No product source was changed by verification.
 
-Run from `/work/repo`:
+## Required next steps
 
-```sh
-npm ci
-npm test
-npm run typecheck
-npm run lint
-npm run build
-npm run test:e2e
-BUILD_SHA=<git-sha> cargo build --release
-PORT=18080 target/release/cycle-legal-profile-check
-```
-
-- Clean install: 85 packages, 0 reported vulnerabilities.
-- Unit/integration: 2/2 Vitest and 9/9 Rust tests passed, including the
-  100-route classification and prohibited-recall guard.
-- TypeScript strict typecheck, rustfmt, and clippy with warnings denied passed.
-- Production build: `dist/` produced; JS 16,069 bytes raw / 6.54 kB gzip, CSS
-  11,495 bytes raw / 3.33 kB gzip, mobile hero 59,794 bytes. No web fonts.
-- Browser: 12/12 Playwright scenarios passed across desktop and touch-enabled
-  390 × 844 Chromium. This includes analysis and evidence rendering, exact
-  target geometry, keyboard order, direct legal routes, identity, cache
-  policy, versioned offline reload, and one-day license-verdict caching.
-- Accessibility: Playwright axe 4.10 reported 0 violations on both desktop and
-  mobile. The URL verifier found title, `lang=en`, exactly one `h1`, a `main`,
-  complete image alt text, labeled buttons, and no console/page errors.
-- Reduced motion: animation and transition durations resolve to 0.01 ms.
-  Neither viewport has horizontal overflow. All first-load browser requests
-  are same-origin.
-- Lighthouse 12.8.2 mobile: Performance 98, Accessibility 100, Best Practices
-  100, SEO 100; LCP 2.3 s, total blocking time 100 ms, CLS 0.
-- Release runtime started with only `PORT` as application configuration.
-  `/health` returned the embedded full build SHA. `/privacy` and `/terms`
-  returned 200.
-- Response policy: HTML/legal/manifest/service worker `no-cache`; hashed CSS
-  `public, max-age=31536000, immutable`; stable hero image
-  `public, max-age=86400`; API and health `no-store`.
-- API negatives: malformed XML 422, one-point GPX 422, unlicensed Netherlands
-  request 402, cross-origin OPTIONS 405 with no CORS allowance.
-- Load smoke: 100 concurrent `/health` requests at concurrency 25 all returned
-  200.
-- Packaging/consumer: no library-consumer check applies to this
-  `web-with-backend` artifact. No local Docker engine is installed; the factory
-  ACR build is the container/package check. The Dockerfile remains multi-stage,
-  `.git` independent, non-root, and configured for port 8080.
-
-The standalone axe CLI could not pair its downloaded ChromeDriver 152 with the
-preinstalled Playwright Chromium 145. The same axe engine completed through
-the repository's supported Playwright integration with zero violations.
-
-## Deployment and remaining limitations
-
-Deploy with the injected container work order:
-
-```sh
-/opt/fleet/lib/deploy-container.sh cycle-legal-profile-check /work/repo Dockerfile 8080
-/opt/fleet/lib/verify-url.sh https://cycle-legal-profile-check.sociobot.in <evidence-dir>
-```
-
-The ACR build receives `BUILD_SHA`, `GIT_SHA`, and `SOURCE_COMMIT`; live
-acceptance requires `/health.build` to equal the deployed `git rev-parse HEAD`.
-
-Product limitations are unchanged: the deterministic 100-case corpus guards
-implemented rules but is not field legal validation; OpenStreetMap/Overpass
-coverage can be incomplete or unavailable; and the report remains a planning
-aid rather than legal clearance.
+Capture form/select state before the upload await, move asynchronous file
+handling inside the error boundary, and add a real-file E2E test that proves an
+analysis request and rendered report on both viewports. Then enable the
+Sociobot checkout, correct the typography and Germany source, deploy a new SHA,
+and rerun independent verification.

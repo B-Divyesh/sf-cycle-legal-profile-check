@@ -1,0 +1,9 @@
+{
+  "name": "Cycle Legal Check",
+  "short_name": "Legal Check",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e5e1d5",
+  "theme_color": "#365d3a",
+  "icons": []
+}

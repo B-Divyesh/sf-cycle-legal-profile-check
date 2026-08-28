@@ -1,0 +1,9 @@
+{
+  "asset": "route-inspection-hero.png",
+  "generated_at": "2026-08-28",
+  "generator": "/opt/fleet/lib/gen-image.sh",
+  "deployment": "factory-image",
+  "size": "1536x1024",
+  "quality": "high",
+  "prompt": "Use case: stylized-concept. Asset type: wide landing-page hero illustration. An editorial top-down still life of a folded cycling route map partially embedded in rough brutalist concrete, a single cycling route traced as tactile dark graphite with one fluorescent survey-orange interruption, living moss following ambiguous path edges. Weathered infrastructure inspection table, no horizon. High-detail tactile paper-and-concrete assemblage, restrained architectural editorial photography. Wide landscape, route entering lower left and exiting upper right, calm negative space at upper left, no people. Overcast northern European daylight, sober and investigative, soft hard-edged shadows. Chalk, wet concrete, asphalt black, deep moss green, one survey orange accent. Aggregate, paper fibers, graphite, damp moss. Realistic object geometry. No interfaces, no signs, no text, no letters, no numbers, no logos, no watermark, no bicycles, no helmets, no hands, no generic neon gradients, no glossy 3D, no fantasy scenery."
+}

@@ -1,0 +1,279 @@
+{
+  "communities": {
+    "0": [
+      "frontend_src_main",
+      "frontend_src_main_apppage",
+      "frontend_src_main_bind",
+      "frontend_src_main_cachedlicenseinactive",
+      "frontend_src_main_cachedunlock",
+      "frontend_src_main_checker",
+      "frontend_src_main_consumelicense",
+      "frontend_src_main_escapehtml",
+      "frontend_src_main_findingitem",
+      "frontend_src_main_footer",
+      "frontend_src_main_icon",
+      "frontend_src_main_legalpage",
+      "frontend_src_main_licenseinactive",
+      "frontend_src_main_paysection",
+      "frontend_src_main_render",
+      "frontend_src_main_restore",
+      "frontend_src_main_resultview",
+      "frontend_src_main_submitcheck",
+      "frontend_src_main_unlocked",
+      "frontend_src_main_verifylicense",
+      "frontend_src_rules_test",
+      "frontend_src_types",
+      "frontend_src_types_analysis",
+      "frontend_src_types_finding",
+      "frontend_src_types_severity",
+      "frontend_src_ui",
+      "frontend_src_ui_checklistcsv",
+      "frontend_src_ui_csvcell",
+      "frontend_src_ui_downloadchecklist",
+      "frontend_src_ui_verdictcopy"
+    ],
+    "1": [
+      "arc",
+      "client",
+      "intoresponse",
+      "json",
+      "response",
+      "semaphore",
+      "sqlitepool",
+      "src_main",
+      "src_main_analyze_route",
+      "src_main_apierror",
+      "src_main_apierror_into_response",
+      "src_main_appstate",
+      "src_main_errorbody",
+      "src_main_health",
+      "src_main_main",
+      "src_main_page_view",
+      "src_main_rs_analysis",
+      "src_main_rs_option",
+      "src_main_rs_result",
+      "src_main_rs_string",
+      "src_main_shutdown",
+      "src_main_verify_paid",
+      "src_main_verifyresponse",
+      "state",
+      "statuscode",
+      "value"
+    ],
+    "2": [
+      "severity",
+      "src_analyzer",
+      "src_analyzer_analyze",
+      "src_analyzer_analyzeerror",
+      "src_analyzer_assess_tags",
+      "src_analyzer_bicycle_no_is_prohibited",
+      "src_analyzer_distance_to_way",
+      "src_analyzer_haversine",
+      "src_analyzer_overpass_query",
+      "src_analyzer_parse_gpx",
+      "src_analyzer_parses_and_measures_gpx",
+      "src_analyzer_point_segment_km",
+      "src_analyzer_rejects_short_gpx",
+      "src_analyzer_relevant_tags",
+      "src_analyzer_round1",
+      "src_analyzer_rs_analysis",
+      "src_analyzer_rs_hashmap",
+      "src_analyzer_rs_result",
+      "src_analyzer_rs_string",
+      "src_analyzer_rs_vec",
+      "src_analyzer_rule_pack",
+      "src_analyzer_sample_points",
+      "src_analyzer_severity_rank",
+      "src_analyzer_speed_pedelec_cycleway_is_uncertain",
+      "src_analyzer_unmatched_route_is_review",
+      "src_model_point"
+    ],
+    "3": [
+      "src_model",
+      "src_model_analysis",
+      "src_model_analyzerequest",
+      "src_model_finding",
+      "src_model_geopoint",
+      "src_model_overpassresponse",
+      "src_model_overpassway",
+      "src_model_rs_hashmap",
+      "src_model_rs_option",
+      "src_model_rs_string",
+      "src_model_rs_vec",
+      "src_model_rulepack",
+      "src_model_severity",
+      "src_model_source"
+    ],
+    "4": [
+      "axe_core_playwright",
+      "concurrently",
+      "package_devdependencies",
+      "package_devdependencies_axe_core_playwright",
+      "package_devdependencies_concurrently",
+      "package_devdependencies_playwright_test",
+      "package_devdependencies_typescript",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitest",
+      "playwright_test",
+      "typescript",
+      "vite",
+      "vitest"
+    ],
+    "5": [
+      "package",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_preview",
+      "package_scripts_test",
+      "package_scripts_test_e2e",
+      "package_type",
+      "package_version"
+    ],
+    "6": [
+      "frontend_public_sw",
+      "frontend_public_sw_shell"
+    ],
+    "7": [
+      "tests_e2e_app_spec",
+      "tests_e2e_app_spec_report"
+    ],
+    "8": [
+      "pkg_cycle_legal_profile_check"
+    ],
+    "9": [
+      "playwright_config"
+    ],
+    "10": [
+      "vite_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.14482758620689656,
+    "1": 0.12307692307692308,
+    "2": 0.16923076923076924,
+    "3": 0.34065934065934067,
+    "4": 0.15384615384615385,
+    "5": 0.18181818181818182,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_analyzer_analyze",
+      "label": "analyze()",
+      "degree": 16
+    },
+    {
+      "id": "src_main_analyze_route",
+      "label": "analyze_route()",
+      "degree": 13
+    },
+    {
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
+      "degree": 10
+    },
+    {
+      "id": "src_main_appstate",
+      "label": "AppState",
+      "degree": 9
+    },
+    {
+      "id": "src_model_point",
+      "label": "Point",
+      "degree": 8
+    },
+    {
+      "id": "src_model_overpassway",
+      "label": "OverpassWay",
+      "degree": 8
+    },
+    {
+      "id": "frontend_src_main_resultview",
+      "label": "resultView()",
+      "degree": 6
+    },
+    {
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
+      "degree": 6
+    },
+    {
+      "id": "frontend_src_main_render",
+      "label": "render()",
+      "degree": 6
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "analyze_route()",
+      "target": "parse_gpx()",
+      "source_files": [
+        "src/main.rs",
+        "src/analyzer.rs"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "analyze_route()",
+      "target": "overpass_query()",
+      "source_files": [
+        "src/main.rs",
+        "src/analyzer.rs"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "analyze_route()",
+      "target": "analyze()",
+      "source_files": [
+        "src/main.rs",
+        "src/analyzer.rs"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "analyze()",
+      "target": "OverpassWay",
+      "source_files": [
+        "src/analyzer.rs",
+        "src/model.rs"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "rule_pack()",
+      "target": "RulePack",
+      "source_files": [
+        "src/analyzer.rs",
+        "src/model.rs"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "bridges separate communities"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

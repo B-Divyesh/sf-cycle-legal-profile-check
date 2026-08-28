@@ -1,4 +1,27 @@
-# Cycle Legal Check — repair handoff
+# Cycle Legal Check — verification handoff
+
+## Current release decision: FAIL
+
+Independent verification work order `cycle-legal-profile-check-verify-2`
+tested candidate `29c54e09007665bacc5632e7ce410edfae2a8cd8` at
+https://cycle-legal-profile-check.sociobot.in on 2026-08-28. **Do not release
+unchanged.** The live deployment does match this candidate (health build SHA
+and candidate-built JS/CSS digests match), and all automated repository checks
+pass, but the 390 px mobile UI exposes several 19–39 px-high links where the
+product contract requires a minimum 44 × 44 px touch target. This is a P1
+accessibility release blocker.
+
+Full evidence, including clean install, tests, production build, backend,
+live-GPX, PWA/offline, privacy, headers, and browser findings, is in
+`.factory/verification-2.md`. No product code was changed by the verifier.
+
+Required follow-up: make all visible interactive navigation/footer targets at
+least 44 × 44 px with adequate spacing, then rerun verification from a clean
+checkout and against deployment.
+
+---
+
+# Prior repair handoff (superseded by verification result above)
 
 ## Release repair
 

@@ -1,56 +1,43 @@
-# Cycle Legal Check — verification handoff
-
-## Current release decision: FAIL
-
-Independent verification work order `cycle-legal-profile-check-verify-2`
-tested candidate `29c54e09007665bacc5632e7ce410edfae2a8cd8` at
-https://cycle-legal-profile-check.sociobot.in on 2026-08-28. **Do not release
-unchanged.** The live deployment does match this candidate (health build SHA
-and candidate-built JS/CSS digests match), and all automated repository checks
-pass, but the 390 px mobile UI exposes several 19–39 px-high links where the
-product contract requires a minimum 44 × 44 px touch target. This is a P1
-accessibility release blocker.
-
-Full evidence, including clean install, tests, production build, backend,
-live-GPX, PWA/offline, privacy, headers, and browser findings, is in
-`.factory/verification-2.md`. No product code was changed by the verifier.
-
-Required follow-up: make all visible interactive navigation/footer targets at
-least 44 × 44 px with adequate spacing, then rerun verification from a clean
-checkout and against deployment.
-
----
-
-# Prior repair handoff (superseded by verification result above)
+# Cycle Legal Check — repair handoff
 
 ## Release repair
 
-Repair work order: `cycle-legal-profile-check-repair-1`
+- Work order: `cycle-legal-profile-check-repair-2`
+- Verifier report commit: `4529e6ea5218882bd5cd73d7ee7b7e0a65b9ce36`
+- Failed candidate: `29c54e09007665bacc5632e7ce410edfae2a8cd8`
+- Date: 2026-08-28
 
-Verifier report: `222f3836c0cdc733e7789cb04376fcbd958fd8ab`
+The sole release blocker in `.factory/verification-2.md` is repaired without
+changing the researched scope, analysis rules, paid-unlock behavior, privacy
+model, deployment class, or visual thesis.
 
-Failed candidate: `60bb320c8c5f85eab73841ba0ff6f928f043731c`
+## Finding, reproduction, and root fix
 
-Date: 2026-08-28
+At 390 × 844 px, the failed candidate reproduced the verifier's measurements:
 
-Every release-blocking finding in `.factory/verification.md` is repaired:
+| Target | Before | After |
+| --- | ---: | ---: |
+| `Cycle legal //01` | 133 × 20 px | 129 × 44 px |
+| `Check a route` | 114 × 38.6 px | 114 × 44 px |
+| `Privacy` | 342 × 18.6 px | 342 × 44 px |
+| `Terms` | 342 × 18.6 px | 342 × 44 px |
+| `© OpenStreetMap contributors` | 342 × 18.6 px | 342 × 44 px |
 
-- Build identity: the container now declares all factory SHA build arguments with a safe `dev` default, embeds them at compile time, ignores the former `unknown` sentinel, and returns the embedded value from `/health`. A browser regression compiles with `BUILD_SHA=e2e-build-identity` and asserts the exact response.
-- Legal pages: `/privacy` and `/terms` are explicit server routes backed by the SPA document, so direct GET/HEAD requests return HTTP 200 instead of a fallback 404. Rust integration tests assert status, body, and policy; browser tests assert both rendered pages.
-- Static response policy: API and health responses use `no-store`; HTML, manifest, and `sw.js` use `no-cache`; Vite content-hashed JS/CSS use `public, max-age=31536000, immutable`; stable image assets use a one-day cache. Rust and browser regressions cover these classes, including Rollup hashes containing `_`.
-- Accuracy evidence: `tests/fixtures/labeled_routes.csv` contains exactly 100 labeled route/tag/profile cases across BE, NL, and DE. The full analyzer scores 100/100 exact classifications and detects 60/60 labeled prohibited or vehicle-mismatch cases. The test fails below 90% exact accuracy or 90% prohibited recall. This deterministic rule-pack corpus is not presented as real-world legal validation.
+The root cause was that header and footer anchors inherited only the text line
+box, while the narrow-screen action override reduced its padding. The shared
+navigation rule now gives the wordmark, primary navigation, header action, and
+legal-footer links a flex hit area with a 44 px minimum in both dimensions.
+Existing navigation gaps remain at least 8 px.
 
-Two additional release-path faults exposed by the new coverage were fixed: duplicate preload URLs no longer abort service-worker installation, and a checkout-return license is no longer verified twice during startup. The versioned `cycle-legal-shell-v3` cache now completes installation and reloads offline; returned licenses are stripped from the URL, stored locally, verified once, and use the one-day cached verdict on reload.
+`tests/e2e/app.spec.ts` now measures every visible header/footer navigation
+target in both desktop Chromium and a touch-enabled 390 × 844 project. It
+fails below 44 × 44 px, checks pairwise target spacing, and Tabs through the
+skip link and each visible header link in order. This is manual-product-QA
+geometry that axe does not test.
 
-## Product delivered
+## Verification evidence
 
-- End-to-end GPX analysis validates and measures tracks, samples geometry, queries nearby OpenStreetMap ways through Overpass, matches within 35 metres, and applies vehicle/region rules.
-- Reports preserve explicit prohibited, review, and clear states, kilometre positions, coverage, relevant raw OSM tags, way links, dated sources, limitations, and CSV review export.
-- Bicycle, 25 km/h e-bike, and 45 km/h speed-pedelec profiles remain available. Belgium remains free; Netherlands and Germany remain protected by the Sociobot one-time license flow.
-- GPX data remains in memory and is never persisted. SQLite stores only the aggregate page counter. No analytics, CDN fonts, third-party scripts, or new external data flows were added.
-- The original brutalist concrete-and-moss system and generated hero asset are unchanged. Provenance remains in `.factory/design.md` and `assets/src/`.
-
-## Run and verify
+Run from `/work/repo`:
 
 ```sh
 npm ci
@@ -59,26 +46,60 @@ npm run typecheck
 npm run lint
 npm run build
 npm run test:e2e
-BUILD_SHA=$(git rev-parse HEAD) cargo build --release
-PORT=8080 target/release/cycle-legal-profile-check
+BUILD_SHA=<git-sha> cargo build --release
+PORT=18080 target/release/cycle-legal-profile-check
 ```
 
-Release verification on 2026-08-28:
+- Clean install: 85 packages, 0 reported vulnerabilities.
+- Unit/integration: 2/2 Vitest and 9/9 Rust tests passed, including the
+  100-route classification and prohibited-recall guard.
+- TypeScript strict typecheck, rustfmt, and clippy with warnings denied passed.
+- Production build: `dist/` produced; JS 16,069 bytes raw / 6.54 kB gzip, CSS
+  11,495 bytes raw / 3.33 kB gzip, mobile hero 59,794 bytes. No web fonts.
+- Browser: 12/12 Playwright scenarios passed across desktop and touch-enabled
+  390 × 844 Chromium. This includes analysis and evidence rendering, exact
+  target geometry, keyboard order, direct legal routes, identity, cache
+  policy, versioned offline reload, and one-day license-verdict caching.
+- Accessibility: Playwright axe 4.10 reported 0 violations on both desktop and
+  mobile. The URL verifier found title, `lang=en`, exactly one `h1`, a `main`,
+  complete image alt text, labeled buttons, and no console/page errors.
+- Reduced motion: animation and transition durations resolve to 0.01 ms.
+  Neither viewport has horizontal overflow. All first-load browser requests
+  are same-origin.
+- Lighthouse 12.8.2 mobile: Performance 98, Accessibility 100, Best Practices
+  100, SEO 100; LCP 2.3 s, total blocking time 100 ms, CLS 0.
+- Release runtime started with only `PORT` as application configuration.
+  `/health` returned the embedded full build SHA. `/privacy` and `/terms`
+  returned 200.
+- Response policy: HTML/legal/manifest/service worker `no-cache`; hashed CSS
+  `public, max-age=31536000, immutable`; stable hero image
+  `public, max-age=86400`; API and health `no-store`.
+- API negatives: malformed XML 422, one-point GPX 422, unlicensed Netherlands
+  request 402, cross-origin OPTIONS 405 with no CORS allowance.
+- Load smoke: 100 concurrent `/health` requests at concurrency 25 all returned
+  200.
+- Packaging/consumer: no library-consumer check applies to this
+  `web-with-backend` artifact. No local Docker engine is installed; the factory
+  ACR build is the container/package check. The Dockerfile remains multi-stage,
+  `.git` independent, non-root, and configured for port 8080.
 
-- Clean install: 85 packages installed, 0 vulnerabilities.
-- `npm test`: 2/2 Vitest and 9/9 Rust tests passed. Corpus result: 100/100 exact and 60/60 prohibited/vehicle-mismatch recall.
-- `npm run typecheck`: strict TypeScript passed. `npm run lint`: rustfmt and clippy with warnings denied passed.
-- `npm run build`: `dist/` produced; HTML 1.05 KB, JS about 16.1 KB raw / 6.6 KB gzip, CSS 11.32 KB raw / 3.30 KB gzip, mobile hero 59.8 KB, desktop hero 143.4 KB.
-- `npm run test:e2e`: 10/10 Chromium scenarios passed across desktop and 390×844 mobile. Coverage includes the real form/result interaction with mocked OSM evidence, axe serious/critical checks, legal-route HTTP status, keyboard focus, response policy, compiled identity, versioned offline reload, and license return/cache behavior.
-- Accessibility CLI: `@axe-core/cli` found 0 violations. Factory URL verifier found the expected title and language, one `h1`, one `main`, complete image alt text, labeled buttons, and no console/page errors.
-- Lighthouse mobile: Performance 98, Accessibility 100, Best Practices 100, SEO 100; LCP 2.2 s, total blocking time 110 ms, CLS 0.
-- Release runtime with only `PORT` supplied: started successfully; `/health` returned the compiled full SHA. Direct `/privacy` and `/terms` returned 200; update-safe and immutable response policies matched the table above.
-- Error/response policy: invalid XML 422, one-point GPX 422, unsupported vehicle 422, unlicensed paid region 402, and cross-origin OPTIONS 405 without an allow-origin header.
-- Load smoke: 100 concurrent `/health` requests at concurrency 25 all returned 200 in under one second.
-- Container packaging: the factory deployment performs the multi-stage ACR build from the `.git`-free source context, passes `BUILD_SHA`, `GIT_SHA`, and `SOURCE_COMMIT`, runs as the non-root `app` user, and exposes port 8080.
+The standalone axe CLI could not pair its downloaded ChromeDriver 152 with the
+preinstalled Playwright Chromium 145. The same axe engine completed through
+the repository's supported Playwright integration with zero violations.
 
-## Remaining limitations
+## Deployment and remaining limitations
 
-- The 100-case corpus validates implemented tag/profile rules and guards regression; it is not an independently adjudicated set of ridden routes and must not be used to claim field legal accuracy. A qualified reviewer should continue to validate rule interpretations and dated source URLs.
-- OSM matching is approximate and public Overpass availability is outside this service. An outage correctly produces review findings instead of fabricated clearance.
-- No local Docker executable is installed in this worker. Container packaging is therefore exercised by the factory's ACR build during deployment rather than a local Docker daemon.
+Deploy with the injected container work order:
+
+```sh
+/opt/fleet/lib/deploy-container.sh cycle-legal-profile-check /work/repo Dockerfile 8080
+/opt/fleet/lib/verify-url.sh https://cycle-legal-profile-check.sociobot.in <evidence-dir>
+```
+
+The ACR build receives `BUILD_SHA`, `GIT_SHA`, and `SOURCE_COMMIT`; live
+acceptance requires `/health.build` to equal the deployed `git rev-parse HEAD`.
+
+Product limitations are unchanged: the deterministic 100-case corpus guards
+implemented rules but is not field legal validation; OpenStreetMap/Overpass
+coverage can be incomplete or unavailable; and the report remains a planning
+aid rather than legal clearance.

@@ -136,3 +136,19 @@ in 6m24s and deployed through `/opt/fleet/lib/deploy-container.sh`.
   successful mapped state were observed live.
 - No release-blocking product gap remains. The next action is independent
   verification of the final deployed commit.
+
+---
+
+## Independent verification 4 — **FAIL**
+
+Verified 2026-08-28 against deployed candidate
+`494c4cdce10afea0bd5b78e577d4c0a8525b7acf` at
+https://cycle-legal-profile-check.sociobot.in. The full evidence report is
+[`verification-4.md`](./verification-4.md).
+
+The deployment and candidate artifacts match, all local tests/builds and the
+22-test Playwright matrix pass, and live product/accessibility/PWA/privacy
+checks pass. **Release is blocked** because 100 rapid POSTs (25 concurrent,
+fixed forwarded client IP) to `/api/page-view` produced 100 × 204, zero 429s,
+and no `Retry-After`. Implement a per-client rate limit for every API endpoint
+and rerun verification.

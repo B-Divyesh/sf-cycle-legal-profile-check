@@ -1,0 +1,9 @@
+{
+  "slug": "cycle-legal-profile-check",
+  "title": "Cycle Legal Check",
+  "territory": "utilities",
+  "user": "Cyclists riding speed pedelecs or crossing local restrictions who need a pre-ride explanation of where their GPX/profile conflicts with route access rules.",
+  "smallest_useful_product": "A GPX analyzer that compares route edges against selected vehicle class and region rules, highlights access conflicts/unknowns, links to underlying OSM tags, and exports a review checklist.",
+  "monetization": "freemium",
+  "constraints": "Not legal advice; record rule-source dates; comply with OSM attribution and data licenses; do not claim complete coverage."
+}

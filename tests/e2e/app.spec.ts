@@ -27,6 +27,41 @@ test('checks the sample route and exposes evidence', async ({ page }) => {
   await expect(page.getByRole('button', { name: /Export review checklist/ })).toBeVisible();
 });
 
+test('visible navigation targets meet touch geometry and keyboard requirements', async ({ page }) => {
+  await page.goto('/');
+
+  const targets = page.locator('header a:visible, footer nav a:visible');
+  expect(await targets.count()).toBeGreaterThanOrEqual(5);
+  for (const target of await targets.all()) {
+    const name = (await target.textContent())?.trim() || 'unnamed link';
+    const box = await target.boundingBox();
+    expect(box, `${name} has a rendered hit area`).not.toBeNull();
+    expect(box!.width, `${name} target width`).toBeGreaterThanOrEqual(44);
+    expect(box!.height, `${name} target height`).toBeGreaterThanOrEqual(44);
+  }
+
+  for (const landmark of ['header', 'footer nav']) {
+    const boxes = await page.locator(`${landmark} a:visible`).evaluateAll((links) => links.map((link) => {
+      const box = link.getBoundingClientRect();
+      return { left: box.left, right: box.right, top: box.top, bottom: box.bottom };
+    }));
+    for (let index = 0; index < boxes.length; index += 1) {
+      for (let other = index + 1; other < boxes.length; other += 1) {
+        const horizontal = Math.max(0, boxes[other].left - boxes[index].right, boxes[index].left - boxes[other].right);
+        const vertical = Math.max(0, boxes[other].top - boxes[index].bottom, boxes[index].top - boxes[other].bottom);
+        expect(Math.hypot(horizontal, vertical), `${landmark} targets ${index + 1} and ${other + 1} spacing`).toBeGreaterThanOrEqual(8);
+      }
+    }
+  }
+
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('link', { name: /Skip to route checker/ })).toBeFocused();
+  for (const target of await page.locator('header a:visible').all()) {
+    await page.keyboard.press('Tab');
+    await expect(target).toBeFocused();
+  }
+});
+
 test('legal pages and keyboard focus are available', async ({ page }) => {
   const privacyResponse = await page.goto('/privacy');
   expect(privacyResponse?.status()).toBe(200);

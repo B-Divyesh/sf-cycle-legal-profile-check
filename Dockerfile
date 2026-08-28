@@ -4,7 +4,7 @@ COPY package.json package-lock.json vite.config.ts ./
 COPY frontend ./frontend
 RUN npm ci && npm run build
 
-FROM rust:1.85-alpine AS backend
+FROM rust:1.90-alpine AS backend
 RUN apk add --no-cache musl-dev
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./

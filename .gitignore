@@ -1,6 +1,7 @@
-node_modules/
-dist/
-.env
-*.log
-graphify-out/
-.DS_Store
+/node_modules/
+**/node_modules/
+/target/
+/dist/
+/*.sqlite
+/.playwright/
+/test-results/

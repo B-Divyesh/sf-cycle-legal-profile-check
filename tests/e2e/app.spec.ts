@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 const report = {
   route_name: 'Brussels canal check', distance_km: 0.5, sampled_points: 5, matched_distance_km: 0.4,
@@ -16,6 +17,8 @@ test('checks the sample route and exposes evidence', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveTitle(/Cycle Legal Check/);
   await expect(page.locator('h1')).toHaveCount(1);
+  const accessibility = await new AxeBuilder({ page }).analyze();
+  expect(accessibility.violations.filter(item => ['serious', 'critical'].includes(item.impact || ''))).toEqual([]);
   await page.getByRole('button', { name: /Use Brussels sample/ }).click();
   await page.getByLabel('2 / Vehicle').selectOption('speed_pedelec');
   await page.getByRole('button', { name: /Check this route/ }).click();

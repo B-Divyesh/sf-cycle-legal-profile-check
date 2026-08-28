@@ -195,11 +195,6 @@
       "degree": 8
     },
     {
-      "id": "frontend_src_main_resultview",
-      "label": "resultView()",
-      "degree": 6
-    },
-    {
       "id": "frontend_src_main_apppage",
       "label": "appPage()",
       "degree": 6
@@ -210,15 +205,20 @@
       "degree": 6
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
+      "id": "frontend_src_main_resultview",
+      "label": "resultView()",
+      "degree": 6
+    },
+    {
+      "id": "src_main_apierror",
+      "label": "ApiError",
       "degree": 6
     }
   ],
   "surprises": [
     {
       "source": "analyze_route()",
-      "target": "parse_gpx()",
+      "target": "analyze()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -240,7 +240,7 @@
     },
     {
       "source": "analyze_route()",
-      "target": "analyze()",
+      "target": "parse_gpx()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -250,10 +250,10 @@
       "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "analyze()",
-      "target": "OverpassWay",
+      "source": "analyze_route()",
+      "target": "AnalyzeRequest",
       "source_files": [
-        "src/analyzer.rs",
+        "src/main.rs",
         "src/model.rs"
       ],
       "confidence": "EXTRACTED",
@@ -261,8 +261,8 @@
       "why": "bridges separate communities"
     },
     {
-      "source": "rule_pack()",
-      "target": "RulePack",
+      "source": "analyze()",
+      "target": "OverpassWay",
       "source_files": [
         "src/analyzer.rs",
         "src/model.rs"

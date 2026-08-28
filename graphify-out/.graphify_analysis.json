@@ -1,6 +1,52 @@
 {
   "communities": {
     "0": [
+      "analyzerequest",
+      "arc",
+      "asref",
+      "client",
+      "intoresponse",
+      "json",
+      "next",
+      "option",
+      "path",
+      "request",
+      "response",
+      "router",
+      "semaphore",
+      "sqlitepool",
+      "src_main",
+      "src_main_analyze_route",
+      "src_main_apierror",
+      "src_main_apierror_into_response",
+      "src_main_appstate",
+      "src_main_build_router",
+      "src_main_build_sha",
+      "src_main_cache_policy",
+      "src_main_errorbody",
+      "src_main_get",
+      "src_main_health",
+      "src_main_health_never_reports_the_old_unknown_sentinel",
+      "src_main_is_hashed_asset",
+      "src_main_legal_routes_are_successful_direct_documents",
+      "src_main_main",
+      "src_main_page_view",
+      "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
+      "src_main_response_policy",
+      "src_main_rs_analysis",
+      "src_main_rs_result",
+      "src_main_rs_string",
+      "src_main_shutdown",
+      "src_main_static_fixture",
+      "src_main_test_state",
+      "src_main_verify_paid",
+      "src_main_verifyresponse",
+      "state",
+      "statuscode",
+      "tempdir",
+      "value"
+    ],
+    "1": [
       "frontend_src_main",
       "frontend_src_main_apppage",
       "frontend_src_main_bind",
@@ -15,6 +61,7 @@
       "frontend_src_main_legalpage",
       "frontend_src_main_licenseinactive",
       "frontend_src_main_paysection",
+      "frontend_src_main_receivedlicense",
       "frontend_src_main_render",
       "frontend_src_main_restore",
       "frontend_src_main_resultview",
@@ -32,35 +79,12 @@
       "frontend_src_ui_downloadchecklist",
       "frontend_src_ui_verdictcopy"
     ],
-    "1": [
-      "arc",
-      "client",
-      "intoresponse",
-      "json",
-      "response",
-      "semaphore",
-      "sqlitepool",
-      "src_main",
-      "src_main_analyze_route",
-      "src_main_apierror",
-      "src_main_apierror_into_response",
-      "src_main_appstate",
-      "src_main_errorbody",
-      "src_main_health",
-      "src_main_main",
-      "src_main_page_view",
-      "src_main_rs_analysis",
-      "src_main_rs_option",
-      "src_main_rs_result",
-      "src_main_rs_string",
-      "src_main_shutdown",
-      "src_main_verify_paid",
-      "src_main_verifyresponse",
-      "state",
-      "statuscode",
-      "value"
-    ],
     "2": [
+      "geopoint",
+      "hashmap",
+      "overpassway",
+      "point",
+      "rulepack",
       "severity",
       "src_analyzer",
       "src_analyzer_analyze",
@@ -69,6 +93,7 @@
       "src_analyzer_bicycle_no_is_prohibited",
       "src_analyzer_distance_to_way",
       "src_analyzer_haversine",
+      "src_analyzer_labeled_hundred_route_corpus_meets_accuracy_and_recall_targets",
       "src_analyzer_overpass_query",
       "src_analyzer_parse_gpx",
       "src_analyzer_parses_and_measures_gpx",
@@ -77,32 +102,39 @@
       "src_analyzer_relevant_tags",
       "src_analyzer_round1",
       "src_analyzer_rs_analysis",
-      "src_analyzer_rs_hashmap",
       "src_analyzer_rs_result",
       "src_analyzer_rs_string",
-      "src_analyzer_rs_vec",
       "src_analyzer_rule_pack",
       "src_analyzer_sample_points",
       "src_analyzer_severity_rank",
       "src_analyzer_speed_pedelec_cycleway_is_uncertain",
       "src_analyzer_unmatched_route_is_review",
-      "src_model_point"
+      "vec"
     ],
     "3": [
-      "src_model",
-      "src_model_analysis",
-      "src_model_analyzerequest",
-      "src_model_finding",
-      "src_model_geopoint",
-      "src_model_overpassresponse",
-      "src_model_overpassway",
-      "src_model_rs_hashmap",
-      "src_model_rs_option",
-      "src_model_rs_string",
-      "src_model_rs_vec",
-      "src_model_rulepack",
-      "src_model_severity",
-      "src_model_source"
+      "ref_dom",
+      "ref_dom_iterable",
+      "ref_es2022",
+      "ref_frontend_src",
+      "ref_node",
+      "ref_playwright_config_ts",
+      "ref_tests_e2e",
+      "ref_vite_client",
+      "ref_vite_config_ts",
+      "ref_vitest_globals",
+      "ref_webworker",
+      "tsconfig",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_lib",
+      "tsconfig_compileroptions_module",
+      "tsconfig_compileroptions_moduleresolution",
+      "tsconfig_compileroptions_noemit",
+      "tsconfig_compileroptions_skiplibcheck",
+      "tsconfig_compileroptions_strict",
+      "tsconfig_compileroptions_target",
+      "tsconfig_compileroptions_types",
+      "tsconfig_compileroptions_usedefineforclassfields",
+      "tsconfig_include"
     ],
     "4": [
       "axe_core_playwright",
@@ -111,63 +143,97 @@
       "package_devdependencies_axe_core_playwright",
       "package_devdependencies_concurrently",
       "package_devdependencies_playwright_test",
+      "package_devdependencies_types_node",
       "package_devdependencies_typescript",
       "package_devdependencies_vite",
       "package_devdependencies_vitest",
       "playwright_test",
+      "types_node",
       "typescript",
       "vite",
       "vitest"
     ],
     "5": [
+      "src_model",
+      "src_model_analysis",
+      "src_model_analyzerequest",
+      "src_model_finding",
+      "src_model_geopoint",
+      "src_model_overpassresponse",
+      "src_model_overpassway",
+      "src_model_point",
+      "src_model_rs_hashmap",
+      "src_model_rs_option",
+      "src_model_rs_string",
+      "src_model_rs_vec",
+      "src_model_rulepack",
+      "src_model_severity",
+      "src_model_source"
+    ],
+    "6": [
       "package",
       "package_name",
       "package_private",
       "package_scripts",
       "package_scripts_build",
       "package_scripts_dev",
+      "package_scripts_lint",
       "package_scripts_preview",
       "package_scripts_test",
       "package_scripts_test_e2e",
+      "package_scripts_typecheck",
       "package_type",
       "package_version"
     ],
-    "6": [
+    "7": [
       "frontend_public_sw",
       "frontend_public_sw_shell"
     ],
-    "7": [
+    "8": [
       "tests_e2e_app_spec",
       "tests_e2e_app_spec_report"
     ],
-    "8": [
+    "9": [
       "pkg_cycle_legal_profile_check"
     ],
-    "9": [
+    "10": [
       "playwright_config"
     ],
-    "10": [
+    "11": [
+      "src_analyzer_rs_hashmap"
+    ],
+    "12": [
+      "src_analyzer_rs_vec"
+    ],
+    "13": [
+      "src_main_rs_option"
+    ],
+    "14": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.14482758620689656,
-    "1": 0.12307692307692308,
-    "2": 0.16923076923076924,
-    "3": 0.34065934065934067,
-    "4": 0.15384615384615385,
-    "5": 0.18181818181818182,
-    "6": 1.0,
+    "0": 0.08773784355179703,
+    "1": 0.13763440860215054,
+    "2": 0.1425287356321839,
+    "3": 0.08695652173913043,
+    "4": 0.13333333333333333,
+    "5": 0.3047619047619048,
+    "6": 0.15384615384615385,
     "7": 1.0,
     "8": 1.0,
     "9": 1.0,
-    "10": 1.0
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0
   },
   "gods": [
     {
       "id": "src_analyzer_analyze",
       "label": "analyze()",
-      "degree": 16
+      "degree": 17
     },
     {
       "id": "src_main_analyze_route",
@@ -177,48 +243,48 @@
     {
       "id": "src_analyzer_parse_gpx",
       "label": "parse_gpx()",
-      "degree": 10
+      "degree": 11
     },
     {
       "id": "src_main_appstate",
       "label": "AppState",
-      "degree": 9
+      "degree": 11
     },
     {
-      "id": "src_model_point",
-      "label": "Point",
+      "id": "src_main_build_router",
+      "label": "build_router()",
+      "degree": 11
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 10
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
       "degree": 8
     },
     {
-      "id": "src_model_overpassway",
-      "label": "OverpassWay",
+      "id": "src_main_get",
+      "label": "get()",
       "degree": 8
     },
     {
-      "id": "frontend_src_main_apppage",
-      "label": "appPage()",
+      "id": "src_model_analysis",
+      "label": "Analysis",
       "degree": 6
     },
     {
-      "id": "frontend_src_main_render",
-      "label": "render()",
-      "degree": 6
-    },
-    {
-      "id": "frontend_src_main_resultview",
-      "label": "resultView()",
-      "degree": 6
-    },
-    {
-      "id": "src_main_apierror",
-      "label": "ApiError",
+      "id": "src_model_finding",
+      "label": "Finding",
       "degree": 6
     }
   ],
   "surprises": [
     {
       "source": "analyze_route()",
-      "target": "analyze()",
+      "target": "parse_gpx()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -240,7 +306,7 @@
     },
     {
       "source": "analyze_route()",
-      "target": "parse_gpx()",
+      "target": "analyze()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -250,26 +316,26 @@
       "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "analyze_route()",
-      "target": "AnalyzeRequest",
+      "source": "bind()",
+      "target": "downloadChecklist()",
       "source_files": [
-        "src/main.rs",
-        "src/model.rs"
+        "frontend/src/main.ts",
+        "frontend/src/ui.ts"
       ],
       "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "bridges separate communities"
+      "relation": "calls",
+      "why": "cross-file semantic connection"
     },
     {
-      "source": "analyze()",
-      "target": "OverpassWay",
+      "source": "resultView()",
+      "target": "verdictCopy()",
       "source_files": [
-        "src/analyzer.rs",
-        "src/model.rs"
+        "frontend/src/main.ts",
+        "frontend/src/ui.ts"
       ],
       "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "bridges separate communities"
+      "relation": "calls",
+      "why": "cross-file semantic connection"
     }
   ],
   "tokens": {

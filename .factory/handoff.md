@@ -1,49 +1,61 @@
-# Cycle Legal Check — build handoff
+# Cycle Legal Check — repair handoff
 
-## Independent verification — FAIL (2026-08-28)
+## Release repair
 
-Candidate tested: `60bb320c8c5f85eab73841ba0ff6f928f043731c` at https://cycle-legal-profile-check.sociobot.in.
+Repair work order: `cycle-legal-profile-check-repair-1`
 
-The clean-checkout unit, browser, build, accessibility, mobile, and live GPX-flow checks passed; the deployed `index.html` exactly matches the candidate build. **Do not release this candidate as verified:** live `/health` reports `build: "unknown"`, rather than the candidate SHA, and direct `/privacy` and `/terms` requests return HTTP 404. Static responses also omit cache-control policies. The full evidence and severity list is in [verification.md](./verification.md).
+Verifier report: `222f3836c0cdc733e7789cb04376fcbd958fd8ab`
 
-## Shipped
+Failed candidate: `60bb320c8c5f85eab73841ba0ff6f928f043731c`
 
-- End-to-end GPX analysis: validates and measures tracks, samples geometry, queries nearby OpenStreetMap ways through Overpass, matches within 35 metres, and applies vehicle/region access rules.
-- Explicit `prohibited`, `review`, and `clear` states with kilometre positions, coverage percentage, raw relevant OSM tags, direct way links, dated rule sources, and a CSV review checklist.
-- Bicycle, 25 km/h e-bike, and 45 km/h speed-pedelec profiles. Belgium is free; Netherlands and Germany are protected by Sociobot license verification.
-- €19 one-time purchase link, return-token capture, local license storage, optimistic cached unlock, once-daily reconciliation, revoked/invalid notice, and paste-to-restore flow. No product ID is hardcoded.
-- Empty, loading, invalid-file, upstream-unavailable, offline, and results states. Upload works through picker, keyboard, and drag/drop. The built-in Brussels GPX provides an immediate real check.
-- Privacy-first aggregate page counter in SQLite. GPX and route geometry are processed in memory and never stored. Same-origin API, 8 MB input limit, eight-analysis concurrency cap, security headers, CSP, and graceful shutdown.
-- Responsive brutalist concrete-and-moss visual system, recorded in `design.md`, with an original factory-generated hero. Source PNG and prompt sidecars are in `assets/src/`; 960 px and 640 px WebP deliveries are 143,378 and about 60 KB.
-- Installable offline shell, semantic legal/privacy routes, OSM attribution, MIT license, and non-root multi-stage container.
+Date: 2026-08-28
+
+Every release-blocking finding in `.factory/verification.md` is repaired:
+
+- Build identity: the container now declares all factory SHA build arguments with a safe `dev` default, embeds them at compile time, ignores the former `unknown` sentinel, and returns the embedded value from `/health`. A browser regression compiles with `BUILD_SHA=e2e-build-identity` and asserts the exact response.
+- Legal pages: `/privacy` and `/terms` are explicit server routes backed by the SPA document, so direct GET/HEAD requests return HTTP 200 instead of a fallback 404. Rust integration tests assert status, body, and policy; browser tests assert both rendered pages.
+- Static response policy: API and health responses use `no-store`; HTML, manifest, and `sw.js` use `no-cache`; Vite content-hashed JS/CSS use `public, max-age=31536000, immutable`; stable image assets use a one-day cache. Rust and browser regressions cover these classes, including Rollup hashes containing `_`.
+- Accuracy evidence: `tests/fixtures/labeled_routes.csv` contains exactly 100 labeled route/tag/profile cases across BE, NL, and DE. The full analyzer scores 100/100 exact classifications and detects 60/60 labeled prohibited or vehicle-mismatch cases. The test fails below 90% exact accuracy or 90% prohibited recall. This deterministic rule-pack corpus is not presented as real-world legal validation.
+
+Two additional release-path faults exposed by the new coverage were fixed: duplicate preload URLs no longer abort service-worker installation, and a checkout-return license is no longer verified twice during startup. The versioned `cycle-legal-shell-v3` cache now completes installation and reloads offline; returned licenses are stripped from the URL, stored locally, verified once, and use the one-day cached verdict on reload.
+
+## Product delivered
+
+- End-to-end GPX analysis validates and measures tracks, samples geometry, queries nearby OpenStreetMap ways through Overpass, matches within 35 metres, and applies vehicle/region rules.
+- Reports preserve explicit prohibited, review, and clear states, kilometre positions, coverage, relevant raw OSM tags, way links, dated sources, limitations, and CSV review export.
+- Bicycle, 25 km/h e-bike, and 45 km/h speed-pedelec profiles remain available. Belgium remains free; Netherlands and Germany remain protected by the Sociobot one-time license flow.
+- GPX data remains in memory and is never persisted. SQLite stores only the aggregate page counter. No analytics, CDN fonts, third-party scripts, or new external data flows were added.
+- The original brutalist concrete-and-moss system and generated hero asset are unchanged. Provenance remains in `.factory/design.md` and `assets/src/`.
 
 ## Run and verify
 
 ```sh
 npm ci
 npm test
+npm run typecheck
+npm run lint
 npm run build
 npm run test:e2e
-cargo build --release
-cargo run
+BUILD_SHA=$(git rev-parse HEAD) cargo build --release
+PORT=8080 target/release/cycle-legal-profile-check
 ```
 
-Exact frontend build command: `npm run build`. Output is `dist/` with `dist/index.html` at its root. Runtime listens on `PORT` (default 8080); `GET /health` returns status and build SHA.
+Release verification on 2026-08-28:
 
-Verification on 2026-08-28:
+- Clean install: 85 packages installed, 0 vulnerabilities.
+- `npm test`: 2/2 Vitest and 9/9 Rust tests passed. Corpus result: 100/100 exact and 60/60 prohibited/vehicle-mismatch recall.
+- `npm run typecheck`: strict TypeScript passed. `npm run lint`: rustfmt and clippy with warnings denied passed.
+- `npm run build`: `dist/` produced; HTML 1.05 KB, JS about 16.1 KB raw / 6.6 KB gzip, CSS 11.32 KB raw / 3.30 KB gzip, mobile hero 59.8 KB, desktop hero 143.4 KB.
+- `npm run test:e2e`: 10/10 Chromium scenarios passed across desktop and 390×844 mobile. Coverage includes the real form/result interaction with mocked OSM evidence, axe serious/critical checks, legal-route HTTP status, keyboard focus, response policy, compiled identity, versioned offline reload, and license return/cache behavior.
+- Accessibility CLI: `@axe-core/cli` found 0 violations. Factory URL verifier found the expected title and language, one `h1`, one `main`, complete image alt text, labeled buttons, and no console/page errors.
+- Lighthouse mobile: Performance 98, Accessibility 100, Best Practices 100, SEO 100; LCP 2.2 s, total blocking time 110 ms, CLS 0.
+- Release runtime with only `PORT` supplied: started successfully; `/health` returned the compiled full SHA. Direct `/privacy` and `/terms` returned 200; update-safe and immutable response policies matched the table above.
+- Error/response policy: invalid XML 422, one-point GPX 422, unsupported vehicle 422, unlicensed paid region 402, and cross-origin OPTIONS 405 without an allow-origin header.
+- Load smoke: 100 concurrent `/health` requests at concurrency 25 all returned 200 in under one second.
+- Container packaging: the factory deployment performs the multi-stage ACR build from the `.git`-free source context, passes `BUILD_SHA`, `GIT_SHA`, and `SOURCE_COMMIT`, runs as the non-root `app` user, and exposes port 8080.
 
-- `npm test`: passed — 2 TypeScript unit tests + 5 Rust analyzer tests.
-- `npm run test:e2e`: passed — 4 Chromium tests across desktop and 390×844 mobile, including a GPX result flow, legal page, keyboard focus, and axe serious/critical scan.
-- Real upstream smoke: Brussels sample returned live OSM ways/tags, 100% sample coverage, and explicit speed-pedelec review findings.
-- Release build: `cargo build --release` passed.
-- Load smoke: 100 concurrent `/health` requests at concurrency 25 completed in 0.369 seconds (~271 requests/second), all successful.
-- Asset budgets: initial JS 16.05 KB raw / 6.53 KB gzip; CSS 11.32 KB raw / 3.30 KB gzip; mobile hero ~60 KB; desktop hero 143.38 KB.
-- Lighthouse mobile: Performance 99, Accessibility 100, Best Practices 100, SEO 100; LCP 2.2 s, total blocking time 20 ms, CLS 0, no console errors.
+## Remaining limitations
 
-## Known gaps and next steps
-
-- The supplied 100-route labeled accuracy corpus does not exist in the repository, so the brief’s 90% recall target could not be measured. Build that fixture before publishing an accuracy claim.
-- OSM matching is approximate and a public Overpass outage yields an honest all-unknown review rather than fabricated clearance. Production should configure a monitored Overpass instance or mirror if availability becomes critical.
-- Rule pack `2026.08` is deliberately conservative, especially for speed pedelecs. A qualified regional reviewer should validate each interpretation and source URL before marketing it as maintained legal coverage.
-- The Dockerfile was reviewed, but this worker image has no Docker executable, so `docker build` could not be run here. Both constituent stages (`npm run build` and `cargo build --release`) passed independently.
-- Factory still needs to register the Sociobot product and set the staging/production billing base during deployment.
+- The 100-case corpus validates implemented tag/profile rules and guards regression; it is not an independently adjudicated set of ridden routes and must not be used to claim field legal accuracy. A qualified reviewer should continue to validate rule interpretations and dated source URLs.
+- OSM matching is approximate and public Overpass availability is outside this service. An outage correctly produces review findings instead of fabricated clearance.
+- No local Docker executable is installed in this worker. Container packaging is therefore exercised by the factory's ACR build during deployment rather than a local Docker daemon.

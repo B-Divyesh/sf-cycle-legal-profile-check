@@ -9,8 +9,10 @@ RUN apk add --no-cache musl-dev
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
-ARG BUILD_SHA=unknown
-ENV BUILD_SHA=$BUILD_SHA
+ARG BUILD_SHA=dev
+ARG GIT_SHA=dev
+ARG SOURCE_COMMIT=dev
+ENV BUILD_SHA=$BUILD_SHA GIT_SHA=$GIT_SHA SOURCE_COMMIT=$SOURCE_COMMIT
 RUN cargo build --release
 
 FROM alpine:3.22

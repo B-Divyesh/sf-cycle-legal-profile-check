@@ -28,8 +28,42 @@ test('checks the sample route and exposes evidence', async ({ page }) => {
 });
 
 test('legal pages and keyboard focus are available', async ({ page }) => {
-  await page.goto('/privacy');
+  const privacyResponse = await page.goto('/privacy');
+  expect(privacyResponse?.status()).toBe(200);
   await expect(page.getByRole('heading', { name: 'Privacy' })).toBeVisible();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: /Skip to route checker/ })).toBeFocused();
+  const termsResponse = await page.goto('/terms');
+  expect(termsResponse?.status()).toBe(200);
+  await expect(page.getByRole('heading', { name: 'Terms of use' })).toBeVisible();
+});
+
+test('server exposes build identity and update-safe cache policy', async ({ page }) => {
+  const health = await page.request.get('/health');
+  expect(health.status()).toBe(200);
+  expect(health.headers()['cache-control']).toBe('no-store');
+  expect(await health.json()).toEqual({ build: 'e2e-build-identity', status: 'ok' });
+
+  const shell = await page.request.get('/');
+  expect(shell.headers()['cache-control']).toBe('no-cache');
+  const serviceWorker = await page.request.get('/sw.js');
+  expect(serviceWorker.headers()['cache-control']).toBe('no-cache');
+  const html = await shell.text();
+  const asset = html.match(/(?:src|href)="(\/assets\/index-[^"]+\.(?:js|css))"/)?.[1];
+  expect(asset).toBeTruthy();
+  const bundle = await page.request.get(asset!);
+  expect(bundle.headers()['cache-control']).toBe('public, max-age=31536000, immutable');
+});
+
+test('installed shell reloads offline', async ({ page, context }) => {
+  await page.goto('/');
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+    const keys = await caches.keys();
+    if (!keys.includes('cycle-legal-shell-v3')) throw new Error('versioned cache missing');
+  });
+  await context.setOffline(true);
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(page.getByRole('heading', { name: /Your route has rules/ })).toBeVisible();
+  await expect(page.getByText('Offline.', { exact: true })).toBeVisible();
 });

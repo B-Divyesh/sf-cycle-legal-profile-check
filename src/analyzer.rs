@@ -383,4 +383,80 @@ mod tests {
         assert_eq!(report.verdict, Severity::Review);
         assert_eq!(report.coverage_percent, 0.0);
     }
+
+    #[test]
+    fn labeled_hundred_route_corpus_meets_accuracy_and_recall_targets() {
+        let corpus = include_str!("../tests/fixtures/labeled_routes.csv");
+        let (_, points) = parse_gpx(
+            "<gpx><trk><trkseg><trkpt lat='50' lon='4'/><trkpt lat='50' lon='4.001'/></trkseg></trk></gpx>",
+        )
+        .unwrap();
+        let geometry = vec![
+            GeoPoint {
+                lat: 50.0,
+                lon: 3.999,
+            },
+            GeoPoint {
+                lat: 50.0,
+                lon: 4.002,
+            },
+        ];
+        let mut total = 0usize;
+        let mut correct = 0usize;
+        let mut prohibited = 0usize;
+        let mut prohibited_found = 0usize;
+        let mut ids = HashSet::new();
+
+        for (line_number, row) in corpus.lines().skip(1).enumerate() {
+            let columns: Vec<_> = row.split(',').collect();
+            assert_eq!(columns.len(), 5, "malformed corpus row {}", line_number + 2);
+            let [id, region, vehicle, raw_tags, expected] = columns.as_slice() else {
+                unreachable!()
+            };
+            assert!(ids.insert(*id), "duplicate corpus id {id}");
+            let tags = raw_tags
+                .split(';')
+                .map(|tag| {
+                    let (key, value) = tag.split_once('=').expect("tag must be key=value");
+                    (key.to_owned(), value.to_owned())
+                })
+                .collect();
+            let ways = [OverpassWay {
+                id: total as i64 + 1,
+                tags,
+                geometry: geometry.clone(),
+            }];
+            let actual = analyze((*id).into(), &points, &ways, vehicle, region, true)
+                .unwrap()
+                .verdict;
+            let expected = match *expected {
+                "prohibited" => Severity::Prohibited,
+                "review" => Severity::Review,
+                "clear" => Severity::Clear,
+                value => panic!("unsupported label {value}"),
+            };
+            total += 1;
+            correct += usize::from(actual == expected);
+            if expected == Severity::Prohibited {
+                prohibited += 1;
+                prohibited_found += usize::from(actual == Severity::Prohibited);
+            }
+        }
+
+        assert_eq!(
+            total, 100,
+            "the release corpus must contain exactly 100 routes"
+        );
+        let accuracy = correct as f64 / total as f64;
+        let prohibited_recall = prohibited_found as f64 / prohibited as f64;
+        eprintln!(
+            "labeled corpus: {correct}/{total} exact; prohibited/vehicle-mismatch recall: {prohibited_found}/{prohibited}"
+        );
+        assert!(accuracy >= 0.90, "accuracy was {:.1}%", accuracy * 100.0);
+        assert!(
+            prohibited_recall >= 0.90,
+            "prohibited recall was {:.1}%",
+            prohibited_recall * 100.0
+        );
+    }
 }

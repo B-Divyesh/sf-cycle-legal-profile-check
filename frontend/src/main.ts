@@ -127,7 +127,7 @@ function bind() {
   document.querySelector('#sample')?.addEventListener('click', () => { sampleText = SAMPLE_GPX; selectedFile = null; render(); });
   document.querySelector('#export')?.addEventListener('click', () => result && downloadChecklist(result));
   document.querySelector('#start-over')?.addEventListener('click', () => { result = null; selectedFinding = ''; render(); location.hash = 'checker'; });
-  document.querySelectorAll<HTMLElement>('[data-finding]').forEach((button) => button.addEventListener('click', () => { selectedFinding = button.dataset.finding || ''; render(); document.querySelector(`[data-finding="${selectedFinding}"]`)?.focus(); }));
+  document.querySelectorAll<HTMLElement>('[data-finding]').forEach((button) => button.addEventListener('click', () => { selectedFinding = button.dataset.finding || ''; render(); document.querySelector<HTMLElement>(`[data-finding="${selectedFinding}"]`)?.focus(); }));
   document.querySelector('#restore')?.addEventListener('click', restore);
 }
 

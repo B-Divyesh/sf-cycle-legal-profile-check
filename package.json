@@ -8,11 +8,14 @@
     "build": "vite build",
     "test": "vitest run && cargo test",
     "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "lint": "cargo fmt --check && cargo clippy --all-targets --all-features -- -D warnings",
     "preview": "vite preview --host 0.0.0.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "1.58.2",
+    "@types/node": "^24.13.3",
     "concurrently": "^9.2.1",
     "typescript": "^5.9.2",
     "vite": "^7.1.3",

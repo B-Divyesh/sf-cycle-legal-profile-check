@@ -28,12 +28,16 @@ Configuration:
 
 ```sh
 npm test
+npm run typecheck
+npm run lint
 npm run build
 npm run test:e2e
 docker build -t cycle-legal-check .
 ```
 
 The Vite build lands in `dist/`. The container builds both layers, runs as a non-root user, stores the aggregate counter in `/data`, and listens on port 8080. `/health` reports status and build SHA.
+
+`npm test` includes the labeled fixture in `tests/fixtures/labeled_routes.csv`: exactly 100 route/tag/profile cases across Belgium, the Netherlands, and Germany. The regression gate requires at least 90% exact classification accuracy and 90% recall for prohibited or vehicle-mismatch cases. This is a deterministic rule-pack corpus, not a claim of real-world legal accuracy.
 
 ## Data and limits
 

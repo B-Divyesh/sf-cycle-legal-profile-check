@@ -39,6 +39,7 @@
       "src_main_shutdown",
       "src_main_static_fixture",
       "src_main_test_state",
+      "src_main_unsupported_region_is_rejected_before_billing",
       "src_main_verify_paid",
       "src_main_verifyresponse",
       "state",
@@ -92,6 +93,7 @@
       "src_analyzer_assess_tags",
       "src_analyzer_bicycle_no_is_prohibited",
       "src_analyzer_distance_to_way",
+      "src_analyzer_germany_pack_links_to_the_current_ministry_source",
       "src_analyzer_haversine",
       "src_analyzer_labeled_hundred_route_corpus_meets_accuracy_and_recall_targets",
       "src_analyzer_overpass_query",
@@ -213,9 +215,9 @@
     ]
   },
   "cohesion": {
-    "0": 0.08773784355179703,
+    "0": 0.08787878787878788,
     "1": 0.13763440860215054,
-    "2": 0.1425287356321839,
+    "2": 0.13763440860215054,
     "3": 0.08695652173913043,
     "4": 0.13333333333333333,
     "5": 0.3047619047619048,
@@ -241,18 +243,18 @@
       "degree": 13
     },
     {
-      "id": "src_main_appstate",
-      "label": "AppState",
-      "degree": 11
-    },
-    {
       "id": "src_main_build_router",
       "label": "build_router()",
-      "degree": 11
+      "degree": 12
     },
     {
       "id": "src_analyzer_parse_gpx",
       "label": "parse_gpx()",
+      "degree": 11
+    },
+    {
+      "id": "src_main_appstate",
+      "label": "AppState",
       "degree": 11
     },
     {
@@ -261,30 +263,30 @@
       "degree": 10
     },
     {
-      "id": "src_main_get",
-      "label": "get()",
-      "degree": 8
-    },
-    {
       "id": "package_scripts",
       "label": "scripts",
       "degree": 8
     },
     {
-      "id": "frontend_src_main_apppage",
-      "label": "appPage()",
-      "degree": 6
+      "id": "src_main_get",
+      "label": "get()",
+      "degree": 8
     },
     {
-      "id": "frontend_src_main_render",
-      "label": "render()",
+      "id": "src_main_test_state",
+      "label": "test_state()",
+      "degree": 7
+    },
+    {
+      "id": "src_model_analysis",
+      "label": "Analysis",
       "degree": 6
     }
   ],
   "surprises": [
     {
       "source": "analyze_route()",
-      "target": "analyze()",
+      "target": "parse_gpx()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -306,7 +308,7 @@
     },
     {
       "source": "analyze_route()",
-      "target": "parse_gpx()",
+      "target": "analyze()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"

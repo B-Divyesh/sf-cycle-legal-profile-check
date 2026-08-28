@@ -438,7 +438,7 @@
       "file_type": "code",
       "norm_label": "apierror",
       "source_file": "src/main.rs",
-      "source_location": "L249"
+      "source_location": "L255"
     },
     {
       "id": "src_main_apierror_into_response",
@@ -448,7 +448,7 @@
       "file_type": "code",
       "norm_label": ".into_response()",
       "source_file": "src/main.rs",
-      "source_location": "L251"
+      "source_location": "L257"
     },
     {
       "id": "src_main_appstate",
@@ -508,7 +508,7 @@
       "file_type": "code",
       "norm_label": "get()",
       "source_file": "src/main.rs",
-      "source_location": "L308"
+      "source_location": "L314"
     },
     {
       "id": "src_main_health",
@@ -528,7 +528,7 @@
       "file_type": "code",
       "norm_label": "health_never_reports_the_old_unknown_sentinel()",
       "source_file": "src/main.rs",
-      "source_location": "L355"
+      "source_location": "L389"
     },
     {
       "id": "src_main_is_hashed_asset",
@@ -548,7 +548,7 @@
       "file_type": "code",
       "norm_label": "legal_routes_are_successful_direct_documents()",
       "source_file": "src/main.rs",
-      "source_location": "L316"
+      "source_location": "L350"
     },
     {
       "id": "src_main_main",
@@ -578,7 +578,7 @@
       "file_type": "code",
       "norm_label": "response_cache_policy_separates_updates_from_immutable_bundles()",
       "source_file": "src/main.rs",
-      "source_location": "L331"
+      "source_location": "L365"
     },
     {
       "id": "src_main_response_policy",
@@ -628,7 +628,7 @@
       "file_type": "code",
       "norm_label": "shutdown()",
       "source_file": "src/main.rs",
-      "source_location": "L256"
+      "source_location": "L262"
     },
     {
       "id": "src_main_static_fixture",
@@ -638,7 +638,7 @@
       "file_type": "code",
       "norm_label": "static_fixture()",
       "source_file": "src/main.rs",
-      "source_location": "L289"
+      "source_location": "L295"
     },
     {
       "id": "src_main_test_state",
@@ -648,7 +648,17 @@
       "file_type": "code",
       "norm_label": "test_state()",
       "source_file": "src/main.rs",
-      "source_location": "L277"
+      "source_location": "L283"
+    },
+    {
+      "id": "src_main_unsupported_region_is_rejected_before_billing",
+      "label": "unsupported_region_is_rejected_before_billing()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "unsupported_region_is_rejected_before_billing()",
+      "source_file": "src/main.rs",
+      "source_location": "L322"
     },
     {
       "id": "src_main_verify_paid",
@@ -658,7 +668,7 @@
       "file_type": "code",
       "norm_label": "verify_paid()",
       "source_file": "src/main.rs",
-      "source_location": "L229"
+      "source_location": "L235"
     },
     {
       "id": "src_main_verifyresponse",
@@ -951,6 +961,16 @@
       "source_location": "L317"
     },
     {
+      "id": "src_analyzer_germany_pack_links_to_the_current_ministry_source",
+      "label": "germany_pack_links_to_the_current_ministry_source()",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "germany_pack_links_to_the_current_ministry_source()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L388"
+    },
+    {
       "id": "src_analyzer_haversine",
       "label": "haversine()",
       "_origin": "ast",
@@ -968,7 +988,7 @@
       "file_type": "code",
       "norm_label": "labeled_hundred_route_corpus_meets_accuracy_and_recall_targets()",
       "source_file": "src/analyzer.rs",
-      "source_location": "L388"
+      "source_location": "L401"
     },
     {
       "id": "src_analyzer_overpass_query",
@@ -2182,6 +2202,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_analyzer_germany_pack_links_to_the_current_ministry_source",
+      "target": "src_analyzer_rule_pack",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L389",
+      "weight": 1.0
+    },
+    {
       "source": "src_analyzer_labeled_hundred_route_corpus_meets_accuracy_and_recall_targets",
       "target": "src_analyzer_parse_gpx",
       "relation": "calls",
@@ -2190,7 +2222,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L390",
+      "source_location": "L403",
       "weight": 1.0
     },
     {
@@ -2202,7 +2234,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L429",
+      "source_location": "L442",
       "weight": 1.0
     },
     {
@@ -2298,7 +2330,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L189",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -2310,7 +2342,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L226",
+      "source_location": "L232",
       "weight": 1.0
     },
     {
@@ -2322,7 +2354,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L252",
+      "source_location": "L258",
       "weight": 1.0
     },
     {
@@ -2370,7 +2402,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L356",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -2382,7 +2414,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L357",
+      "source_location": "L391",
       "weight": 1.0
     },
     {
@@ -2394,7 +2426,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L357",
+      "source_location": "L391",
       "weight": 1.0
     },
     {
@@ -2406,7 +2438,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L357",
+      "source_location": "L391",
       "weight": 1.0
     },
     {
@@ -2418,7 +2450,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L317",
+      "source_location": "L351",
       "weight": 1.0
     },
     {
@@ -2430,7 +2462,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L318",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -2442,7 +2474,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L318",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -2454,7 +2486,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L320",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -2490,7 +2522,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L332",
+      "source_location": "L366",
       "weight": 1.0
     },
     {
@@ -2502,7 +2534,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L333",
+      "source_location": "L367",
       "weight": 1.0
     },
     {
@@ -2514,7 +2546,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L333",
+      "source_location": "L367",
       "weight": 1.0
     },
     {
@@ -2526,7 +2558,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L344",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -2542,6 +2574,42 @@
       "weight": 1.0
     },
     {
+      "source": "src_main_unsupported_region_is_rejected_before_billing",
+      "target": "src_main_static_fixture",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L323",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_unsupported_region_is_rejected_before_billing",
+      "target": "src_main_build_router",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L324",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_unsupported_region_is_rejected_before_billing",
+      "target": "src_main_test_state",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L324",
+      "weight": 1.0
+    },
+    {
       "source": "src_main_verify_paid",
       "target": "src_main_get",
       "relation": "calls",
@@ -2550,7 +2618,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L239",
+      "source_location": "L245",
       "weight": 1.0
     },
     {
@@ -2562,7 +2630,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "src/main.rs",
-      "source_location": "L249",
+      "source_location": "L255",
       "weight": 1.0
     },
     {
@@ -2574,7 +2642,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "src/main.rs",
-      "source_location": "L249",
+      "source_location": "L255",
       "weight": 1.0
     },
     {
@@ -3042,7 +3110,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L277",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -3546,7 +3614,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/main.rs",
-      "source_location": "L274",
+      "source_location": "L280",
       "weight": 1.0
     },
     {
@@ -3750,7 +3818,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L308",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -3798,7 +3866,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L229",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -3810,7 +3878,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L229",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -3918,7 +3986,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L251",
+      "source_location": "L257",
       "weight": 1.0
     },
     {
@@ -3942,7 +4010,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L308",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -3978,7 +4046,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L289",
+      "source_location": "L295",
       "weight": 1.0
     },
     {
@@ -3990,7 +4058,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L277",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -4666,13 +4734,24 @@
     },
     {
       "source": "src_analyzer",
-      "target": "src_analyzer_labeled_hundred_route_corpus_meets_accuracy_and_recall_targets",
+      "target": "src_analyzer_germany_pack_links_to_the_current_ministry_source",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
       "source_location": "L388",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_labeled_hundred_route_corpus_meets_accuracy_and_recall_targets",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L401",
       "weight": 1.0
     },
     {
@@ -4804,7 +4883,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L229",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -4815,18 +4894,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L249",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_main_shutdown",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/main.rs",
-      "source_location": "L256",
+      "source_location": "L255",
       "weight": 1.0
     },
     {
@@ -4842,13 +4910,24 @@
     },
     {
       "source": "src_main",
+      "target": "src_main_shutdown",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L262",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
       "target": "src_main_test_state",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L277",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -4859,7 +4938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L289",
+      "source_location": "L295",
       "weight": 1.0
     },
     {
@@ -4870,29 +4949,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L308",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
       "source": "src_main",
-      "target": "src_main_legal_routes_are_successful_direct_documents",
+      "target": "src_main_unsupported_region_is_rejected_before_billing",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L316",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/main.rs",
-      "source_location": "L331",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -4908,13 +4976,35 @@
     },
     {
       "source": "src_main",
+      "target": "src_main_legal_routes_are_successful_direct_documents",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L350",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L365",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
       "target": "src_main_health_never_reports_the_old_unknown_sentinel",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L355",
+      "source_location": "L389",
       "weight": 1.0
     },
     {
@@ -5200,7 +5290,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L250",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -5211,7 +5301,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L251",
+      "source_location": "L257",
       "weight": 1.0
     },
     {
@@ -5283,7 +5373,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L195",
+      "source_location": "L201",
       "weight": 1.0
     },
     {
@@ -5295,7 +5385,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L197",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
@@ -5307,10 +5397,10 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L224",
+      "source_location": "L230",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1370e0733a3c577665dd25c0fbba4864babfaf05"
+  "built_at_commit": "494c4cdce10afea0bd5b78e577d4c0a8525b7acf"
 }

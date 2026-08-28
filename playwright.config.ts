@@ -7,6 +7,6 @@ export default defineConfig({
   webServer: { command: 'npm run build && cargo run', url: 'http://127.0.0.1:8080/health', reuseExistingServer: true, timeout: 120_000 },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
-    { name: 'mobile', use: { ...devices['iPhone 13'], viewport: { width: 390, height: 844 } } },
+    { name: 'mobile', use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } },
   ],
 });

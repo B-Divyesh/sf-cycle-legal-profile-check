@@ -1,7 +1,18 @@
-const CACHE = 'cycle-legal-shell-v1';
-const SHELL = ['/', '/manifest.webmanifest'];
-self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL))));
-self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))));
+const CACHE = 'cycle-legal-shell-v2';
+const SHELL = ['/', '/manifest.webmanifest', '/favicon.svg', '/assets/route-inspection-hero-mobile.webp', '/assets/route-inspection-hero.webp'];
+self.addEventListener('install', (event) => event.waitUntil((async () => {
+  const cache = await caches.open(CACHE);
+  const page = await fetch('/');
+  const html = await page.clone().text();
+  await cache.put('/', page);
+  const builtAssets = [...html.matchAll(/(?:src|href)="(\/assets\/[^"]+)"/g)].map(match => match[1]);
+  await cache.addAll([...SHELL.slice(1), ...builtAssets]);
+  await self.skipWaiting();
+})()));
+self.addEventListener('activate', (event) => event.waitUntil((async () => {
+  await Promise.all((await caches.keys()).filter((key) => key !== CACHE).map((key) => caches.delete(key)));
+  await self.clients.claim();
+})()));
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || new URL(event.request.url).pathname.startsWith('/api/')) return;
   event.respondWith(fetch(event.request).then((response) => {

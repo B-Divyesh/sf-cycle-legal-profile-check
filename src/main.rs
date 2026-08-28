@@ -14,6 +14,7 @@ use serde::{Deserialize, Serialize};
 use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
 use std::{env, sync::Arc, time::Duration};
 use tokio::signal;
+use tokio::sync::Semaphore;
 use tower_http::{
     services::{ServeDir, ServeFile},
     set_header::SetResponseHeaderLayer,
@@ -26,6 +27,7 @@ struct AppState {
     db: SqlitePool,
     overpass_url: String,
     billing_base: String,
+    analysis_slots: Arc<Semaphore>,
 }
 
 #[derive(Serialize)]
@@ -66,6 +68,7 @@ async fn main() {
             .unwrap_or_else(|_| "https://overpass-api.de/api/interpreter".into()),
         billing_base: env::var("BILLING_API_BASE")
             .unwrap_or_else(|_| "https://api.sociobot.in/api/v1".into()),
+        analysis_slots: Arc::new(Semaphore::new(8)),
     });
     let static_service = ServeDir::new("dist").not_found_service(ServeFile::new("dist/index.html"));
     let app = Router::new()
@@ -111,6 +114,12 @@ async fn analyze_route(
     State(state): State<Arc<AppState>>,
     Json(input): Json<AnalyzeRequest>,
 ) -> Result<Json<model::Analysis>, ApiError> {
+    let _permit = state.analysis_slots.try_acquire().map_err(|_| {
+        ApiError(
+            StatusCode::TOO_MANY_REQUESTS,
+            "The checker is busy. Wait a moment and try again.".into(),
+        )
+    })?;
     if input.gpx.len() > 8 * 1024 * 1024 {
         return Err(ApiError(
             StatusCode::PAYLOAD_TOO_LARGE,

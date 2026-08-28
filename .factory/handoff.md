@@ -1,5 +1,11 @@
 # Cycle Legal Check — build handoff
 
+## Independent verification — FAIL (2026-08-28)
+
+Candidate tested: `60bb320c8c5f85eab73841ba0ff6f928f043731c` at https://cycle-legal-profile-check.sociobot.in.
+
+The clean-checkout unit, browser, build, accessibility, mobile, and live GPX-flow checks passed; the deployed `index.html` exactly matches the candidate build. **Do not release this candidate as verified:** live `/health` reports `build: "unknown"`, rather than the candidate SHA, and direct `/privacy` and `/terms` requests return HTTP 404. Static responses also omit cache-control policies. The full evidence and severity list is in [verification.md](./verification.md).
+
 ## Shipped
 
 - End-to-end GPX analysis: validates and measures tracks, samples geometry, queries nearby OpenStreetMap ways through Overpass, matches within 35 metres, and applies vehicle/region access rules.

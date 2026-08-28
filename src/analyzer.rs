@@ -268,8 +268,8 @@ fn rule_pack(region: &str) -> RulePack {
             "https://www.government.nl/topics/bicycles/safe-cycling",
         ),
         "DE" => (
-            "Germany road traffic guidance",
-            "https://bmdv.bund.de/SharedDocs/EN/Articles/StV/Roadtraffic/cycling.html",
+            "Germany Federal Ministry of Transport: cycling",
+            "https://www.bmv.de/DE/Themen/Mobilitaet/Fahrradverkehr/fahrradverkehr.html",
         ),
         _ => (
             "Belgium road code: cycling and speed pedelecs",
@@ -382,6 +382,19 @@ mod tests {
         let report = analyze("X".into(), &points, &[], "bicycle", "BE", false).unwrap();
         assert_eq!(report.verdict, Severity::Review);
         assert_eq!(report.coverage_percent, 0.0);
+    }
+
+    #[test]
+    fn germany_pack_links_to_the_current_ministry_source() {
+        let source = &rule_pack("DE").sources[0];
+        assert_eq!(
+            source.label,
+            "Germany Federal Ministry of Transport: cycling"
+        );
+        assert_eq!(
+            source.url,
+            "https://www.bmv.de/DE/Themen/Mobilitaet/Fahrradverkehr/fahrradverkehr.html"
+        );
     }
 
     #[test]

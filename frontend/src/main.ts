@@ -142,15 +142,15 @@ async function restore() {
 
 async function submitCheck(event: Event) {
   event.preventDefault();
-  const status = document.querySelector<HTMLElement>('#form-status')!;
-  const fileText = sampleText || (selectedFile ? await selectedFile.text() : '');
-  if (!fileText) { status.textContent = 'Choose a GPX file or load the sample route first.'; return; }
-  if (selectedFile && selectedFile.size > 8 * 1024 * 1024) { status.textContent = 'That file is over 8 MB. Export a simpler track and try again.'; return; }
-  status.innerHTML = '<span class="loader" aria-hidden="true"></span> Matching route points to mapped ways…';
   const form = event.currentTarget as HTMLFormElement;
   const vehicle = (form.elements.namedItem('vehicle') as HTMLSelectElement).value;
   const region = (form.elements.namedItem('region') as HTMLSelectElement).value;
+  const status = document.querySelector<HTMLElement>('#form-status')!;
+  if (!sampleText && !selectedFile) { status.textContent = 'Choose a GPX file or load the sample route first.'; return; }
+  if (selectedFile && selectedFile.size > 8 * 1024 * 1024) { status.textContent = 'That file is over 8 MB. Export a simpler track and try again.'; return; }
+  status.innerHTML = '<span class="loader" aria-hidden="true"></span> Matching route points to mapped ways…';
   try {
+    const fileText = sampleText || await selectedFile!.text();
     const response = await fetch('/api/analyze', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ gpx: fileText, vehicle, region, license: localStorage.getItem(LICENSE_KEY) }) });
     const body = await response.json();
     if (!response.ok) throw new Error(body.error || 'The route could not be checked.');

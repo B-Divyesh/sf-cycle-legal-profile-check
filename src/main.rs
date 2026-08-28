@@ -186,6 +186,12 @@ async fn analyze_route(
         ));
     }
     let region = input.region.to_uppercase();
+    if !matches!(region.as_str(), "BE" | "NL" | "DE") {
+        return Err(ApiError(
+            StatusCode::UNPROCESSABLE_ENTITY,
+            "That regional rule pack is not supported.".into(),
+        ));
+    }
     if region != "BE" && !verify_paid(&state, input.license.as_deref()).await {
         return Err(ApiError(
             StatusCode::PAYMENT_REQUIRED,
@@ -310,6 +316,34 @@ mod tests {
             .oneshot(Request::builder().uri(path).body(Body::empty()).unwrap())
             .await
             .unwrap()
+    }
+
+    #[tokio::test]
+    async fn unsupported_region_is_rejected_before_billing() {
+        let fixture = static_fixture();
+        let app = build_router(test_state(), fixture.path());
+        let request = Request::builder()
+            .method("POST")
+            .uri("/api/analyze")
+            .header(header::CONTENT_TYPE, "application/json")
+            .body(Body::from(
+                serde_json::json!({
+                    "gpx": "<gpx><trkpt lat='50' lon='4'/><trkpt lat='50.01' lon='4'/></gpx>",
+                    "vehicle": "bicycle",
+                    "region": "XX"
+                })
+                .to_string(),
+            ))
+            .unwrap();
+        let response = app.oneshot(request).await.unwrap();
+        assert_eq!(response.status(), StatusCode::UNPROCESSABLE_ENTITY);
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        assert_eq!(
+            serde_json::from_slice::<serde_json::Value>(&body).unwrap()["error"],
+            "That regional rule pack is not supported."
+        );
     }
 
     #[tokio::test]

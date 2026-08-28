@@ -26,7 +26,7 @@ All text and UI pairings meet WCAG AA (4.5:1 for body text, 3:1 for large text a
 
 - Display: `Arial Black`, `Arial Narrow`, system sans-serif. Condensed, infrastructural, uppercase only for short labels.
 - Body/data: `ui-monospace`, `SFMono-Regular`, Consolas, monospace. It reads like a field note and makes distances/tags scan cleanly with tabular numerals.
-- No web-font payload or third-party request. Type steps: 12, 14, 16, 20, 32, and fluid 48–72px. Body is never below 16px.
+- No web-font payload or third-party request. Type steps: 16, 20, 32, and fluid 48–72px. Labels and supporting copy use weight and letter spacing—not undersized text—for hierarchy; visible text is never below 16px.
 
 ## Space and structure
 

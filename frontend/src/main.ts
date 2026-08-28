@@ -31,11 +31,12 @@ function cachedLicenseInactive() {
 function consumeLicense() {
   const url = new URL(location.href);
   const token = url.searchParams.get('license');
-  if (!token) return;
+  if (!token) return false;
   localStorage.setItem(LICENSE_KEY, token);
   url.searchParams.delete('license');
   history.replaceState({}, '', url);
   verifyLicense(token);
+  return true;
 }
 
 async function verifyLicense(token = localStorage.getItem(LICENSE_KEY) || '') {
@@ -163,12 +164,12 @@ function escapeHtml(value: string) {
   const element = document.createElement('span'); element.textContent = value; return element.innerHTML;
 }
 
-consumeLicense();
+const receivedLicense = consumeLicense();
 render();
 try {
   const token = localStorage.getItem(LICENSE_KEY);
   const cache = JSON.parse(localStorage.getItem(VERDICT_KEY) || '{}');
-  if (token && (!cache.checked_at || Date.now() - cache.checked_at >= 86_400_000)) verifyLicense(token);
+  if (!receivedLicense && token && (!cache.checked_at || Date.now() - cache.checked_at >= 86_400_000)) verifyLicense(token);
 } catch { /* malformed local state stays locked */ }
 if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => undefined));
 if (!sessionStorage.getItem('page-counted')) {

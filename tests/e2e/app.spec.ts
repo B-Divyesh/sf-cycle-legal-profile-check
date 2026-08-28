@@ -67,3 +67,24 @@ test('installed shell reloads offline', async ({ page, context }) => {
   await expect(page.getByRole('heading', { name: /Your route has rules/ })).toBeVisible();
   await expect(page.getByText('Offline.', { exact: true })).toBeVisible();
 });
+
+test('license return is stored, stripped from the URL, and cached for a day', async ({ page }) => {
+  let verificationCalls = 0;
+  await page.route('https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/verify?**', async (route) => {
+    verificationCalls += 1;
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ valid: true, reason: 'ok', expires_at: null }),
+    });
+  });
+  await page.goto('/?license=return-token');
+  await expect(page).toHaveURL('http://127.0.0.1:8080/');
+  await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="NL"]')).toBeEnabled();
+  expect(await page.evaluate(() => localStorage.getItem('sb_license:cycle-legal-profile-check'))).toBe('return-token');
+  expect(verificationCalls).toBe(1);
+
+  await page.reload();
+  await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="NL"]')).toBeEnabled();
+  expect(verificationCalls).toBe(1);
+});

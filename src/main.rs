@@ -153,14 +153,11 @@ fn is_hashed_asset(path: &str) -> bool {
     let Some(filename) = path.strip_prefix("/assets/") else {
         return false;
     };
-    let stem = filename.rsplit_once('.').map_or(filename, |(stem, _)| stem);
-    let Some(hash) = stem.rsplit('-').next() else {
-        return false;
-    };
-    hash.len() >= 8
-        && hash
-            .chars()
-            .all(|character| character.is_ascii_alphanumeric())
+    // Vite's generated JS/CSS names contain content hashes. Rollup uses a
+    // URL-safe base64 alphabet, so hashes may contain `_` or `-` as well as
+    // letters and digits. Public images keep stable names and use the shorter
+    // revalidation policy below.
+    (filename.ends_with(".js") || filename.ends_with(".css")) && filename.contains('-')
 }
 
 async fn page_view(State(state): State<Arc<AppState>>) -> StatusCode {
@@ -300,7 +297,7 @@ mod tests {
         std::fs::write(directory.path().join("sw.js"), "// service worker")
             .expect("service-worker fixture");
         std::fs::write(
-            directory.path().join("assets/index-Ab12Cd34.js"),
+            directory.path().join("assets/index-Ab12_C34.js"),
             "// bundle",
         )
         .expect("bundle fixture");
@@ -339,7 +336,7 @@ mod tests {
             ("/sw.js", "no-cache"),
             ("/health", "no-store"),
             (
-                "/assets/index-Ab12Cd34.js",
+                "/assets/index-Ab12_C34.js",
                 "public, max-age=31536000, immutable",
             ),
             ("/assets/hero.webp", "public, max-age=86400"),

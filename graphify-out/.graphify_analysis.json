@@ -279,13 +279,13 @@
       "degree": 17
     },
     {
-      "id": "src_main_build_router",
-      "label": "build_router()",
+      "id": "src_main_analyze_route",
+      "label": "analyze_route()",
       "degree": 14
     },
     {
-      "id": "src_main_analyze_route",
-      "label": "analyze_route()",
+      "id": "src_main_build_router",
+      "label": "build_router()",
       "degree": 14
     },
     {
@@ -304,13 +304,13 @@
       "degree": 11
     },
     {
-      "id": "tsconfig_compileroptions",
-      "label": "compilerOptions",
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
       "degree": 10
     },
     {
-      "id": "frontend_src_main_apppage",
-      "label": "appPage()",
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
       "degree": 10
     },
     {
@@ -319,8 +319,8 @@
       "degree": 9
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
+      "id": "frontend_src_main_render",
+      "label": "render()",
       "degree": 8
     }
   ],

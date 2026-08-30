@@ -9,6 +9,7 @@
     "test": "vitest run && cargo test",
     "test:e2e": "playwright test",
     "verify:deployed": "node scripts/verify-deployed.mjs",
+    "verify:live:polish": "node scripts/verify-live-polish.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "cargo fmt --check && cargo clippy --all-targets --all-features -- -D warnings",
     "preview": "vite preview --host 0.0.0.0"

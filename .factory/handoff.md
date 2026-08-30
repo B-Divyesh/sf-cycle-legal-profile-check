@@ -1,29 +1,50 @@
-# Cycle Legal Check — review 1 handoff
+# Cycle Legal Check — polish round 1 handoff
 
-## Outcome: FAIL
+## Outcome
 
-This was an adversarial reviewer pass. No product code was changed. The review
-is recorded in [`review-1.md`](review-1.md) and identifies six findings:
+All six findings in `.factory/review-1.md` are resolved. The polished backend
+and frontend are live at <https://cycle-legal-profile-check.sociobot.in> on
+build `fff835f45c0e9e8e0ab2ab9d996c8241fc605c55`.
 
-1. Blocking: several visitor-facing landing claims have no `claims.json`
-   entry/test.
-2. Major: route changes leave focus on `body` and provide no live announcement.
-3. Moderate: the 404 and iOS touch icon metadata are incomplete.
-4. Minor: a decorative hero caption carries no usable information.
-5. Minor: GPX and regional-pack terminology drifts.
-6. Minor: existing copy-audit word counts are inaccurate.
+The product now has claim-backed first-screen wording, a direct isolated
+`?demo=1` and `/demo` sample path, SPA route focus and announcements, complete
+route/404 metadata, an original touch icon, consistent terminology, accurate
+copy counts, and a mobile first screen that shows all three facts at 390×844.
+The concrete-and-moss field-inspection identity was preserved.
 
-## Verification performed
+## Verification evidence
 
-- Used fresh live browser contexts at 390 px and desktop for the cold landing,
-  `/demo`, route, metadata, network, focus, and accessibility checks.
-- Created a clean clone at `151959a4e858fdb6604db922297305a03f474adb`; ran
-  every declared claim command successfully, plus `npm test`, typecheck, lint,
-  build, and focused real-upload/navigation tests.
-- Confirmed the clean-built JS and CSS hashes equal the deployed assets and
-  that live `/health` reports build `d562c39c9eefc51e8193d869bade1fddbc58d014`.
+The released product commit was cloned into a new temporary directory. Every
+one of the 13 commands in `.factory/claims.json` passed individually. The same
+clean clone then passed:
 
-## How to reproduce
+```text
+npm test          2 Vitest + 17 Rust tests passed
+npm run typecheck passed
+npm run lint      rustfmt + clippy -D warnings passed
+npm run build     JS 21.01 kB raw / 7.94 kB gzip
+                  CSS 13.89 kB raw / 3.80 kB gzip
+npm run test:e2e  42/42 passed across desktop and 390 px mobile
+```
+
+Browser coverage includes real GPX upload payloads, invalid-file recovery,
+the 8 MB boundary, claim fixtures, demo isolation and reset, offline reload in
+its own context, export contents, license return/caching/revocation, route
+focus/back navigation, titles/canonicals, 404 status/metadata, 44 px targets,
+mobile overflow, console errors, and axe checks on every product route.
+
+Local Lighthouse mobile results are 99 performance, 100 accessibility, 100
+best practices, and 100 SEO. LCP was 2255 ms, CLS 0, and TBT 29 ms. The raw
+report and screenshots are in `.factory/evidence/polish-1/`.
+
+Post-deploy evidence:
+
+- `/opt/fleet/lib/verify-url.sh` reported HTTPS 200, the correct title, `lang=en`, one `h1`, one `main`, complete image alt text, and no console errors.
+- `npm run verify:live:polish` passed all route, responsive, axe, demo-network, reset, focus, 404, and offline assertions. Its report is `.factory/evidence/polish-1/live/polish-live.json`.
+- `EXPECTED_BUILD_SHA=fff835f45c0e9e8e0ab2ab9d996c8241fc605c55 npm run verify:deployed` observed 40 accepted requests and 20 HTTP 429 responses, all with `Retry-After: 1`.
+- The cloud container build succeeded. The verified release revision was `sf-cycle-legal-profile-check--0000021`, using one replica and the scoped `sf-cycle-legal-profile-check-d2` share mounted at `/data`.
+
+## Run and verify
 
 ```sh
 npm ci
@@ -32,14 +53,14 @@ npm run typecheck
 npm run lint
 npm run build
 npm run test:e2e
+EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:live:polish
+EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:deployed
 ```
 
-Run each exact command in `.factory/claims.json` from a fresh checkout. The
-direct demo is `/demo`.
+For each claim, also run its exact `test` command from `.factory/claims.json`.
+The demo entry point is `/demo` or `/?demo=1`.
 
-## Known gaps / next steps
+## Known gaps and next steps
 
-Address every finding in `review-1.md`, especially F-1-1 and F-1-2, then rerun
-the full first-read review in a fresh browser context. External billing and OSM
-destinations were not contacted because this work order explicitly restricts
-access to the product service.
+None for the reviewed scope. No AI feature was added because GPX analysis,
+mapped evidence, and export complete the brief without model inference.

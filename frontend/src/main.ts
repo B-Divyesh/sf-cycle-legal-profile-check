@@ -22,7 +22,7 @@ const DEMO_REPORT: Analysis = {
   findings: [
     {
       id: 'demo-way-42', severity: 'prohibited', title: 'Speed pedelec access is prohibited',
-      explanation: 'The mapped way has an explicit speed-pedelec restriction. Choose another route or check local signs.',
+      explanation: 'The mapped way has an explicit speed-pedelec restriction. Choose another GPX track or check local signs.',
       start_km: 0.2, end_km: 0.3, tags: { highway: 'cycleway', speed_pedelec: 'no' },
       osm_way_id: 42, osm_url: 'https://www.openstreetmap.org/way/42', rule_id: 'SP-EXPLICIT-NO',
     },
@@ -39,7 +39,11 @@ const DEMO_REPORT: Analysis = {
   caveats: ['Map tags can be incomplete.', 'Road signs and official instructions take priority.'],
 };
 
-const demoMode = location.pathname === '/demo' || new URL(location.href).searchParams.get('demo') === '1';
+function isDemoRoute() {
+  return location.pathname === '/demo' || new URL(location.href).searchParams.get('demo') === '1';
+}
+
+let demoMode = isDemoRoute();
 let selectedFile: File | null = null;
 let sampleText = demoMode ? SAMPLE_GPX : '';
 let result: Analysis | null = demoMode ? cloneDemoReport() : null;
@@ -111,17 +115,17 @@ function resetDemo() {
 }
 
 function legalPage(kind: 'privacy' | 'terms') {
-  const privacy = `<p>Cycle Legal Check processes an uploaded GPX only for the report you request. The server holds the file in memory and does not retain it.</p><p>We store one aggregate page count. We do not store route geometry, device identifiers, or analytics events.</p><p>Client IP addresses stay briefly in server memory to limit abusive bursts. They are not written to the database.</p><p>A license token and a once-daily verdict stay in your browser after an unlock. License verification goes to Sociobot, the merchant of record.</p><p>The server sends sampled route coordinates to OpenStreetMap’s Overpass service for public map tags. Clear this site’s storage to remove browser data.</p><p>Contact: <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p>`;
-  const terms = `<p>Cycle Legal Check is a planning aid. It is not legal advice or live navigation.</p><p>Map data and rule packs can be incomplete, delayed, or wrong. Road signs and official instructions take priority.</p><p>You remain responsible for checking the route and riding lawfully.</p><p>The maintained regional pack costs €19 once. It includes the Netherlands and Germany packs.</p><p>Sociobot/Dodo is the merchant of record. It handles checkout and refunds. A refund automatically revokes the license.</p><p>Accessibility, Belgium checks, safety warnings, and checklist export stay free.</p><p>OpenStreetMap data is © OpenStreetMap contributors and available under the ODbL. This service is provided “as is” without warranty.</p>`;
-  return `${header()}<main id="main" class="legal"><p class="eyebrow">FIELD NOTE / ${kind === 'privacy' ? 'PRIVACY' : 'TERMS'}</p><h1 tabindex="-1">${kind === 'privacy' ? 'Privacy' : 'Terms of use'}</h1><p class="lede">Effective 28 August 2026</p>${kind === 'privacy' ? privacy : terms}</main>${footer()}`;
+  const privacy = `<p>Cycle Legal Check processes an uploaded GPX track only for the report you request. The server holds the file in memory and does not retain it.</p><p>We store one aggregate page count. We do not store GPX track geometry, device identifiers, or analytics events.</p><p>Client IP addresses stay briefly in server memory to limit abusive bursts. They are not written to the database.</p><p>A license token and a once-daily verdict stay in your browser after a purchase. License verification goes to Sociobot.</p><p>The server sends sampled GPX track coordinates to OpenStreetMap’s Overpass service for public map tags. Clear this site’s storage to remove browser data.</p><p>Contact: <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p>`;
+  const terms = `<p>Cycle Legal Check is a planning aid. It is not legal advice or live navigation.</p><p>Map data and regional rule packs can be incomplete, delayed, or wrong. Road signs and official instructions take priority.</p><p>You remain responsible for checking the GPX track and riding lawfully.</p><p>The maintained regional rule pack costs €19 once. It includes the Netherlands and Germany rule packs.</p><p>Sociobot billing, backed by Dodo, handles checkout and refunds. A refund automatically revokes the license.</p><p>Accessibility, Belgium checks, safety warnings, and checklist export stay free.</p><p>OpenStreetMap data is © OpenStreetMap contributors and available under the ODbL. This service is provided “as is” without warranty.</p>`;
+  return `${header()}<main id="main" class="legal"><p class="eyebrow">${kind === 'privacy' ? 'DATA HANDLING' : 'SERVICE TERMS'}</p><h1 tabindex="-1">${kind === 'privacy' ? 'Privacy' : 'Terms of use'}</h1><p class="lede">Effective 28 August 2026</p>${kind === 'privacy' ? privacy : terms}</main>${footer()}`;
 }
 
 function footer() {
-  return `<footer><p><strong>Cycle Legal Check</strong> is not legal advice. Coverage is incomplete.</p><nav aria-label="Legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://www.openstreetmap.org/copyright" rel="external">© OpenStreetMap contributors</a></nav><p class="generated">Hero image generated for this product with Azure AI. <a href="/health">Build status</a> · Built by Param Factory</p></footer>`;
+  return `<footer><p><strong>Cycle Legal Check</strong> is not legal advice. Coverage is incomplete.</p><nav aria-label="Legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://www.openstreetmap.org/copyright" rel="external">© OpenStreetMap contributors</a></nav><p class="generated">Hero image generated for this product with Azure AI. <a href="/health">Build status</a> · Version 1.0 · Built by Param Factory</p></footer>`;
 }
 
 function header() {
-  return `<header class="site-header"><a class="wordmark" href="/">Cycle legal <span>//01</span></a><nav aria-label="Primary"><a href="/demo">Demo</a><a href="/#how">How it works</a><a href="/#rule-packs">Rule packs</a><a href="/privacy">Privacy</a></nav><a class="header-action" href="/#checker">Check a route</a></header>`;
+  return `<header class="site-header"><a class="wordmark" href="/">Cycle legal <span>//01</span></a><nav aria-label="Primary"><a href="/demo">Demo</a><a href="/#how">How it works</a><a href="/#rule-packs">Rule packs</a><a href="/privacy">Privacy</a></nav><a class="header-action" href="/#checker">Check a GPX track</a></header>`;
 }
 
 function icon(severity: Severity) {
@@ -138,28 +142,28 @@ function resultView(data: Analysis) {
   const tags = current ? Object.entries(current.tags).map(([key, value]) => `<code>${escapeHtml(key)}=${escapeHtml(value)}</code>`).join('') : '';
   return `<section class="results" aria-labelledby="result-title">
     <div class="result-head ${data.verdict}"><div><p class="eyebrow">REPORT / ${data.region}-${data.rule_pack.version}</p><h2 id="result-title"><span aria-hidden="true">${icon(data.verdict)}</span> ${verdictCopy(data.verdict)}</h2><p>${data.route_name} · ${data.distance_km.toFixed(1)} km · ${data.vehicle.replace('_', ' ')}</p></div><div class="coverage"><strong>${data.coverage_percent.toFixed(0)}%</strong><span>matched to tagged OSM ways</span></div></div>
-    <div class="coverage-note"><strong>Coverage matters.</strong> ${data.coverage_percent < 95 ? 'Unmatched sections are marked for manual review.' : 'Nearly all sampled route points matched mapped ways.'} This report cannot prove a route is legal.</div>
-    <div class="route-tape" aria-label="Route evidence overview">${data.findings.map(finding => `<span class="${finding.severity}" title="${escapeHtml(finding.title)}"><b aria-hidden="true">${icon(finding.severity)}</b><small>${finding.start_km.toFixed(1)} km</small></span>`).join('')}</div>
-    <div class="result-grid"><div><h3>Route findings <span>${data.findings.length}</span></h3><ol class="finding-list">${data.findings.map(findingItem).join('')}</ol></div>
+    <div class="coverage-note"><strong>Coverage matters.</strong> ${data.coverage_percent < 95 ? 'Unmatched sections are marked for manual review.' : 'Nearly all sampled GPX track points matched mapped ways.'} This report cannot prove a GPX track is legal.</div>
+    <div class="route-tape" aria-label="GPX track evidence overview">${data.findings.map(finding => `<span class="${finding.severity}" title="${escapeHtml(finding.title)}"><b aria-hidden="true">${icon(finding.severity)}</b><small>${finding.start_km.toFixed(1)} km</small></span>`).join('')}</div>
+    <div class="result-grid"><div><h3>GPX track findings <span>${data.findings.length}</span></h3><ol class="finding-list">${data.findings.map(findingItem).join('')}</ol></div>
     <aside class="evidence" aria-live="polite">${current ? `<p class="eyebrow">EVIDENCE / ${current.rule_id}</p><h3>${escapeHtml(current.title)}</h3><p>${escapeHtml(current.explanation)}</p><div class="tags" aria-label="OpenStreetMap tags">${tags || '<em>No access tags were returned.</em>'}</div>${current.osm_url ? `<a class="text-link" href="${current.osm_url}" target="_blank" rel="noreferrer">Inspect OSM way <span aria-hidden="true">↗</span></a>` : '<p class="muted">No OSM way link is available for this unmatched section.</p>'}` : ''}</aside></div>
-    <div class="report-actions"><button class="secondary" id="export">Export review checklist (.csv)</button><button class="plain" id="start-over">${demoMode ? 'Reset sample report' : 'Check another route'}</button></div>
+    <div class="report-actions"><button class="secondary" id="export">Export review checklist (.csv)</button><button class="plain" id="start-over">${demoMode ? 'Reset sample report' : 'Check another GPX track'}</button></div>
     <details><summary>Rule sources and limitations</summary><p>Rule pack source date: ${data.rule_pack.source_date}. Rules interpret public OSM access tags; they do not replace signs, local orders, or current law.</p><ul>${data.rule_pack.sources.map(source => `<li><a href="${source.url}" rel="external">${escapeHtml(source.label)}</a></li>`).join('')}</ul><ul>${data.caveats.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></details>
   </section>`;
 }
 
 function checker() {
-  return `<section class="checker" id="checker" aria-labelledby="checker-title"><div class="section-number" aria-hidden="true">01</div><div class="checker-copy"><p class="eyebrow">PRE-RIDE ACCESS AUDIT</p><h2 id="checker-title">Check a GPX before you ride.</h2><p>Upload a GPX track. We compare nearby OpenStreetMap tags with your vehicle and regional rule pack.</p></div>
-  <form id="check-form"><div class="form-grid"><div class="field file-field"><span class="field-label">1 / Route file</span><label class="drop-zone" for="gpx-file"><input id="gpx-file" type="file" accept=".gpx,application/gpx+xml,application/xml,text/xml"/><span class="drop-mark" aria-hidden="true">＋</span><strong>${selectedFile ? escapeHtml(selectedFile.name) : sampleText ? 'Brussels sample route loaded' : 'Choose or drop a GPX file'}</strong><small>${selectedFile ? `${(selectedFile.size / 1024).toFixed(0)} KB · ready to inspect` : sampleText ? 'Built-in 0.5 km test track' : 'GPX track · up to 8 MB · never stored'}</small></label><button class="sample-button" type="button" id="sample">Use Brussels sample route</button></div>
-  <div class="field"><label class="field-label" for="vehicle">2 / Vehicle</label><select id="vehicle" name="vehicle"><option value="bicycle">Bicycle</option><option value="ebike_25">E-bike (assist to 25 km/h)</option><option value="speed_pedelec">Speed pedelec (assist to 45 km/h)</option></select><p class="hint">Vehicle class changes which access tags are treated as evidence.</p></div>
+  return `<section class="checker" id="checker" aria-labelledby="checker-title"><div class="section-number" aria-hidden="true">01</div><div class="checker-copy"><p class="eyebrow">PRE-RIDE ACCESS CHECK</p><h2 id="checker-title">Check a GPX track before you ride.</h2><p>Upload a GPX track. Choose the vehicle and regional rule pack used in its report.</p></div>
+  <form id="check-form"><div class="form-grid"><div class="field file-field"><span class="field-label">1 / GPX track file</span><label class="drop-zone" for="gpx-file"><input id="gpx-file" type="file" accept=".gpx,application/gpx+xml,application/xml,text/xml"/><span class="drop-mark" aria-hidden="true">＋</span><strong>${selectedFile ? escapeHtml(selectedFile.name) : sampleText ? 'Brussels sample GPX track loaded' : 'Choose or drop a GPX track'}</strong><small>${selectedFile ? `${(selectedFile.size / 1024).toFixed(0)} KB · ready to inspect` : sampleText ? 'Built-in 0.5 km test track' : 'GPX track · up to 8 MB · never stored'}</small></label><button class="sample-button" type="button" id="sample">Use Brussels sample GPX track</button></div>
+  <div class="field"><label class="field-label" for="vehicle">2 / Vehicle</label><select id="vehicle" name="vehicle"><option value="bicycle">Bicycle</option><option value="ebike_25">E-bike (assist to 25 km/h)</option><option value="speed_pedelec">Speed pedelec (assist to 45 km/h)</option></select><p class="hint">The report shows evidence for this vehicle.</p></div>
   <div class="field"><label class="field-label" for="region">3 / Regional rule pack</label><select id="region" name="region"><option value="BE">Belgium · included</option><option value="NL" ${unlocked ? '' : 'disabled'}>Netherlands · maintained${unlocked ? '' : ' (unlock)'}</option><option value="DE" ${unlocked ? '' : 'disabled'}>Germany · maintained${unlocked ? '' : ' (unlock)'}</option></select><p class="hint">Sources are dated and linked in every report.</p></div></div>
-  <div id="form-status" class="form-status" aria-live="assertive"></div><button class="primary" type="submit"><span>Check this route</span><span aria-hidden="true">→</span></button></form></section>`;
+  <div id="form-status" class="form-status" aria-live="assertive"></div><button class="primary" type="submit"><span>Check this GPX track</span><span aria-hidden="true">→</span></button></form></section>`;
 }
 
 function paySection() {
   if (demoMode) {
-    return `<section class="paid" id="rule-packs"><div><p class="eyebrow">MAINTAINED RULE PACKS / ONE-TIME</p><h2>Regional packs cost €19 once.</h2><p>Belgium checks and checklist export stay free. Start a real check to unlock maintained Netherlands and Germany packs.</p></div><div class="price"><span>€</span><strong>19</strong><small>one-time purchase</small></div><div class="paid-actions"><a class="primary link-button start-real" href="/">Start for real →</a><p>Sociobot/Dodo is the merchant of record. Refunds are handled there.</p></div></section>`;
+    return `<section class="paid" id="rule-packs"><div><p class="eyebrow">MAINTAINED RULE PACKS / ONE-TIME</p><h2>Regional rule packs cost €19 once.</h2><p>Belgium checks and checklist export stay free. Start a real check to add the Netherlands and Germany rule packs.</p></div><div class="price"><span>€</span><strong>19</strong><small>one-time purchase</small></div><div class="paid-actions"><a class="primary link-button start-real" href="/">Start for real →</a><p>Pay once for both regional rule packs.</p></div></section>`;
   }
-  return `<section class="paid" id="rule-packs"><div><p class="eyebrow">MAINTAINED RULE PACKS / ONE-TIME</p><h2>Regional packs cost €19 once.</h2><p>Belgium checks and checklist export stay free. Unlock dated Netherlands and Germany interpretations with future pack updates.</p></div><div class="price"><span>€</span><strong>19</strong><small>one-time purchase</small></div><div class="paid-actions">${unlocked ? '<p class="unlocked"><span aria-hidden="true">✓</span> Maintained packs unlocked</p>' : `<a class="primary link-button" href="${BILLING}/products/${SLUG}/checkout">Unlock regional packs →</a>`}${licenseInactive ? '<p class="license-notice">Your saved license is no longer active.</p>' : ''}<button class="plain" id="restore">Have a license? Restore purchase</button><p>Sociobot/Dodo is the merchant of record. Refunds are handled there.</p></div></section>`;
+  return `<section class="paid" id="rule-packs"><div><p class="eyebrow">MAINTAINED RULE PACKS / ONE-TIME</p><h2>Regional rule packs cost €19 once.</h2><p>Belgium checks and checklist export stay free. The purchase adds the Netherlands and Germany rule packs.</p></div><div class="price"><span>€</span><strong>19</strong><small>one-time purchase</small></div><div class="paid-actions">${unlocked ? '<p class="unlocked"><span aria-hidden="true">✓</span> Regional rule packs added</p>' : `<a class="primary link-button" href="${BILLING}/products/${SLUG}/checkout">Buy regional rule packs →</a>`}${licenseInactive ? '<p class="license-notice">Your saved license is no longer active.</p>' : ''}<button class="plain" id="restore">Have a license? Restore purchase</button><p>Checkout and refunds are handled by Sociobot and Dodo.</p></div></section>`;
 }
 
 function demoBanner() {
@@ -167,26 +171,27 @@ function demoBanner() {
 }
 
 function hero() {
-  return `<section class="hero"><div class="hero-copy"><p class="eyebrow">ROUTE ACCESS / BEFORE DEPARTURE</p><h1 tabindex="-1">Check route access <span>before you ride.</span></h1><p class="lede">For cyclists with a GPX, find mapped access conflicts before the ride.</p><div class="hero-actions"><a class="primary link-button" href="/demo">Try it with sample data <span aria-hidden="true">→</span></a><p>Opens a sample report. Nothing is saved to your real data.</p><a class="text-link" href="#checker">Check your own GPX</a></div><ul class="hero-facts"><li>Demo uses a separate sample workspace.</li><li>After one online visit, the page reloads offline.</li><li>Belgium checks are free. Regional packs cost €19 once.</li></ul></div><figure class="hero-art"><img src="/assets/route-inspection-hero.webp" srcset="/assets/route-inspection-hero-mobile.webp 640w, /assets/route-inspection-hero.webp 960w" sizes="(max-width: 800px) 100vw, 58vw" width="960" height="640" alt="A folded route map embedded in concrete, with moss and an orange survey line marking uncertain access" fetchpriority="high" decoding="async"><figcaption><span>FIELD STUDY / 50.85°N</span><span>MAP EVIDENCE, NOT A VERDICT</span></figcaption></figure></section>`;
+  return `<section class="hero"><div class="hero-copy"><p class="eyebrow">GPX TRACK ACCESS / BEFORE DEPARTURE</p><h1 tabindex="-1">Check GPX track access <span>before you ride.</span></h1><p class="lede">For cyclists with a planned GPX track, find mapped access conflicts before starting the ride.</p><div class="hero-actions"><a class="primary link-button" href="/demo">Try it with sample data <span aria-hidden="true">→</span></a><p>Opens a sample report. Nothing is saved to your real data.</p><a class="text-link" href="#checker">Check your own GPX track</a></div><ul class="hero-facts"><li>Demo uses a separate sample workspace.</li><li>After one online visit, the page reloads offline.</li><li>Belgium checks are free. Regional rule packs cost €19 once.</li></ul></div><figure class="hero-art"><img src="/assets/route-inspection-hero.webp" srcset="/assets/route-inspection-hero-mobile.webp 640w, /assets/route-inspection-hero.webp 960w" sizes="(max-width: 800px) 100vw, 58vw" width="960" height="640" alt="A folded GPX track map with moss and an orange line marking uncertain access" fetchpriority="high" decoding="async"><figcaption>Illustration: map evidence can be incomplete.</figcaption></figure></section>`;
 }
 
 function demoWorkspace() {
   const report = result || cloneDemoReport();
-  return `<section class="demo-workspace" aria-labelledby="demo-title"><h1 id="demo-title" tabindex="-1">Sample route report</h1><p>Brussels canal sample · Speed pedelec · Belgium rules dated 1 August 2026</p>${resultView(report)}</section>`;
+  return `<section class="demo-workspace" aria-labelledby="demo-title"><h1 id="demo-title" tabindex="-1">Sample GPX track report</h1><p>Brussels canal sample · Speed pedelec · Belgium rules dated 1 August 2026</p>${resultView(report)}</section>`;
 }
 
 function appPage() {
   const workspace = demoMode ? demoWorkspace() : `${hero()}${result ? resultView(result) : checker()}`;
   return `${header()}<main id="main">${navigator.onLine ? '' : '<div class="offline" role="status"><strong>Offline.</strong> You can review this page, but a new map check needs a connection.</div>'}${demoMode ? demoBanner() : ''}${workspace}
-  <section class="method" id="how"><div class="section-number" aria-hidden="true">02</div><div><p class="eyebrow">HOW IT WORKS</p><h2>Check three kinds of route evidence.</h2></div><ol><li><strong>Geometry</strong><span>We sample your track and calculate its length on the server.</span></li><li><strong>Map tags</strong><span>Nearby OSM ways provide access and vehicle evidence.</span></li><li><strong>Rules</strong><span>A dated regional pack marks conflicts and uncertainty.</span></li></ol></section>
+  <section class="method" id="how"><div class="section-number" aria-hidden="true">02</div><div><p class="eyebrow">HOW IT WORKS</p><h2>Review three parts of your GPX track.</h2></div><ol><li><strong>Upload</strong><span>Choose the GPX track you plan to ride.</span></li><li><strong>Profile</strong><span>Choose your vehicle and regional rule pack.</span></li><li><strong>Report</strong><span>Review mapped conflicts, uncertainty, and dated sources.</span></li></ol></section>
   ${paySection()}<section class="boundary"><p class="eyebrow">WHAT THIS TOOL DOES NOT DO</p><blockquote>“No conflict found” does not mean legal clearance.</blockquote></section></main>${footer()}`;
 }
 
-function render() {
+function render(routeChanged = false) {
   const path = location.pathname;
   document.querySelector<HTMLDivElement>('#app')!.innerHTML = path === '/privacy' ? legalPage('privacy') : path === '/terms' ? legalPage('terms') : appPage();
   updateRouteMetadata(path);
   bind();
+  if (routeChanged) announceRoute();
 }
 
 function updateRouteMetadata(path: string) {
@@ -195,15 +200,50 @@ function updateRouteMetadata(path: string) {
     : path === '/terms'
       ? { title: 'Terms — Cycle Legal Check', description: 'Read the terms and limits for Cycle Legal Check.' }
       : demoMode
-        ? { title: 'Demo — Cycle Legal Check', description: 'Review a separate Brussels sample route report before checking your own GPX.' }
-        : { title: 'Cycle Legal Check — pre-ride access audit', description: 'Check a planned GPX route for bicycle and speed-pedelec access conflicts before you ride.' };
+        ? { title: 'Demo — Cycle Legal Check', description: 'Review a separate Brussels sample GPX track report before checking your own track.' }
+        : { title: 'Cycle Legal Check — Check GPX track access', description: 'Check a planned GPX track for bicycle and speed-pedelec access conflicts before you ride.' };
   document.title = details.title;
   document.querySelector('meta[name="description"]')?.setAttribute('content', details.description);
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', details.title);
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', details.description);
   document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', details.title);
   document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', details.description);
-  document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', `${location.origin}${path}`);
+  const canonicalPath = demoMode ? '/demo' : path;
+  document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', `${location.origin}${canonicalPath}`);
+}
+
+function announceRoute() {
+  requestAnimationFrame(() => {
+    const heading = document.querySelector<HTMLElement>('main h1');
+    const status = document.querySelector<HTMLElement>('#route-status');
+    if (!heading || !status) return;
+    heading.focus({ preventScroll: true });
+    status.textContent = `${heading.textContent?.trim() || 'Page'} loaded`;
+    heading.scrollIntoView({ block: 'start' });
+  });
+}
+
+function syncRouteMode() {
+  const nextDemoMode = isDemoRoute();
+  if (nextDemoMode && !demoMode) {
+    demoMode = true;
+    selectedFile = null;
+    sampleText = SAMPLE_GPX;
+    result = cloneDemoReport();
+    selectedFinding = result.findings[0]?.id || '';
+    unlocked = false;
+    licenseInactive = false;
+    markDemoActive();
+  } else if (!nextDemoMode && demoMode) {
+    demoMode = false;
+    discardDemoData();
+    selectedFile = null;
+    sampleText = '';
+    result = null;
+    selectedFinding = '';
+    unlocked = cachedUnlock();
+    licenseInactive = cachedLicenseInactive();
+  }
 }
 
 function bind() {
@@ -230,6 +270,16 @@ function bind() {
   document.querySelectorAll<HTMLAnchorElement>('.start-real').forEach((link) => link.addEventListener('click', discardDemoData));
   document.querySelectorAll<HTMLElement>('[data-finding]').forEach((button) => button.addEventListener('click', () => { selectedFinding = button.dataset.finding || ''; render(); document.querySelector<HTMLElement>(`[data-finding="${selectedFinding}"]`)?.focus(); }));
   document.querySelector('#restore')?.addEventListener('click', restore);
+  document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => link.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
+    const destination = new URL(link.href, location.href);
+    const appRoutes = ['/', '/demo', '/privacy', '/terms'];
+    if (destination.origin !== location.origin || !appRoutes.includes(destination.pathname) || (destination.pathname === location.pathname && destination.search === location.search && destination.hash)) return;
+    event.preventDefault();
+    history.pushState({}, '', `${destination.pathname}${destination.search}${destination.hash}`);
+    syncRouteMode();
+    render(true);
+  }));
 }
 
 async function restore() {
@@ -247,9 +297,9 @@ async function submitCheck(event: Event) {
   const vehicle = (form.elements.namedItem('vehicle') as HTMLSelectElement).value;
   const region = (form.elements.namedItem('region') as HTMLSelectElement).value;
   const status = document.querySelector<HTMLElement>('#form-status')!;
-  if (!sampleText && !selectedFile) { status.textContent = 'Choose a GPX file or load the sample route first.'; return; }
+  if (!sampleText && !selectedFile) { status.textContent = 'Choose a GPX track or load the sample GPX track first.'; return; }
   if (selectedFile && selectedFile.size > 8 * 1024 * 1024) { status.textContent = 'That file is over 8 MB. Export a simpler track and try again.'; return; }
-  status.innerHTML = '<span class="loader" aria-hidden="true"></span> Matching route points to mapped ways…';
+  status.innerHTML = '<span class="loader" aria-hidden="true"></span> Matching GPX track points to mapped ways…';
   try {
     const fileText = sampleText || await selectedFile!.text();
     const response = await fetch('/api/analyze', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ gpx: fileText, vehicle, region, license: localStorage.getItem(LICENSE_KEY) }) });
@@ -280,6 +330,6 @@ if (!demoMode && !sessionStorage.getItem('page-counted')) {
   sessionStorage.setItem('page-counted', '1');
   fetch('/api/page-view', { method: 'POST' }).catch(() => undefined);
 }
-addEventListener('popstate', render);
-addEventListener('online', render);
-addEventListener('offline', render);
+addEventListener('popstate', () => { syncRouteMode(); render(true); });
+addEventListener('online', () => render());
+addEventListener('offline', () => render());

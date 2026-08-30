@@ -22,6 +22,6 @@ COPY --from=backend /app/target/release/cycle-legal-profile-check /usr/local/bin
 COPY --from=frontend /app/dist ./dist
 RUN mkdir /data && chown app:app /data
 USER app
-ENV PORT=8080 DATABASE_URL=sqlite:///data/cycle-legal.sqlite?mode=rwc
+ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["cycle-legal-profile-check"]

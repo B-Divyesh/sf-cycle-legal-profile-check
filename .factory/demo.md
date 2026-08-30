@@ -4,7 +4,7 @@
 
 Open `/demo` or `https://cycle-legal-profile-check.sociobot.in/demo`.
 
-The route opens a complete Brussels canal report immediately. The sample uses a
+The page opens a complete Brussels canal report immediately. The sample uses a
 five-point GPX track for a speed pedelec in Belgium. It contains one explicit
 `speed_pedelec=no` finding and one unmapped review section. The report is
 static client-side sample data, so it does not call `/api/analyze`, does not
@@ -26,5 +26,5 @@ to `/`. No demo content is copied to real storage.
 
 After the first online visit, the service worker caches the application shell.
 Reloading `/demo` offline retains the demo URL and renders the bundled report
-with the Offline notice. The report is still sample data; a real route check
+with the Offline notice. The report is still sample data; a real GPX track check
 requires a connection.

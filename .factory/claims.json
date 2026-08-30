@@ -1,10 +1,17 @@
 [
   {
     "id": "demo-sample-report",
-    "claim": "Try it with sample data opens a dated Brussels sample report immediately.",
-    "where": "Landing primary action, /demo, README",
+    "claim": "Try it with sample data and ?demo=1 open a dated Brussels sample report immediately.",
+    "where": "Landing primary action, /demo, ?demo=1, README",
     "test": "npm run test:e2e -- --grep @claim:demo-sample-report",
     "sandbox": "Fresh browser context opens /demo and observes its report without setup."
+  },
+  {
+    "id": "mapped-access-conflicts",
+    "claim": "The sample identifies a vehicle-specific mapped access conflict in a planned GPX track.",
+    "where": "Landing headline and description, sample report",
+    "test": "npm run test:e2e -- --grep @claim:mapped-access-conflicts",
+    "sandbox": "Fresh context uses the first-screen action and observes the speed-pedelec conflict and its mapped tag."
   },
   {
     "id": "demo-isolation",
@@ -29,17 +36,38 @@
   },
   {
     "id": "report-evidence",
-    "claim": "Reports show mapped OSM tags and a dated rule source.",
-    "where": "Report, README",
+    "claim": "Reports show mapped conflicts, uncertainty, OSM tags, and a dated rule source.",
+    "where": "Report, How it works, README",
     "test": "npm run test:e2e -- --grep @claim:report-evidence",
     "sandbox": "Fresh context opens /demo and checks the visible evidence tag and expanded source date."
   },
   {
+    "id": "vehicle-rule-profile",
+    "claim": "A real check uses the uploaded GPX track, selected vehicle, and regional rule pack to return map evidence.",
+    "where": "Checker, How it works, README",
+    "test": "npm run test:e2e -- --grep @claim:vehicle-rule-profile",
+    "sandbox": "Fresh context uploads a GPX fixture, selects speed pedelec and Belgium, inspects the request, and observes returned map evidence."
+  },
+  {
+    "id": "gpx-size-limit",
+    "claim": "GPX track uploads are limited to 8 MB.",
+    "where": "GPX track file input",
+    "test": "npm run test:e2e -- --grep @claim:gpx-size-limit",
+    "sandbox": "Fresh context selects an 8 MB plus one byte fixture and observes rejection before any analyzer request."
+  },
+  {
     "id": "regional-pricing",
-    "claim": "Belgium checks and checklist export are free; maintained regional packs cost €19 once.",
+    "claim": "Belgium checks and checklist export are free; €19 once adds the Netherlands and Germany regional rule packs.",
     "where": "Landing facts, pricing section, README, terms",
     "test": "npm run test:e2e -- --grep @claim:regional-pricing",
-    "sandbox": "Fresh context opens /demo and observes the free-tier and one-time-price copy."
+    "sandbox": "Fresh context exports the demo report without a license, observes the one-time price, then uses a recorded valid verdict to enable both paid rule packs."
+  },
+  {
+    "id": "billing-refunds",
+    "claim": "Sociobot billing, backed by Dodo, handles checkout and refunds; a refunded or revoked license removes paid regional rule packs.",
+    "where": "Pricing section, terms",
+    "test": "npm run test:e2e -- --grep @claim:billing-refunds",
+    "sandbox": "Fresh context checks the Sociobot checkout URL and terms, then recorded valid and revoked verdicts prove paid options are added and removed."
   },
   {
     "id": "license-browser-local",

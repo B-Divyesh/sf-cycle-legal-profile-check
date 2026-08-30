@@ -9,6 +9,7 @@ const report = {
 };
 
 const validGpx = `<?xml version="1.0"?><gpx version="1.1"><trk><name>Uploaded route</name><trkseg><trkpt lat="50.8466" lon="4.3528"/><trkpt lat="50.8477" lon="4.3502"/></trkseg></trk></gpx>`;
+const baseUrl = 'http://127.0.0.1:8080';
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/api/page-view', route => route.fulfill({ status: 204 }));
@@ -23,13 +24,13 @@ test('checks the sample route and exposes evidence', async ({ page }) => {
   expect(accessibility.violations.filter(item => ['serious', 'critical'].includes(item.impact || ''))).toEqual([]);
   await page.getByRole('button', { name: /Use Brussels sample/ }).click();
   await page.getByLabel('2 / Vehicle').selectOption('speed_pedelec');
-  await page.getByRole('button', { name: /Check this route/ }).click();
+  await page.getByRole('button', { name: /Check this GPX track/ }).click();
   await expect(page.getByRole('heading', { name: /Access conflict found/ })).toBeVisible();
   await expect(page.getByText('speed_pedelec=no')).toBeVisible();
   await expect(page.getByRole('button', { name: /Export review checklist/ })).toBeVisible();
 });
 
-test('uploads a real GPX file and sends its selected profile for analysis', async ({ page }) => {
+test('@claim:vehicle-rule-profile sends the GPX track and selected profile, then shows returned map evidence', async ({ page }) => {
   const pageErrors: string[] = [];
   page.on('pageerror', error => pageErrors.push(error.message));
   await page.goto('/');
@@ -40,7 +41,7 @@ test('uploads a real GPX file and sends its selected profile for analysis', asyn
   });
   await page.getByLabel('2 / Vehicle').selectOption('speed_pedelec');
   const requestPromise = page.waitForRequest(request => request.url().endsWith('/api/analyze'));
-  await page.getByRole('button', { name: /Check this route/ }).click();
+  await page.getByRole('button', { name: /Check this GPX track/ }).click();
   const request = await requestPromise;
   expect(request.postDataJSON()).toMatchObject({
     gpx: validGpx,
@@ -76,7 +77,7 @@ test('shows a malformed-upload error and recovers with a replacement file', asyn
     mimeType: 'application/gpx+xml',
     buffer: Buffer.from('<broken'),
   });
-  await page.getByRole('button', { name: /Check this route/ }).click();
+  await page.getByRole('button', { name: /Check this GPX track/ }).click();
   await expect(page.locator('#form-status')).toContainText('The GPX is not valid XML. Try again');
 
   await page.locator('#gpx-file').setInputFiles({
@@ -84,10 +85,28 @@ test('shows a malformed-upload error and recovers with a replacement file', asyn
     mimeType: 'application/gpx+xml',
     buffer: Buffer.from(validGpx),
   });
-  await page.getByRole('button', { name: /Check this route/ }).click();
+  await page.getByRole('button', { name: /Check this GPX track/ }).click();
   await expect(page.getByRole('heading', { name: /Access conflict found/ })).toBeVisible();
   expect(analysisCalls).toBe(2);
   expect(pageErrors).toEqual([]);
+});
+
+test('@claim:gpx-size-limit rejects a GPX track above 8 MB before it reaches the analyzer', async ({ page }) => {
+  let analysisCalls = 0;
+  await page.unroute('**/api/analyze');
+  await page.route('**/api/analyze', route => {
+    analysisCalls += 1;
+    return route.fulfill({ status: 500 });
+  });
+  await page.goto('/');
+  await page.locator('#gpx-file').setInputFiles({
+    name: 'too-large.gpx',
+    mimeType: 'application/gpx+xml',
+    buffer: Buffer.alloc(8 * 1024 * 1024 + 1),
+  });
+  await page.getByRole('button', { name: /Check this GPX track/ }).click();
+  await expect(page.locator('#form-status')).toHaveText('That file is over 8 MB. Export a simpler track and try again.');
+  expect(analysisCalls).toBe(0);
 });
 
 test('keeps all visible text at or above the 16px product minimum', async ({ page }) => {
@@ -110,7 +129,7 @@ test('keeps all visible text at or above the 16px product minimum', async ({ pag
 
   await page.goto('/');
   await page.getByRole('button', { name: /Use Brussels sample/ }).click();
-  await page.getByRole('button', { name: /Check this route/ }).click();
+  await page.getByRole('button', { name: /Check this GPX track/ }).click();
   await expect(page.getByRole('heading', { name: /Access conflict found/ })).toBeVisible();
   expect(await undersizedText(), 'the report has undersized visible copy').toEqual([]);
 });
@@ -143,19 +162,27 @@ test('visible navigation targets meet touch geometry and keyboard requirements',
   }
 
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('link', { name: /Skip to route checker/ })).toBeFocused();
+  await expect(page.getByRole('link', { name: /Skip to GPX track checker/ })).toBeFocused();
   for (const target of await page.locator('header a:visible').all()) {
     await page.keyboard.press('Tab');
     await expect(target).toBeFocused();
   }
 });
 
-test('legal pages and keyboard focus are available', async ({ page }) => {
-  const privacyResponse = await page.goto('/privacy');
-  expect(privacyResponse?.status()).toBe(200);
-  await expect(page.getByRole('heading', { name: 'Privacy' })).toBeVisible();
-  await page.keyboard.press('Tab');
-  await expect(page.getByRole('link', { name: /Skip to route checker/ })).toBeFocused();
+test('route links, back navigation, titles, focus, and announcements stay in sync', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Privacy' }).first().click();
+  await expect(page).toHaveURL(`${baseUrl}/privacy`);
+  await expect(page).toHaveTitle('Privacy — Cycle Legal Check');
+  await expect(page.getByRole('heading', { name: 'Privacy' })).toBeFocused();
+  await expect(page.locator('#route-status')).toHaveText('Privacy loaded');
+
+  await page.goBack();
+  await expect(page).toHaveURL(`${baseUrl}/`);
+  await expect(page).toHaveTitle('Cycle Legal Check — Check GPX track access');
+  await expect(page.getByRole('heading', { name: /Check GPX track access/ })).toBeFocused();
+  await expect(page.locator('#route-status')).toContainText('Check GPX track access before you ride. loaded');
+
   const termsResponse = await page.goto('/terms');
   expect(termsResponse?.status()).toBe(200);
   await expect(page.getByRole('heading', { name: 'Terms of use' })).toBeVisible();
@@ -175,6 +202,26 @@ test('cold product routes load without console or page errors', async ({ page })
   }
   expect(pageErrors).toEqual([]);
   expect(consoleErrors).toEqual([]);
+});
+
+test('product routes expose unique metadata and no serious accessibility violations', async ({ page }) => {
+  const routes = [
+    { path: '/', title: 'Cycle Legal Check — Check GPX track access', canonical: '/' },
+    { path: '/demo', title: 'Demo — Cycle Legal Check', canonical: '/demo' },
+    { path: '/privacy', title: 'Privacy — Cycle Legal Check', canonical: '/privacy' },
+    { path: '/terms', title: 'Terms — Cycle Legal Check', canonical: '/terms' },
+  ];
+  for (const route of routes) {
+    await page.goto(route.path);
+    await expect(page).toHaveTitle(route.title);
+    await expect(page.locator('main')).toHaveCount(1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /^.{20,}$/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${baseUrl}${route.canonical}`);
+    await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute('href', '/apple-touch-icon.png');
+    const accessibility = await new AxeBuilder({ page }).analyze();
+    expect(accessibility.violations.filter(item => ['serious', 'critical'].includes(item.impact || '')), route.path).toEqual([]);
+  }
 });
 
 test('server exposes build identity and update-safe cache policy', async ({ page }) => {
@@ -199,37 +246,56 @@ test('installed shell reloads offline', async ({ page, context }) => {
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
     const keys = await caches.keys();
-    if (!keys.includes('cycle-legal-shell-v4')) throw new Error('versioned cache missing');
+    if (!keys.includes('cycle-legal-shell-v5')) throw new Error('versioned cache missing');
   });
   await context.setOffline(true);
   await page.reload({ waitUntil: 'domcontentloaded' });
-  await expect(page.getByRole('heading', { name: /Check route access/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Check GPX track access/ })).toBeVisible();
   await expect(page.getByText('Offline.', { exact: true })).toBeVisible();
 });
 
 test('@claim:demo-sample-report opens an immediate dated sample report from the direct demo URL', async ({ page }) => {
   await page.goto('/demo');
   await expect(page).toHaveTitle('Demo — Cycle Legal Check');
-  await expect(page.getByRole('heading', { name: 'Sample route report' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Sample GPX track report' })).toBeVisible();
   const accessibility = await new AxeBuilder({ page }).analyze();
   expect(accessibility.violations.filter(item => ['serious', 'critical'].includes(item.impact || ''))).toEqual([]);
   await expect(page.getByRole('heading', { name: /Manual review needed/ })).toBeVisible();
   await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible();
   await expect(page.getByText(/Belgium rules dated 1 August 2026/)).toBeVisible();
   await expect(page.getByText('speed_pedelec=no')).toBeVisible();
+  await page.goto('/?demo=1');
+  await expect(page.getByRole('heading', { name: 'Sample GPX track report' })).toBeVisible();
+  await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Reset demo' })).toBeVisible();
+});
+
+test('@claim:mapped-access-conflicts opens one vehicle-specific mapped conflict from the first-screen action', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: /Check GPX track access before you ride/ })).toBeVisible();
+  await expect(page.getByText(/find mapped access conflicts/)).toBeVisible();
+  await page.getByRole('link', { name: /Try it with sample data/ }).click();
+  await expect(page).toHaveURL(`${baseUrl}/demo`);
+  await expect(page.getByRole('heading', { name: /Manual review needed/ })).toBeVisible();
+  await expect(page.getByText('Speed pedelec access is prohibited').first()).toBeVisible();
+  await expect(page.getByText('speed_pedelec=no')).toBeVisible();
 });
 
 test('@claim:demo-isolation keeps the sample separate from real browser data and APIs', async ({ page }) => {
   const apiRequests: string[] = [];
+  const externalRequests: string[] = [];
   await page.addInitScript(() => localStorage.setItem('sb_license:cycle-legal-profile-check', 'real-license'));
   page.on('request', request => {
-    if (new URL(request.url()).pathname.startsWith('/api/')) apiRequests.push(request.url());
+    const url = new URL(request.url());
+    if (url.pathname.startsWith('/api/')) apiRequests.push(request.url());
+    if (url.origin !== baseUrl) externalRequests.push(request.url());
   });
   await page.goto('/demo');
   expect(await page.evaluate(() => localStorage.getItem('sb_license:cycle-legal-profile-check'))).toBe('real-license');
   expect(await page.evaluate(() => localStorage.getItem('demo:cycle-legal-profile-check:active'))).toBe('1');
   await page.getByRole('button', { name: 'Reset demo' }).click();
   expect(apiRequests).toEqual([]);
+  expect(externalRequests).toEqual([]);
   await page.getByRole('link', { name: 'Start for real' }).first().click();
   await expect(page).toHaveURL('http://127.0.0.1:8080/');
   expect(await page.evaluate(() => localStorage.getItem('demo:cycle-legal-profile-check:active'))).toBeNull();
@@ -250,13 +316,19 @@ test('@claim:csv-export exports the demo checklist with a row for each finding',
   expect(text).toContain('"Brussels canal check"');
 });
 
-test('@claim:offline-reload reloads the demo shell offline after its first online visit', async ({ page, context }) => {
-  await page.goto('/demo');
-  await page.evaluate(async () => { await navigator.serviceWorker.ready; });
-  await context.setOffline(true);
-  await page.reload({ waitUntil: 'domcontentloaded' });
-  await expect(page.getByRole('heading', { name: 'Sample route report' })).toBeVisible();
-  await expect(page.getByText('Offline.', { exact: true })).toBeVisible();
+test('@claim:offline-reload reloads the demo shell offline after its first online visit', async ({ browser }) => {
+  const isolatedContext = await browser.newContext();
+  try {
+    const isolatedPage = await isolatedContext.newPage();
+    await isolatedPage.goto(`${baseUrl}/demo`);
+    await isolatedPage.evaluate(async () => { await navigator.serviceWorker.ready; });
+    await isolatedContext.setOffline(true);
+    await isolatedPage.reload({ waitUntil: 'domcontentloaded' });
+    await expect(isolatedPage.getByRole('heading', { name: 'Sample GPX track report' })).toBeVisible();
+    await expect(isolatedPage.getByText('Offline.', { exact: true })).toBeVisible();
+  } finally {
+    await isolatedContext.close();
+  }
 });
 
 test('@claim:report-evidence shows the sample route’s map tags and dated rule source', async ({ page }) => {
@@ -267,11 +339,23 @@ test('@claim:report-evidence shows the sample route’s map tags and dated rule 
   await expect(page.getByRole('link', { name: 'Belgium road code and access guidance' })).toBeVisible();
 });
 
-test('@claim:regional-pricing states the free Belgium check and one-time regional-pack price', async ({ page }) => {
+test('@claim:regional-pricing proves the free report export and one-time regional rule pack purchase', async ({ page }) => {
   await page.goto('/demo');
   await expect(page.getByText('Belgium checks and checklist export stay free.')).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Regional packs cost €19 once.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Regional rule packs cost €19 once.' })).toBeVisible();
   await expect(page.getByText('one-time purchase')).toBeVisible();
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: /Export review checklist/ }).click();
+  await downloadPromise;
+
+  await page.route('https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/verify?**', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ valid: true, reason: 'ok', expires_at: null }),
+  }));
+  await page.goto('/?license=regional-rule-pack-token');
+  await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="NL"]')).toBeEnabled();
+  await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="DE"]')).toBeEnabled();
 });
 
 test('serves crawler files and a styled direct 404 document', async ({ page }) => {
@@ -281,8 +365,16 @@ test('serves crawler files and a styled direct 404 document', async ({ page }) =
   }
   const missing = await page.goto('/a-route-that-does-not-exist');
   expect(missing?.status()).toBe(404);
-  await expect(page.getByRole('heading', { name: 'This route does not exist.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'This page does not exist.' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Try it with sample data' })).toBeVisible();
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /does not exist/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://cycle-legal-profile-check.sociobot.in/404.html');
+  await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute('href', '/apple-touch-icon.png');
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /social-preview\.svg$/);
+  const manifest = await page.request.get('/manifest.webmanifest');
+  expect((await manifest.json()).icons).toEqual(expect.arrayContaining([
+    expect.objectContaining({ src: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }),
+  ]));
 });
 
 test('@claim:license-browser-local license return is stored, stripped from the URL, and cached for a day', async ({ page }) => {
@@ -308,24 +400,21 @@ test('@claim:license-browser-local license return is stored, stripped from the U
   expect(verificationCalls).toBe(1);
 });
 
-test('exposes the production checkout contract and refund terms', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.getByRole('link', { name: /Unlock regional packs/ })).toHaveAttribute(
-    'href',
-    'https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/checkout',
-  );
-  await expect(page.getByText('Sociobot/Dodo is the merchant of record. Refunds are handled there.')).toBeVisible();
-  await page.goto('/terms');
-  await expect(page.getByText(/A refund automatically revokes the license/)).toBeVisible();
-});
-
-test('restores a valid license and reconciles a revoked license', async ({ page }) => {
+test('@claim:billing-refunds uses the Sociobot checkout and removes refunded or revoked licenses', async ({ page }) => {
   await page.route('https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/verify?**', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
     body: JSON.stringify({ valid: true, reason: 'ok', expires_at: null }),
   }));
   await page.goto('/');
+  await expect(page.getByRole('link', { name: /Buy regional rule packs/ })).toHaveAttribute(
+    'href',
+    'https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/checkout',
+  );
+  await page.getByRole('link', { name: 'Terms' }).first().click();
+  await expect(page.getByText(/Sociobot billing, backed by Dodo, handles checkout and refunds/)).toBeVisible();
+  await expect(page.getByText(/A refund automatically revokes the license/)).toBeVisible();
+  await page.getByRole('link', { name: /Cycle legal/ }).click();
   page.once('dialog', dialog => dialog.accept('restored-token'));
   await page.getByRole('button', { name: /Have a license/ }).click();
   await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="DE"]')).toBeEnabled();
@@ -344,5 +433,5 @@ test('restores a valid license and reconciles a revoked license', async ({ page 
   await page.reload();
   await expect(page.getByText('Your saved license is no longer active.')).toBeVisible();
   await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="DE"]')).toBeDisabled();
-  await expect(page.getByRole('link', { name: /Unlock regional packs/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Buy regional rule packs/ })).toBeVisible();
 });

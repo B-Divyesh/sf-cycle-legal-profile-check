@@ -113,8 +113,10 @@ async fn main() {
                 .add_directive("cycle_legal_profile_check=info".parse().unwrap()),
         )
         .init();
-    let database_url =
-        env::var("DATABASE_URL").unwrap_or_else(|_| "sqlite://cycle-legal.sqlite?mode=rwc".into());
+    let supplied_database_url = env::var("DATABASE_URL").ok();
+    let database_url = supplied_database_url
+        .clone()
+        .unwrap_or_else(default_database_url);
     let db = SqlitePoolOptions::new()
         .max_connections(4)
         .connect(&database_url)
@@ -142,7 +144,16 @@ async fn main() {
     let listener = tokio::net::TcpListener::bind(("0.0.0.0", port))
         .await
         .expect("bind server");
-    tracing::info!(port, build = build_sha(), "server listening");
+    tracing::info!(
+        port,
+        build = build_sha(),
+        database_config = if supplied_database_url.is_some() {
+            "supplied"
+        } else {
+            "generated default"
+        },
+        "server listening"
+    );
     axum::serve(
         listener,
         app.into_make_service_with_connect_info::<SocketAddr>(),
@@ -150,6 +161,14 @@ async fn main() {
     .with_graceful_shutdown(shutdown())
     .await
     .expect("serve");
+}
+
+fn default_database_url() -> String {
+    if Path::new("/data").is_dir() {
+        "sqlite:///data/cycle-legal.sqlite?mode=rwc".into()
+    } else {
+        "sqlite://cycle-legal.sqlite?mode=rwc".into()
+    }
 }
 
 fn build_router(state: Arc<AppState>, static_root: impl AsRef<Path>) -> Router {

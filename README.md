@@ -1,16 +1,16 @@
 # Cycle Legal Check
 
-Cycle Legal Check checks a planned GPX route for bicycle, e-bike, and speed-pedelec access conflicts before a ride. It compares sampled points with nearby OpenStreetMap ways and a dated regional rule pack. It is a planning aid, not legal advice.
+Cycle Legal Check checks a planned GPX track for bicycle, e-bike, and speed-pedelec access conflicts before a ride. It compares sampled points with nearby OpenStreetMap ways and a dated regional rule pack. It is a planning aid, not legal advice.
 
 ## Try the sample
 
 Open [the sample report](/demo). It opens a dated Brussels report immediately. The sample stays separate from real browser data and does not call the analyzer or page-view endpoint.
 
-For a real check, open `/`, upload a GPX, choose a vehicle and region, and select **Check this route**. Reports show OSM tags, a dated source, and clear review limits. CSV checklist export is free.
+For a real check, open `/`, upload a GPX track, choose a vehicle and region, and select **Check this GPX track**. Reports show OSM tags, a dated source, and clear review limits. CSV checklist export is free.
 
-Belgium checks are free. Maintained Netherlands and Germany packs cost €19 once through Sociobot/Dodo. A returned license stays in the browser and is verified at most once per day.
+Belgium checks are free. The Netherlands and Germany regional rule packs cost €19 once through Sociobot billing, backed by Dodo. A returned license stays in the browser and is verified at most once per day.
 
-The server handles a real GPX only for its requested report. It does not retain route data in SQLite. SQLite stores one aggregate page-view counter.
+The server handles a real GPX track only for its requested report. It does not retain GPX track data in SQLite. SQLite stores one aggregate page-view counter.
 
 ## Run locally
 
@@ -27,7 +27,7 @@ Open <http://localhost:8080>. For split frontend and backend development, run `n
 Configuration is optional:
 
 - `PORT` — HTTP port; defaults to `8080`.
-- `DATABASE_URL` — SQLite URL; defaults to `sqlite://cycle-legal.sqlite?mode=rwc`.
+- `DATABASE_URL` — optional SQLite URL override. The default is `/data/cycle-legal.sqlite` when `/data` exists, otherwise `./cycle-legal.sqlite`.
 - `OVERPASS_URL` — Overpass interpreter URL.
 - `BILLING_API_BASE` — Sociobot billing API base.
 - `BUILD_SHA` — build identifier returned by `/health`.

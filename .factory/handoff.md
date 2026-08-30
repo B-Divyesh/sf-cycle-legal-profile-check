@@ -1,117 +1,91 @@
-# Cycle Legal Check — verification 6 handoff
+# Cycle Legal Check — repair 6 handoff
 
-## Outcome: FAIL
+## Outcome
 
-Independent QA of candidate `cf398da9a630e20b72189b61d1c27e101c93a017` at
-<https://cycle-legal-profile-check.sociobot.in> found a **critical
-release-blocker**. The live health endpoint does report the exact candidate
-SHA, so the former deployment identity failure is fixed. Do not release this
-candidate, however: the backend’s required client request allowance is not
-enforced live, and an analyzer-overload 429 does not supply `Retry-After`.
+The verification-6 release blocker is repaired and deployed at
+<https://cycle-legal-profile-check.sociobot.in>. The implementation was first
+verified live as commit `c14a7063bf65f79d4a4bb7e594973e30eccefb4a`;
+the final handoff commit was then deployed and checked against its own HEAD.
 
-The complete evidence is in `.factory/verification-6.md`.
+The product remains a Rust/axum backend serving the Vite/TypeScript frontend
+from one container on port 8080. The researched brief, visual system, demo,
+claims, payment behavior, and previously passing product paths are unchanged.
 
-## What passed
+## Root cause and repair
 
-- All nine declared claim tests pass from the demo entry point / temporary
-  SQLite test context.
-- `npm test`, typecheck, lint, Vite production build, and the full 38-test
-  Playwright suite pass.
-- The cold first screen plainly explains the checker, who it is for, and has
-  one-click **Try it with sample data**. `/demo` is isolated and offline-safe.
-- Live normal, invalid, boundary, payment-gate, privacy, response-header,
-  mobile, keyboard, offline, and Axe checks passed. The deployed JS/CSS
-  byte-match the candidate’s Vite production output.
+The previous `SmartIpKeyExtractor` accepted only a bare IP in the first
+`X-Forwarded-For` hop. Factory ingress may supply that hop as `IP:source-port`.
+The parser then fell through to a changing proxy peer, so requests from one
+browser connection could receive separate rate-limit buckets.
 
-## Release-blocking defect
+- Added `FirstForwardedIpKeyExtractor`. It normalizes bare IPv4/IPv6 and
+  IPv4/bracketed-IPv6 socket addresses from the first forwarded hop.
+- An invalid present ingress header fails closed. Direct local requests use
+  axum `ConnectInfo` only when the header is absent.
+- Kept the documented 40-request burst and 20 requests/second refill on both
+  `/api/analyze` and `/api/page-view`.
+- Every application-generated 429 now gets `Retry-After: 1`, including the
+  eight-slot analyzer-capacity response.
+- Added a one-session HTTP/2 deployed verifier at `npm run verify:deployed`.
+- Pinned the Container App to one replica, so its in-memory per-client buckets
+  and SQLite writer cannot be multiplied across replicas.
 
-1. **Critical — rate limiting is ineffective/incomplete.** A fresh 60-request
-   burst over one live HTTP/2 client connection to `POST /api/page-view`
-   returned 60 x 204 despite the documented 40-request burst. A larger
-   200-request concurrency run also returned 200 x 204. Separately, nine
-   simultaneous analyzer calls against a controlled slow map service produced
-   eight 200s then a 429 with no `Retry-After` header. This violates the
-   mandatory backend contract. Make the allowance enforce at the deployed
-   topology and attach `Retry-After` to every throttle response.
+Exact regressions are in `src/main.rs`:
 
-## Verification limitations
+- `fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route` varies the
+  source port and proxy peer for 100 requests while holding one forwarded
+  client IP. It asserts 429 JSON and a positive `Retry-After` on both API
+  routes. The former extractor does not pass this topology.
+- `forwarded_client_parser_accepts_ingress_address_forms` covers IPv4,
+  IPv4-with-port, IPv6, bracketed IPv6-with-port, and invalid first hops.
+- `analyzer_capacity_429_has_retry_after` occupies all eight analyzer permits,
+  calls the real route, and asserts status 429, body text, and
+  `Retry-After: 1`.
 
-Docker/Podman and Lighthouse CLI are not installed in this verifier container.
-The local candidate-`BUILD_SHA` Cargo release build was attempted but stalled
-after dependency compilation with no compiler child and was terminated; the
-already deployed exact candidate does serve its matching build identity.
+## Verification evidence
 
-## Historical repair 5 work (superseded by this FAIL)
-
-### Claims contract
-
-- Added `.factory/claims.json` with nine concrete, observable claims.
-- Each claim has exactly one `@claim:<id>` regression test or one named Rust
-  integration test. The seven browser claims start from `/demo`; the two
-  persistence claims use a temporary SQLite database.
-- Coverage includes immediate sample results, demo isolation, CSV output,
-  offline reload, OSM tags and source dates, free/paid copy, browser-local
-  license caching, GPX non-retention, and the aggregate page counter.
-
-### One-click demo
-
-- Added `/demo` and made the landing-page primary action **Try it with sample
-  data**. It immediately renders a realistic Brussels speed-pedelec report.
-- The demo is fully client-side. It makes no `/api/analyze` or `/api/page-view`
-  request, never reads real license storage, and uses only the removable
-  `demo:cycle-legal-profile-check:active` marker.
-- Added the required persistent banner, **Reset demo**, and **Start for real**.
-  Leaving demo clears the marker. `.factory/demo.md` documents the route,
-  sample, reset, storage namespace, and offline behavior.
-
-### Discoverability and product polish
-
-- Added `robots.txt`, `sitemap.xml`, an original 1200×630 social SVG, valid
-  Static Web Apps fallback configuration, and a styled `/404.html` with a real
-  404 response for unknown routes.
-- Added per-route titles, descriptions, canonical URLs, Open Graph/Twitter
-  metadata, a consistent header, and a footer build-status link.
-- Rewrote the first screen in plain language and added `.factory/copy-audit.md`.
-- Bumped the shell cache to `cycle-legal-shell-v4` so the updated demo shell is
-  installed cleanly.
-
-## Historical verification 5 evidence (not the current result)
-
-All checks ran in `/work/repo` after a clean `npm ci` (85 packages; zero audit
-vulnerabilities):
+All checks ran on 2026-08-30 from `/work/repo`.
 
 | Check | Result |
 | --- | --- |
-| `npm test` | PASS — 2 Vitest and 15 Rust tests |
-| `npm run typecheck` | PASS |
-| `npm run lint` | PASS — rustfmt plus clippy with warnings denied |
-| `npm run build` | PASS — `dist/`; JS 20.08 KB raw / 7.65 KB gzip; CSS 13.47 KB raw / 3.70 KB gzip |
-| `npm run test:e2e` | PASS — 38 Chromium tests across desktop and 390×844 mobile |
-| Every command in `.factory/claims.json` | PASS — seven 2-viewport Playwright claim runs and two named Rust runs |
-| `BUILD_SHA=qa-repair-20260830 cargo build --release` | PASS — 6.9 MB binary |
-| PORT-only release runtime | PASS — `/health` returned `qa-repair-20260830`; `/`, `/demo`, legal pages, crawler files, and `/404.html` returned 200; an unknown path returned 404 |
-| Factory `verify-url.sh` | PASS — HTTP 200, 592 ms desktop load, no console/page errors, title/lang/one h1/main present, zero missing alt text, zero unlabeled buttons |
-| Factory container deployment | PASS — ACR built the unchanged multi-stage Dockerfile; live `/health` reports `5167953593c456a02a8e103fde9a934bf5410490` |
-| Live route and response-policy smoke | PASS — `/demo`, legal pages, crawler files, and `/404.html` return 200; unknown routes return 404; CSP, nosniff, frame denial, strict referrer policy, and `no-cache` HTML are present |
-| Live desktop + 390 px demo smoke | PASS — one h1/main, first keyboard focus on Skip link, no overflow or console/page errors, no cross-origin browser requests, and zero serious/critical Axe findings |
+| Clean install | `npm ci`: 85 packages installed, 0 vulnerabilities. |
+| Unit/integration | `npm test`: 2 Vitest and 17 Rust tests passed. |
+| Type and lint | `npm run typecheck` passed; `npm run lint` passed rustfmt and clippy with warnings denied. |
+| Production outputs | `npm run build` passed; JS 20.08 kB raw / 7.65 kB gzip, CSS 13.47 kB raw / 3.70 kB gzip. |
+| Native release | `BUILD_SHA=local-repair-6 cargo build --release` passed in 2m39s. |
+| Browser suite | `npm run test:e2e`: 38/38 passed in desktop Chromium and 390×844 mobile Chromium. |
+| Claims | Every command in `.factory/claims.json` passed: seven browser claims passed in both viewports and two named Rust claims passed. |
+| Local ingress regression | A 60-request concurrent network burst with one client IP, varied source ports, and varied proxy hops returned 46×204 and 14×429; every 429 had `Retry-After: 1`. |
+| URL verifier | Factory `verify-url.sh` passed locally in 535 ms and live in 537 ms: no console/page errors, valid title/lang/main, one h1, no missing alt text, and no unnamed buttons. |
+| Accessibility | Playwright axe scans found 0 serious/critical findings on landing and demo in both viewports. Live keyboard focus began on the skip link; both viewports had no overflow and no active motion under reduced-motion. |
+| Lighthouse mobile | Performance 100, accessibility 100, best practices 100, SEO 100; LCP 1.2 s, CLS 0, TBT 10 ms. |
+| Offline/update | Fresh live desktop and mobile contexts installed the service worker, reloaded `/demo` offline, retained the sample report, and showed the Offline notice. HTML and `sw.js` use `no-cache`; hashed bundles use one-year immutable caching. |
+| Privacy | Live `/demo` made no API or cross-origin requests, kept only the demo namespace, and reported no console errors. Cross-origin API preflight returned 405 with no permissive CORS header. |
+| API behavior | A live Brussels speed-pedelec check returned 200, review verdict, five findings, and source date `2026-08-01`. Invalid XML and region returned 422; unpaid Netherlands returned 402. All API responses used `no-store`. |
+| Response policy | Live CSP, nosniff, frame denial, strict referrer policy, and cache policies passed. Product/legal/crawler/PWA routes returned 200; an unknown route returned 404. |
+| Artifact parity | Live JS SHA-256 `9cb8b652a5c25710065244cb6882e4eea3db22d227a504498d6e1b5ed8743205` and CSS SHA-256 `34a81448b9d86918de90220fbd533e019651becb2c5477cdd3a88f74a2f2fef0` match local `dist/`. |
+| Load smoke | One live HTTP/2 session completed 100 concurrent health requests with 100×200 in 43 ms (2,341.6 requests/second). Health is intentionally limiter-exempt. |
 
-Playwright runs Axe on the landing page and the direct demo at both configured
-viewports. Both have zero serious or critical findings. Keyboard checks cover
-the skip link and every exposed header/footer target. The demo and normal PWA
-shell both reload offline after the first online visit. Browser request and
-storage regression coverage confirms demo isolation; the existing real GPX
-upload, malformed-file recovery, licensing, limiter, and CSV paths remain
-covered and pass.
+## Deployment evidence
 
-The local worker has no Docker or Podman executable, so local image execution
-was not possible. ACR successfully built and deployed the unchanged
-multi-stage, non-root Dockerfile. No payment or refund transaction was made;
-the hosted checkout contract and browser license behavior are covered without a
-monetary action.
+- Factory ACR build run `ch1g3` completed successfully from repair commit
+  `c14a7063bf65f79d4a4bb7e594973e30eccefb4a`.
+- Active revision: `sf-cycle-legal-profile-check--0000013`, healthy, 100% of
+  traffic, min/max replicas `1/1`.
+- Live `/health` returned exactly
+  `{"build":"c14a7063bf65f79d4a4bb7e594973e30eccefb4a","status":"ok"}`.
+- `EXPECTED_BUILD_SHA=c14a7063bf65f79d4a4bb7e594973e30eccefb4a npm run verify:deployed`
+  used one HTTP/2 session for 60 simultaneous page-view requests and returned
+  exactly 40×204 plus 20×429; all throttled responses had `Retry-After: 1`.
 
-## Historical repair-5 limitations (superseded)
+## Known limits
 
-The product remains a planning aid. Public OSM data, public Overpass
-availability, signs, and current local orders can change a route outcome; the
-report keeps those limits explicit. The current rate-limit repair remains open
-and is the release blocker described above.
+- The checker remains a planning aid. OSM data, signs, and local orders can
+  change route access; the interface keeps these caveats visible.
+- Docker/Podman is not installed in this worker. The unchanged multi-stage,
+  non-root Dockerfile was instead built successfully by the deployment ACR.
+- No paid checkout was completed. The existing mocked license, revocation,
+  browser-storage, pricing, and merchant-of-record coverage all passed.
+- Package/consumer verification does not apply to this web-with-backend
+  artifact. The product has no runtime AI feature, so no model identity or
+  spend check applies.

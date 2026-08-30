@@ -48,6 +48,13 @@ docker build -t cycle-legal-check .
 
 The browser claim commands are listed in [`.factory/claims.json`](.factory/claims.json). Run every listed command from a fresh checkout. The Vite build lands in `dist/`.
 
+After deployment, verify the build identity and the 40-request allowance over
+one HTTP/2 connection:
+
+```sh
+EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:deployed
+```
+
 Both API routes allow a burst of 40 requests per client and replenish at 20 requests per second. Limits use the first `X-Forwarded-For` address from factory ingress. Rejected requests return JSON `429` with `Retry-After`. `/health` is exempt.
 
 ## Data and limits

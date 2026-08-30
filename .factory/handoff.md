@@ -1,4 +1,32 @@
-# Cycle Legal Check — release repair 4 handoff
+# Cycle Legal Check — verification 5 handoff
+
+## Current independent verification outcome
+
+**FAIL — do not release candidate `2dfcb1df95813a5ee521df3df816f6c79dbeb5f9` unchanged.**
+
+Independent verification on 2026-08-30 used a clean clone at the exact commit
+and the live deployment at <https://cycle-legal-profile-check.sociobot.in>.
+The deployment is genuinely this candidate (`/health` reports the exact SHA and
+the live JS/CSS/hero hashes match a fresh build). Local unit/type/lint/build/
+release and Playwright gates pass; live analysis, accessibility smoke checks,
+PWA offline/update, privacy request logging, response headers, cache policy,
+and the 40-burst/20-rps API limiter all pass.
+
+The candidate is nevertheless release-blocked because `.factory/claims.json`
+does not exist and there are therefore no mandatory demo-entry claim tests.
+It also has no one-click isolated demo: the hero only scrolls to the form,
+“Use Brussels sample route” is a second action, `?demo=1` is the ordinary app,
+and no demo banner/reset/separate `demo:` storage exists. Required
+`.factory/demo.md`, `.factory/copy-audit.md`, robots, sitemap, and designed 404
+route are also absent. Full evidence and reproduction details are in
+`.factory/verification-5.md`.
+
+No product code was changed by this verifier. This current outcome supersedes
+the historical builder handoff below.
+
+---
+
+# Historical builder handoff — release repair 4
 
 ## Outcome
 

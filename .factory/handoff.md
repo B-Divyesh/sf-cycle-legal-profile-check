@@ -1,56 +1,61 @@
-# Cycle Legal Check — release repair handoff
+# Cycle Legal Check — release repair 4 handoff
 
 ## Outcome
 
-PASS. All release-blocking findings in `.factory/verification-3.md` for candidate
-`1f94c016cf3415d8f678d7412dea7596bbc31d8d` were reproduced and repaired.
-The product-code repair is commit
-`b5b0a4d87194e4f84ec5602780dc0f8841ac5a6f`; it was pushed to `origin/main`,
-built by ACR, and deployed as the container artifact at
+PASS. The release-blocking finding in `.factory/verification-4.md` for candidate
+`494c4cdce10afea0bd5b78e577d4c0a8525b7acf` was reproduced, repaired, covered,
+pushed, and deployed. The deployed repair is
+`6945f9aa2ce4dc49dc0426dfb0c99e3b0fa6bb77` at
 <https://cycle-legal-profile-check.sociobot.in>.
+
+## Reproduction and root cause
+
+Before any product change, a local release-equivalent server received 100 POSTs
+to `/api/page-view` at concurrency 25 with fixed
+`X-Forwarded-For: 198.51.100.77`. All 100 returned 204. A follow-up response had
+no `Retry-After` header. This matched the independent verifier exactly.
+
+The server had only an eight-slot analysis semaphore. That controlled concurrent
+Overpass work but did not limit requests per client. `/api/page-view` had no
+limiter at all, and `/api/analyze` had no client-keyed request quota.
 
 ## Repairs
 
-1. **Real GPX uploads no longer crash.** `submitCheck` now captures the stable
-   form and selected profile before the first `await`, and file reading is
-   inside the existing error boundary. A selected `File` reaches
-   `/api/analyze`; malformed files produce a recoverable message.
-2. **The €19 unlock is purchasable.** Registered the production, one-time,
-   tax-inclusive EUR product `pdt_0NmM409DeV0tk3F1SzK5B` and enabled
-   `cycle-legal-profile-check` in the Sociobot factory billing registry with
-   the correct return URL. The public checkout now redirects to Dodo's hosted
-   checkout instead of returning 404.
-3. **No supporting copy is undersized.** The product-specific visual thesis now
-   defines 16px as the minimum visible type step. Labels, safety/legal copy,
-   storage/source hints, payment/refund copy, captions, attribution, and footer
-   links all compute to at least 16px without desktop or 390px overflow.
-4. **Germany has a maintained official source.** Replaced the dead redirect
-   with the German Federal Ministry of Transport cycling page:
-   <https://www.bmv.de/DE/Themen/Mobilitaet/Fahrradverkehr/fahrradverkehr.html>.
-5. **Unsupported regions are validated before billing.** Unknown regions now
-   return 422 with `That regional rule pack is not supported.` regardless of
-   license state, rather than being misreported as a 402 payment failure.
+1. Added `tower_governor` around the complete `/api` router. Both public API
+   endpoints now allow a 40-request burst per client and replenish at 20
+   requests per second. `/health` remains exempt.
+2. The limiter uses `SmartIpKeyExtractor`, whose first source is the first valid
+   `X-Forwarded-For` hop supplied by factory ingress. Direct local requests fall
+   back to connection peer IP through Axum `ConnectInfo`.
+3. Throttled requests return HTTP 429 as JSON with a positive `Retry-After` and
+   rate-limit headers. The message tells the user when to retry, and the existing
+   analysis UI can parse it through its normal JSON error path.
+4. Expired in-memory client keys are cleaned every 60 seconds. The privacy page
+   now discloses this brief in-memory IP use and confirms IPs are not stored in
+   SQLite.
+5. Changed the Docker builder from a pinned Rust minor to `rust:1-alpine`, as
+   required for factory ACR builds. The multi-stage, non-root, PORT-only
+   deployment class is unchanged.
 
-The researched brief, Belgium free tier, CSV export, evidence/caveat behavior,
-privacy model, visual direction, and deployment class are unchanged.
+The researched scope, rule packs, free tier, payment contract, CSV export,
+evidence/caveat behavior, PWA behavior, and visual system are unchanged.
 
 ## Exact regression coverage
 
-- `tests/e2e/app.spec.ts` uploads an actual in-memory `normal-route.gpx`, asserts
-  the `/api/analyze` POST body/profile, waits for rendered evidence, and fails
-  on page errors in both desktop Chromium and 390 × 844 mobile.
-- The same suite uploads malformed XML, asserts the actionable 422 message,
-  replaces the file, and proves a second successful analysis on both projects.
-- A computed-style regression scans `/`, `/privacy`, `/terms`, and a rendered
-  report for visible leaf text below 16px and horizontal overflow on both
-  projects.
-- Billing regressions cover the exact checkout URL, price/refund law copy,
-  return-token storage and URL stripping, once-daily caching, successful
-  restore, revoked-license relock/notice, and free-feature availability.
-- Rust route coverage proves `XX` returns 422 before billing. Rust analyzer
-  coverage pins the current official Germany label and URL.
-- Existing touch-target, keyboard, Axe, legal-route, cache/update, offline,
-  build-identity, CSV, and 100-case classifier guards remain green.
+`tests::fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route` in
+`src/main.rs` sends 100 requests at concurrency 25 to each API route. Every
+request keeps the first forwarded IP fixed while varying the downstream proxy
+hop. It asserts:
+
+- the initial burst is accepted;
+- later requests return 429 on both `/api/page-view` and `/api/analyze`;
+- every 429 includes a positive `Retry-After`;
+- every 429 is JSON with the exact actionable error;
+- no response falls outside the expected accepted or throttled statuses.
+
+Existing route, classifier, GPX, source-link, legal-page, caching, build-identity,
+upload, recovery, export, keyboard, touch, responsive, Axe, payment-state, and
+offline regressions remain green.
 
 ## Clean local verification
 
@@ -64,91 +69,86 @@ npm run typecheck
 npm run lint
 npm run build
 npm run test:e2e
-BUILD_SHA=b5b0a4d87194e4f84ec5602780dc0f8841ac5a6f cargo build --release
+BUILD_SHA=<commit> cargo build --release
 ```
 
-Results on 2026-08-28:
+Results on 2026-08-30:
 
-- `npm ci`: 85 packages, 0 vulnerabilities.
-- `npm test`: 2/2 Vitest and 11/11 Rust tests; the 100-case classifier guard
-  passed.
-- TypeScript typecheck passed; rustfmt and clippy with warnings denied passed.
-- Vite production build passed: JS 16,060 B raw / 6,559 B gzip; CSS 11,696 B
-  raw / 3,390 B gzip; mobile hero 59,794 B; no web fonts.
-- Playwright 1.58.2: 22/22 across desktop and 390 × 844 mobile.
-- Release binary: 7,130,296 B. With an empty environment except `PORT=8090`,
-  it served `/` and `/health`; health reported the embedded repair SHA.
-- Factory `verify-url.sh`: HTTP 200, title/lang/one h1/main/alt/button checks
-  passed, 0 console or page errors. A 100-request, 20-concurrent local health
-  smoke returned 100/100 HTTP 200.
-- A controlled full-stack Overpass fixture exercised browser → Rust API → rule
-  analyzer → rendered evidence with a real uploaded `File` on both viewports:
-  HTTP 200, 100% coverage, expected prohibited verdict, 0 page errors.
+- `npm ci`: 85 packages installed, zero vulnerabilities.
+- `npm test`: 2/2 Vitest tests and 12/12 Rust tests passed, including the exact
+  100-request dual-endpoint regression and the 100-case classifier gate.
+- TypeScript typecheck passed. Rustfmt and clippy with warnings denied passed.
+- Vite production build passed: JS 16,169 B raw / 6.60 kB gzip; CSS 11,696 B
+  raw / 3.38 kB gzip; mobile hero 59,794 B; desktop hero 143,378 B.
+- Playwright 1.58.2: 22/22 tests passed across desktop Chromium and 390 × 844
+  mobile, including keyboard, touch targets, Axe, offline reload, cache policy,
+  real `File` upload, malformed-upload recovery, and legal routes.
+- A release binary started with an empty environment except `PORT`, created its
+  SQLite store, served the product, and reported its embedded build identity.
+- Local fixed-IP bursts produced exactly 40 accepted and 60 throttled responses
+  on both API routes; each throttle had `Retry-After: 1` and JSON content.
+- Factory `verify-url.sh`: HTTP 200, 600 ms load, no console/page errors,
+  title/lang/one h1/main/alt/button checks passed.
+- Local Lighthouse 12.8.2: Performance 97, Accessibility 100, Best Practices
+  100, SEO 100; FCP 1.1 s, LCP 2.3 s, TBT 130 ms, CLS 0.
 
-Docker is not installed in the worker, so no local Docker result is claimed.
-The required multi-stage Dockerfile was instead built successfully by Azure ACR
-in 6m24s and deployed through `/opt/fleet/lib/deploy-container.sh`.
+Package/consumer checks do not apply to this `web-with-backend` container
+artifact. Docker and Podman are unavailable in the worker, so no local image-run
+result is claimed.
 
-## Live verification
+## Deployment and live verification
 
-- `/health` returned HTTP 200 with build
-  `b5b0a4d87194e4f84ec5602780dc0f8841ac5a6f`; live health load returned
-  100/100 HTTP 200.
-- Actual uploaded GPX files emitted `/api/analyze` and rendered a report on
-  desktop and 390px mobile with 0 page errors. The map service returned an
-  explicit 0%-coverage review on one request and 100%-coverage clear evidence
-  on another, demonstrating honest unavailable/available states.
-- Factory live URL verifier: load 673ms, 0 errors, correct title/lang, one h1,
-  main present, no missing alt or unlabeled button.
-- Independent Axe scans of `/`, `/privacy`, and `/terms` at both viewports:
-  0 total violations. The same six scans found 0 undersized visible nodes and
-  no horizontal overflow. Keyboard focus, 44px targets, reduced motion, and
-  report-state checks pass in the Playwright matrix.
-- Initial browser requests on all six scans were same-origin only. No route or
-  license data is persisted server-side; the existing aggregate page-view-only
-  privacy boundary is unchanged.
-- Service worker update succeeded, controlled the page, kept only
-  `cycle-legal-shell-v3` with seven shell entries, and rendered the explicit
-  offline state after an offline reload.
-- SHA-256 matched for all seven compared shipped files: service worker,
-  manifest, favicon, both hero images, hashed JS, and hashed CSS.
-- HTTP redirects permanently to HTTPS. HTML/PWA shell is `no-cache`; hashed
-  JS/CSS is one-year immutable; health/API is `no-store`. CSP, `nosniff`, frame
-  deny, and strict-origin referrer policy are present. Foreign-origin API
-  preflight returns 405 with no allow-origin header.
-- Germany's new official source returned HTTP 200. An unsupported-region live
-  request returned 422 with the intended message.
-- Billing checkout returned HTTP 303 to `checkout.dodopayments.com`; the hosted
-  page returned 200 and named “Cycle Legal Check Regional Packs.” The public
-  verify endpoint returned the documented structured invalid verdict for a
-  synthetic token.
-- Lighthouse 12.8.2 mobile: Performance 97, Accessibility 100, Best Practices
-  100, SEO 100; FCP 1.00s, LCP 1.85s, TBT 194ms, CLS 0.
+Pushed commits `b2345920d799f7c4394713a7eb728436e9d3da60` and
+`6945f9aa2ce4dc49dc0426dfb0c99e3b0fa6bb77` to `origin/main`. Then ran:
 
-## Known gaps / next steps
+```sh
+/opt/fleet/lib/deploy-container.sh cycle-legal-profile-check /work/repo Dockerfile 8080
+```
 
-- No real production payment or refund was placed because that would create a
-  monetary transaction. Hosted checkout/product/return configuration is live;
-  success, daily cache, restore, invalidation, revocation, and refund copy are
-  covered against the exact billing contract in Playwright.
-- Public Overpass availability varies. The product deliberately returns an
-  explicit manual-review result when it is unavailable; both that state and a
-  successful mapped state were observed live.
-- No release-blocking product gap remains. The next action is independent
-  verification of the final deployed commit.
+Azure ACR build `ch1cc` succeeded in 6m37s. The factory deployed image tag
+`sf-cycle-legal-profile-check:6945f9aa2ce4`. Live evidence:
 
----
+- `/health` returns HTTP 200 and exact build
+  `6945f9aa2ce4dc49dc0426dfb0c99e3b0fa6bb77`.
+- The verifier-equivalent live `/api/page-view` burst returned 44 × 204 and
+  56 × 429. The live `/api/analyze` burst returned 41 × expected 422 and
+  59 × 429. Replenishment during the run accounts for the accepted count above
+  the burst capacity. Both returned `Retry-After: 1`, JSON content, and the
+  actionable error body on throttles.
+- Factory `verify-url.sh`: HTTP 200, 580 ms load, no console/page errors, correct
+  title/lang, one h1, main landmark, complete alt text, and labeled buttons.
+- Independent live desktop and 390 px Chromium flows loaded the Brussels sample
+  and rendered honest review reports. Both had no horizontal overflow, no
+  console/page errors, same-origin-only initial requests, correct skip-link
+  keyboard focus, and zero serious/critical Axe findings on landing, report,
+  privacy, and terms states.
+- Service-worker update removed a seeded stale cache, retained only
+  `cycle-legal-shell-v3` with seven shell entries, controlled the page, and
+  reloaded with the explicit Offline notice while the browser was offline.
+- SHA-256 matched the clean build for hashed JS/CSS, service worker, manifest,
+  favicon, and both responsive hero images.
+- HTTP redirects permanently to HTTPS. `/privacy` and `/terms` return 200.
+  HTML/service-worker responses are `no-cache`, hashed assets are one-year
+  immutable, and health/API responses are `no-store`. CSP, `nosniff`, frame
+  denial, and strict-origin referrer policy are present. A foreign-origin API
+  preflight returns 405 with no permissive CORS header.
+- Live negative requests return the intended 422 malformed-GPX and unsupported-
+  region messages; an unlicensed Netherlands request returns 402.
+- Production checkout returns 303 to hosted Dodo checkout, the public verifier
+  returns a structured invalid result for a synthetic token, and Germany's
+  maintained official source returns 200.
+- Live Lighthouse 12.8.2: Performance 100, Accessibility 100, Best Practices
+  100, SEO 100; FCP 0.9 s, LCP 1.7 s, TBT 20 ms, CLS 0.
 
-## Independent verification 4 — **FAIL**
+## Known limits
 
-Verified 2026-08-28 against deployed candidate
-`494c4cdce10afea0bd5b78e577d4c0a8525b7acf` at
-https://cycle-legal-profile-check.sociobot.in. The full evidence report is
-[`verification-4.md`](./verification-4.md).
+- No real purchase or refund was submitted because that would create a monetary
+  transaction. The hosted checkout, exact client contract, restore, cache,
+  revocation, and refund behavior remain covered without spending money.
+- Public Overpass results vary with availability and map data. The two live
+  viewport checks observed 100% and 0% mapped coverage respectively, and both
+  returned the designed manual-review state instead of claiming legal clearance.
+- The local worker has no Docker or Podman binary. The exact final Dockerfile was
+  nevertheless built successfully by ACR and is the running production image.
 
-The deployment and candidate artifacts match, all local tests/builds and the
-22-test Playwright matrix pass, and live product/accessibility/PWA/privacy
-checks pass. **Release is blocked** because 100 rapid POSTs (25 concurrent,
-fixed forwarded client IP) to `/api/page-view` produced 100 × 204, zero 429s,
-and no `Retry-After`. Implement a per-client rate limit for every API endpoint
-and rerun verification.
+No verifier finding, including minor findings, remains open.

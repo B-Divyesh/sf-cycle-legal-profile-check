@@ -4,8 +4,8 @@
 
 The verifier blockers in `.factory/verification-5.md` are repaired. The
 implementation commit is `df1c848` (`fix: add isolated demo and claims
-coverage`). This handoff records the release evidence for the final `main`
-commit and its configured container deployment.
+coverage`). The deployed container source commit is
+`5167953593c456a02a8e103fde9a934bf5410490`.
 
 ## Repairs
 
@@ -57,6 +57,9 @@ vulnerabilities):
 | `BUILD_SHA=qa-repair-20260830 cargo build --release` | PASS — 6.9 MB binary |
 | PORT-only release runtime | PASS — `/health` returned `qa-repair-20260830`; `/`, `/demo`, legal pages, crawler files, and `/404.html` returned 200; an unknown path returned 404 |
 | Factory `verify-url.sh` | PASS — HTTP 200, 592 ms desktop load, no console/page errors, title/lang/one h1/main present, zero missing alt text, zero unlabeled buttons |
+| Factory container deployment | PASS — ACR built the unchanged multi-stage Dockerfile; live `/health` reports `5167953593c456a02a8e103fde9a934bf5410490` |
+| Live route and response-policy smoke | PASS — `/demo`, legal pages, crawler files, and `/404.html` return 200; unknown routes return 404; CSP, nosniff, frame denial, strict referrer policy, and `no-cache` HTML are present |
+| Live desktop + 390 px demo smoke | PASS — one h1/main, first keyboard focus on Skip link, no overflow or console/page errors, no cross-origin browser requests, and zero serious/critical Axe findings |
 
 Playwright runs Axe on the landing page and the direct demo at both configured
 viewports. Both have zero serious or critical findings. Keyboard checks cover
@@ -66,9 +69,9 @@ storage regression coverage confirms demo isolation; the existing real GPX
 upload, malformed-file recovery, licensing, limiter, and CSV paths remain
 covered and pass.
 
-The local worker has no Docker or Podman executable, so a local image execution
-was not possible. The deployment uses the unchanged multi-stage, non-root
-Dockerfile and ACR container build. No payment or refund transaction was made;
+The local worker has no Docker or Podman executable, so local image execution
+was not possible. ACR successfully built and deployed the unchanged
+multi-stage, non-root Dockerfile. No payment or refund transaction was made;
 the hosted checkout contract and browser license behavior are covered without a
 monetary action.
 

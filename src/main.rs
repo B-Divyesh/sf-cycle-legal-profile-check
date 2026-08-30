@@ -12,7 +12,10 @@ use axum::{
 };
 use model::{AnalyzeRequest, OverpassResponse};
 use serde::{Deserialize, Serialize};
-use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
+use sqlx::{
+    sqlite::{SqliteConnectOptions, SqlitePoolOptions},
+    SqlitePool,
+};
 use std::{
     env,
     net::{IpAddr, SocketAddr},
@@ -117,9 +120,14 @@ async fn main() {
     let database_url = supplied_database_url
         .clone()
         .unwrap_or_else(default_database_url);
+    let database_options = database_url
+        .parse::<SqliteConnectOptions>()
+        .expect("valid sqlite configuration")
+        .create_if_missing(true)
+        .busy_timeout(Duration::from_secs(30));
     let db = SqlitePoolOptions::new()
-        .max_connections(4)
-        .connect(&database_url)
+        .max_connections(1)
+        .connect_with(database_options)
         .await
         .expect("connect sqlite");
     sqlx::query("CREATE TABLE IF NOT EXISTS counters (key TEXT PRIMARY KEY, value INTEGER NOT NULL DEFAULT 0)").execute(&db).await.expect("create counters");

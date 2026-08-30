@@ -173,7 +173,11 @@ async fn main() {
 
 fn default_database_url() -> String {
     if Path::new("/data").is_dir() {
-        "sqlite:///data/cycle-legal.sqlite?mode=rwc".into()
+        // Azure Files uses SMB semantics that do not provide SQLite's usual
+        // POSIX byte-range locks. This VFS uses a sidecar lock directory and
+        // is safe with the deployment's enforced one-replica/one-connection
+        // configuration.
+        "sqlite:///data/cycle-legal.sqlite?mode=rwc&vfs=unix-dotfile".into()
     } else {
         "sqlite://cycle-legal.sqlite?mode=rwc".into()
     }

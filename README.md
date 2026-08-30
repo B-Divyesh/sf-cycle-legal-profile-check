@@ -27,7 +27,7 @@ Open <http://localhost:8080>. For split frontend and backend development, run `n
 Configuration is optional:
 
 - `PORT` — HTTP port; defaults to `8080`.
-- `DATABASE_URL` — optional SQLite URL override. The default is `/data/cycle-legal.sqlite` when `/data` exists, otherwise `./cycle-legal.sqlite`.
+- `DATABASE_URL` — optional SQLite URL override. The default is `/data/cycle-legal.sqlite` with SMB-safe locking when `/data` exists, otherwise `./cycle-legal.sqlite`.
 - `OVERPASS_URL` — Overpass interpreter URL.
 - `BILLING_API_BASE` — Sociobot billing API base.
 - `BUILD_SHA` — build identifier returned by `/health`.

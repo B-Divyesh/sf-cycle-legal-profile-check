@@ -1,65 +1,36 @@
 {
   "communities": {
     "0": [
-      "analysis",
-      "analyzerequest",
-      "arc",
-      "asref",
-      "client",
-      "intoresponse",
-      "option",
-      "path",
-      "result",
-      "router",
-      "semaphore",
-      "sqlitepool",
-      "src_main",
-      "src_main_analyze_route",
-      "src_main_apierror",
-      "src_main_appstate",
-      "src_main_build_router",
-      "src_main_build_sha",
-      "src_main_errorbody",
-      "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
-      "src_main_get",
-      "src_main_health_never_reports_the_old_unknown_sentinel",
-      "src_main_legal_routes_are_successful_direct_documents",
-      "src_main_main",
-      "src_main_page_view",
-      "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
-      "src_main_run_fixed_ip_burst",
-      "src_main_shutdown",
-      "src_main_static_fixture",
-      "src_main_test_state",
-      "src_main_unsupported_region_is_rejected_before_billing",
-      "src_main_verify_paid",
-      "src_main_verifyresponse",
-      "state",
-      "statuscode",
-      "string",
-      "tempdir"
-    ],
-    "1": [
       "frontend_src_main",
       "frontend_src_main_apppage",
       "frontend_src_main_bind",
       "frontend_src_main_cachedlicenseinactive",
       "frontend_src_main_cachedunlock",
       "frontend_src_main_checker",
+      "frontend_src_main_clonedemoreport",
       "frontend_src_main_consumelicense",
+      "frontend_src_main_demo_report",
+      "frontend_src_main_demobanner",
+      "frontend_src_main_demoworkspace",
+      "frontend_src_main_discarddemodata",
       "frontend_src_main_escapehtml",
       "frontend_src_main_findingitem",
       "frontend_src_main_footer",
+      "frontend_src_main_header",
+      "frontend_src_main_hero",
       "frontend_src_main_icon",
       "frontend_src_main_legalpage",
       "frontend_src_main_licenseinactive",
+      "frontend_src_main_markdemoactive",
       "frontend_src_main_paysection",
       "frontend_src_main_receivedlicense",
       "frontend_src_main_render",
+      "frontend_src_main_resetdemo",
       "frontend_src_main_restore",
       "frontend_src_main_resultview",
       "frontend_src_main_submitcheck",
       "frontend_src_main_unlocked",
+      "frontend_src_main_updateroutemetadata",
       "frontend_src_main_verifylicense",
       "frontend_src_rules_test",
       "frontend_src_types",
@@ -72,7 +43,7 @@
       "frontend_src_ui_downloadchecklist",
       "frontend_src_ui_verdictcopy"
     ],
-    "2": [
+    "1": [
       "geopoint",
       "hashmap",
       "overpassway",
@@ -105,7 +76,7 @@
       "src_analyzer_unmatched_route_is_review",
       "vec"
     ],
-    "3": [
+    "2": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_es2022",
@@ -130,7 +101,7 @@
       "tsconfig_compileroptions_usedefineforclassfields",
       "tsconfig_include"
     ],
-    "4": [
+    "3": [
       "axe_core_playwright",
       "concurrently",
       "package_devdependencies",
@@ -147,7 +118,7 @@
       "vite",
       "vitest"
     ],
-    "5": [
+    "4": [
       "src_model",
       "src_model_analysis",
       "src_model_analyzerequest",
@@ -164,7 +135,39 @@
       "src_model_severity",
       "src_model_source"
     ],
+    "5": [
+      "analysis",
+      "analyzerequest",
+      "arc",
+      "client",
+      "option",
+      "result",
+      "semaphore",
+      "sqlitepool",
+      "src_main_analyze_route",
+      "src_main_appstate",
+      "src_main_gpx_analysis_never_persists_route_data",
+      "src_main_page_view",
+      "src_main_verify_paid",
+      "state"
+    ],
     "6": [
+      "asref",
+      "path",
+      "router",
+      "src_main_build_router",
+      "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
+      "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
+      "src_main_get",
+      "src_main_health_never_reports_the_old_unknown_sentinel",
+      "src_main_legal_routes_are_successful_direct_documents",
+      "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
+      "src_main_run_fixed_ip_burst",
+      "src_main_static_fixture",
+      "src_main_test_state",
+      "src_main_unsupported_region_is_rejected_before_billing"
+    ],
+    "7": [
       "package",
       "package_name",
       "package_private",
@@ -179,68 +182,84 @@
       "package_type",
       "package_version"
     ],
-    "7": [
-      "governorerror",
-      "json",
+    "8": [
       "next",
       "request",
+      "src_main",
+      "src_main_build_sha",
+      "src_main_cache_policy",
+      "src_main_is_hashed_asset",
+      "src_main_main",
+      "src_main_page_views_persist_only_an_aggregate_counter",
+      "src_main_response_policy",
+      "src_main_shutdown",
+      "src_main_verifyresponse",
+      "tempdir"
+    ],
+    "9": [
+      "governorerror",
+      "json",
       "response",
       "src_main_apierror_into_response",
-      "src_main_cache_policy",
       "src_main_health",
-      "src_main_is_hashed_asset",
       "src_main_rate_limit_response",
-      "src_main_response_policy",
       "value"
     ],
-    "8": [
+    "10": [
+      "intoresponse",
+      "src_main_apierror",
+      "src_main_errorbody",
+      "statuscode",
+      "string"
+    ],
+    "11": [
       "frontend_public_sw",
       "frontend_public_sw_shell"
     ],
-    "9": [
+    "12": [
       "tests_e2e_app_spec",
       "tests_e2e_app_spec_report"
     ],
-    "10": [
+    "13": [
       "pkg_cycle_legal_profile_check"
     ],
-    "11": [
+    "14": [
       "playwright_config"
     ],
-    "12": [
+    "15": [
       "src_analyzer_rs_hashmap"
     ],
-    "13": [
+    "16": [
       "src_analyzer_rs_vec"
     ],
-    "14": [
+    "17": [
       "src_main_rs_analysis"
     ],
-    "15": [
+    "18": [
       "src_main_rs_option"
     ],
-    "16": [
+    "19": [
       "src_main_rs_result"
     ],
-    "17": [
+    "20": [
       "src_main_rs_string"
     ],
-    "18": [
+    "21": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.11711711711711711,
+    "0": 0.1073170731707317,
     "1": 0.13763440860215054,
-    "2": 0.13763440860215054,
-    "3": 0.08695652173913043,
-    "4": 0.13333333333333333,
-    "5": 0.3047619047619048,
-    "6": 0.15384615384615385,
-    "7": 0.19696969696969696,
-    "8": 1.0,
-    "9": 1.0,
-    "10": 1.0,
+    "2": 0.08695652173913043,
+    "3": 0.13333333333333333,
+    "4": 0.3047619047619048,
+    "5": 0.1978021978021978,
+    "6": 0.31868131868131866,
+    "7": 0.15384615384615385,
+    "8": 0.21212121212121213,
+    "9": 0.38095238095238093,
+    "10": 0.4,
     "11": 1.0,
     "12": 1.0,
     "13": 1.0,
@@ -248,7 +267,10 @@
     "15": 1.0,
     "16": 1.0,
     "17": 1.0,
-    "18": 1.0
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0
   },
   "gods": [
     {
@@ -257,14 +279,19 @@
       "degree": 17
     },
     {
-      "id": "src_main_analyze_route",
-      "label": "analyze_route()",
-      "degree": 13
-    },
-    {
       "id": "src_main_build_router",
       "label": "build_router()",
-      "degree": 13
+      "degree": 14
+    },
+    {
+      "id": "src_main_analyze_route",
+      "label": "analyze_route()",
+      "degree": 14
+    },
+    {
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
+      "degree": 11
     },
     {
       "id": "src_main_appstate",
@@ -272,8 +299,8 @@
       "degree": 11
     },
     {
-      "id": "src_analyzer_parse_gpx",
-      "label": "parse_gpx()",
+      "id": "src_main_test_state",
+      "label": "test_state()",
       "degree": 11
     },
     {
@@ -282,24 +309,19 @@
       "degree": 10
     },
     {
-      "id": "src_main_get",
-      "label": "get()",
-      "degree": 8
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
+      "degree": 10
     },
     {
-      "id": "src_main_test_state",
-      "label": "test_state()",
-      "degree": 8
+      "id": "src_main_get",
+      "label": "get()",
+      "degree": 9
     },
     {
       "id": "package_scripts",
       "label": "scripts",
       "degree": 8
-    },
-    {
-      "id": "src_main_static_fixture",
-      "label": "static_fixture()",
-      "degree": 7
     }
   ],
   "surprises": [

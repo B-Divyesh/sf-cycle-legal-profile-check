@@ -3,8 +3,8 @@ mod model;
 
 use analyzer::{analyze, overpass_query, parse_gpx};
 use axum::{
-    extract::{DefaultBodyLimit, Request, State},
-    http::{header, HeaderMap, HeaderValue, StatusCode},
+    extract::{ConnectInfo, DefaultBodyLimit, Request, State},
+    http::{header, HeaderMap, HeaderValue, Request as HttpRequest, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
     routing::{get, post},
@@ -13,12 +13,17 @@ use axum::{
 use model::{AnalyzeRequest, OverpassResponse};
 use serde::{Deserialize, Serialize};
 use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
-use std::{env, net::SocketAddr, path::Path, sync::Arc, time::Duration};
+use std::{
+    env,
+    net::{IpAddr, SocketAddr},
+    path::Path,
+    sync::Arc,
+    time::Duration,
+};
 use tokio::signal;
 use tokio::sync::Semaphore;
 use tower_governor::{
-    governor::GovernorConfigBuilder, key_extractor::SmartIpKeyExtractor, GovernorError,
-    GovernorLayer,
+    governor::GovernorConfigBuilder, key_extractor::KeyExtractor, GovernorError, GovernorLayer,
 };
 use tower_http::{
     services::{ServeDir, ServeFile},
@@ -28,6 +33,57 @@ use tower_http::{
 
 const API_RATE_LIMIT_BURST: u32 = 40;
 const API_RATE_LIMIT_PERIOD_MS: u64 = 50;
+const ANALYSIS_BUSY_RETRY_SECONDS: u64 = 1;
+
+/// Extract the original client address supplied by the factory ingress.
+///
+/// Azure Container Apps can include the source port in the first
+/// `X-Forwarded-For` hop. `SmartIpKeyExtractor` accepts a bare IP only, then
+/// silently falls back to the changing ingress peer address. That makes one
+/// caller appear as many clients. If the trusted ingress header is present we
+/// therefore require and normalize its first hop; direct local connections
+/// fall back to `ConnectInfo`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct FirstForwardedIpKeyExtractor;
+
+impl KeyExtractor for FirstForwardedIpKeyExtractor {
+    type Key = IpAddr;
+
+    fn extract<T>(&self, request: &HttpRequest<T>) -> Result<Self::Key, GovernorError> {
+        if let Some(value) = request.headers().get("x-forwarded-for") {
+            return value
+                .to_str()
+                .ok()
+                .and_then(first_forwarded_ip)
+                .ok_or(GovernorError::UnableToExtractKey);
+        }
+
+        request
+            .extensions()
+            .get::<ConnectInfo<SocketAddr>>()
+            .map(|ConnectInfo(address)| address.ip())
+            .ok_or(GovernorError::UnableToExtractKey)
+    }
+}
+
+fn first_forwarded_ip(value: &str) -> Option<IpAddr> {
+    let first_hop = value.split(',').next()?.trim().trim_matches('"');
+    first_hop
+        .parse::<IpAddr>()
+        .ok()
+        .or_else(|| {
+            first_hop
+                .parse::<SocketAddr>()
+                .ok()
+                .map(|address| address.ip())
+        })
+        .or_else(|| {
+            first_hop
+                .strip_prefix('[')
+                .and_then(|value| value.strip_suffix(']'))
+                .and_then(|value| value.parse::<IpAddr>().ok())
+        })
+}
 
 #[derive(Clone)]
 struct AppState {
@@ -104,7 +160,7 @@ fn build_router(state: Arc<AppState>, static_root: impl AsRef<Path>) -> Router {
     let api_rate_limit = GovernorConfigBuilder::default()
         .per_millisecond(API_RATE_LIMIT_PERIOD_MS)
         .burst_size(API_RATE_LIMIT_BURST)
-        .key_extractor(SmartIpKeyExtractor)
+        .key_extractor(FirstForwardedIpKeyExtractor)
         .use_headers()
         .finish()
         .expect("valid API rate-limit configuration");
@@ -325,7 +381,14 @@ async fn verify_paid(state: &AppState, license: Option<&str>) -> bool {
 struct ApiError(StatusCode, String);
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
-        (self.0, Json(ErrorBody { error: self.1 })).into_response()
+        let mut response = (self.0, Json(ErrorBody { error: self.1 })).into_response();
+        if self.0 == StatusCode::TOO_MANY_REQUESTS {
+            response.headers_mut().insert(
+                header::RETRY_AFTER,
+                HeaderValue::from(ANALYSIS_BUSY_RETRY_SECONDS),
+            );
+        }
+        response
     }
 }
 
@@ -561,6 +624,7 @@ mod tests {
         path: &'static str,
         body: &'static str,
         first_hop: &'static str,
+        ingress_style_addresses: bool,
     ) -> Vec<Response> {
         let concurrency = Arc::new(Semaphore::new(25));
         let mut tasks = tokio::task::JoinSet::new();
@@ -569,18 +633,31 @@ mod tests {
             let concurrency = Arc::clone(&concurrency);
             tasks.spawn(async move {
                 let _permit = concurrency.acquire_owned().await.expect("burst permit");
-                let forwarded_for = format!("{first_hop}, 203.0.113.{}", request_number % 250 + 1);
-                app.oneshot(
-                    Request::builder()
-                        .method("POST")
-                        .uri(path)
-                        .header(header::CONTENT_TYPE, "application/json")
-                        .header("x-forwarded-for", forwarded_for)
-                        .body(Body::from(body))
-                        .unwrap(),
-                )
-                .await
-                .unwrap()
+                let forwarded_for = if ingress_style_addresses {
+                    format!(
+                        "{first_hop}:{}, 203.0.113.{}",
+                        40_000 + request_number,
+                        request_number % 250 + 1
+                    )
+                } else {
+                    format!("{first_hop}, 203.0.113.{}", request_number % 250 + 1)
+                };
+                let mut request = Request::builder()
+                    .method("POST")
+                    .uri(path)
+                    .header(header::CONTENT_TYPE, "application/json")
+                    .header("x-forwarded-for", forwarded_for)
+                    .body(Body::from(body))
+                    .unwrap();
+                if ingress_style_addresses {
+                    request.extensions_mut().insert(ConnectInfo(SocketAddr::new(
+                        format!("10.0.0.{}", request_number % 250 + 1)
+                            .parse()
+                            .expect("proxy address"),
+                        30_000 + request_number as u16,
+                    )));
+                }
+                app.oneshot(request).await.unwrap()
             });
         }
         let mut responses = Vec::with_capacity(100);
@@ -609,7 +686,7 @@ mod tests {
             } else {
                 "198.51.100.78"
             };
-            let responses = run_fixed_ip_burst(app, path, body, first_hop).await;
+            let responses = run_fixed_ip_burst(app, path, body, first_hop, true).await;
             let mut accepted = 0;
             let mut throttled = 0;
 
@@ -652,5 +729,57 @@ mod tests {
             assert!(throttled > 0, "{path} should reject an abusive burst");
             assert_eq!(accepted + throttled, 100, "{path}");
         }
+    }
+
+    #[test]
+    fn forwarded_client_parser_accepts_ingress_address_forms() {
+        assert_eq!(
+            first_forwarded_ip("198.51.100.77:43120, 10.0.0.4"),
+            Some("198.51.100.77".parse().unwrap())
+        );
+        assert_eq!(
+            first_forwarded_ip("[2001:db8::77]:43120, 10.0.0.4"),
+            Some("2001:db8::77".parse().unwrap())
+        );
+        assert_eq!(
+            first_forwarded_ip("2001:db8::77, 10.0.0.4"),
+            Some("2001:db8::77".parse().unwrap())
+        );
+        assert_eq!(first_forwarded_ip("unknown, 10.0.0.4"), None);
+    }
+
+    #[tokio::test]
+    async fn analyzer_capacity_429_has_retry_after() {
+        let fixture = static_fixture();
+        let state = test_state().await;
+        let held_permits = state
+            .analysis_slots
+            .clone()
+            .acquire_many_owned(8)
+            .await
+            .expect("hold every analyzer permit");
+        let app = build_router(state, fixture.path());
+        let request = Request::builder()
+            .method("POST")
+            .uri("/api/analyze")
+            .header(header::CONTENT_TYPE, "application/json")
+            .header("x-forwarded-for", "198.51.100.90:43120, 10.0.0.4")
+            .body(Body::from(
+                r#"{"gpx":"unused","vehicle":"bicycle","region":"BE"}"#,
+            ))
+            .unwrap();
+
+        let response = app.oneshot(request).await.unwrap();
+        drop(held_permits);
+
+        assert_eq!(response.status(), StatusCode::TOO_MANY_REQUESTS);
+        assert_eq!(response.headers()[header::RETRY_AFTER], "1");
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        assert_eq!(
+            serde_json::from_slice::<serde_json::Value>(&body).unwrap()["error"],
+            "The checker is busy. Wait a moment and try again."
+        );
     }
 }

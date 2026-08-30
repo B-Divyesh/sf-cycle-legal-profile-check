@@ -300,13 +300,13 @@
       "degree": 12
     },
     {
-      "id": "src_analyzer_parse_gpx",
-      "label": "parse_gpx()",
+      "id": "src_main_appstate",
+      "label": "AppState",
       "degree": 11
     },
     {
-      "id": "src_main_appstate",
-      "label": "AppState",
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
       "degree": 11
     },
     {
@@ -315,18 +315,18 @@
       "degree": 10
     },
     {
-      "id": "tsconfig_compileroptions",
-      "label": "compilerOptions",
-      "degree": 10
-    },
-    {
       "id": "src_main_get",
       "label": "get()",
       "degree": 10
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 10
+    },
+    {
+      "id": "src_main_static_fixture",
+      "label": "static_fixture()",
       "degree": 9
     }
   ],

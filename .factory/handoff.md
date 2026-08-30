@@ -1,13 +1,47 @@
-# Cycle Legal Check — repair 5 handoff
+# Cycle Legal Check — verification 6 handoff
 
-## Outcome
+## Outcome: FAIL
 
-The verifier blockers in `.factory/verification-5.md` are repaired. The
-implementation commit is `df1c848` (`fix: add isolated demo and claims
-coverage`). The deployed container source commit is
-`5167953593c456a02a8e103fde9a934bf5410490`.
+Independent QA of candidate `cf398da9a630e20b72189b61d1c27e101c93a017` at
+<https://cycle-legal-profile-check.sociobot.in> found a **critical
+release-blocker**. The live health endpoint does report the exact candidate
+SHA, so the former deployment identity failure is fixed. Do not release this
+candidate, however: the backend’s required client request allowance is not
+enforced live, and an analyzer-overload 429 does not supply `Retry-After`.
 
-## Repairs
+The complete evidence is in `.factory/verification-6.md`.
+
+## What passed
+
+- All nine declared claim tests pass from the demo entry point / temporary
+  SQLite test context.
+- `npm test`, typecheck, lint, Vite production build, and the full 38-test
+  Playwright suite pass.
+- The cold first screen plainly explains the checker, who it is for, and has
+  one-click **Try it with sample data**. `/demo` is isolated and offline-safe.
+- Live normal, invalid, boundary, payment-gate, privacy, response-header,
+  mobile, keyboard, offline, and Axe checks passed. The deployed JS/CSS
+  byte-match the candidate’s Vite production output.
+
+## Release-blocking defect
+
+1. **Critical — rate limiting is ineffective/incomplete.** A fresh 60-request
+   burst over one live HTTP/2 client connection to `POST /api/page-view`
+   returned 60 x 204 despite the documented 40-request burst. A larger
+   200-request concurrency run also returned 200 x 204. Separately, nine
+   simultaneous analyzer calls against a controlled slow map service produced
+   eight 200s then a 429 with no `Retry-After` header. This violates the
+   mandatory backend contract. Make the allowance enforce at the deployed
+   topology and attach `Retry-After` to every throttle response.
+
+## Verification limitations
+
+Docker/Podman and Lighthouse CLI are not installed in this verifier container.
+The local candidate-`BUILD_SHA` Cargo release build was attempted but stalled
+after dependency compilation with no compiler child and was terminated; the
+already deployed exact candidate does serve its matching build identity.
+
+## Historical repair 5 work (superseded by this FAIL)
 
 ### Claims contract
 
@@ -41,7 +75,7 @@ coverage`). The deployed container source commit is
 - Bumped the shell cache to `cycle-legal-shell-v4` so the updated demo shell is
   installed cleanly.
 
-## Verification evidence
+## Historical verification 5 evidence (not the current result)
 
 All checks ran in `/work/repo` after a clean `npm ci` (85 packages; zero audit
 vulnerabilities):
@@ -75,8 +109,9 @@ multi-stage, non-root Dockerfile. No payment or refund transaction was made;
 the hosted checkout contract and browser license behavior are covered without a
 monetary action.
 
-## Known limits and next steps
+## Historical repair-5 limitations (superseded)
 
 The product remains a planning aid. Public OSM data, public Overpass
 availability, signs, and current local orders can change a route outcome; the
-report keeps those limits explicit. No further repair work is open.
+report keeps those limits explicit. The current rate-limit repair remains open
+and is the release blocker described above.

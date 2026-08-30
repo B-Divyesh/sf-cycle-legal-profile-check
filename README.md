@@ -37,6 +37,8 @@ docker build -t cycle-legal-check .
 
 The Vite build lands in `dist/`. The container builds both layers, runs as a non-root user, stores the aggregate counter in `/data`, and listens on port 8080. `/health` reports status and build SHA.
 
+Both API routes allow a burst of 40 requests per client and replenish at 20 requests per second. Limits use the first `X-Forwarded-For` address supplied by the factory ingress, with the direct peer address as the local-development fallback. Rejected requests return 429 JSON with `Retry-After`; `/health` is exempt.
+
 `npm test` includes the labeled fixture in `tests/fixtures/labeled_routes.csv`: exactly 100 route/tag/profile cases across Belgium, the Netherlands, and Germany. The regression gate requires at least 90% exact classification accuracy and 90% recall for prohibited or vehicle-mismatch cases. This is a deterministic rule-pack corpus, not a claim of real-world legal accuracy.
 
 ## Data and limits

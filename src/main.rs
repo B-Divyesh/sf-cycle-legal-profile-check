@@ -4,7 +4,7 @@ mod model;
 use analyzer::{analyze, overpass_query, parse_gpx};
 use axum::{
     extract::{DefaultBodyLimit, Request, State},
-    http::{header, HeaderValue, StatusCode},
+    http::{header, HeaderMap, HeaderValue, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
     routing::{get, post},
@@ -13,14 +13,21 @@ use axum::{
 use model::{AnalyzeRequest, OverpassResponse};
 use serde::{Deserialize, Serialize};
 use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
-use std::{env, path::Path, sync::Arc, time::Duration};
+use std::{env, net::SocketAddr, path::Path, sync::Arc, time::Duration};
 use tokio::signal;
 use tokio::sync::Semaphore;
+use tower_governor::{
+    governor::GovernorConfigBuilder, key_extractor::SmartIpKeyExtractor, GovernorError,
+    GovernorLayer,
+};
 use tower_http::{
     services::{ServeDir, ServeFile},
     set_header::SetResponseHeaderLayer,
     trace::TraceLayer,
 };
+
+const API_RATE_LIMIT_BURST: u32 = 40;
+const API_RATE_LIMIT_PERIOD_MS: u64 = 50;
 
 #[derive(Clone)]
 struct AppState {
@@ -80,20 +87,41 @@ async fn main() {
         .await
         .expect("bind server");
     tracing::info!(port, build = build_sha(), "server listening");
-    axum::serve(listener, app)
-        .with_graceful_shutdown(shutdown())
-        .await
-        .expect("serve");
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .with_graceful_shutdown(shutdown())
+    .await
+    .expect("serve");
 }
 
 fn build_router(state: Arc<AppState>, static_root: impl AsRef<Path>) -> Router {
     let root = static_root.as_ref();
     let index = root.join("index.html");
     let static_service = ServeDir::new(root).not_found_service(ServeFile::new(&index));
+    let api_rate_limit = GovernorConfigBuilder::default()
+        .per_millisecond(API_RATE_LIMIT_PERIOD_MS)
+        .burst_size(API_RATE_LIMIT_BURST)
+        .key_extractor(SmartIpKeyExtractor)
+        .use_headers()
+        .finish()
+        .expect("valid API rate-limit configuration");
+    let rate_limit_cleanup = api_rate_limit.limiter().clone();
+    tokio::spawn(async move {
+        let mut interval = tokio::time::interval(Duration::from_secs(60));
+        loop {
+            interval.tick().await;
+            rate_limit_cleanup.retain_recent();
+        }
+    });
+    let api = Router::new()
+        .route("/analyze", post(analyze_route))
+        .route("/page-view", post(page_view))
+        .layer(GovernorLayer::new(api_rate_limit).error_handler(rate_limit_response));
     Router::new()
         .route("/health", get(health))
-        .route("/api/analyze", post(analyze_route))
-        .route("/api/page-view", post(page_view))
+        .nest("/api", api)
         .route_service("/privacy", ServeFile::new(&index))
         .route_service("/terms", ServeFile::new(&index))
         .fallback_service(static_service)
@@ -105,6 +133,38 @@ fn build_router(state: Arc<AppState>, static_root: impl AsRef<Path>) -> Router {
         .layer(middleware::from_fn(response_policy))
         .layer(TraceLayer::new_for_http())
         .with_state(state)
+}
+
+fn rate_limit_response(error: GovernorError) -> Response {
+    let (status, headers, message) = match error {
+        GovernorError::TooManyRequests { wait_time, headers } => {
+            let retry_seconds = wait_time.max(1);
+            let mut headers = headers.unwrap_or_else(HeaderMap::new);
+            let retry_value = HeaderValue::from(retry_seconds);
+            headers.insert(header::RETRY_AFTER, retry_value.clone());
+            headers.insert("x-ratelimit-after", retry_value);
+            (
+                StatusCode::TOO_MANY_REQUESTS,
+                Some(headers),
+                format!("Too many requests. Wait {retry_seconds} seconds and try again."),
+            )
+        }
+        GovernorError::UnableToExtractKey => (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            None,
+            "The client address could not be read. Try again.".into(),
+        ),
+        GovernorError::Other { code, msg, headers } => (
+            code,
+            headers,
+            msg.unwrap_or_else(|| "The request could not be processed. Try again.".into()),
+        ),
+    };
+    let mut response = (status, Json(ErrorBody { error: message })).into_response();
+    if let Some(headers) = headers {
+        response.headers_mut().extend(headers);
+    }
+    response
 }
 
 async fn health() -> Json<serde_json::Value> {
@@ -280,12 +340,21 @@ mod tests {
     use tempfile::TempDir;
     use tower::ServiceExt;
 
-    fn test_state() -> Arc<AppState> {
+    async fn test_state() -> Arc<AppState> {
+        let db = SqlitePoolOptions::new()
+            .max_connections(1)
+            .connect("sqlite::memory:")
+            .await
+            .expect("in-memory sqlite connection");
+        sqlx::query(
+            "CREATE TABLE counters (key TEXT PRIMARY KEY, value INTEGER NOT NULL DEFAULT 0)",
+        )
+        .execute(&db)
+        .await
+        .expect("counter table");
         Arc::new(AppState {
             client: reqwest::Client::new(),
-            db: SqlitePoolOptions::new()
-                .connect_lazy("sqlite::memory:")
-                .expect("in-memory sqlite URL"),
+            db,
             overpass_url: "http://127.0.0.1/overpass".into(),
             billing_base: "http://127.0.0.1/billing".into(),
             analysis_slots: Arc::new(Semaphore::new(8)),
@@ -321,11 +390,12 @@ mod tests {
     #[tokio::test]
     async fn unsupported_region_is_rejected_before_billing() {
         let fixture = static_fixture();
-        let app = build_router(test_state(), fixture.path());
+        let app = build_router(test_state().await, fixture.path());
         let request = Request::builder()
             .method("POST")
             .uri("/api/analyze")
             .header(header::CONTENT_TYPE, "application/json")
+            .header("x-forwarded-for", "198.51.100.10")
             .body(Body::from(
                 serde_json::json!({
                     "gpx": "<gpx><trkpt lat='50' lon='4'/><trkpt lat='50.01' lon='4'/></gpx>",
@@ -349,7 +419,7 @@ mod tests {
     #[tokio::test]
     async fn legal_routes_are_successful_direct_documents() {
         let fixture = static_fixture();
-        let app = build_router(test_state(), fixture.path());
+        let app = build_router(test_state().await, fixture.path());
         for path in ["/privacy", "/terms"] {
             let response = get(&app, path).await;
             assert_eq!(response.status(), StatusCode::OK, "{path}");
@@ -364,7 +434,7 @@ mod tests {
     #[tokio::test]
     async fn response_cache_policy_separates_updates_from_immutable_bundles() {
         let fixture = static_fixture();
-        let app = build_router(test_state(), fixture.path());
+        let app = build_router(test_state().await, fixture.path());
         for (path, expected) in [
             ("/", "no-cache"),
             ("/sw.js", "no-cache"),
@@ -388,7 +458,7 @@ mod tests {
     #[tokio::test]
     async fn health_never_reports_the_old_unknown_sentinel() {
         let fixture = static_fixture();
-        let response = get(&build_router(test_state(), fixture.path()), "/health").await;
+        let response = get(&build_router(test_state().await, fixture.path()), "/health").await;
         let body = axum::body::to_bytes(response.into_body(), usize::MAX)
             .await
             .unwrap();
@@ -396,5 +466,105 @@ mod tests {
         assert_eq!(payload["status"], "ok");
         assert_ne!(payload["build"], "unknown");
         assert_eq!(payload["build"], build_sha());
+    }
+
+    async fn run_fixed_ip_burst(
+        app: Router,
+        path: &'static str,
+        body: &'static str,
+        first_hop: &'static str,
+    ) -> Vec<Response> {
+        let concurrency = Arc::new(Semaphore::new(25));
+        let mut tasks = tokio::task::JoinSet::new();
+        for request_number in 0..100 {
+            let app = app.clone();
+            let concurrency = Arc::clone(&concurrency);
+            tasks.spawn(async move {
+                let _permit = concurrency.acquire_owned().await.expect("burst permit");
+                let forwarded_for = format!("{first_hop}, 203.0.113.{}", request_number % 250 + 1);
+                app.oneshot(
+                    Request::builder()
+                        .method("POST")
+                        .uri(path)
+                        .header(header::CONTENT_TYPE, "application/json")
+                        .header("x-forwarded-for", forwarded_for)
+                        .body(Body::from(body))
+                        .unwrap(),
+                )
+                .await
+                .unwrap()
+            });
+        }
+        let mut responses = Vec::with_capacity(100);
+        while let Some(response) = tasks.join_next().await {
+            responses.push(response.expect("burst request task"));
+        }
+        responses
+    }
+
+    #[tokio::test]
+    async fn fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route() {
+        let cases = [
+            ("/api/page-view", "{}", StatusCode::NO_CONTENT),
+            (
+                "/api/analyze",
+                r#"{"gpx":"unused","vehicle":"bicycle","region":"XX"}"#,
+                StatusCode::UNPROCESSABLE_ENTITY,
+            ),
+        ];
+
+        for (index, (path, body, accepted_status)) in cases.into_iter().enumerate() {
+            let fixture = static_fixture();
+            let app = build_router(test_state().await, fixture.path());
+            let first_hop = if index == 0 {
+                "198.51.100.77"
+            } else {
+                "198.51.100.78"
+            };
+            let responses = run_fixed_ip_burst(app, path, body, first_hop).await;
+            let mut accepted = 0;
+            let mut throttled = 0;
+
+            for response in responses {
+                if response.status() == accepted_status {
+                    accepted += 1;
+                    continue;
+                }
+                assert_eq!(response.status(), StatusCode::TOO_MANY_REQUESTS, "{path}");
+                assert!(
+                    response.headers().contains_key(header::RETRY_AFTER),
+                    "{path}"
+                );
+                assert!(
+                    response.headers()[header::RETRY_AFTER]
+                        .to_str()
+                        .unwrap()
+                        .parse::<u64>()
+                        .unwrap()
+                        >= 1,
+                    "{path} should provide an actionable retry delay"
+                );
+                assert_eq!(
+                    response.headers()[header::CONTENT_TYPE],
+                    "application/json",
+                    "{path}"
+                );
+                let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+                    .await
+                    .unwrap();
+                assert!(
+                    serde_json::from_slice::<serde_json::Value>(&body).unwrap()["error"]
+                        .as_str()
+                        .unwrap()
+                        .starts_with("Too many requests."),
+                    "{path}"
+                );
+                throttled += 1;
+            }
+
+            assert!(accepted > 0, "{path} should allow the initial burst");
+            assert!(throttled > 0, "{path} should reject an abusive burst");
+            assert_eq!(accepted + throttled, 100, "{path}");
+        }
     }
 }

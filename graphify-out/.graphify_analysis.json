@@ -1,41 +1,33 @@
 {
   "communities": {
     "0": [
+      "analysis",
       "analyzerequest",
       "arc",
       "asref",
       "client",
       "intoresponse",
-      "json",
-      "next",
       "option",
       "path",
-      "request",
-      "response",
+      "result",
       "router",
       "semaphore",
       "sqlitepool",
       "src_main",
       "src_main_analyze_route",
       "src_main_apierror",
-      "src_main_apierror_into_response",
       "src_main_appstate",
       "src_main_build_router",
       "src_main_build_sha",
-      "src_main_cache_policy",
       "src_main_errorbody",
+      "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
       "src_main_get",
-      "src_main_health",
       "src_main_health_never_reports_the_old_unknown_sentinel",
-      "src_main_is_hashed_asset",
       "src_main_legal_routes_are_successful_direct_documents",
       "src_main_main",
       "src_main_page_view",
       "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
-      "src_main_response_policy",
-      "src_main_rs_analysis",
-      "src_main_rs_result",
-      "src_main_rs_string",
+      "src_main_run_fixed_ip_burst",
       "src_main_shutdown",
       "src_main_static_fixture",
       "src_main_test_state",
@@ -44,8 +36,8 @@
       "src_main_verifyresponse",
       "state",
       "statuscode",
-      "tempdir",
-      "value"
+      "string",
+      "tempdir"
     ],
     "1": [
       "frontend_src_main",
@@ -188,48 +180,75 @@
       "package_version"
     ],
     "7": [
+      "governorerror",
+      "json",
+      "next",
+      "request",
+      "response",
+      "src_main_apierror_into_response",
+      "src_main_cache_policy",
+      "src_main_health",
+      "src_main_is_hashed_asset",
+      "src_main_rate_limit_response",
+      "src_main_response_policy",
+      "value"
+    ],
+    "8": [
       "frontend_public_sw",
       "frontend_public_sw_shell"
     ],
-    "8": [
+    "9": [
       "tests_e2e_app_spec",
       "tests_e2e_app_spec_report"
     ],
-    "9": [
+    "10": [
       "pkg_cycle_legal_profile_check"
     ],
-    "10": [
+    "11": [
       "playwright_config"
     ],
-    "11": [
+    "12": [
       "src_analyzer_rs_hashmap"
     ],
-    "12": [
+    "13": [
       "src_analyzer_rs_vec"
     ],
-    "13": [
+    "14": [
+      "src_main_rs_analysis"
+    ],
+    "15": [
       "src_main_rs_option"
     ],
-    "14": [
+    "16": [
+      "src_main_rs_result"
+    ],
+    "17": [
+      "src_main_rs_string"
+    ],
+    "18": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.08787878787878788,
+    "0": 0.11711711711711711,
     "1": 0.13763440860215054,
     "2": 0.13763440860215054,
     "3": 0.08695652173913043,
     "4": 0.13333333333333333,
     "5": 0.3047619047619048,
     "6": 0.15384615384615385,
-    "7": 1.0,
+    "7": 0.19696969696969696,
     "8": 1.0,
     "9": 1.0,
     "10": 1.0,
     "11": 1.0,
     "12": 1.0,
     "13": 1.0,
-    "14": 1.0
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0
   },
   "gods": [
     {
@@ -238,19 +257,14 @@
       "degree": 17
     },
     {
-      "id": "src_main_analyze_route",
-      "label": "analyze_route()",
+      "id": "src_main_build_router",
+      "label": "build_router()",
       "degree": 13
     },
     {
-      "id": "src_main_build_router",
-      "label": "build_router()",
-      "degree": 12
-    },
-    {
-      "id": "src_main_appstate",
-      "label": "AppState",
-      "degree": 11
+      "id": "src_main_analyze_route",
+      "label": "analyze_route()",
+      "degree": 13
     },
     {
       "id": "src_analyzer_parse_gpx",
@@ -258,14 +272,14 @@
       "degree": 11
     },
     {
+      "id": "src_main_appstate",
+      "label": "AppState",
+      "degree": 11
+    },
+    {
       "id": "tsconfig_compileroptions",
       "label": "compilerOptions",
       "degree": 10
-    },
-    {
-      "id": "src_main_get",
-      "label": "get()",
-      "degree": 8
     },
     {
       "id": "package_scripts",
@@ -275,12 +289,17 @@
     {
       "id": "src_main_test_state",
       "label": "test_state()",
-      "degree": 7
+      "degree": 8
     },
     {
-      "id": "frontend_src_main_apppage",
-      "label": "appPage()",
-      "degree": 6
+      "id": "src_main_get",
+      "label": "get()",
+      "degree": 8
+    },
+    {
+      "id": "src_main_static_fixture",
+      "label": "static_fixture()",
+      "degree": 7
     }
   ],
   "surprises": [

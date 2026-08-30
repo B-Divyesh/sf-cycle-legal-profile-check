@@ -139,6 +139,11 @@ fn rate_limit_response(error: GovernorError) -> Response {
     let (status, headers, message) = match error {
         GovernorError::TooManyRequests { wait_time, headers } => {
             let retry_seconds = wait_time.max(1);
+            let unit = if retry_seconds == 1 {
+                "second"
+            } else {
+                "seconds"
+            };
             let mut headers = headers.unwrap_or_else(HeaderMap::new);
             let retry_value = HeaderValue::from(retry_seconds);
             headers.insert(header::RETRY_AFTER, retry_value.clone());
@@ -146,7 +151,7 @@ fn rate_limit_response(error: GovernorError) -> Response {
             (
                 StatusCode::TOO_MANY_REQUESTS,
                 Some(headers),
-                format!("Too many requests. Wait {retry_seconds} seconds and try again."),
+                format!("Too many requests. Wait {retry_seconds} {unit} and try again."),
             )
         }
         GovernorError::UnableToExtractKey => (
@@ -554,9 +559,7 @@ mod tests {
                     .unwrap();
                 assert!(
                     serde_json::from_slice::<serde_json::Value>(&body).unwrap()["error"]
-                        .as_str()
-                        .unwrap()
-                        .starts_with("Too many requests."),
+                        == "Too many requests. Wait 1 second and try again.",
                     "{path}"
                 );
                 throttled += 1;

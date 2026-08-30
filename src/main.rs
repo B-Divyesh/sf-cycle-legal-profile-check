@@ -99,7 +99,8 @@ async fn main() {
 fn build_router(state: Arc<AppState>, static_root: impl AsRef<Path>) -> Router {
     let root = static_root.as_ref();
     let index = root.join("index.html");
-    let static_service = ServeDir::new(root).not_found_service(ServeFile::new(&index));
+    let not_found = root.join("404.html");
+    let static_service = ServeDir::new(root).not_found_service(ServeFile::new(not_found));
     let api_rate_limit = GovernorConfigBuilder::default()
         .per_millisecond(API_RATE_LIMIT_PERIOD_MS)
         .burst_size(API_RATE_LIMIT_BURST)
@@ -122,8 +123,11 @@ fn build_router(state: Arc<AppState>, static_root: impl AsRef<Path>) -> Router {
     Router::new()
         .route("/health", get(health))
         .nest("/api", api)
+        .route_service("/", ServeFile::new(&index))
+        .route_service("/demo", ServeFile::new(&index))
         .route_service("/privacy", ServeFile::new(&index))
         .route_service("/terms", ServeFile::new(&index))
+        .route_service("/404.html", ServeFile::new(root.join("404.html")))
         .fallback_service(static_service)
         .layer(DefaultBodyLimit::max(8 * 1024 * 1024 + 4096))
         .layer(SetResponseHeaderLayer::overriding(header::X_CONTENT_TYPE_OPTIONS, HeaderValue::from_static("nosniff")))
@@ -317,6 +321,7 @@ async fn verify_paid(state: &AppState, license: Option<&str>) -> bool {
     }
 }
 
+#[derive(Debug)]
 struct ApiError(StatusCode, String);
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
@@ -360,7 +365,7 @@ mod tests {
         Arc::new(AppState {
             client: reqwest::Client::new(),
             db,
-            overpass_url: "http://127.0.0.1/overpass".into(),
+            overpass_url: "http://127.0.0.1:9/overpass".into(),
             billing_base: "http://127.0.0.1/billing".into(),
             analysis_slots: Arc::new(Semaphore::new(8)),
         })
@@ -376,6 +381,18 @@ mod tests {
         .expect("index fixture");
         std::fs::write(directory.path().join("sw.js"), "// service worker")
             .expect("service-worker fixture");
+        std::fs::write(
+            directory.path().join("404.html"),
+            "<main>route not found</main>",
+        )
+        .expect("404 fixture");
+        std::fs::write(
+            directory.path().join("robots.txt"),
+            "User-agent: *\nAllow: /\n",
+        )
+        .expect("robots fixture");
+        std::fs::write(directory.path().join("sitemap.xml"), "<urlset></urlset>")
+            .expect("sitemap fixture");
         std::fs::write(
             directory.path().join("assets/index-Ab12_C34.js"),
             "// bundle",
@@ -422,6 +439,55 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn gpx_analysis_never_persists_route_data() {
+        let state = test_state().await;
+        let report = analyze_route(
+            State(Arc::clone(&state)),
+            Json(AnalyzeRequest {
+                gpx: "<gpx><trk><name>Private commute</name><trkseg><trkpt lat='50' lon='4'/><trkpt lat='50.01' lon='4.01'/></trkseg></trk></gpx>".into(),
+                vehicle: "bicycle".into(),
+                region: "BE".into(),
+                license: None,
+            }),
+        )
+        .await
+        .expect("valid in-memory analysis");
+        assert_eq!(report.0.route_name, "Private commute");
+        let counter_rows: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM counters")
+            .fetch_one(&state.db)
+            .await
+            .expect("counter query");
+        assert_eq!(
+            counter_rows, 0,
+            "analysis must not write route data or counters"
+        );
+        let tables: Vec<String> =
+            sqlx::query_scalar("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name")
+                .fetch_all(&state.db)
+                .await
+                .expect("table query");
+        assert_eq!(tables, vec!["counters"]);
+    }
+
+    #[tokio::test]
+    async fn page_views_persist_only_an_aggregate_counter() {
+        let state = test_state().await;
+        assert_eq!(
+            page_view(State(Arc::clone(&state))).await,
+            StatusCode::NO_CONTENT
+        );
+        assert_eq!(
+            page_view(State(Arc::clone(&state))).await,
+            StatusCode::NO_CONTENT
+        );
+        let rows: Vec<(String, i64)> = sqlx::query_as("SELECT key, value FROM counters")
+            .fetch_all(&state.db)
+            .await
+            .expect("counter query");
+        assert_eq!(rows, vec![("page_views".into(), 2)]);
+    }
+
+    #[tokio::test]
     async fn legal_routes_are_successful_direct_documents() {
         let fixture = static_fixture();
         let app = build_router(test_state().await, fixture.path());
@@ -434,6 +500,23 @@ mod tests {
                 .unwrap();
             assert_eq!(&body[..], b"<main>legal shell</main>");
         }
+    }
+
+    #[tokio::test]
+    async fn demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404() {
+        let fixture = static_fixture();
+        let app = build_router(test_state().await, fixture.path());
+        for path in ["/demo", "/robots.txt", "/sitemap.xml", "/404.html"] {
+            let response = get(&app, path).await;
+            assert_eq!(response.status(), StatusCode::OK, "{path}");
+        }
+
+        let response = get(&app, "/missing-route").await;
+        assert_eq!(response.status(), StatusCode::NOT_FOUND);
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        assert_eq!(&body[..], b"<main>route not found</main>");
     }
 
     #[tokio::test]

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cycle-legal-profile-check.sociobot.in/sitemap.xml

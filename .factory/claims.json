@@ -1,0 +1,65 @@
+[
+  {
+    "id": "demo-sample-report",
+    "claim": "Try it with sample data opens a dated Brussels sample report immediately.",
+    "where": "Landing primary action, /demo, README",
+    "test": "npm run test:e2e -- --grep @claim:demo-sample-report",
+    "sandbox": "Fresh browser context opens /demo and observes its report without setup."
+  },
+  {
+    "id": "demo-isolation",
+    "claim": "The demo stays separate from real browser data and makes no analyzer or page-view request.",
+    "where": "Demo banner, .factory/demo.md",
+    "test": "npm run test:e2e -- --grep @claim:demo-isolation",
+    "sandbox": "Fresh context seeds a real license, opens /demo, resets it, then starts for real while recording API requests and storage keys."
+  },
+  {
+    "id": "csv-export",
+    "claim": "Exports the review checklist as CSV.",
+    "where": "Report action, README",
+    "test": "npm run test:e2e -- --grep @claim:csv-export",
+    "sandbox": "Fresh context opens /demo, downloads the checklist, and asserts its header and both sample findings."
+  },
+  {
+    "id": "offline-reload",
+    "claim": "The app shell reloads offline after the first online visit.",
+    "where": "Landing facts, README",
+    "test": "npm run test:e2e -- --grep @claim:offline-reload",
+    "sandbox": "Fresh browser context loads /demo, waits for the service worker, goes offline, then reloads the sample route."
+  },
+  {
+    "id": "report-evidence",
+    "claim": "Reports show mapped OSM tags and a dated rule source.",
+    "where": "Report, README",
+    "test": "npm run test:e2e -- --grep @claim:report-evidence",
+    "sandbox": "Fresh context opens /demo and checks the visible evidence tag and expanded source date."
+  },
+  {
+    "id": "regional-pricing",
+    "claim": "Belgium checks and checklist export are free; maintained regional packs cost €19 once.",
+    "where": "Landing facts, pricing section, README, terms",
+    "test": "npm run test:e2e -- --grep @claim:regional-pricing",
+    "sandbox": "Fresh context opens /demo and observes the free-tier and one-time-price copy."
+  },
+  {
+    "id": "license-browser-local",
+    "claim": "A returned license is kept in the browser and is not reverified for one day.",
+    "where": "Privacy page, README",
+    "test": "npm run test:e2e -- --grep @claim:license-browser-local",
+    "sandbox": "Fresh context enters /demo, starts for real, receives a mocked license return, and verifies storage, URL cleanup, and once-daily caching."
+  },
+  {
+    "id": "gpx-not-retained",
+    "claim": "A GPX analysis does not persist route data in SQLite.",
+    "where": "Privacy page, README",
+    "test": "cargo test gpx_analysis_never_persists_route_data",
+    "sandbox": "A temporary SQLite database analyzes a named GPX and asserts that only the aggregate-counter table exists with no rows."
+  },
+  {
+    "id": "aggregate-page-view",
+    "claim": "The server stores only one aggregate page-view counter.",
+    "where": "Privacy page, README",
+    "test": "cargo test page_views_persist_only_an_aggregate_counter",
+    "sandbox": "A temporary SQLite database receives two page-view calls and asserts its sole row is the aggregate counter."
+  }
+]

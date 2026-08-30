@@ -161,6 +161,22 @@ test('legal pages and keyboard focus are available', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Terms of use' })).toBeVisible();
 });
 
+test('cold product routes load without console or page errors', async ({ page }) => {
+  const consoleErrors: string[] = [];
+  const pageErrors: string[] = [];
+  page.on('console', message => {
+    if (message.type() === 'error') consoleErrors.push(message.text());
+  });
+  page.on('pageerror', error => pageErrors.push(error.message));
+  for (const path of ['/', '/demo', '/privacy', '/terms']) {
+    await page.goto(path);
+    await expect(page.locator('main')).toBeVisible();
+    await expect(page.locator('h1')).toHaveCount(1);
+  }
+  expect(pageErrors).toEqual([]);
+  expect(consoleErrors).toEqual([]);
+});
+
 test('server exposes build identity and update-safe cache policy', async ({ page }) => {
   const health = await page.request.get('/health');
   expect(health.status()).toBe(200);
@@ -183,15 +199,93 @@ test('installed shell reloads offline', async ({ page, context }) => {
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
     const keys = await caches.keys();
-    if (!keys.includes('cycle-legal-shell-v3')) throw new Error('versioned cache missing');
+    if (!keys.includes('cycle-legal-shell-v4')) throw new Error('versioned cache missing');
   });
   await context.setOffline(true);
   await page.reload({ waitUntil: 'domcontentloaded' });
-  await expect(page.getByRole('heading', { name: /Your route has rules/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Check route access/ })).toBeVisible();
   await expect(page.getByText('Offline.', { exact: true })).toBeVisible();
 });
 
-test('license return is stored, stripped from the URL, and cached for a day', async ({ page }) => {
+test('@claim:demo-sample-report opens an immediate dated sample report from the direct demo URL', async ({ page }) => {
+  await page.goto('/demo');
+  await expect(page).toHaveTitle('Demo — Cycle Legal Check');
+  await expect(page.getByRole('heading', { name: 'Sample route report' })).toBeVisible();
+  const accessibility = await new AxeBuilder({ page }).analyze();
+  expect(accessibility.violations.filter(item => ['serious', 'critical'].includes(item.impact || ''))).toEqual([]);
+  await expect(page.getByRole('heading', { name: /Manual review needed/ })).toBeVisible();
+  await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible();
+  await expect(page.getByText(/Belgium rules dated 1 August 2026/)).toBeVisible();
+  await expect(page.getByText('speed_pedelec=no')).toBeVisible();
+});
+
+test('@claim:demo-isolation keeps the sample separate from real browser data and APIs', async ({ page }) => {
+  const apiRequests: string[] = [];
+  await page.addInitScript(() => localStorage.setItem('sb_license:cycle-legal-profile-check', 'real-license'));
+  page.on('request', request => {
+    if (new URL(request.url()).pathname.startsWith('/api/')) apiRequests.push(request.url());
+  });
+  await page.goto('/demo');
+  expect(await page.evaluate(() => localStorage.getItem('sb_license:cycle-legal-profile-check'))).toBe('real-license');
+  expect(await page.evaluate(() => localStorage.getItem('demo:cycle-legal-profile-check:active'))).toBe('1');
+  await page.getByRole('button', { name: 'Reset demo' }).click();
+  expect(apiRequests).toEqual([]);
+  await page.getByRole('link', { name: 'Start for real' }).first().click();
+  await expect(page).toHaveURL('http://127.0.0.1:8080/');
+  expect(await page.evaluate(() => localStorage.getItem('demo:cycle-legal-profile-check:active'))).toBeNull();
+  expect(await page.evaluate(() => localStorage.getItem('sb_license:cycle-legal-profile-check'))).toBe('real-license');
+});
+
+test('@claim:csv-export exports the demo checklist with a row for each finding', async ({ page }) => {
+  await page.goto('/demo');
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: /Export review checklist/ }).click();
+  const download = await downloadPromise;
+  const stream = await download.createReadStream();
+  const chunks: Buffer[] = [];
+  for await (const chunk of stream || []) chunks.push(Buffer.from(chunk));
+  const text = Buffer.concat(chunks).toString('utf8');
+  expect(text.split('\n')).toHaveLength(3);
+  expect(text).toContain('"route","region","vehicle","status"');
+  expect(text).toContain('"Brussels canal check"');
+});
+
+test('@claim:offline-reload reloads the demo shell offline after its first online visit', async ({ page, context }) => {
+  await page.goto('/demo');
+  await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+  await context.setOffline(true);
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(page.getByRole('heading', { name: 'Sample route report' })).toBeVisible();
+  await expect(page.getByText('Offline.', { exact: true })).toBeVisible();
+});
+
+test('@claim:report-evidence shows the sample route’s map tags and dated rule source', async ({ page }) => {
+  await page.goto('/demo');
+  await expect(page.getByText('speed_pedelec=no')).toBeVisible();
+  await page.getByText('Rule sources and limitations').click();
+  await expect(page.getByText('Rule pack source date: 2026-08-01.')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Belgium road code and access guidance' })).toBeVisible();
+});
+
+test('@claim:regional-pricing states the free Belgium check and one-time regional-pack price', async ({ page }) => {
+  await page.goto('/demo');
+  await expect(page.getByText('Belgium checks and checklist export stay free.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Regional packs cost €19 once.' })).toBeVisible();
+  await expect(page.getByText('one-time purchase')).toBeVisible();
+});
+
+test('serves crawler files and a styled direct 404 document', async ({ page }) => {
+  for (const path of ['/robots.txt', '/sitemap.xml', '/404.html']) {
+    const response = await page.goto(path);
+    expect(response?.status(), path).toBe(200);
+  }
+  const missing = await page.goto('/a-route-that-does-not-exist');
+  expect(missing?.status()).toBe(404);
+  await expect(page.getByRole('heading', { name: 'This route does not exist.' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Try it with sample data' })).toBeVisible();
+});
+
+test('@claim:license-browser-local license return is stored, stripped from the URL, and cached for a day', async ({ page }) => {
   let verificationCalls = 0;
   await page.route('https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/verify?**', async (route) => {
     verificationCalls += 1;
@@ -201,6 +295,8 @@ test('license return is stored, stripped from the URL, and cached for a day', as
       body: JSON.stringify({ valid: true, reason: 'ok', expires_at: null }),
     });
   });
+  await page.goto('/demo');
+  await page.getByRole('link', { name: 'Start for real' }).first().click();
   await page.goto('/?license=return-token');
   await expect(page).toHaveURL('http://127.0.0.1:8080/');
   await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="NL"]')).toBeEnabled();

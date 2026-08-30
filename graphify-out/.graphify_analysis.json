@@ -248,13 +248,13 @@
       "degree": 12
     },
     {
-      "id": "src_analyzer_parse_gpx",
-      "label": "parse_gpx()",
+      "id": "src_main_appstate",
+      "label": "AppState",
       "degree": 11
     },
     {
-      "id": "src_main_appstate",
-      "label": "AppState",
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
       "degree": 11
     },
     {
@@ -263,13 +263,13 @@
       "degree": 10
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
+      "id": "src_main_get",
+      "label": "get()",
       "degree": 8
     },
     {
-      "id": "src_main_get",
-      "label": "get()",
+      "id": "package_scripts",
+      "label": "scripts",
       "degree": 8
     },
     {
@@ -278,15 +278,15 @@
       "degree": 7
     },
     {
-      "id": "src_model_analysis",
-      "label": "Analysis",
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
       "degree": 6
     }
   ],
   "surprises": [
     {
       "source": "analyze_route()",
-      "target": "parse_gpx()",
+      "target": "analyze()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -308,7 +308,7 @@
     },
     {
       "source": "analyze_route()",
-      "target": "analyze()",
+      "target": "parse_gpx()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"

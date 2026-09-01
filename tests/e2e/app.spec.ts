@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import type { Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 const report = {
@@ -10,6 +11,37 @@ const report = {
 
 const validGpx = `<?xml version="1.0"?><gpx version="1.1"><trk><name>Uploaded route</name><trkseg><trkpt lat="50.8466" lon="4.3528"/><trkpt lat="50.8477" lon="4.3502"/></trkseg></trk></gpx>`;
 const baseUrl = 'http://127.0.0.1:8080';
+
+const rgb = (value: string) => {
+  const channels = value.match(/[\d.]+/g)?.slice(0, 3).map(Number);
+  if (!channels || channels.length !== 3) throw new Error(`Expected an RGB color, received ${value}`);
+  return channels;
+};
+
+const contrastRatio = (foreground: string, background: string) => {
+  const luminance = (color: string) => {
+    const channels = rgb(color).map(channel => {
+      const normalized = channel / 255;
+      return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  };
+  const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+  return (values[0] + 0.05) / (values[1] + 0.05);
+};
+
+async function expectFocusContrast(target: Locator, surface: Locator, label: string) {
+  await target.focus();
+  expect(await target.evaluate(element => element.matches(':focus-visible')), `${label} uses its visible focus state`).toBe(true);
+  const indicator = await target.evaluate(element => {
+    const style = getComputedStyle(element);
+    return { color: style.outlineColor, style: style.outlineStyle, width: Number.parseFloat(style.outlineWidth) };
+  });
+  const background = await surface.evaluate(element => getComputedStyle(element).backgroundColor);
+  expect(indicator.style, `${label} focus style`).toBe('solid');
+  expect(indicator.width, `${label} focus width`).toBeGreaterThanOrEqual(3);
+  expect(contrastRatio(indicator.color, background), `${label} focus contrast`).toBeGreaterThanOrEqual(3);
+}
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/api/page-view', route => route.fulfill({ status: 204 }));
@@ -107,6 +139,61 @@ test('@claim:gpx-size-limit rejects a GPX track above 8 MB before it reaches the
   await page.getByRole('button', { name: /Check this GPX track/ }).click();
   await expect(page.locator('#form-status')).toHaveText('That file is over 8 MB. Export a simpler track and try again.');
   expect(analysisCalls).toBe(0);
+});
+
+test('keeps every first-screen fact within desktop and mobile viewports', async ({ page }) => {
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    const required = page.locator('.hero h1, .hero .lede, .hero-actions, .hero-facts li');
+    expect(await required.count()).toBe(6);
+    for (const element of await required.all()) {
+      const box = await element.boundingBox();
+      const text = (await element.textContent())?.trim() || 'first-screen item';
+      expect(box, `${text} has layout at ${viewport.width}px`).not.toBeNull();
+      expect(box!.y, `${text} starts in the ${viewport.height}px viewport`).toBeGreaterThanOrEqual(0);
+      expect(box!.y + box!.height, `${text} ends in the ${viewport.height}px viewport`).toBeLessThanOrEqual(viewport.height);
+    }
+  }
+});
+
+test('report interactions and every evidence link have 44px targets', async ({ page }) => {
+  await page.goto('/demo');
+  const findings = page.locator('.finding-list button');
+  expect(await findings.count()).toBe(2);
+
+  await findings.nth(1).click();
+  await expect(findings.nth(1)).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('heading', { name: 'Map evidence is incomplete' })).toBeVisible();
+  await expect(page.locator('.evidence a')).toHaveCount(0);
+
+  await findings.first().click();
+  await expect(findings.first()).toHaveAttribute('aria-pressed', 'true');
+  const osmLink = page.getByRole('link', { name: /Inspect OSM way/ });
+  await expect(osmLink).toHaveAttribute('href', 'https://www.openstreetmap.org/way/42');
+
+  await page.getByText('Rule sources and limitations').click();
+  const sourceLinks = page.locator('details a:visible');
+  expect(await sourceLinks.count()).toBeGreaterThan(0);
+
+  const interactions = page.locator('.results a:visible, .results button:visible, .results summary:visible');
+  for (const interaction of await interactions.all()) {
+    const name = (await interaction.textContent())?.trim() || 'report interaction';
+    const box = await interaction.boundingBox();
+    expect(box, `${name} has a rendered hit area`).not.toBeNull();
+    expect(box!.width, `${name} target width`).toBeGreaterThanOrEqual(44);
+    expect(box!.height, `${name} target height`).toBeGreaterThanOrEqual(44);
+  }
+});
+
+test('focus indicators exceed 3:1 contrast on every product surface', async ({ page }) => {
+  await page.goto('/');
+  await expectFocusContrast(page.getByRole('link', { name: 'Check your own GPX track' }), page.locator('body'), 'concrete');
+  await expectFocusContrast(page.getByRole('button', { name: /Use Brussels sample GPX track/ }), page.locator('.checker'), 'chalk');
+  await expectFocusContrast(page.getByRole('link', { name: /Buy regional rule packs/ }), page.locator('.paid'), 'moss');
+
+  await page.goto('/demo');
+  await expectFocusContrast(page.getByRole('button', { name: 'Reset demo' }), page.locator('.demo-banner'), 'asphalt');
 });
 
 test('keeps all visible text at or above the 16px product minimum', async ({ page }) => {
@@ -246,7 +333,7 @@ test('installed shell reloads offline', async ({ page, context }) => {
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
     const keys = await caches.keys();
-    if (!keys.includes('cycle-legal-shell-v5')) throw new Error('versioned cache missing');
+    if (!keys.includes('cycle-legal-shell-v6')) throw new Error('versioned cache missing');
   });
   await context.setOffline(true);
   await page.reload({ waitUntil: 'domcontentloaded' });

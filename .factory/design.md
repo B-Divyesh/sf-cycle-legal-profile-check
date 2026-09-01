@@ -22,6 +22,11 @@ This is a single-mode, light concrete treatment. Painting the background explici
 
 All text and UI pairings meet WCAG AA (4.5:1 for body text, 3:1 for large text and controls). Findings always pair color with an icon, label, and plain-language sentence.
 
+Keyboard focus uses a 4px asphalt ring on concrete and chalk, then switches to
+a 4px chalk ring on moss and asphalt. Each ring exceeds 3:1 against its
+adjacent surface; survey orange remains a finding color rather than a focus
+color.
+
 ## Type
 
 - Display: `Arial Black`, `Arial Narrow`, system sans-serif. Condensed, infrastructural, uppercase only for short labels.
@@ -32,7 +37,10 @@ All text and UI pairings meet WCAG AA (4.5:1 for body text, 3:1 for large text a
 
 An 8px base rhythm: 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64. Desktop uses a 12-column survey grid with a narrow evidence rail. Mobile collapses to one column and drops ornamental coordinates, never route evidence. Corners stay at 0–2px; 2px borders and offset shadows resemble paper notices fixed to concrete. Independent findings are bounded; form controls group by proximity rather than being wrapped in decorative cards.
 
-Touch targets are at least 44px. Main content maxes at 1200px and readable prose at 68ch.
+Touch targets are at least 44px, including inline OSM evidence and rule-source
+links. Main content maxes at 1200px and readable prose at 68ch. The desktop
+hero gives the report explanation seven grid columns so the three required
+facts remain in a 1440×900 first viewport; the phone layout stays stacked.
 
 ## Interaction grammar
 

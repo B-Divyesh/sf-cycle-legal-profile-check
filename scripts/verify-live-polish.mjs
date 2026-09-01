@@ -4,10 +4,35 @@ import { chromium } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 const baseUrl = process.env.VERIFY_BASE_URL ?? 'https://cycle-legal-profile-check.sociobot.in';
+const productionUrl = 'https://cycle-legal-profile-check.sociobot.in';
 const expectedBuild = process.env.EXPECTED_BUILD_SHA;
 const evidenceDir = process.env.EVIDENCE_DIR ?? '.factory/evidence/polish-1/live';
 const browser = await chromium.launch({ headless: true });
-const report = { baseUrl, routes: [], demoRequests: [], build: '', offline: false, routeFocus: false };
+const report = {
+  baseUrl,
+  routes: [],
+  demoRequests: [],
+  firstViewport: [],
+  mobileReportTargets: [],
+  paidFocusContrast: 0,
+  build: '',
+  offline: false,
+  routeFocus: false,
+};
+
+function contrastRatio(foreground, background) {
+  const luminance = (color) => {
+    const channels = color.match(/[\d.]+/g)?.slice(0, 3).map(Number);
+    assert.equal(channels?.length, 3, `Expected RGB color, received ${color}`);
+    const linear = channels.map((channel) => {
+      const value = channel / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+  };
+  const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+  return (values[0] + 0.05) / (values[1] + 0.05);
+}
 
 await mkdir(evidenceDir, { recursive: true });
 
@@ -47,7 +72,40 @@ try {
 
     assert.deepEqual(errors, [], `${viewport.name} console errors`);
     await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
+    const firstScreen = await page.locator('.hero h1, .hero .lede, .hero-actions, .hero-facts li').evaluateAll(elements => elements.map((element) => {
+      const box = element.getBoundingClientRect();
+      return { text: element.textContent?.trim(), top: box.top, bottom: box.bottom };
+    }));
+    assert.equal(firstScreen.length, 6, `${viewport.name} required first-screen items`);
+    for (const item of firstScreen) {
+      assert.ok(item.top >= 0 && item.bottom <= viewport.height, `${viewport.name} first-screen item outside viewport: ${item.text}`);
+    }
+    report.firstViewport.push({ viewport: viewport.name, items: firstScreen });
     await page.screenshot({ path: `${evidenceDir}/landing-${viewport.name}.png`, fullPage: false });
+
+    if (viewport.name === 'mobile') {
+      await page.goto(`${baseUrl}/demo`);
+      await page.getByText('Rule sources and limitations').click();
+      const targets = await page.locator('.results a:visible, .results button:visible, .results summary:visible').evaluateAll(elements => elements.map((element) => {
+        const box = element.getBoundingClientRect();
+        return { text: element.textContent?.trim(), width: box.width, height: box.height };
+      }));
+      assert.ok(targets.length > 0, 'mobile report interactions were rendered');
+      for (const target of targets) {
+        assert.ok(target.width >= 44 && target.height >= 44, `undersized mobile report target: ${target.text}`);
+      }
+      report.mobileReportTargets = targets;
+
+      await page.goto(`${baseUrl}/`);
+      const buy = page.getByRole('link', { name: /Buy regional rule packs/ });
+      await buy.focus();
+      const colors = await buy.evaluate((element) => ({
+        outline: getComputedStyle(element).outlineColor,
+        background: getComputedStyle(element.closest('.paid')).backgroundColor,
+      }));
+      report.paidFocusContrast = contrastRatio(colors.outline, colors.background);
+      assert.ok(report.paidFocusContrast >= 3, `paid focus contrast was ${report.paidFocusContrast.toFixed(2)}:1`);
+    }
     await context.close();
   }
 
@@ -60,6 +118,7 @@ try {
   assert.equal(await routePage.locator('#route-status').textContent(), 'Privacy loaded');
   await routePage.goBack();
   await routePage.getByRole('heading', { name: /Check GPX track access/ }).waitFor();
+  await routePage.waitForFunction(() => document.querySelector('#route-status')?.textContent?.includes('Check GPX track access before you ride. loaded'));
   assert.match(await routePage.locator('#route-status').textContent() ?? '', /Check GPX track access before you ride\. loaded/);
   report.routeFocus = true;
   await routeContext.close();
@@ -95,7 +154,7 @@ try {
   assert.equal(missing?.status(), 404);
   assert.equal(await notFoundPage.title(), 'Page not found — Cycle Legal Check');
   assert.equal(await notFoundPage.locator('link[rel="apple-touch-icon"]').getAttribute('href'), '/apple-touch-icon.png');
-  assert.equal(await notFoundPage.locator('link[rel="canonical"]').getAttribute('href'), `${baseUrl}/404.html`);
+  assert.equal(await notFoundPage.locator('link[rel="canonical"]').getAttribute('href'), `${productionUrl}/404.html`);
   await notFoundPage.screenshot({ path: `${evidenceDir}/404-desktop.png`, fullPage: false });
   await notFoundContext.close();
 

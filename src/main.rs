@@ -1,7 +1,7 @@
 mod analyzer;
 mod model;
 
-use analyzer::{analyze, overpass_query, parse_gpx};
+use analyzer::{analyze, overpass_query, parse_gpx, validate_vehicle};
 use axum::{
     extract::{ConnectInfo, DefaultBodyLimit, Request, State},
     http::{header, HeaderMap, HeaderValue, Request as HttpRequest, StatusCode},
@@ -341,6 +341,8 @@ async fn analyze_route(
             "The GPX is over the 8 MB limit.".into(),
         ));
     }
+    validate_vehicle(&input.vehicle)
+        .map_err(|error| ApiError(StatusCode::UNPROCESSABLE_ENTITY, error.to_string()))?;
     let region = input.region.to_uppercase();
     if !matches!(region.as_str(), "BE" | "NL" | "DE") {
         return Err(ApiError(
@@ -441,6 +443,7 @@ async fn shutdown() {
 mod tests {
     use super::*;
     use axum::{body::Body, http::Request};
+    use std::sync::atomic::{AtomicUsize, Ordering};
     use tempfile::TempDir;
     use tower::ServiceExt;
 
@@ -530,6 +533,72 @@ mod tests {
             serde_json::from_slice::<serde_json::Value>(&body).unwrap()["error"],
             "That regional rule pack is not supported."
         );
+    }
+
+    #[tokio::test]
+    async fn unsupported_vehicle_is_rejected_before_any_map_request() {
+        let map_requests = Arc::new(AtomicUsize::new(0));
+        let request_counter = Arc::clone(&map_requests);
+        let map_service = Router::new().route(
+            "/overpass",
+            post(move || {
+                let request_counter = Arc::clone(&request_counter);
+                async move {
+                    request_counter.fetch_add(1, Ordering::SeqCst);
+                    Json(serde_json::json!({ "elements": [] }))
+                }
+            }),
+        );
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0")
+            .await
+            .expect("bind map request spy");
+        let address = listener.local_addr().expect("map request spy address");
+        let map_server = tokio::spawn(async move {
+            axum::serve(listener, map_service)
+                .await
+                .expect("serve map request spy");
+        });
+
+        let base_state = test_state().await;
+        let state = Arc::new(AppState {
+            client: base_state.client.clone(),
+            db: base_state.db.clone(),
+            overpass_url: format!("http://{address}/overpass"),
+            billing_base: base_state.billing_base.clone(),
+            analysis_slots: Arc::clone(&base_state.analysis_slots),
+        });
+        let fixture = static_fixture();
+        let app = build_router(state, fixture.path());
+        let request = Request::builder()
+            .method("POST")
+            .uri("/api/analyze")
+            .header(header::CONTENT_TYPE, "application/json")
+            .header("x-forwarded-for", "198.51.100.11")
+            .body(Body::from(
+                serde_json::json!({
+                    "gpx": "<gpx><trk><trkseg><trkpt lat='50' lon='4'/><trkpt lat='50.01' lon='4.01'/></trkseg></trk></gpx>",
+                    "vehicle": "horse",
+                    "region": "BE"
+                })
+                .to_string(),
+            ))
+            .expect("unsupported vehicle request");
+        let response = app.oneshot(request).await.expect("analyze response");
+        assert_eq!(response.status(), StatusCode::UNPROCESSABLE_ENTITY);
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .expect("unsupported vehicle response body");
+        assert_eq!(
+            serde_json::from_slice::<serde_json::Value>(&body).expect("JSON error response")
+                ["error"],
+            "That vehicle class is not supported."
+        );
+        assert_eq!(
+            map_requests.load(Ordering::SeqCst),
+            0,
+            "unsupported vehicles must not reach the map service"
+        );
+        map_server.abort();
     }
 
     #[tokio::test]

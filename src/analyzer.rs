@@ -17,6 +17,14 @@ pub enum AnalyzeError {
     Region,
 }
 
+pub(crate) fn validate_vehicle(vehicle: &str) -> Result<(), AnalyzeError> {
+    if matches!(vehicle, "bicycle" | "ebike_25" | "speed_pedelec") {
+        Ok(())
+    } else {
+        Err(AnalyzeError::Vehicle)
+    }
+}
+
 pub fn parse_gpx(xml: &str) -> Result<(String, Vec<Point>), AnalyzeError> {
     let document = Document::parse(xml).map_err(|_| AnalyzeError::Xml)?;
     let mut points = Vec::new();
@@ -89,9 +97,7 @@ pub fn analyze(
     region: &str,
     map_available: bool,
 ) -> Result<Analysis, AnalyzeError> {
-    if !matches!(vehicle, "bicycle" | "ebike_25" | "speed_pedelec") {
-        return Err(AnalyzeError::Vehicle);
-    }
+    validate_vehicle(vehicle)?;
     if !matches!(region, "BE" | "NL" | "DE") {
         return Err(AnalyzeError::Region);
     }

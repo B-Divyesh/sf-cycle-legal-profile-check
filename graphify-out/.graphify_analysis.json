@@ -1,6 +1,65 @@
 {
   "communities": {
     "0": [
+      "analyzerequest",
+      "arc",
+      "asref",
+      "client",
+      "intoresponse",
+      "ipaddr",
+      "json",
+      "next",
+      "option",
+      "path",
+      "request",
+      "response",
+      "router",
+      "semaphore",
+      "sqlitepool",
+      "src_main",
+      "src_main_analyze_route",
+      "src_main_analyzer_capacity_429_has_retry_after",
+      "src_main_apierror",
+      "src_main_apierror_into_response",
+      "src_main_appstate",
+      "src_main_build_router",
+      "src_main_build_sha",
+      "src_main_cache_policy",
+      "src_main_default_database_url",
+      "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
+      "src_main_errorbody",
+      "src_main_first_forwarded_ip",
+      "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
+      "src_main_forwarded_client_parser_accepts_ingress_address_forms",
+      "src_main_get",
+      "src_main_gpx_analysis_never_persists_route_data",
+      "src_main_health",
+      "src_main_health_never_reports_the_old_unknown_sentinel",
+      "src_main_is_hashed_asset",
+      "src_main_legal_routes_are_successful_direct_documents",
+      "src_main_main",
+      "src_main_page_view",
+      "src_main_page_views_persist_only_an_aggregate_counter",
+      "src_main_rate_limit_response",
+      "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
+      "src_main_response_policy",
+      "src_main_rs_analysis",
+      "src_main_rs_string",
+      "src_main_rs_vec",
+      "src_main_run_fixed_ip_burst",
+      "src_main_shutdown",
+      "src_main_static_fixture",
+      "src_main_test_state",
+      "src_main_unsupported_region_is_rejected_before_billing",
+      "src_main_unsupported_vehicle_is_rejected_before_any_map_request",
+      "src_main_verify_paid",
+      "src_main_verifyresponse",
+      "state",
+      "statuscode",
+      "tempdir",
+      "value"
+    ],
+    "1": [
       "frontend_src_main",
       "frontend_src_main_announceroute",
       "frontend_src_main_apppage",
@@ -47,52 +106,6 @@
       "frontend_src_ui_downloadchecklist",
       "frontend_src_ui_verdictcopy"
     ],
-    "1": [
-      "analysis",
-      "analyzerequest",
-      "arc",
-      "asref",
-      "client",
-      "intoresponse",
-      "ipaddr",
-      "option",
-      "path",
-      "router",
-      "semaphore",
-      "sqlitepool",
-      "src_main",
-      "src_main_analyze_route",
-      "src_main_analyzer_capacity_429_has_retry_after",
-      "src_main_apierror",
-      "src_main_appstate",
-      "src_main_build_router",
-      "src_main_build_sha",
-      "src_main_default_database_url",
-      "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
-      "src_main_errorbody",
-      "src_main_first_forwarded_ip",
-      "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
-      "src_main_forwarded_client_parser_accepts_ingress_address_forms",
-      "src_main_get",
-      "src_main_gpx_analysis_never_persists_route_data",
-      "src_main_health_never_reports_the_old_unknown_sentinel",
-      "src_main_legal_routes_are_successful_direct_documents",
-      "src_main_main",
-      "src_main_page_view",
-      "src_main_page_views_persist_only_an_aggregate_counter",
-      "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
-      "src_main_run_fixed_ip_burst",
-      "src_main_shutdown",
-      "src_main_static_fixture",
-      "src_main_test_state",
-      "src_main_unsupported_region_is_rejected_before_billing",
-      "src_main_verify_paid",
-      "src_main_verifyresponse",
-      "state",
-      "statuscode",
-      "string",
-      "tempdir"
-    ],
     "2": [
       "geopoint",
       "hashmap",
@@ -119,46 +132,15 @@
       "src_analyzer_rs_analysis",
       "src_analyzer_rs_result",
       "src_analyzer_rs_string",
+      "src_analyzer_rs_vec",
       "src_analyzer_rule_pack",
       "src_analyzer_sample_points",
       "src_analyzer_severity_rank",
       "src_analyzer_speed_pedelec_cycleway_is_uncertain",
       "src_analyzer_unmatched_route_is_review",
-      "vec"
+      "src_analyzer_validate_vehicle"
     ],
     "3": [
-      "axe_core_playwright",
-      "concurrently",
-      "package",
-      "package_devdependencies",
-      "package_devdependencies_axe_core_playwright",
-      "package_devdependencies_concurrently",
-      "package_devdependencies_playwright_test",
-      "package_devdependencies_types_node",
-      "package_devdependencies_typescript",
-      "package_devdependencies_vite",
-      "package_devdependencies_vitest",
-      "package_name",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_lint",
-      "package_scripts_preview",
-      "package_scripts_test",
-      "package_scripts_test_e2e",
-      "package_scripts_typecheck",
-      "package_scripts_verify_deployed",
-      "package_scripts_verify_live_polish",
-      "package_type",
-      "package_version",
-      "playwright_test",
-      "types_node",
-      "typescript",
-      "vite",
-      "vitest"
-    ],
-    "4": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_es2022",
@@ -183,26 +165,39 @@
       "tsconfig_compileroptions_usedefineforclassfields",
       "tsconfig_include"
     ],
+    "4": [
+      "axe_core_playwright",
+      "concurrently",
+      "package_devdependencies",
+      "package_devdependencies_axe_core_playwright",
+      "package_devdependencies_concurrently",
+      "package_devdependencies_playwright_test",
+      "package_devdependencies_types_node",
+      "package_devdependencies_typescript",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitest",
+      "playwright_test",
+      "types_node",
+      "typescript",
+      "vite",
+      "vitest"
+    ],
     "5": [
-      "governorerror",
-      "httprequest",
-      "json",
-      "key",
-      "keyextractor",
-      "next",
-      "request",
-      "response",
-      "result",
-      "src_main_apierror_into_response",
-      "src_main_cache_policy",
-      "src_main_firstforwardedipkeyextractor",
-      "src_main_firstforwardedipkeyextractor_extract",
-      "src_main_health",
-      "src_main_is_hashed_asset",
-      "src_main_rate_limit_response",
-      "src_main_response_policy",
-      "t",
-      "value"
+      "package",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_preview",
+      "package_scripts_test",
+      "package_scripts_test_e2e",
+      "package_scripts_typecheck",
+      "package_scripts_verify_deployed",
+      "package_scripts_verify_live_polish",
+      "package_type",
+      "package_version"
     ],
     "6": [
       "src_model",
@@ -222,63 +217,77 @@
       "src_model_source"
     ],
     "7": [
+      "governorerror",
+      "httprequest",
+      "key",
+      "keyextractor",
+      "src_main_firstforwardedipkeyextractor",
+      "src_main_firstforwardedipkeyextractor_extract",
+      "src_main_rs_result",
+      "t"
+    ],
+    "8": [
+      "tests_e2e_app_spec",
+      "tests_e2e_app_spec_contrastratio",
+      "tests_e2e_app_spec_expectfocuscontrast",
+      "tests_e2e_app_spec_report",
+      "tests_e2e_app_spec_rgb"
+    ],
+    "9": [
       "scripts_verify_deployed",
       "scripts_verify_deployed_baseurl",
       "scripts_verify_deployed_request",
       "scripts_verify_deployed_session"
     ],
-    "8": [
+    "10": [
+      "scripts_verify_live_polish",
+      "scripts_verify_live_polish_contrastratio",
+      "scripts_verify_live_polish_report"
+    ],
+    "11": [
       "frontend_public_sw",
       "frontend_public_sw_shell"
     ],
-    "9": [
-      "scripts_verify_live_polish",
-      "scripts_verify_live_polish_report"
-    ],
-    "10": [
-      "tests_e2e_app_spec",
-      "tests_e2e_app_spec_report"
-    ],
-    "11": [
-      "pkg_cycle_legal_profile_check"
-    ],
     "12": [
-      "playwright_config"
+      "analysis"
     ],
     "13": [
-      "src_analyzer_rs_hashmap"
+      "pkg_cycle_legal_profile_check"
     ],
     "14": [
-      "src_analyzer_rs_vec"
+      "playwright_config"
     ],
     "15": [
-      "src_main_rs_analysis"
+      "result"
     ],
     "16": [
-      "src_main_rs_option"
+      "src_analyzer_rs_hashmap"
     ],
     "17": [
-      "src_main_rs_result"
+      "src_main_rs_option"
     ],
     "18": [
-      "src_main_rs_string"
+      "string"
     ],
     "19": [
+      "vec"
+    ],
+    "20": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.10101010101010101,
-    "1": 0.10359408033826638,
-    "2": 0.13763440860215054,
-    "3": 0.06666666666666667,
-    "4": 0.08695652173913043,
-    "5": 0.11695906432748537,
+    "0": 0.07894736842105263,
+    "1": 0.10101010101010101,
+    "2": 0.13709677419354838,
+    "3": 0.08695652173913043,
+    "4": 0.13333333333333333,
+    "5": 0.13333333333333333,
     "6": 0.3047619047619048,
-    "7": 0.5,
-    "8": 1.0,
-    "9": 1.0,
-    "10": 1.0,
+    "7": 0.25,
+    "8": 0.6,
+    "9": 0.5,
+    "10": 0.6666666666666666,
     "11": 1.0,
     "12": 1.0,
     "13": 1.0,
@@ -287,33 +296,29 @@
     "16": 1.0,
     "17": 1.0,
     "18": 1.0,
-    "19": 1.0
+    "19": 1.0,
+    "20": 1.0
   },
   "gods": [
     {
       "id": "src_analyzer_analyze",
       "label": "analyze()",
-      "degree": 17
+      "degree": 18
     },
     {
       "id": "src_main_build_router",
       "label": "build_router()",
-      "degree": 15
+      "degree": 16
     },
     {
       "id": "src_main_analyze_route",
       "label": "analyze_route()",
-      "degree": 14
+      "degree": 15
     },
     {
       "id": "src_main_test_state",
       "label": "test_state()",
-      "degree": 12
-    },
-    {
-      "id": "src_main_appstate",
-      "label": "AppState",
-      "degree": 11
+      "degree": 13
     },
     {
       "id": "src_analyzer_parse_gpx",
@@ -321,13 +326,13 @@
       "degree": 11
     },
     {
-      "id": "frontend_src_main_apppage",
-      "label": "appPage()",
-      "degree": 10
+      "id": "src_main_appstate",
+      "label": "AppState",
+      "degree": 11
     },
     {
-      "id": "src_main_get",
-      "label": "get()",
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
       "degree": 10
     },
     {
@@ -339,12 +344,28 @@
       "id": "tsconfig_compileroptions",
       "label": "compilerOptions",
       "degree": 10
+    },
+    {
+      "id": "src_main_static_fixture",
+      "label": "static_fixture()",
+      "degree": 10
     }
   ],
   "surprises": [
     {
       "source": "analyze_route()",
-      "target": "analyze()",
+      "target": "validate_vehicle()",
+      "source_files": [
+        "src/main.rs",
+        "src/analyzer.rs"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "analyze_route()",
+      "target": "parse_gpx()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -366,7 +387,7 @@
     },
     {
       "source": "analyze_route()",
-      "target": "parse_gpx()",
+      "target": "analyze()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -378,17 +399,6 @@
     {
       "source": "bind()",
       "target": "downloadChecklist()",
-      "source_files": [
-        "frontend/src/main.ts",
-        "frontend/src/ui.ts"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "calls",
-      "why": "cross-file semantic connection"
-    },
-    {
-      "source": "resultView()",
-      "target": "verdictCopy()",
       "source_files": [
         "frontend/src/main.ts",
         "frontend/src/ui.ts"

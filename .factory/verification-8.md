@@ -1,7 +1,9 @@
 # Independent verification 8 — FAIL
 
-**Candidate:** `fd5e13755cc0390d8d8d66f64d47c5559cfadb18`  
-**Live URL:** <https://cycle-legal-profile-check.sociobot.in>  
+**Candidate:** `fd5e13755cc0390d8d8d66f64d47c5559cfadb18`
+
+**Live URL:** <https://cycle-legal-profile-check.sociobot.in>
+
 **Verified:** 1 September 2026 from `/work/repo`
 
 ## Decision

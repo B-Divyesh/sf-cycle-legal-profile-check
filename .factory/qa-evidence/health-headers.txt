@@ -1,4 +1,4 @@
-HTTP/2 200 
+HTTP/2 200
 content-type: application/json
 x-content-type-options: nosniff
 x-frame-options: DENY

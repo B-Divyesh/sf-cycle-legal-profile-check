@@ -1,4 +1,4 @@
-const CACHE = 'cycle-legal-shell-v6';
+const CACHE = 'cycle-legal-shell-v7';
 const SHELL = ['/', '/manifest.webmanifest', '/favicon.svg', '/apple-touch-icon.png', '/assets/route-inspection-hero-mobile.webp', '/assets/route-inspection-hero.webp'];
 self.addEventListener('install', (event) => event.waitUntil((async () => {
   const cache = await caches.open(CACHE);

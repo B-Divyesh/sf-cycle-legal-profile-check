@@ -6,7 +6,7 @@ import AxeBuilder from '@axe-core/playwright';
 const baseUrl = process.env.VERIFY_BASE_URL ?? 'https://cycle-legal-profile-check.sociobot.in';
 const productionUrl = 'https://cycle-legal-profile-check.sociobot.in';
 const expectedBuild = process.env.EXPECTED_BUILD_SHA;
-const evidenceDir = process.env.EVIDENCE_DIR ?? '.factory/evidence/polish-1/live';
+const evidenceDir = process.env.EVIDENCE_DIR ?? '.factory/evidence/polish-2/live';
 const browser = await chromium.launch({ headless: true });
 const report = {
   baseUrl,
@@ -18,6 +18,8 @@ const report = {
   build: '',
   offline: false,
   routeFocus: false,
+  mobileNavigation: false,
+  legalClaims: false,
 };
 
 function contrastRatio(foreground, background) {
@@ -84,6 +86,37 @@ try {
     await page.screenshot({ path: `${evidenceDir}/landing-${viewport.name}.png`, fullPage: false });
 
     if (viewport.name === 'mobile') {
+      await page.goto(`${baseUrl}/terms`);
+      const menu = page.getByRole('button', { name: 'Menu' });
+      await menu.click();
+      assert.equal(await menu.getAttribute('aria-expanded'), 'true');
+      for (const name of ['Demo', 'How it works', 'Rule packs', 'Privacy']) {
+        assert.equal(await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name }).isVisible(), true);
+      }
+      await page.screenshot({ path: `${evidenceDir}/mobile-menu.png`, fullPage: false });
+      await page.keyboard.press('Escape');
+      assert.equal(await menu.getAttribute('aria-expanded'), 'false');
+      assert.equal(await menu.evaluate(element => document.activeElement === element), true);
+      await menu.click();
+      await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Privacy' }).click();
+      await page.getByRole('heading', { name: 'Privacy' }).waitFor();
+      assert.equal(await page.getByRole('heading', { name: 'Privacy' }).evaluate(element => document.activeElement === element), true);
+      report.mobileNavigation = true;
+
+      await page.evaluate(() => {
+        localStorage.setItem('sb_license:cycle-legal-profile-check', 'evidence-license');
+        localStorage.setItem('sb_license:cycle-legal-profile-check:verdict', '{"valid":true}');
+        localStorage.setItem('demo:cycle-legal-profile-check:active', '1');
+      });
+      await page.getByRole('button', { name: 'Remove saved browser data' }).click();
+      assert.deepEqual(await page.evaluate(() => [
+        localStorage.getItem('sb_license:cycle-legal-profile-check'),
+        localStorage.getItem('sb_license:cycle-legal-profile-check:verdict'),
+        localStorage.getItem('demo:cycle-legal-profile-check:active'),
+      ]), [null, null, null]);
+      await page.screenshot({ path: `${evidenceDir}/privacy-mobile.png`, fullPage: false });
+      report.legalClaims = true;
+
       await page.goto(`${baseUrl}/demo`);
       await page.getByText('Rule sources and limitations').click();
       const targets = await page.locator('.results a:visible, .results button:visible, .results summary:visible').evaluateAll(elements => elements.map((element) => {

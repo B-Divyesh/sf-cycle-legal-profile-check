@@ -8,14 +8,14 @@ Open [the sample report](/demo). It opens a dated Brussels report immediately. T
 
 For a real check, open `/`, upload a GPX track, choose a vehicle and region, and select **Check this GPX track**. Reports show OSM tags, a dated source, and clear review limits. CSV checklist export is free.
 
-Belgium checks are free. The Netherlands and Germany regional rule packs cost €19 once through Sociobot billing, backed by Dodo. A returned license stays in the browser and is verified at most once per day.
+Belgium checks are free. The Netherlands and Germany regional rule packs cost €19 once through Sociobot billing, backed by Dodo. A returned license stays in the browser. Sociobot verifies it at most once per day.
 
-The regional packs make separate, cautious speed-pedelec decisions. An untagged
-`highway=cycleway` is a sign review in Belgium, but is prohibited in the
-Netherlands and Germany unless the relevant mapped exception is present. Signs
-and local orders remain decisive.
+The regional rule packs make separate, cautious speed-pedelec decisions. An
+untagged `highway=cycleway` is a sign review in Belgium. In the Netherlands and
+Germany, it is prohibited unless a mapped exception is present. Signs and local
+orders remain decisive.
 
-The server handles a real GPX track only for its requested report. It does not retain GPX track data in SQLite. SQLite stores one aggregate page-view counter.
+The server does not retain GPX track data in SQLite. It sends sampled coordinates to Overpass without the GPX file or track name. SQLite stores one aggregate page-view counter. Client IP addresses are not written to SQLite.
 
 ## Run locally
 
@@ -32,7 +32,8 @@ Open <http://localhost:8080>. For split frontend and backend development, run `n
 Configuration is optional:
 
 - `PORT` — HTTP port; defaults to `8080`.
-- `DATABASE_URL` — optional SQLite URL override. The default is `/data/cycle-legal.sqlite` with SMB-safe locking when `/data` exists, otherwise `./cycle-legal.sqlite`.
+- `DATABASE_URL` — optional SQLite URL override.
+  The default is `/data/cycle-legal.sqlite` when `/data` exists. It uses SMB-safe locking there. Otherwise, it uses `./cycle-legal.sqlite`.
 - `OVERPASS_URL` — Overpass interpreter URL.
 - `BILLING_API_BASE` — Sociobot billing API base.
 - `BUILD_SHA` — build identifier returned by `/health`.

@@ -1,1 +1,1 @@
-Check a planned GPX track for bicycle, e-bike, and speed-pedelec access conflicts before you ride.
+Check a GPX track for mapped bicycle, e-bike, and speed-pedelec access conflicts before riding.

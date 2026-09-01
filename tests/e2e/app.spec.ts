@@ -223,8 +223,10 @@ test('keeps all visible text at or above the 16px product minimum', async ({ pag
 
 test('visible navigation targets meet touch geometry and keyboard requirements', async ({ page }) => {
   await page.goto('/');
+  const menu = page.getByRole('button', { name: 'Menu' });
+  if (await menu.isVisible()) await menu.click();
 
-  const targets = page.locator('header a:visible, footer nav a:visible');
+  const targets = page.locator('header a:visible, header button:visible, footer nav a:visible');
   expect(await targets.count()).toBeGreaterThanOrEqual(5);
   for (const target of await targets.all()) {
     const name = (await target.textContent())?.trim() || 'unnamed link';
@@ -234,8 +236,8 @@ test('visible navigation targets meet touch geometry and keyboard requirements',
     expect(box!.height, `${name} target height`).toBeGreaterThanOrEqual(44);
   }
 
-  for (const landmark of ['header', 'footer nav']) {
-    const boxes = await page.locator(`${landmark} a:visible`).evaluateAll((links) => links.map((link) => {
+  for (const selector of ['header a:visible, header button:visible', 'footer nav a:visible']) {
+    const boxes = await page.locator(selector).evaluateAll((links) => links.map((link) => {
       const box = link.getBoundingClientRect();
       return { left: box.left, right: box.right, top: box.top, bottom: box.bottom };
     }));
@@ -243,16 +245,26 @@ test('visible navigation targets meet touch geometry and keyboard requirements',
       for (let other = index + 1; other < boxes.length; other += 1) {
         const horizontal = Math.max(0, boxes[other].left - boxes[index].right, boxes[index].left - boxes[other].right);
         const vertical = Math.max(0, boxes[other].top - boxes[index].bottom, boxes[index].top - boxes[other].bottom);
-        expect(Math.hypot(horizontal, vertical), `${landmark} targets ${index + 1} and ${other + 1} spacing`).toBeGreaterThanOrEqual(8);
+        expect(Math.hypot(horizontal, vertical), `${selector} targets ${index + 1} and ${other + 1} spacing`).toBeGreaterThanOrEqual(8);
       }
     }
   }
 
+  await page.goto('/');
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: /Skip to GPX track checker/ })).toBeFocused();
-  for (const target of await page.locator('header a:visible').all()) {
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('link', { name: /Cycle legal/ })).toBeFocused();
+  if (await menu.isVisible()) {
     await page.keyboard.press('Tab');
-    await expect(target).toBeFocused();
+    await expect(menu).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Demo' })).toBeFocused();
+  } else {
+    for (const target of await page.locator('header nav a:visible, .header-action:visible').all()) {
+      await page.keyboard.press('Tab');
+      await expect(target).toBeFocused();
+    }
   }
 });
 
@@ -273,6 +285,36 @@ test('route links, back navigation, titles, focus, and announcements stay in syn
   const termsResponse = await page.goto('/terms');
   expect(termsResponse?.status()).toBe(200);
   await expect(page.getByRole('heading', { name: 'Terms of use' })).toBeVisible();
+});
+
+test('mobile primary menu works on every route and restores focus on Escape', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const path of ['/', '/demo', '/privacy', '/terms']) {
+    await page.goto(path);
+    const menu = page.getByRole('button', { name: 'Menu' });
+    await expect(menu).toBeVisible();
+    const box = await menu.boundingBox();
+    expect(box?.width, `${path} menu width`).toBeGreaterThanOrEqual(44);
+    expect(box?.height, `${path} menu height`).toBeGreaterThanOrEqual(44);
+    await menu.click();
+    await expect(menu).toHaveAttribute('aria-expanded', 'true');
+    for (const name of ['Demo', 'How it works', 'Rule packs', 'Privacy']) {
+      await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name })).toBeVisible();
+    }
+    await page.keyboard.press('Escape');
+    await expect(menu).toHaveAttribute('aria-expanded', 'false');
+    await expect(menu).toBeFocused();
+  }
+
+  await page.goto('/terms');
+  await page.getByRole('button', { name: 'Menu' }).click();
+  await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Privacy' }).click();
+  await expect(page).toHaveURL(`${baseUrl}/privacy`);
+  await expect(page.getByRole('heading', { name: 'Privacy' })).toBeFocused();
+  await page.getByRole('button', { name: 'Menu' }).click();
+  await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Demo' }).click();
+  await expect(page).toHaveURL(`${baseUrl}/demo`);
+  await expect(page.getByRole('heading', { name: 'Sample GPX track report' })).toBeFocused();
 });
 
 test('cold product routes load without console or page errors', async ({ page }) => {
@@ -333,7 +375,7 @@ test('installed shell reloads offline', async ({ page, context }) => {
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
     const keys = await caches.keys();
-    if (!keys.includes('cycle-legal-shell-v6')) throw new Error('versioned cache missing');
+    if (!keys.includes('cycle-legal-shell-v7')) throw new Error('versioned cache missing');
   });
   await context.setOffline(true);
   await page.reload({ waitUntil: 'domcontentloaded' });
@@ -466,8 +508,10 @@ test('serves crawler files and a styled direct 404 document', async ({ page }) =
 
 test('@claim:license-browser-local license return is stored, stripped from the URL, and cached for a day', async ({ page }) => {
   let verificationCalls = 0;
+  const verificationUrls: string[] = [];
   await page.route('https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/verify?**', async (route) => {
     verificationCalls += 1;
+    verificationUrls.push(route.request().url());
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -481,10 +525,29 @@ test('@claim:license-browser-local license return is stored, stripped from the U
   await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="NL"]')).toBeEnabled();
   expect(await page.evaluate(() => localStorage.getItem('sb_license:cycle-legal-profile-check'))).toBe('return-token');
   expect(verificationCalls).toBe(1);
+  expect(verificationUrls).toEqual([
+    'https://api.sociobot.in/api/v1/products/cycle-legal-profile-check/verify?license=return-token',
+  ]);
 
   await page.reload();
   await expect(page.getByLabel('3 / Regional rule pack').locator('option[value="NL"]')).toBeEnabled();
   expect(verificationCalls).toBe(1);
+});
+
+test('@claim:browser-storage-removal removes saved product data from this browser', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('sb_license:cycle-legal-profile-check', 'saved-license');
+    localStorage.setItem('sb_license:cycle-legal-profile-check:verdict', JSON.stringify({ valid: true, checked_at: Date.now() }));
+    localStorage.setItem('demo:cycle-legal-profile-check:active', '1');
+  });
+  await page.goto('/privacy');
+  await page.getByRole('button', { name: 'Remove saved browser data' }).click();
+  expect(await page.evaluate(() => ({
+    license: localStorage.getItem('sb_license:cycle-legal-profile-check'),
+    verdict: localStorage.getItem('sb_license:cycle-legal-profile-check:verdict'),
+    demo: localStorage.getItem('demo:cycle-legal-profile-check:active'),
+  }))).toEqual({ license: null, verdict: null, demo: null });
+  await expect(page.getByRole('status')).toHaveText('Saved license and demo data removed from this browser.');
 });
 
 test('@claim:billing-refunds uses the Sociobot checkout and removes refunded or revoked licenses', async ({ page }) => {

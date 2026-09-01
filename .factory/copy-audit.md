@@ -1,4 +1,4 @@
-# Landing copy audit — 2026-08-30
+# Copy audit — 2026-09-01
 
 The audited route is `/` in its clean, signed-out state. Labels, proper names,
 file names, and legal links are excluded. Sentence-equivalent lines are
@@ -35,6 +35,32 @@ separately. No row exceeds 22 words or uses a banned marketing term.
 | Cycle Legal Check is not legal advice. | 7 | Pass — necessary limitation |
 | Coverage is incomplete. | 3 | Pass — necessary limitation |
 | Hero image generated for this product with Azure AI. | 9 | Pass — asset provenance |
+
+## Privacy and terms copy added in polish round 2
+
+| Copy | Words | Result |
+| --- | ---: | --- |
+| The server does not retain GPX track data in SQLite. | 10 | Pass — `gpx-not-retained` |
+| It stores one aggregate page count. | 6 | Pass — `aggregate-page-view` |
+| Client IP addresses enforce request limits. | 6 | Pass — `api-rate-limit` |
+| They are not written to SQLite. | 6 | Pass — `ip-not-persisted` |
+| A saved license and its once-daily verdict stay in your browser. | 12 | Pass — `license-browser-local` |
+| License verification uses Sociobot. | 4 | Pass — `license-browser-local` |
+| A check sends sampled GPX track coordinates to OpenStreetMap’s Overpass service. | 12 | Pass — `overpass-data-disclosure` |
+| It does not send the GPX file or track name. | 10 | Pass — `overpass-data-disclosure` |
+| This removes the saved license and demo marker from this browser. | 11 | Pass — `browser-storage-removal` |
+| Belgium checks and checklist export stay free. | 7 | Pass — `regional-pricing` |
+
+## README rewrites from polish round 2
+
+| Copy | Words | Result |
+| --- | ---: | --- |
+| The regional rule packs make separate, cautious speed-pedelec decisions. | 10 | Pass — `regional-cycleway-decisions` |
+| An untagged `highway=cycleway` is a sign review in Belgium. | 10 | Pass — `regional-cycleway-decisions` |
+| In the Netherlands and Germany, it is prohibited unless a mapped exception is present. | 14 | Pass — `regional-cycleway-decisions` |
+| The default is `/data/cycle-legal.sqlite` when `/data` exists. | 10 | Pass |
+| It uses SMB-safe locking there. | 6 | Pass |
+| Otherwise, it uses `./cycle-legal.sqlite`. | 6 | Pass |
 
 ## Terminology
 

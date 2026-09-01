@@ -92,14 +92,14 @@
   },
   {
     "id": "license-browser-local",
-    "claim": "A returned license is kept in the browser and is not reverified for one day.",
+    "claim": "A returned license stays in the browser, is verified through Sociobot, and is not reverified for one day.",
     "where": "Privacy page, README",
     "test": "npm run test:e2e -- --grep @claim:license-browser-local",
     "sandbox": "Fresh context enters /demo, starts for real, receives a mocked license return, and verifies storage, URL cleanup, and once-daily caching."
   },
   {
     "id": "gpx-not-retained",
-    "claim": "A GPX analysis does not persist route data in SQLite.",
+    "claim": "The server does not retain GPX track data in SQLite.",
     "where": "Privacy page, README",
     "test": "cargo test gpx_analysis_never_persists_route_data",
     "sandbox": "A temporary SQLite database analyzes a named GPX and asserts that only the aggregate-counter table exists with no rows."
@@ -110,6 +110,27 @@
     "where": "Privacy page, README",
     "test": "cargo test page_views_persist_only_an_aggregate_counter",
     "sandbox": "A temporary SQLite database receives two page-view calls and asserts its sole row is the aggregate counter."
+  },
+  {
+    "id": "ip-not-persisted",
+    "claim": "Client IP addresses used for request limits are not written to SQLite.",
+    "where": "Privacy page",
+    "test": "cargo test client_ip_addresses_are_not_persisted",
+    "sandbox": "A temporary app receives a page-view request with a fixed forwarded client IP, then its complete SQLite schema and rows are inspected."
+  },
+  {
+    "id": "overpass-data-disclosure",
+    "claim": "A check sends sampled coordinates to Overpass without sending the GPX file or track name.",
+    "where": "Privacy page",
+    "test": "cargo test overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name",
+    "sandbox": "A local Overpass spy captures the form body and asserts the sampled coordinates and 35-metre queries are present while the raw GPX and private track name are absent."
+  },
+  {
+    "id": "browser-storage-removal",
+    "claim": "Remove saved browser data deletes the saved license, cached verdict, and demo marker.",
+    "where": "Privacy page",
+    "test": "npm run test:e2e -- --grep @claim:browser-storage-removal",
+    "sandbox": "A fresh browser context seeds every product storage key, uses the privacy-page removal control, and asserts every key is gone."
   },
   {
     "id": "api-rate-limit",

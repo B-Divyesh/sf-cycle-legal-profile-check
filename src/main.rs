@@ -443,7 +443,10 @@ async fn shutdown() {
 mod tests {
     use super::*;
     use axum::{body::Body, http::Request};
-    use std::sync::atomic::{AtomicUsize, Ordering};
+    use std::sync::{
+        atomic::{AtomicUsize, Ordering},
+        Mutex,
+    };
     use tempfile::TempDir;
     use tower::ServiceExt;
 
@@ -633,6 +636,75 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name() {
+        let captured = Arc::new(Mutex::new(None::<(HeaderMap, String)>));
+        let request_capture = Arc::clone(&captured);
+        let map_service = Router::new().route(
+            "/overpass",
+            post(move |headers: HeaderMap, body: axum::body::Bytes| {
+                let request_capture = Arc::clone(&request_capture);
+                async move {
+                    *request_capture.lock().expect("capture lock") = Some((
+                        headers,
+                        String::from_utf8(body.to_vec()).expect("UTF-8 form body"),
+                    ));
+                    Json(serde_json::json!({ "elements": [] }))
+                }
+            }),
+        );
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0")
+            .await
+            .expect("bind Overpass spy");
+        let address = listener.local_addr().expect("Overpass spy address");
+        let map_server = tokio::spawn(async move {
+            axum::serve(listener, map_service)
+                .await
+                .expect("serve Overpass spy");
+        });
+
+        let base_state = test_state().await;
+        let state = Arc::new(AppState {
+            client: base_state.client.clone(),
+            db: base_state.db.clone(),
+            overpass_url: format!("http://{address}/overpass"),
+            billing_base: base_state.billing_base.clone(),
+            analysis_slots: Arc::clone(&base_state.analysis_slots),
+        });
+        let _report = analyze_route(
+            State(state),
+            Json(AnalyzeRequest {
+                gpx: "<gpx><trk><name>Private commute</name><trkseg><trkpt lat='50.100001' lon='4.200002'/><trkpt lat='50.101001' lon='4.201002'/></trkseg></trk></gpx>".into(),
+                vehicle: "bicycle".into(),
+                region: "BE".into(),
+                license: None,
+            }),
+        )
+        .await
+        .expect("analysis using captured Overpass request");
+
+        let (headers, form_body) = captured
+            .lock()
+            .expect("capture lock")
+            .clone()
+            .expect("captured Overpass request");
+        assert_eq!(
+            headers[header::CONTENT_TYPE],
+            "application/x-www-form-urlencoded"
+        );
+        let query = urlencoding::decode(
+            form_body
+                .strip_prefix("data=")
+                .expect("Overpass form data field"),
+        )
+        .expect("encoded Overpass query");
+        assert!(query.contains("way(around:35,50.100001,4.200002)[highway]"));
+        assert!(query.contains("way(around:35,50.101001,4.201002)[highway]"));
+        assert!(!query.contains("<gpx"));
+        assert!(!query.contains("Private commute"));
+        map_server.abort();
+    }
+
+    #[tokio::test]
     async fn page_views_persist_only_an_aggregate_counter() {
         let state = test_state().await;
         assert_eq!(
@@ -648,6 +720,37 @@ mod tests {
             .await
             .expect("counter query");
         assert_eq!(rows, vec![("page_views".into(), 2)]);
+    }
+
+    #[tokio::test]
+    async fn client_ip_addresses_are_not_persisted() {
+        let state = test_state().await;
+        let fixture = static_fixture();
+        let app = build_router(Arc::clone(&state), fixture.path());
+        let response = app
+            .oneshot(
+                Request::builder()
+                    .method("POST")
+                    .uri("/api/page-view")
+                    .header("x-forwarded-for", "198.51.100.123, 10.0.0.4")
+                    .body(Body::empty())
+                    .expect("page-view request"),
+            )
+            .await
+            .expect("page-view response");
+        assert_eq!(response.status(), StatusCode::NO_CONTENT);
+        let tables: Vec<String> =
+            sqlx::query_scalar("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name")
+                .fetch_all(&state.db)
+                .await
+                .expect("table query");
+        let rows: Vec<(String, i64)> = sqlx::query_as("SELECT key, value FROM counters")
+            .fetch_all(&state.db)
+            .await
+            .expect("counter query");
+        assert_eq!(tables, vec!["counters"]);
+        assert_eq!(rows, vec![("page_views".into(), 1)]);
+        assert!(!format!("{tables:?}{rows:?}").contains("198.51.100.123"));
     }
 
     #[tokio::test]

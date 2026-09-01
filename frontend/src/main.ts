@@ -115,8 +115,8 @@ function resetDemo() {
 }
 
 function legalPage(kind: 'privacy' | 'terms') {
-  const privacy = `<p>Cycle Legal Check processes an uploaded GPX track only for the report you request. The server holds the file in memory and does not retain it.</p><p>We store one aggregate page count. We do not store GPX track geometry, device identifiers, or analytics events.</p><p>Client IP addresses stay briefly in server memory to limit abusive bursts. They are not written to the database.</p><p>A license token and a once-daily verdict stay in your browser after a purchase. License verification goes to Sociobot.</p><p>The server sends sampled GPX track coordinates to OpenStreetMap’s Overpass service for public map tags. Clear this site’s storage to remove browser data.</p><p>Contact: <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p>`;
-  const terms = `<p>Cycle Legal Check is a planning aid. It is not legal advice or live navigation.</p><p>Map data and regional rule packs can be incomplete, delayed, or wrong. Road signs and official instructions take priority.</p><p>You remain responsible for checking the GPX track and riding lawfully.</p><p>The maintained regional rule pack costs €19 once. It includes the Netherlands and Germany rule packs.</p><p>Sociobot billing, backed by Dodo, handles checkout and refunds. A refund automatically revokes the license.</p><p>Accessibility, Belgium checks, safety warnings, and checklist export stay free.</p><p>OpenStreetMap data is © OpenStreetMap contributors and available under the ODbL. This service is provided “as is” without warranty.</p>`;
+  const privacy = `<p>The server does not retain GPX track data in SQLite. It stores one aggregate page count.</p><p>Client IP addresses enforce request limits. They are not written to SQLite.</p><p>A saved license and its once-daily verdict stay in your browser. License verification uses Sociobot.</p><p>A check sends sampled GPX track coordinates to OpenStreetMap’s Overpass service. It does not send the GPX file or track name.</p><div class="storage-control"><button class="secondary" id="clear-browser-data" type="button">Remove saved browser data</button><p id="storage-status" role="status">This removes the saved license and demo marker from this browser.</p></div><p>Contact: <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p>`;
+  const terms = `<p>Cycle Legal Check is a planning aid. It is not legal advice or live navigation.</p><p>Map data and regional rule packs can be incomplete, delayed, or wrong. Road signs and official instructions take priority.</p><p>You remain responsible for checking the GPX track and riding lawfully.</p><p>The maintained regional rule pack costs €19 once. It includes the Netherlands and Germany rule packs.</p><p>Sociobot billing, backed by Dodo, handles checkout and refunds. A refund automatically revokes the license.</p><p>Belgium checks and checklist export stay free.</p><p>OpenStreetMap data is © OpenStreetMap contributors and available under the ODbL. This service is provided “as is” without warranty.</p>`;
   return `${header()}<main id="main" class="legal"><p class="eyebrow">${kind === 'privacy' ? 'DATA HANDLING' : 'SERVICE TERMS'}</p><h1 tabindex="-1">${kind === 'privacy' ? 'Privacy' : 'Terms of use'}</h1><p class="lede">Effective 28 August 2026</p>${kind === 'privacy' ? privacy : terms}</main>${footer()}`;
 }
 
@@ -125,7 +125,7 @@ function footer() {
 }
 
 function header() {
-  return `<header class="site-header"><a class="wordmark" href="/">Cycle legal <span>//01</span></a><nav aria-label="Primary"><a href="/demo">Demo</a><a href="/#how">How it works</a><a href="/#rule-packs">Rule packs</a><a href="/privacy">Privacy</a></nav><a class="header-action" href="/#checker">Check a GPX track</a></header>`;
+  return `<header class="site-header"><a class="wordmark" href="/">Cycle legal <span>//01</span></a><button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span aria-hidden="true">☰</span><span>Menu</span></button><nav id="primary-nav" aria-label="Primary"><a href="/demo">Demo</a><a href="/#how">How it works</a><a href="/#rule-packs">Rule packs</a><a href="/privacy">Privacy</a></nav><a class="header-action" href="/#checker">Check a GPX track</a></header>`;
 }
 
 function icon(severity: Severity) {
@@ -270,6 +270,21 @@ function bind() {
   document.querySelectorAll<HTMLAnchorElement>('.start-real').forEach((link) => link.addEventListener('click', discardDemoData));
   document.querySelectorAll<HTMLElement>('[data-finding]').forEach((button) => button.addEventListener('click', () => { selectedFinding = button.dataset.finding || ''; render(); document.querySelector<HTMLElement>(`[data-finding="${selectedFinding}"]`)?.focus(); }));
   document.querySelector('#restore')?.addEventListener('click', restore);
+  document.querySelector('#clear-browser-data')?.addEventListener('click', clearBrowserData);
+  const menuToggle = document.querySelector<HTMLButtonElement>('#menu-toggle');
+  const primaryNav = document.querySelector<HTMLElement>('#primary-nav');
+  menuToggle?.addEventListener('click', () => {
+    const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+    menuToggle.setAttribute('aria-expanded', String(open));
+    primaryNav?.toggleAttribute('data-open', open);
+    if (open) primaryNav?.querySelector<HTMLAnchorElement>('a')?.focus();
+  });
+  document.onkeydown = (event) => {
+    if (event.key !== 'Escape' || menuToggle?.getAttribute('aria-expanded') !== 'true') return;
+    menuToggle.setAttribute('aria-expanded', 'false');
+    primaryNav?.removeAttribute('data-open');
+    menuToggle.focus();
+  };
   document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => link.addEventListener('click', (event) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
     const destination = new URL(link.href, location.href);
@@ -280,6 +295,15 @@ function bind() {
     syncRouteMode();
     render(true);
   }));
+}
+
+function clearBrowserData() {
+  for (const key of [LICENSE_KEY, VERDICT_KEY, DEMO_KEY]) localStorage.removeItem(key);
+  sessionStorage.removeItem('page-counted');
+  unlocked = false;
+  licenseInactive = false;
+  const status = document.querySelector<HTMLElement>('#storage-status');
+  if (status) status.textContent = 'Saved license and demo data removed from this browser.';
 }
 
 async function restore() {

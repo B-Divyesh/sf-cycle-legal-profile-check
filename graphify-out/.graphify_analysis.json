@@ -8,6 +8,7 @@
       "frontend_src_main_cachedlicenseinactive",
       "frontend_src_main_cachedunlock",
       "frontend_src_main_checker",
+      "frontend_src_main_clearbrowserdata",
       "frontend_src_main_clonedemoreport",
       "frontend_src_main_consumelicense",
       "frontend_src_main_demo_report",
@@ -66,6 +67,7 @@
       "src_main_build_router",
       "src_main_build_sha",
       "src_main_cache_policy",
+      "src_main_client_ip_addresses_are_not_persisted",
       "src_main_default_database_url",
       "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
       "src_main_errorbody",
@@ -81,8 +83,6 @@
       "src_main_page_views_persist_only_an_aggregate_counter",
       "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
       "src_main_response_policy",
-      "src_main_rs_string",
-      "src_main_rs_vec",
       "src_main_run_fixed_ip_burst",
       "src_main_shutdown",
       "src_main_static_fixture",
@@ -91,7 +91,9 @@
       "src_main_unsupported_vehicle_is_rejected_before_any_map_request",
       "src_main_verify_paid",
       "src_main_verifyresponse",
-      "tempdir"
+      "string",
+      "tempdir",
+      "vec"
     ],
     "2": [
       "geopoint",
@@ -163,6 +165,31 @@
       "vitest"
     ],
     "4": [
+      "analysis",
+      "analyzerequest",
+      "governorerror",
+      "httprequest",
+      "intoresponse",
+      "json",
+      "key",
+      "keyextractor",
+      "response",
+      "result",
+      "src_main_analyze_route",
+      "src_main_apierror",
+      "src_main_apierror_into_response",
+      "src_main_firstforwardedipkeyextractor",
+      "src_main_firstforwardedipkeyextractor_extract",
+      "src_main_gpx_analysis_never_persists_route_data",
+      "src_main_health",
+      "src_main_overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name",
+      "src_main_rate_limit_response",
+      "state",
+      "statuscode",
+      "t",
+      "value"
+    ],
+    "5": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_es2022",
@@ -186,30 +213,6 @@
       "tsconfig_compileroptions_types",
       "tsconfig_compileroptions_usedefineforclassfields",
       "tsconfig_include"
-    ],
-    "5": [
-      "analyzerequest",
-      "governorerror",
-      "httprequest",
-      "intoresponse",
-      "json",
-      "key",
-      "keyextractor",
-      "response",
-      "src_main_analyze_route",
-      "src_main_apierror",
-      "src_main_apierror_into_response",
-      "src_main_firstforwardedipkeyextractor",
-      "src_main_firstforwardedipkeyextractor_extract",
-      "src_main_gpx_analysis_never_persists_route_data",
-      "src_main_health",
-      "src_main_rate_limit_response",
-      "src_main_rs_analysis",
-      "src_main_rs_result",
-      "state",
-      "statuscode",
-      "t",
-      "value"
     ],
     "6": [
       "src_model",
@@ -255,37 +258,37 @@
       "playwright_config"
     ],
     "12": [
-      "analysis"
-    ],
-    "13": [
       "pkg_cycle_legal_profile_check"
     ],
-    "14": [
-      "result"
-    ],
-    "15": [
+    "13": [
       "src_analyzer_rs_hashmap"
     ],
-    "16": [
+    "14": [
+      "src_main_rs_analysis"
+    ],
+    "15": [
       "src_main_rs_option"
     ],
+    "16": [
+      "src_main_rs_result"
+    ],
     "17": [
-      "string"
+      "src_main_rs_string"
     ],
     "18": [
-      "vec"
+      "src_main_rs_vec"
     ],
     "19": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.10101010101010101,
-    "1": 0.1014799154334038,
+    "0": 0.09855072463768116,
+    "1": 0.10101010101010101,
     "2": 0.12941176470588237,
     "3": 0.06666666666666667,
-    "4": 0.08695652173913043,
-    "5": 0.11688311688311688,
+    "4": 0.11857707509881422,
+    "5": 0.08695652173913043,
     "6": 0.3047619047619048,
     "7": 0.6,
     "8": 0.5,
@@ -305,7 +308,7 @@
     {
       "id": "src_main_build_router",
       "label": "build_router()",
-      "degree": 17
+      "degree": 18
     },
     {
       "id": "src_analyzer_analyze",
@@ -315,32 +318,22 @@
     {
       "id": "src_main_analyze_route",
       "label": "analyze_route()",
-      "degree": 15
+      "degree": 16
     },
     {
       "id": "src_main_test_state",
       "label": "test_state()",
-      "degree": 14
+      "degree": 16
+    },
+    {
+      "id": "src_main_static_fixture",
+      "label": "static_fixture()",
+      "degree": 12
     },
     {
       "id": "src_main_appstate",
       "label": "AppState",
       "degree": 11
-    },
-    {
-      "id": "src_main_static_fixture",
-      "label": "static_fixture()",
-      "degree": 11
-    },
-    {
-      "id": "frontend_src_main_apppage",
-      "label": "appPage()",
-      "degree": 10
-    },
-    {
-      "id": "src_main_get",
-      "label": "get()",
-      "degree": 10
     },
     {
       "id": "src_analyzer_parse_gpx",
@@ -350,6 +343,16 @@
     {
       "id": "package_scripts",
       "label": "scripts",
+      "degree": 10
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 10
+    },
+    {
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
       "degree": 10
     }
   ],

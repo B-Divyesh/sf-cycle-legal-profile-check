@@ -1,65 +1,6 @@
 {
   "communities": {
     "0": [
-      "analyzerequest",
-      "arc",
-      "asref",
-      "client",
-      "intoresponse",
-      "ipaddr",
-      "json",
-      "next",
-      "option",
-      "path",
-      "request",
-      "response",
-      "router",
-      "semaphore",
-      "sqlitepool",
-      "src_main",
-      "src_main_analyze_route",
-      "src_main_analyzer_capacity_429_has_retry_after",
-      "src_main_apierror",
-      "src_main_apierror_into_response",
-      "src_main_appstate",
-      "src_main_build_router",
-      "src_main_build_sha",
-      "src_main_cache_policy",
-      "src_main_default_database_url",
-      "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
-      "src_main_errorbody",
-      "src_main_first_forwarded_ip",
-      "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
-      "src_main_forwarded_client_parser_accepts_ingress_address_forms",
-      "src_main_get",
-      "src_main_gpx_analysis_never_persists_route_data",
-      "src_main_health",
-      "src_main_health_never_reports_the_old_unknown_sentinel",
-      "src_main_is_hashed_asset",
-      "src_main_legal_routes_are_successful_direct_documents",
-      "src_main_main",
-      "src_main_page_view",
-      "src_main_page_views_persist_only_an_aggregate_counter",
-      "src_main_rate_limit_response",
-      "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
-      "src_main_response_policy",
-      "src_main_rs_analysis",
-      "src_main_rs_string",
-      "src_main_rs_vec",
-      "src_main_run_fixed_ip_burst",
-      "src_main_shutdown",
-      "src_main_static_fixture",
-      "src_main_test_state",
-      "src_main_unsupported_region_is_rejected_before_billing",
-      "src_main_unsupported_vehicle_is_rejected_before_any_map_request",
-      "src_main_verify_paid",
-      "src_main_verifyresponse",
-      "state",
-      "statuscode",
-      "tempdir",
-      "value"
-    ],
-    "1": [
       "frontend_src_main",
       "frontend_src_main_announceroute",
       "frontend_src_main_apppage",
@@ -106,6 +47,52 @@
       "frontend_src_ui_downloadchecklist",
       "frontend_src_ui_verdictcopy"
     ],
+    "1": [
+      "arc",
+      "asref",
+      "client",
+      "ipaddr",
+      "next",
+      "option",
+      "path",
+      "request",
+      "router",
+      "semaphore",
+      "sqlitepool",
+      "src_main",
+      "src_main_analyzer_capacity_429_has_retry_after",
+      "src_main_api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second",
+      "src_main_appstate",
+      "src_main_build_router",
+      "src_main_build_sha",
+      "src_main_cache_policy",
+      "src_main_default_database_url",
+      "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
+      "src_main_errorbody",
+      "src_main_first_forwarded_ip",
+      "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
+      "src_main_forwarded_client_parser_accepts_ingress_address_forms",
+      "src_main_get",
+      "src_main_health_never_reports_the_old_unknown_sentinel",
+      "src_main_is_hashed_asset",
+      "src_main_legal_routes_are_successful_direct_documents",
+      "src_main_main",
+      "src_main_page_view",
+      "src_main_page_views_persist_only_an_aggregate_counter",
+      "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
+      "src_main_response_policy",
+      "src_main_rs_string",
+      "src_main_rs_vec",
+      "src_main_run_fixed_ip_burst",
+      "src_main_shutdown",
+      "src_main_static_fixture",
+      "src_main_test_state",
+      "src_main_unsupported_region_is_rejected_before_billing",
+      "src_main_unsupported_vehicle_is_rejected_before_any_map_request",
+      "src_main_verify_paid",
+      "src_main_verifyresponse",
+      "tempdir"
+    ],
     "2": [
       "geopoint",
       "hashmap",
@@ -116,16 +103,18 @@
       "src_analyzer",
       "src_analyzer_analyze",
       "src_analyzer_analyzeerror",
+      "src_analyzer_assess_speed_pedelec_region",
       "src_analyzer_assess_tags",
       "src_analyzer_bicycle_no_is_prohibited",
       "src_analyzer_distance_to_way",
       "src_analyzer_germany_pack_links_to_the_current_ministry_source",
       "src_analyzer_haversine",
-      "src_analyzer_labeled_hundred_route_corpus_meets_accuracy_and_recall_targets",
+      "src_analyzer_matching_radius_is_thirty_five_metres",
       "src_analyzer_overpass_query",
       "src_analyzer_parse_gpx",
       "src_analyzer_parses_and_measures_gpx",
       "src_analyzer_point_segment_km",
+      "src_analyzer_regional_cycleway_rules_are_distinct_and_cautious",
       "src_analyzer_rejects_short_gpx",
       "src_analyzer_relevant_tags",
       "src_analyzer_round1",
@@ -135,12 +124,45 @@
       "src_analyzer_rs_vec",
       "src_analyzer_rule_pack",
       "src_analyzer_sample_points",
+      "src_analyzer_sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length",
       "src_analyzer_severity_rank",
       "src_analyzer_speed_pedelec_cycleway_is_uncertain",
       "src_analyzer_unmatched_route_is_review",
       "src_analyzer_validate_vehicle"
     ],
     "3": [
+      "axe_core_playwright",
+      "concurrently",
+      "package",
+      "package_devdependencies",
+      "package_devdependencies_axe_core_playwright",
+      "package_devdependencies_concurrently",
+      "package_devdependencies_playwright_test",
+      "package_devdependencies_types_node",
+      "package_devdependencies_typescript",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitest",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_preview",
+      "package_scripts_test",
+      "package_scripts_test_e2e",
+      "package_scripts_typecheck",
+      "package_scripts_verify_deployed",
+      "package_scripts_verify_live_polish",
+      "package_type",
+      "package_version",
+      "playwright_test",
+      "types_node",
+      "typescript",
+      "vite",
+      "vitest"
+    ],
+    "4": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_es2022",
@@ -165,39 +187,29 @@
       "tsconfig_compileroptions_usedefineforclassfields",
       "tsconfig_include"
     ],
-    "4": [
-      "axe_core_playwright",
-      "concurrently",
-      "package_devdependencies",
-      "package_devdependencies_axe_core_playwright",
-      "package_devdependencies_concurrently",
-      "package_devdependencies_playwright_test",
-      "package_devdependencies_types_node",
-      "package_devdependencies_typescript",
-      "package_devdependencies_vite",
-      "package_devdependencies_vitest",
-      "playwright_test",
-      "types_node",
-      "typescript",
-      "vite",
-      "vitest"
-    ],
     "5": [
-      "package",
-      "package_name",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_lint",
-      "package_scripts_preview",
-      "package_scripts_test",
-      "package_scripts_test_e2e",
-      "package_scripts_typecheck",
-      "package_scripts_verify_deployed",
-      "package_scripts_verify_live_polish",
-      "package_type",
-      "package_version"
+      "analyzerequest",
+      "governorerror",
+      "httprequest",
+      "intoresponse",
+      "json",
+      "key",
+      "keyextractor",
+      "response",
+      "src_main_analyze_route",
+      "src_main_apierror",
+      "src_main_apierror_into_response",
+      "src_main_firstforwardedipkeyextractor",
+      "src_main_firstforwardedipkeyextractor_extract",
+      "src_main_gpx_analysis_never_persists_route_data",
+      "src_main_health",
+      "src_main_rate_limit_response",
+      "src_main_rs_analysis",
+      "src_main_rs_result",
+      "state",
+      "statuscode",
+      "t",
+      "value"
     ],
     "6": [
       "src_model",
@@ -217,36 +229,30 @@
       "src_model_source"
     ],
     "7": [
-      "governorerror",
-      "httprequest",
-      "key",
-      "keyextractor",
-      "src_main_firstforwardedipkeyextractor",
-      "src_main_firstforwardedipkeyextractor_extract",
-      "src_main_rs_result",
-      "t"
-    ],
-    "8": [
       "tests_e2e_app_spec",
       "tests_e2e_app_spec_contrastratio",
       "tests_e2e_app_spec_expectfocuscontrast",
       "tests_e2e_app_spec_report",
       "tests_e2e_app_spec_rgb"
     ],
-    "9": [
+    "8": [
       "scripts_verify_deployed",
       "scripts_verify_deployed_baseurl",
       "scripts_verify_deployed_request",
       "scripts_verify_deployed_session"
     ],
-    "10": [
+    "9": [
       "scripts_verify_live_polish",
       "scripts_verify_live_polish_contrastratio",
       "scripts_verify_live_polish_report"
     ],
-    "11": [
+    "10": [
       "frontend_public_sw",
       "frontend_public_sw_shell"
+    ],
+    "11": [
+      "frontend_src_harness_test",
+      "playwright_config"
     ],
     "12": [
       "analysis"
@@ -255,39 +261,36 @@
       "pkg_cycle_legal_profile_check"
     ],
     "14": [
-      "playwright_config"
-    ],
-    "15": [
       "result"
     ],
-    "16": [
+    "15": [
       "src_analyzer_rs_hashmap"
     ],
-    "17": [
+    "16": [
       "src_main_rs_option"
     ],
-    "18": [
+    "17": [
       "string"
     ],
-    "19": [
+    "18": [
       "vec"
     ],
-    "20": [
+    "19": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.07894736842105263,
-    "1": 0.10101010101010101,
-    "2": 0.13709677419354838,
-    "3": 0.08695652173913043,
-    "4": 0.13333333333333333,
-    "5": 0.13333333333333333,
+    "0": 0.10101010101010101,
+    "1": 0.1014799154334038,
+    "2": 0.12941176470588237,
+    "3": 0.06666666666666667,
+    "4": 0.08695652173913043,
+    "5": 0.11688311688311688,
     "6": 0.3047619047619048,
-    "7": 0.25,
-    "8": 0.6,
-    "9": 0.5,
-    "10": 0.6666666666666666,
+    "7": 0.6,
+    "8": 0.5,
+    "9": 0.6666666666666666,
+    "10": 1.0,
     "11": 1.0,
     "12": 1.0,
     "13": 1.0,
@@ -296,19 +299,18 @@
     "16": 1.0,
     "17": 1.0,
     "18": 1.0,
-    "19": 1.0,
-    "20": 1.0
+    "19": 1.0
   },
   "gods": [
     {
       "id": "src_analyzer_analyze",
       "label": "analyze()",
-      "degree": 18
+      "degree": 17
     },
     {
       "id": "src_main_build_router",
       "label": "build_router()",
-      "degree": 16
+      "degree": 17
     },
     {
       "id": "src_main_analyze_route",
@@ -318,7 +320,7 @@
     {
       "id": "src_main_test_state",
       "label": "test_state()",
-      "degree": 13
+      "degree": 14
     },
     {
       "id": "src_main_appstate",
@@ -326,8 +328,8 @@
       "degree": 11
     },
     {
-      "id": "src_analyzer_parse_gpx",
-      "label": "parse_gpx()",
+      "id": "src_main_static_fixture",
+      "label": "static_fixture()",
       "degree": 11
     },
     {
@@ -336,36 +338,25 @@
       "degree": 10
     },
     {
-      "id": "src_main_get",
-      "label": "get()",
-      "degree": 10
-    },
-    {
-      "id": "src_main_static_fixture",
-      "label": "static_fixture()",
-      "degree": 10
-    },
-    {
       "id": "tsconfig_compileroptions",
       "label": "compilerOptions",
+      "degree": 10
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 10
+    },
+    {
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
       "degree": 10
     }
   ],
   "surprises": [
     {
       "source": "analyze_route()",
-      "target": "analyze()",
-      "source_files": [
-        "src/main.rs",
-        "src/analyzer.rs"
-      ],
-      "confidence": "INFERRED",
-      "relation": "calls",
-      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
-    },
-    {
-      "source": "analyze_route()",
-      "target": "overpass_query()",
+      "target": "validate_vehicle()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -387,7 +378,18 @@
     },
     {
       "source": "analyze_route()",
-      "target": "validate_vehicle()",
+      "target": "overpass_query()",
+      "source_files": [
+        "src/main.rs",
+        "src/analyzer.rs"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "analyze_route()",
+      "target": "analyze()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"

@@ -321,13 +321,13 @@
       "degree": 13
     },
     {
-      "id": "src_analyzer_parse_gpx",
-      "label": "parse_gpx()",
+      "id": "src_main_appstate",
+      "label": "AppState",
       "degree": 11
     },
     {
-      "id": "src_main_appstate",
-      "label": "AppState",
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
       "degree": 11
     },
     {
@@ -336,36 +336,25 @@
       "degree": 10
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
-      "degree": 10
-    },
-    {
-      "id": "tsconfig_compileroptions",
-      "label": "compilerOptions",
+      "id": "src_main_get",
+      "label": "get()",
       "degree": 10
     },
     {
       "id": "src_main_static_fixture",
       "label": "static_fixture()",
       "degree": 10
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 10
     }
   ],
   "surprises": [
     {
       "source": "analyze_route()",
-      "target": "validate_vehicle()",
-      "source_files": [
-        "src/main.rs",
-        "src/analyzer.rs"
-      ],
-      "confidence": "INFERRED",
-      "relation": "calls",
-      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
-    },
-    {
-      "source": "analyze_route()",
-      "target": "parse_gpx()",
+      "target": "analyze()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"
@@ -387,7 +376,18 @@
     },
     {
       "source": "analyze_route()",
-      "target": "analyze()",
+      "target": "parse_gpx()",
+      "source_files": [
+        "src/main.rs",
+        "src/analyzer.rs"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "analyze_route()",
+      "target": "validate_vehicle()",
       "source_files": [
         "src/main.rs",
         "src/analyzer.rs"

@@ -87,6 +87,40 @@ accessibility 100, best practices 100, SEO 100, FCP 1.1 s, LCP 2.3 s, TBT 60 ms,
 and CLS 0. Initial JS is 21,010 bytes raw / 7.94 kB gzip; CSS is 14,070 bytes
 raw / 3.80 kB gzip; the mobile hero is 59,794 bytes.
 
+## Deployment and live verification
+
+Factory ACR built repair evidence commit
+`cc5a2ae047394eb3301c5804e16895fba9051f86` successfully in 7m23s. The deploy
+updated only `sf-cycle-legal-profile-check`, preserved its owned durable share
+`sf-cycle-legal-profile-c-fa77fd` at `/data`, and kept the SQLite app at one
+replica. HTTPS returned 200 after the managed certificate binding completed.
+
+Exact live checks against <https://cycle-legal-profile-check.sociobot.in>:
+
+- `/health` returned build `cc5a2ae047394eb3301c5804e16895fba9051f86`.
+- Worker `verify-url.sh` returned 200 with no browser console errors and all
+  basic document/accessibility checks present.
+- `npm run verify:live:polish` passed all four routes at 1440×900 and 390×844,
+  with zero serious/critical axe findings, same-origin-only demo requests,
+  correct route focus, and an offline demo reload.
+- Live first-screen bounds matched local evidence: the last desktop fact ended
+  at 769.53px and the last mobile fact at 814.39px.
+- Live mobile report targets measured 153.67×44px for the OSM link and
+  318×49.59px for the Belgium rule-source link. The paid focus ring measured
+  6.80:1 against moss.
+- Live `/api/page-view`: 40×204 and 20×429 on one HTTP/2 connection; live
+  `/api/analyze`: 40×422 and 20×429. Every 429 included `Retry-After: 1`.
+- A live unsupported-vehicle request returned the expected 422 in 46ms. The
+  local request-spy integration test is the proof that this path makes zero
+  map requests.
+- Live Lighthouse mobile: performance 100, accessibility 100, best practices
+  100, SEO 100, FCP 1.1s, LCP 1.8s, TBT 30ms, CLS 0.
+
+Live browser and Lighthouse artifacts are under
+`.factory/evidence/repair-7/live/`. This live-evidence-only follow-up changes no
+Docker `COPY` input used by the product; the factory redeploys the final handoff
+commit and checks `/health` against the final pushed HEAD.
+
 ## Run and verify
 
 ```sh
@@ -116,5 +150,5 @@ remains multi-stage, uses `rust:1-alpine`, runs non-root, and receives build
 identity only through build args.
 
 No Docker daemon is installed in the worker, so there was no local image build.
-The factory ACR deployment is the container-build verification. No product or
-external-service gap is known.
+The successful factory ACR build is the container-build verification. No
+product or external-service gap is known.

@@ -1,0 +1,62 @@
+{
+  "baseUrl": "https://cycle-legal-profile-check.sociobot.in",
+  "routes": [
+    {
+      "path": "/",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/demo",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/privacy",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/terms",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/demo",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/privacy",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/terms",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    }
+  ],
+  "demoRequests": [
+    "https://cycle-legal-profile-check.sociobot.in/?demo=1",
+    "https://cycle-legal-profile-check.sociobot.in/assets/route-inspection-hero.webp",
+    "https://cycle-legal-profile-check.sociobot.in/assets/index-DQRFMSbQ.js",
+    "https://cycle-legal-profile-check.sociobot.in/assets/style-BX4ZBn4G.css"
+  ],
+  "build": "fd5e13755cc0390d8d8d66f64d47c5559cfadb18",
+  "offline": true,
+  "routeFocus": true
+}

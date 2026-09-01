@@ -344,12 +344,12 @@ fn relevant_tags(tags: &HashMap<String, String>) -> HashMap<String, String> {
 fn rule_pack(region: &str) -> RulePack {
     let (label, legal) = match region {
         "NL" => (
-            "Netherlands government: speed-pedelec rules",
-            "https://www.rijksoverheid.nl/onderwerpen/bromfiets/vraag-en-antwoorden/welke-regels-gelden-voor-speed-pedelecs",
+            "Netherlands traffic rules for speed pedelecs",
+            "https://www.government.nl/topics/bicycles/safe-cycling",
         ),
         "DE" => (
-            "Germany Road Traffic Regulations § 2",
-            "https://www.gesetze-im-internet.de/stvo_2013/__2.html",
+            "Germany Federal Ministry of Transport: cycling",
+            "https://www.bmv.de/DE/Themen/Mobilitaet/Fahrradverkehr/fahrradverkehr.html",
         ),
         _ => (
             "Belgium road code: speed-pedelec rules",
@@ -465,12 +465,15 @@ mod tests {
     }
 
     #[test]
-    fn germany_pack_links_to_the_road_traffic_regulations() {
+    fn germany_pack_links_to_the_current_ministry_source() {
         let source = &rule_pack("DE").sources[0];
-        assert_eq!(source.label, "Germany Road Traffic Regulations § 2");
+        assert_eq!(
+            source.label,
+            "Germany Federal Ministry of Transport: cycling"
+        );
         assert_eq!(
             source.url,
-            "https://www.gesetze-im-internet.de/stvo_2013/__2.html"
+            "https://www.bmv.de/DE/Themen/Mobilitaet/Fahrradverkehr/fahrradverkehr.html"
         );
     }
 

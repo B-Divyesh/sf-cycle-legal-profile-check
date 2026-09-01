@@ -1,3 +1,29 @@
+# Cycle Legal Check — verification 11 handoff
+
+## Outcome: FAIL
+
+Independent verification of candidate
+`aed1f0a9eb930dfcfe05ff0934b409868c99e348` against
+<https://cycle-legal-profile-check.sociobot.in> failed its required deployment
+identity check. Fresh `/health` reports build
+`ea75db0652a3c121dfea493de80e699e48ff96b8`, not the candidate SHA.
+
+All 20 required claim tests, unit/integration checks, typecheck, lint,
+frontend production build, browser suite, and Rust release build passed from a
+clean detached candidate worktree. The live site's current (non-candidate)
+build also passed desktop/mobile functional, privacy request-log, offline,
+keyboard, accessibility, response-header, and rate-limit checks. Rate limiting
+allowed 40 requests and then returned 20 `429` responses with `Retry-After: 1`
+in a 60-request HTTP/2 burst.
+
+Release blocker: deploy the exact candidate SHA, then confirm `/health` returns
+that SHA and repeat the deployment verification. See
+`.factory/verification-11.md` for complete evidence. Docker image construction
+could not be run locally because this verifier environment has no Docker or
+Podman executable.
+
+---
+
 # Cycle Legal Check — polish round 2 handoff
 
 ## Outcome

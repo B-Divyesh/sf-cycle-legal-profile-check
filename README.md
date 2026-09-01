@@ -10,6 +10,11 @@ For a real check, open `/`, upload a GPX track, choose a vehicle and region, and
 
 Belgium checks are free. The Netherlands and Germany regional rule packs cost €19 once through Sociobot billing, backed by Dodo. A returned license stays in the browser and is verified at most once per day.
 
+The regional packs make separate, cautious speed-pedelec decisions. An untagged
+`highway=cycleway` is a sign review in Belgium, but is prohibited in the
+Netherlands and Germany unless the relevant mapped exception is present. Signs
+and local orders remain decisive.
+
 The server handles a real GPX track only for its requested report. It does not retain GPX track data in SQLite. SQLite stores one aggregate page-view counter.
 
 ## Run locally
@@ -59,7 +64,10 @@ Both API routes allow a burst of 40 requests per client and replenish at 20 requ
 
 ## Data and limits
 
-The checker samples a route at roughly 80 metres or one-sixtieth of its length. It looks for highway geometry within 35 metres. Parallel ways, incomplete tags, temporary orders, and signs can change an outcome. Unmatched and vehicle-ambiguous sections are marked for review.
+The checker samples a route at 80 metres or one-sixtieth of its length,
+whichever is farther apart. It searches for highway geometry within 35 metres.
+Parallel ways, incomplete tags, temporary orders, and signs can change an
+outcome. Unmatched and vehicle-ambiguous sections are marked for review.
 
 OpenStreetMap data is © OpenStreetMap contributors and licensed under ODbL. Every report includes source links and source dates. See `/privacy` and `/terms` in the running app.
 

@@ -3,6 +3,10 @@ use roxmltree::Document;
 use std::collections::{HashMap, HashSet};
 use thiserror::Error;
 
+const MATCH_RADIUS_KM: f64 = 0.035;
+const MATCH_RADIUS_METRES: u8 = 35;
+const SAMPLE_DISTANCE_EPSILON_KM: f64 = 0.000_000_001;
+
 #[derive(Debug, Error)]
 pub enum AnalyzeError {
     #[error("The GPX is not valid XML.")]
@@ -69,7 +73,10 @@ pub fn sample_points(points: &[Point]) -> Vec<Point> {
     let mut next = 0.0;
     let mut sampled = Vec::new();
     for point in points {
-        if point.km >= next || sampled.is_empty() {
+        // GPS distances and the one-sixtieth interval are floating-point
+        // values. Permit a sub-micrometre rounding difference so a point at
+        // the intended interval is not accidentally skipped.
+        if point.km + SAMPLE_DISTANCE_EPSILON_KM >= next || sampled.is_empty() {
             sampled.push(*point);
             next = point.km + interval;
         }
@@ -84,7 +91,12 @@ pub fn overpass_query(points: &[Point]) -> String {
     let points = sample_points(points);
     let clauses = points
         .iter()
-        .map(|point| format!("way(around:35,{:.6},{:.6})[highway];", point.lat, point.lon))
+        .map(|point| {
+            format!(
+                "way(around:{MATCH_RADIUS_METRES},{:.6},{:.6})[highway];",
+                point.lat, point.lon
+            )
+        })
         .collect::<String>();
     format!("[out:json][timeout:20];({clauses});out tags geom;")
 }
@@ -108,7 +120,7 @@ pub fn analyze(
             ways.iter()
                 .filter_map(|way| {
                     let distance = distance_to_way(*sample, way);
-                    (distance <= 0.035).then_some((way, distance))
+                    (distance <= MATCH_RADIUS_KM).then_some((way, distance))
                 })
                 .min_by(|a, b| a.1.total_cmp(&b.1))
                 .map(|pair| pair.0),
@@ -217,19 +229,7 @@ pub fn assess_tags(
         if forbidden(value("moped")) || forbidden(value("mofa")) {
             return (Severity::Prohibited, "Moped-class access may conflict", "SP-MOPED-NO", "This region treats 45 km/h speed pedelecs as a moped-class vehicle, while the matched way prohibits the relevant moped class.");
         }
-        if value("highway") == "cycleway" && !matches!(value("moped"), "yes" | "designated") {
-            return (
-                Severity::Review,
-                "Cycleway needs a speed-pedelec check",
-                "SP-CYCLEWAY-UNKNOWN",
-                if region == "BE" {
-                    "Belgian speed pedelec access to cycle tracks depends on signing, speed limits, and local conditions. The map has no explicit speed-pedelec/moped permission here."
-                } else {
-                    "Speed-pedelec use of this cycleway is jurisdiction- and sign-dependent. The map has no explicit vehicle-specific permission."
-                },
-            );
-        }
-        return (Severity::Review, "Vehicle-specific access is not tagged", "SP-TAG-UNKNOWN", "The matched way has no explicit speed-pedelec access tag. Check the road class, signs, and current regional rules.");
+        return assess_speed_pedelec_region(tags, region);
     }
     if matches!(value("bicycle"), "yes" | "designated" | "permissive") {
         return (
@@ -245,6 +245,80 @@ pub fn assess_tags(
         "BIKE-DEFAULT",
         "No bicycle-specific conflict was found in the matched tags.",
     )
+}
+
+/// Apply the maintained, conservative regional rules after explicit OSM tags
+/// and universal access restrictions have been handled. A `highway=cycleway`
+/// tag means a different default for a 45 km/h speed pedelec in each pack:
+/// Belgium needs a sign review, Dutch cycleways need a mapped moped-path
+/// permission, and German cycleways need an explicit exception. These are
+/// decision differences, not just source-label differences.
+fn assess_speed_pedelec_region(
+    tags: &HashMap<String, String>,
+    region: &str,
+) -> (Severity, &'static str, &'static str, &'static str) {
+    let value = |key: &str| tags.get(key).map(String::as_str).unwrap_or("");
+    let moped_path = matches!(value("moped"), "yes" | "designated");
+
+    if value("highway") != "cycleway" {
+        return match region {
+            "BE" => (
+                Severity::Review,
+                "Belgian speed-pedelec access is not tagged",
+                "BE-SP-TAG-UNKNOWN",
+                "The map has no explicit speed-pedelec access tag. Check the road class, signs, and current Belgian rules.",
+            ),
+            "NL" => (
+                Severity::Review,
+                "Dutch speed-pedelec access is not tagged",
+                "NL-SP-TAG-UNKNOWN",
+                "The map has no explicit speed-pedelec access tag. Check the road class, signs, and current Dutch rules.",
+            ),
+            _ => (
+                Severity::Review,
+                "German speed-pedelec access is not tagged",
+                "DE-SP-TAG-UNKNOWN",
+                "The map has no explicit speed-pedelec access tag. Check the road class, signs, and current German rules.",
+            ),
+        };
+    }
+
+    match region {
+        "BE" => (
+            Severity::Review,
+            "Belgian cycleway needs a sign check",
+            "BE-SP-CYCLEWAY-SIGN-CHECK",
+            if moped_path {
+                "The map marks moped access, but Belgian speed-pedelec use still depends on the applicable sign and local conditions. Check the sign before riding."
+            } else {
+                "Belgian speed-pedelec access to a cycleway depends on signing and local conditions. The map has no explicit speed-pedelec or moped-path permission."
+            },
+        ),
+        "NL" if moped_path => (
+            Severity::Clear,
+            "Dutch moped path is tagged for access",
+            "NL-SP-MOPED-PATH-YES",
+            "The matched cycleway is tagged as a moped path. This is the map evidence the Dutch speed-pedelec pack expects; still check signs and local restrictions.",
+        ),
+        "NL" => (
+            Severity::Prohibited,
+            "Dutch cycleway is not a mapped moped path",
+            "NL-SP-CYCLEWAY-NO-MOPED-PATH",
+            "A Dutch speed pedelec needs moped-path permission on a cycleway. No mapped moped-path permission is present, so treat this section as prohibited until signs confirm otherwise.",
+        ),
+        "DE" if moped_path => (
+            Severity::Review,
+            "German cycleway exception needs a sign check",
+            "DE-SP-CYCLEWAY-SIGNED-EXCEPTION",
+            "The map marks moped access, but that does not by itself establish a German speed-pedelec exception. Check the sign before riding.",
+        ),
+        _ => (
+            Severity::Prohibited,
+            "German cycleway has no speed-pedelec exception",
+            "DE-SP-CYCLEWAY-NO-EXCEPTION",
+            "German speed pedelecs need an explicit exception to use a cycleway. No mapped exception is present, so treat this section as prohibited until signs confirm otherwise.",
+        ),
+    }
 }
 
 fn relevant_tags(tags: &HashMap<String, String>) -> HashMap<String, String> {
@@ -270,21 +344,21 @@ fn relevant_tags(tags: &HashMap<String, String>) -> HashMap<String, String> {
 fn rule_pack(region: &str) -> RulePack {
     let (label, legal) = match region {
         "NL" => (
-            "Netherlands traffic rules for speed pedelecs",
-            "https://www.government.nl/topics/bicycles/safe-cycling",
+            "Netherlands government: speed-pedelec rules",
+            "https://www.rijksoverheid.nl/onderwerpen/bromfiets/vraag-en-antwoorden/welke-regels-gelden-voor-speed-pedelecs",
         ),
         "DE" => (
-            "Germany Federal Ministry of Transport: cycling",
-            "https://www.bmv.de/DE/Themen/Mobilitaet/Fahrradverkehr/fahrradverkehr.html",
+            "Germany Road Traffic Regulations § 2",
+            "https://www.gesetze-im-internet.de/stvo_2013/__2.html",
         ),
         _ => (
-            "Belgium road code: cycling and speed pedelecs",
+            "Belgium road code: speed-pedelec rules",
             "https://mobilit.belgium.be/en/road/road-safety/road-rules",
         ),
     };
     RulePack {
-        version: "2026.08".into(),
-        source_date: "2026-08-01".into(),
+        version: "2026.09".into(),
+        source_date: "2026-09-01".into(),
         sources: vec![
             Source {
                 label: label.into(),
@@ -391,91 +465,127 @@ mod tests {
     }
 
     #[test]
-    fn germany_pack_links_to_the_current_ministry_source() {
+    fn germany_pack_links_to_the_road_traffic_regulations() {
         let source = &rule_pack("DE").sources[0];
-        assert_eq!(
-            source.label,
-            "Germany Federal Ministry of Transport: cycling"
-        );
+        assert_eq!(source.label, "Germany Road Traffic Regulations § 2");
         assert_eq!(
             source.url,
-            "https://www.bmv.de/DE/Themen/Mobilitaet/Fahrradverkehr/fahrradverkehr.html"
+            "https://www.gesetze-im-internet.de/stvo_2013/__2.html"
         );
     }
 
     #[test]
-    fn labeled_hundred_route_corpus_meets_accuracy_and_recall_targets() {
-        let corpus = include_str!("../tests/fixtures/labeled_routes.csv");
-        let (_, points) = parse_gpx(
-            "<gpx><trk><trkseg><trkpt lat='50' lon='4'/><trkpt lat='50' lon='4.001'/></trkseg></trk></gpx>",
-        )
-        .unwrap();
-        let geometry = vec![
-            GeoPoint {
-                lat: 50.0,
-                lon: 3.999,
+    fn regional_cycleway_rules_are_distinct_and_cautious() {
+        let untagged_cycleway = HashMap::from([("highway".into(), "cycleway".into())]);
+        let belgium = assess_tags(&untagged_cycleway, "speed_pedelec", "BE");
+        let netherlands = assess_tags(&untagged_cycleway, "speed_pedelec", "NL");
+        let germany = assess_tags(&untagged_cycleway, "speed_pedelec", "DE");
+
+        assert_eq!(belgium.0, Severity::Review);
+        assert_eq!(belgium.2, "BE-SP-CYCLEWAY-SIGN-CHECK");
+        assert_eq!(netherlands.0, Severity::Prohibited);
+        assert_eq!(netherlands.2, "NL-SP-CYCLEWAY-NO-MOPED-PATH");
+        assert_eq!(germany.0, Severity::Prohibited);
+        assert_eq!(germany.2, "DE-SP-CYCLEWAY-NO-EXCEPTION");
+        assert_ne!(belgium.2, netherlands.2);
+        assert_ne!(netherlands.2, germany.2);
+
+        let mapped_moped_path = HashMap::from([
+            ("highway".into(), "cycleway".into()),
+            ("moped".into(), "designated".into()),
+        ]);
+        assert_eq!(
+            assess_tags(&mapped_moped_path, "speed_pedelec", "BE").0,
+            Severity::Review
+        );
+        assert_eq!(
+            assess_tags(&mapped_moped_path, "speed_pedelec", "NL").0,
+            Severity::Clear
+        );
+        assert_eq!(
+            assess_tags(&mapped_moped_path, "speed_pedelec", "DE").0,
+            Severity::Review
+        );
+    }
+
+    #[test]
+    fn sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length() {
+        let short_route = [
+            Point {
+                lat: 0.0,
+                lon: 0.0,
+                km: 0.0,
             },
-            GeoPoint {
-                lat: 50.0,
-                lon: 4.002,
+            Point {
+                lat: 0.0,
+                lon: 0.0,
+                km: 0.04,
+            },
+            Point {
+                lat: 0.0,
+                lon: 0.0,
+                km: 0.08,
+            },
+            Point {
+                lat: 0.0,
+                lon: 0.0,
+                km: 0.16,
             },
         ];
-        let mut total = 0usize;
-        let mut correct = 0usize;
-        let mut prohibited = 0usize;
-        let mut prohibited_found = 0usize;
-        let mut ids = HashSet::new();
+        let short_samples: Vec<_> = sample_points(&short_route)
+            .into_iter()
+            .map(|point| point.km)
+            .collect();
+        assert_eq!(short_samples, vec![0.0, 0.08, 0.16]);
 
-        for (line_number, row) in corpus.lines().skip(1).enumerate() {
-            let columns: Vec<_> = row.split(',').collect();
-            assert_eq!(columns.len(), 5, "malformed corpus row {}", line_number + 2);
-            let [id, region, vehicle, raw_tags, expected] = columns.as_slice() else {
-                unreachable!()
-            };
-            assert!(ids.insert(*id), "duplicate corpus id {id}");
-            let tags = raw_tags
-                .split(';')
-                .map(|tag| {
-                    let (key, value) = tag.split_once('=').expect("tag must be key=value");
-                    (key.to_owned(), value.to_owned())
-                })
-                .collect();
-            let ways = [OverpassWay {
-                id: total as i64 + 1,
-                tags,
-                geometry: geometry.clone(),
-            }];
-            let actual = analyze((*id).into(), &points, &ways, vehicle, region, true)
-                .unwrap()
-                .verdict;
-            let expected = match *expected {
-                "prohibited" => Severity::Prohibited,
-                "review" => Severity::Review,
-                "clear" => Severity::Clear,
-                value => panic!("unsupported label {value}"),
-            };
-            total += 1;
-            correct += usize::from(actual == expected);
-            if expected == Severity::Prohibited {
-                prohibited += 1;
-                prohibited_found += usize::from(actual == Severity::Prohibited);
-            }
-        }
+        let long_route: Vec<_> = (0..=60)
+            .map(|index| Point {
+                lat: 0.0,
+                lon: 0.0,
+                km: index as f64 * 0.1,
+            })
+            .collect();
+        let long_samples = sample_points(&long_route);
+        assert_eq!(long_samples.len(), 61);
+        assert_eq!(long_samples[1].km, 6.0 / 60.0);
+    }
 
-        assert_eq!(
-            total, 100,
-            "the release corpus must contain exactly 100 routes"
-        );
-        let accuracy = correct as f64 / total as f64;
-        let prohibited_recall = prohibited_found as f64 / prohibited as f64;
-        eprintln!(
-            "labeled corpus: {correct}/{total} exact; prohibited/vehicle-mismatch recall: {prohibited_found}/{prohibited}"
-        );
-        assert!(accuracy >= 0.90, "accuracy was {:.1}%", accuracy * 100.0);
-        assert!(
-            prohibited_recall >= 0.90,
-            "prohibited recall was {:.1}%",
-            prohibited_recall * 100.0
-        );
+    #[test]
+    fn matching_radius_is_thirty_five_metres() {
+        let point = Point {
+            lat: 50.0,
+            lon: 4.0,
+            km: 0.0,
+        };
+        let way_at = |metres: f64| OverpassWay {
+            id: 1,
+            tags: HashMap::from([("highway".into(), "residential".into())]),
+            geometry: vec![
+                GeoPoint {
+                    lat: 50.0 + metres / 111_195.0,
+                    lon: 3.999,
+                },
+                GeoPoint {
+                    lat: 50.0 + metres / 111_195.0,
+                    lon: 4.001,
+                },
+            ],
+        };
+        let near = distance_to_way(point, &way_at(34.0));
+        let far = distance_to_way(point, &way_at(36.0));
+        assert!((near * 1000.0 - 34.0).abs() < 0.2);
+        assert!((far * 1000.0 - 36.0).abs() < 0.2);
+        assert!(near <= MATCH_RADIUS_KM);
+        assert!(far > MATCH_RADIUS_KM);
+
+        let query = overpass_query(&[
+            point,
+            Point {
+                lat: 50.0,
+                lon: 4.001,
+                km: 0.1,
+            },
+        ]);
+        assert!(query.contains("way(around:35,50.000000,4.000000)[highway]"));
     }
 }

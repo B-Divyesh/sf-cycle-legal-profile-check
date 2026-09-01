@@ -49,11 +49,32 @@
     "sandbox": "Fresh context uploads a GPX fixture, selects speed pedelec and Belgium, inspects the request, and observes returned map evidence."
   },
   {
+    "id": "regional-cycleway-decisions",
+    "claim": "Belgium, Netherlands, and Germany use separate cautious speed-pedelec decisions for an untagged mapped cycleway.",
+    "where": "README regional-rule-pack explanation",
+    "test": "cargo test regional_cycleway_rules_are_distinct_and_cautious",
+    "sandbox": "The analyzer receives the same highway=cycleway map tags for each regional pack and asserts distinct rule IDs, severities, and moped-path outcomes."
+  },
+  {
     "id": "gpx-size-limit",
     "claim": "GPX track uploads are limited to 8 MB.",
     "where": "GPX track file input",
     "test": "npm run test:e2e -- --grep @claim:gpx-size-limit",
     "sandbox": "Fresh context selects an 8 MB plus one byte fixture and observes rejection before any analyzer request."
+  },
+  {
+    "id": "sampling-density",
+    "claim": "The checker samples at 80 metres or one-sixtieth of route length, whichever is farther apart.",
+    "where": "README Data and limits",
+    "test": "cargo test sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length",
+    "sandbox": "Synthetic point distances exercise the 80-metre floor and a six-kilometre route with 60 equal sampling intervals."
+  },
+  {
+    "id": "matching-radius",
+    "claim": "The checker searches for highway geometry within 35 metres.",
+    "where": "README Data and limits, report caveats",
+    "test": "cargo test matching_radius_is_thirty_five_metres",
+    "sandbox": "A 34-metre segment is included, a 36-metre segment is excluded, and the generated Overpass query is asserted to use 35 metres."
   },
   {
     "id": "regional-pricing",
@@ -89,5 +110,12 @@
     "where": "Privacy page, README",
     "test": "cargo test page_views_persist_only_an_aggregate_counter",
     "sandbox": "A temporary SQLite database receives two page-view calls and asserts its sole row is the aggregate counter."
+  },
+  {
+    "id": "api-rate-limit",
+    "claim": "Both API routes allow a burst of 40 requests per client and replenish at 20 requests per second.",
+    "where": "README Verify",
+    "test": "cargo test api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second",
+    "sandbox": "A fixed forwarded client address receives 40 page-view responses, a 429 with Retry-After, then one renewed allowance after the 50-millisecond refill interval."
   }
 ]

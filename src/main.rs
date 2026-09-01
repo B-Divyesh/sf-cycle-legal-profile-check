@@ -831,6 +831,38 @@ mod tests {
         }
     }
 
+    #[tokio::test]
+    async fn api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second() {
+        let fixture = static_fixture();
+        let app = build_router(test_state().await, fixture.path());
+        let request = || {
+            Request::builder()
+                .method("POST")
+                .uri("/api/page-view")
+                .header(header::CONTENT_TYPE, "application/json")
+                .header("x-forwarded-for", "198.51.100.88")
+                .body(Body::from("{}"))
+                .unwrap()
+        };
+
+        for request_number in 0..API_RATE_LIMIT_BURST {
+            let response = app.clone().oneshot(request()).await.unwrap();
+            assert_eq!(
+                response.status(),
+                StatusCode::NO_CONTENT,
+                "request {request_number}"
+            );
+        }
+        let throttled = app.clone().oneshot(request()).await.unwrap();
+        assert_eq!(throttled.status(), StatusCode::TOO_MANY_REQUESTS);
+        assert_eq!(throttled.headers()[header::RETRY_AFTER], "1");
+
+        tokio::time::sleep(Duration::from_millis(API_RATE_LIMIT_PERIOD_MS + 10)).await;
+        let replenished = app.oneshot(request()).await.unwrap();
+        assert_eq!(replenished.status(), StatusCode::NO_CONTENT);
+        assert_eq!(1000 / API_RATE_LIMIT_PERIOD_MS, 20);
+    }
+
     #[test]
     fn forwarded_client_parser_accepts_ingress_address_forms() {
         assert_eq!(

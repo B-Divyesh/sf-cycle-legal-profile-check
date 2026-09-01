@@ -48,6 +48,9 @@ The manifest contains 20 unique claims. Local results were:
 
 Local evidence is under `.factory/evidence/polish-2/local/`.
 
+A fresh remote clone of `aed1f0a9eb930dfcfe05ff0934b409868c99e348`
+ran all 20 claim commands individually. Every command passed.
+
 ## Deploy and live verification
 
 Deploy through the work-order configuration:
@@ -62,6 +65,14 @@ The container starts with only `PORT`; `/data` is the durable SQLite location.
 The fleet keeps one replica. `/health` returns the build SHA. Both API routes
 enforce the 40-request burst, return 429 with `Retry-After`, and key the limit
 from the first forwarded client address.
+
+The fleet ACR build completed successfully. The cold live evidence run passed
+all product routes at desktop and 390 px, the direct `?demo=1` sandbox, offline
+reload, route focus, mobile navigation, privacy data removal, and the designed
+404. It found no console error or serious/critical axe issue. The rate-limit
+probe sent 60 requests over one HTTP/2 connection: 40 returned 204 and 20
+returned 429 with `Retry-After: 1`. Evidence is under
+`.factory/evidence/polish-2/live/`.
 
 ## Known gaps and next steps
 

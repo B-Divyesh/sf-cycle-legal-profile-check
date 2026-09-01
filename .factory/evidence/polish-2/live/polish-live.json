@@ -1,0 +1,174 @@
+{
+  "baseUrl": "https://cycle-legal-profile-check.sociobot.in",
+  "routes": [
+    {
+      "path": "/",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/demo",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/privacy",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/terms",
+      "viewport": "desktop",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/demo",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/privacy",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    },
+    {
+      "path": "/terms",
+      "viewport": "mobile",
+      "status": 200,
+      "seriousAxe": 0
+    }
+  ],
+  "demoRequests": [
+    "https://cycle-legal-profile-check.sociobot.in/?demo=1",
+    "https://cycle-legal-profile-check.sociobot.in/assets/route-inspection-hero.webp",
+    "https://cycle-legal-profile-check.sociobot.in/assets/index-CqdUYOH5.js",
+    "https://cycle-legal-profile-check.sociobot.in/assets/style-DFdn5NcT.css"
+  ],
+  "firstViewport": [
+    {
+      "viewport": "desktop",
+      "items": [
+        {
+          "text": "Check GPX track access before you ride.",
+          "top": 166.796875,
+          "bottom": 354.4375
+        },
+        {
+          "text": "For cyclists with a planned GPX track, find mapped access conflicts before starting the ride.",
+          "top": 378.4375,
+          "bottom": 466.75
+        },
+        {
+          "text": "Try it with sample data →Opens a sample report. Nothing is saved to your real data.Check your own GPX track",
+          "top": 490.75,
+          "bottom": 657.140625
+        },
+        {
+          "text": "Demo uses a separate sample workspace.",
+          "top": 679.140625,
+          "bottom": 703.9375
+        },
+        {
+          "text": "After one online visit, the page reloads offline.",
+          "top": 711.9375,
+          "bottom": 736.734375
+        },
+        {
+          "text": "Belgium checks are free. Regional rule packs cost €19 once.",
+          "top": 744.734375,
+          "bottom": 769.53125
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "items": [
+        {
+          "text": "Check GPX track access before you ride.",
+          "top": 155.59375,
+          "bottom": 271.46875
+        },
+        {
+          "text": "For cyclists with a planned GPX track, find mapped access conflicts before starting the ride.",
+          "top": 295.46875,
+          "bottom": 413.21875
+        },
+        {
+          "text": "Try it with sample data →Opens a sample report. Nothing is saved to your real data.Check your own GPX track",
+          "top": 437.21875,
+          "bottom": 603.609375
+        },
+        {
+          "text": "Demo uses a separate sample workspace.",
+          "top": 649.609375,
+          "bottom": 699.203125
+        },
+        {
+          "text": "After one online visit, the page reloads offline.",
+          "top": 707.203125,
+          "bottom": 756.796875
+        },
+        {
+          "text": "Belgium checks are free. Regional rule packs cost €19 once.",
+          "top": 764.796875,
+          "bottom": 814.390625
+        }
+      ]
+    }
+  ],
+  "mobileReportTargets": [
+    {
+      "text": "×Speed pedelec access is prohibited0.2–0.3 km · prohibited→",
+      "width": 358,
+      "height": 100.390625
+    },
+    {
+      "text": "!Map evidence is incomplete0.3–0.5 km · Verify before riding→",
+      "width": 358,
+      "height": 102.390625
+    },
+    {
+      "text": "Inspect OSM way ↗",
+      "width": 153.671875,
+      "height": 44
+    },
+    {
+      "text": "Export review checklist (.csv)",
+      "width": 358,
+      "height": 48.796875
+    },
+    {
+      "text": "Reset sample report",
+      "width": 358,
+      "height": 44
+    },
+    {
+      "text": "Rule sources and limitations",
+      "width": 358,
+      "height": 44
+    },
+    {
+      "text": "Belgium road code and access guidance",
+      "width": 318,
+      "height": 49.59375
+    }
+  ],
+  "paidFocusContrast": 6.7950914837553515,
+  "build": "aed1f0a9eb930dfcfe05ff0934b409868c99e348",
+  "offline": true,
+  "routeFocus": true,
+  "mobileNavigation": true,
+  "legalClaims": true
+}

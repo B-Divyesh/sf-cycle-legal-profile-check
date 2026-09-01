@@ -1,0 +1,14 @@
+{
+  "url": "https://cycle-legal-profile-check.sociobot.in",
+  "loadMs": 660,
+  "errors": [],
+  "a11y": {
+    "title": "Cycle Legal Check — Check GPX track access",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 1923
+  }
+}

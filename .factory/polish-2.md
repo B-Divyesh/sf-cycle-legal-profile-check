@@ -33,5 +33,14 @@ finding without changing the concrete-and-moss visual system.
   `.factory/evidence/polish-2/local/lighthouse-mobile.json`.
 - The direct demo remains <https://cycle-legal-profile-check.sociobot.in/?demo=1>.
   Its request log contains only same-origin static shell assets.
+- A clean clone of pushed commit `aed1f0a9eb930dfcfe05ff0934b409868c99e348`
+  passed all 20 commands in `.factory/claims.json` individually.
+- The fleet ACR multi-stage container build passed. Live `/health` returned
+  `aed1f0a9eb930dfcfe05ff0934b409868c99e348` for the evidence run.
+- Live route, demo, offline, mobile-menu, legal-control, focus, 404, metadata,
+  console, and axe checks passed. Evidence is under
+  `.factory/evidence/polish-2/live/`.
+- The deployed rate-limit check used one HTTP/2 session for 60 requests: 40
+  returned 204 and 20 returned 429 with `Retry-After: 1`.
 
 No review finding remains open.

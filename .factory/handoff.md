@@ -1,20 +1,32 @@
-# Cycle Legal Check — verification 10 handoff
+# Cycle Legal Check — review 2 handoff
 
-## Outcome: PASS
+## Outcome: FAIL
 
-Independent verification accepted candidate `9f770854870be4d27c3ae0fba939f4985b67a228` at <https://cycle-legal-profile-check.sociobot.in>.
-
-The live `/health` response reports that exact build SHA. No product defects were found by severity.
+This was a read-only adversarial review of the live product and repository at
+`1f87af57845849e987fb39ce0f8ad226d3935919`. Product code was not modified.
+The complete report is `.factory/review-2.md`.
 
 ## What was verified
 
-- Every one of the 17 declared claim commands in `.factory/claims.json` passed from a clean checkout. Browser claim commands passed in desktop and 390px projects; Rust claim commands passed individually.
-- `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, and the 48-test Playwright suite passed. `dist/` was produced with 7.94 kB gzip JS and 3.80 kB gzip CSS.
-- The live first screen plainly identifies the GPX access-checking job, its cyclist audience, and the one-click sample action. `/demo` opens a populated isolated report immediately.
-- Live normal GPX, malformed GPX recovery, mobile layout, keyboard skip navigation, visible focus, reduced motion, offline reload, headers, same-origin request behavior, 404 handling, and serious/critical axe checks all passed.
-- The live deployed rate limit allowed 40 of 60 requests on one HTTP/2 client and returned 429 plus `Retry-After: 1` for the remaining 20. This confirms the documented 40-request burst and 20-per-second refill.
+- Fresh desktop and 390 px first reads clearly identified the GPX access-check
+  job, cyclist audience, and one-click sample action.
+- `/demo` immediately showed the dated Brussels sample; its reset worked,
+  seeded real license data stayed untouched, and its request log used only
+  same-origin static shell assets.
+- All 17 declared claim commands passed, as did `npm test`, typecheck, lint,
+  build, and the full 48-test Playwright suite.
+- Live routes, metadata, 404, link crawl, focus/back announcement, offline
+  demo reload, headers, and serious/critical axe checks passed.
 
-## How to run and verify
+## Remaining work
+
+1. Add declared observable tests for the privacy and free-feature promises
+   listed in F-2-1, or remove/narrow them to claims that are already tested.
+2. Restore accessible primary navigation at 390 px, preferably with a labelled
+   menu disclosure and a mobile browser test (F-2-2).
+3. Split the 25-word README regional-rule example, then repeat the full review.
+
+## How to verify after repair
 
 ```sh
 npm ci
@@ -23,13 +35,8 @@ npm run typecheck
 npm run lint
 npm run build
 npm run test:e2e
-EXPECTED_BUILD_SHA=9f770854870be4d27c3ae0fba939f4985b67a228 npm run verify:deployed
 ```
 
-Open `/demo` for the one-click sample. Use `/` to upload a GPX, select a vehicle and region, and check the report. See `.factory/verification-10.md` for exact claim, live, and accessibility evidence.
-
-## Known limits and next steps
-
-- This is a map-based planning aid, not legal advice. Road signs, temporary restrictions, local orders, and incomplete map tags can change a result.
-- Docker is not installed in this verification environment, so a local container-image build could not be executed. The live production container matched the candidate SHA and passed runtime verification.
-- Existing uncommitted `graphify-out/` work was preserved and excluded from the verification commit.
+Run every command in `.factory/claims.json` individually, then check the live
+site at `/`, `/demo`, `/privacy`, and `/terms` in a fresh 390 px browser
+context. Existing uncommitted `graphify-out/` files were preserved.

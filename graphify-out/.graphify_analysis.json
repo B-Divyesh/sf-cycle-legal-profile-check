@@ -1,6 +1,53 @@
 {
   "communities": {
     "0": [
+      "frontend_src_main",
+      "frontend_src_main_announceroute",
+      "frontend_src_main_apppage",
+      "frontend_src_main_bind",
+      "frontend_src_main_cachedlicenseinactive",
+      "frontend_src_main_cachedunlock",
+      "frontend_src_main_checker",
+      "frontend_src_main_clonedemoreport",
+      "frontend_src_main_consumelicense",
+      "frontend_src_main_demo_report",
+      "frontend_src_main_demobanner",
+      "frontend_src_main_demomode",
+      "frontend_src_main_demoworkspace",
+      "frontend_src_main_discarddemodata",
+      "frontend_src_main_escapehtml",
+      "frontend_src_main_findingitem",
+      "frontend_src_main_footer",
+      "frontend_src_main_header",
+      "frontend_src_main_hero",
+      "frontend_src_main_icon",
+      "frontend_src_main_isdemoroute",
+      "frontend_src_main_legalpage",
+      "frontend_src_main_licenseinactive",
+      "frontend_src_main_markdemoactive",
+      "frontend_src_main_paysection",
+      "frontend_src_main_receivedlicense",
+      "frontend_src_main_render",
+      "frontend_src_main_resetdemo",
+      "frontend_src_main_restore",
+      "frontend_src_main_resultview",
+      "frontend_src_main_submitcheck",
+      "frontend_src_main_syncroutemode",
+      "frontend_src_main_unlocked",
+      "frontend_src_main_updateroutemetadata",
+      "frontend_src_main_verifylicense",
+      "frontend_src_rules_test",
+      "frontend_src_types",
+      "frontend_src_types_analysis",
+      "frontend_src_types_finding",
+      "frontend_src_types_severity",
+      "frontend_src_ui",
+      "frontend_src_ui_checklistcsv",
+      "frontend_src_ui_csvcell",
+      "frontend_src_ui_downloadchecklist",
+      "frontend_src_ui_verdictcopy"
+    ],
+    "1": [
       "analysis",
       "analyzerequest",
       "arc",
@@ -20,6 +67,7 @@
       "src_main_appstate",
       "src_main_build_router",
       "src_main_build_sha",
+      "src_main_default_database_url",
       "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
       "src_main_errorbody",
       "src_main_first_forwarded_ip",
@@ -44,49 +92,6 @@
       "statuscode",
       "string",
       "tempdir"
-    ],
-    "1": [
-      "frontend_src_main",
-      "frontend_src_main_apppage",
-      "frontend_src_main_bind",
-      "frontend_src_main_cachedlicenseinactive",
-      "frontend_src_main_cachedunlock",
-      "frontend_src_main_checker",
-      "frontend_src_main_clonedemoreport",
-      "frontend_src_main_consumelicense",
-      "frontend_src_main_demo_report",
-      "frontend_src_main_demobanner",
-      "frontend_src_main_demoworkspace",
-      "frontend_src_main_discarddemodata",
-      "frontend_src_main_escapehtml",
-      "frontend_src_main_findingitem",
-      "frontend_src_main_footer",
-      "frontend_src_main_header",
-      "frontend_src_main_hero",
-      "frontend_src_main_icon",
-      "frontend_src_main_legalpage",
-      "frontend_src_main_licenseinactive",
-      "frontend_src_main_markdemoactive",
-      "frontend_src_main_paysection",
-      "frontend_src_main_receivedlicense",
-      "frontend_src_main_render",
-      "frontend_src_main_resetdemo",
-      "frontend_src_main_restore",
-      "frontend_src_main_resultview",
-      "frontend_src_main_submitcheck",
-      "frontend_src_main_unlocked",
-      "frontend_src_main_updateroutemetadata",
-      "frontend_src_main_verifylicense",
-      "frontend_src_rules_test",
-      "frontend_src_types",
-      "frontend_src_types_analysis",
-      "frontend_src_types_finding",
-      "frontend_src_types_severity",
-      "frontend_src_ui",
-      "frontend_src_ui_checklistcsv",
-      "frontend_src_ui_csvcell",
-      "frontend_src_ui_downloadchecklist",
-      "frontend_src_ui_verdictcopy"
     ],
     "2": [
       "geopoint",
@@ -144,6 +149,7 @@
       "package_scripts_test_e2e",
       "package_scripts_typecheck",
       "package_scripts_verify_deployed",
+      "package_scripts_verify_live_polish",
       "package_type",
       "package_version",
       "playwright_test",
@@ -226,42 +232,46 @@
       "frontend_public_sw_shell"
     ],
     "9": [
+      "scripts_verify_live_polish",
+      "scripts_verify_live_polish_report"
+    ],
+    "10": [
       "tests_e2e_app_spec",
       "tests_e2e_app_spec_report"
     ],
-    "10": [
+    "11": [
       "pkg_cycle_legal_profile_check"
     ],
-    "11": [
+    "12": [
       "playwright_config"
     ],
-    "12": [
+    "13": [
       "src_analyzer_rs_hashmap"
     ],
-    "13": [
+    "14": [
       "src_analyzer_rs_vec"
     ],
-    "14": [
+    "15": [
       "src_main_rs_analysis"
     ],
-    "15": [
+    "16": [
       "src_main_rs_option"
     ],
-    "16": [
+    "17": [
       "src_main_rs_result"
     ],
-    "17": [
+    "18": [
       "src_main_rs_string"
     ],
-    "18": [
+    "19": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.10631229235880399,
-    "1": 0.1073170731707317,
+    "0": 0.10101010101010101,
+    "1": 0.10359408033826638,
     "2": 0.13763440860215054,
-    "3": 0.06896551724137931,
+    "3": 0.06666666666666667,
     "4": 0.08695652173913043,
     "5": 0.11695906432748537,
     "6": 0.3047619047619048,
@@ -276,7 +286,8 @@
     "15": 1.0,
     "16": 1.0,
     "17": 1.0,
-    "18": 1.0
+    "18": 1.0,
+    "19": 1.0
   },
   "gods": [
     {
@@ -300,24 +311,14 @@
       "degree": 12
     },
     {
-      "id": "src_main_appstate",
-      "label": "AppState",
-      "degree": 11
-    },
-    {
       "id": "src_analyzer_parse_gpx",
       "label": "parse_gpx()",
       "degree": 11
     },
     {
-      "id": "frontend_src_main_apppage",
-      "label": "appPage()",
-      "degree": 10
-    },
-    {
-      "id": "src_main_get",
-      "label": "get()",
-      "degree": 10
+      "id": "src_main_appstate",
+      "label": "AppState",
+      "degree": 11
     },
     {
       "id": "tsconfig_compileroptions",
@@ -325,9 +326,19 @@
       "degree": 10
     },
     {
-      "id": "src_main_static_fixture",
-      "label": "static_fixture()",
-      "degree": 9
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
+      "degree": 10
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 10
+    },
+    {
+      "id": "src_main_get",
+      "label": "get()",
+      "degree": 10
     }
   ],
   "surprises": [

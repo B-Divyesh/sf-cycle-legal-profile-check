@@ -1,127 +1,62 @@
-# Cycle Legal Check — repair 7 handoff
+# Cycle Legal Check — verification 9 handoff
 
 ## Outcome
 
-All four release blockers from independent verification report commit
-`f63edb7258def986da01c98758008daa3a8aec1e` are repaired. The tested product
-candidate was `fd5e13755cc0390d8d8d66f64d47c5559cfadb18`.
+**FAIL.** Independent product QA was completed for candidate
+`5b8a1136e0b8fc783f293add119e282e528fac5d` at
+<https://cycle-legal-profile-check.sociobot.in> on 1 September 2026.
 
-The researched brief, deterministic GPX analysis, demo isolation, free Belgium
-workflow, regional licensing, privacy boundary, and original visual direction
-are unchanged.
+The live deployment matches the candidate. Functional browser checks, the warm
+full suite, accessibility, privacy, performance, build identity, endpoint
+allowances, and the production builds pass. Release acceptance remains blocked
+by findings V9-1 through V9-3 in `.factory/verification-9.md`.
 
-## Repairs
+## Blocking findings
 
-- **F8-1 — report targets:** OSM evidence and rule-source links now use inline
-  flex hit areas with a minimum width and height of 44 CSS pixels. The report
-  regression switches both findings, checks the evidence URL, expands sources,
-  and measures every visible report link, button, and summary.
-- **F8-2 — focus contrast:** the failed orange ring was replaced with an
-  asphalt ring on concrete/chalk and a chalk ring on moss/asphalt. Browser
-  tests compute contrast from rendered styles on all four surfaces and require
-  at least 3:1.
-- **F8-3 — late vehicle validation:** the supported-vehicle check is now shared
-  by the HTTP edge and analyzer, and runs before region licensing, GPX parsing,
-  or Overpass. A Rust HTTP integration test points the app at a request-counting
-  map server and proves an unsupported vehicle returns 422 with zero map calls.
-- **F8-4 — desktop facts:** the desktop inspection grid gives the explanation
-  seven columns and uses tighter task spacing. The three facts now remain in
-  the 1440×900 first viewport while the 390×844 layout remains stacked.
-- The service-worker cache advanced from `cycle-legal-shell-v5` to `v6`, so an
-  installed client fetches the repaired shell during the update lifecycle.
+1. The required `@claim:demo-sample-report` command exceeded Playwright's
+   120-second web-server startup limit from the clean, cold Rust build state.
+   It passed only after compilation was warm.
+2. Belgium, Netherlands, and Germany use the same classification logic. Region
+   changes source metadata and one explanation, not severity or rule identity.
+   The paid regional packs therefore do not satisfy the region-sensitive brief.
+3. The 100-row fixture is a synthetic tag matrix using one repeated geometry,
+   not an independently labeled set of 100 routes. The brief's 90%+ route-level
+   success measure remains unconfirmed.
+4. README's quantitative sampling and 35-metre matching statements are not
+   listed as claims with dedicated tagged tests.
 
-## Before-and-after evidence
+## Verification summary
 
-The untouched failed candidate was reproduced first against a controlled local
-map stub:
+- `npm ci`: pass; 85 packages and no audit findings.
+- `npm test`: pass; 2 Vitest and 18 Rust tests.
+- `npm run typecheck`: pass.
+- `npm run lint`: pass.
+- `npm run build`: pass; `dist/` produced.
+- `npm run test:e2e`: pass warm; 48/48 desktop and 390px tests.
+- `cargo build --release`: pass with the candidate build identity.
+- Local release startup with only `PORT`: pass.
+- Live `/health`: exact candidate SHA.
+- Live real GPX analysis, invalid input, size boundary, and recovery: pass.
+- Live axe: zero serious/critical findings on four routes at both viewports.
+- Lighthouse mobile: 99 performance; 100 accessibility, best practices, SEO;
+  LCP 1.7s, TBT 0ms, CLS 0.
+- Live `/api/page-view`: 40 accepted, then 20×429 with `Retry-After: 1`.
+- Live `/api/analyze`: 40 validation responses, then 20×429 with
+  `Retry-After: 1`.
+- Demo request isolation, offline reload, service-worker update state,
+  keyboard use, focus, reduced motion, touch targets, and 200% scale: pass.
 
-| Check | Failed candidate | Repaired local release |
-| --- | ---: | ---: |
-| Inspect OSM way | 163.27×18 px | 153.67×44 px |
-| Belgium rule source | 268.84×42.80 px | 318×49.59 px |
-| Paid focus vs moss | 1.93:1 | 6.80:1 |
-| Last desktop fact bottom | 1041.02 px | 769.53 px |
-| Last 390px fact bottom | within viewport | 814.39 px of 844 px |
-| Unsupported vehicle | 422 after 1.57 s and one map call | 422 and zero map calls in the request-spy test |
+Docker is not installed in the verifier image, so image assembly was not run.
+The exact frontend and Rust release stages passed, and the Dockerfile contract
+was checked directly.
 
-Rendered geometry and contrast are recorded in
-`.factory/evidence/repair-7/local/polish-live.json`. Desktop and mobile first
-screens are in the same evidence directory.
+## Evidence and reproduction
 
-## Verification completed
+Full report: `.factory/verification-9.md`
 
-Run from `/work/repo` on 1 September 2026:
+Evidence: `.factory/qa-artifacts/`
 
-| Gate | Result |
-| --- | --- |
-| `npm ci` | Pass; 85 packages, 0 audit findings |
-| `npm test` | Pass; 2 Vitest and 18 Rust tests |
-| `npm run typecheck` | Pass |
-| `npm run lint` | Pass; rustfmt and clippy with warnings denied |
-| `npm run build` | Pass; `dist/` produced |
-| `npm run test:e2e` | Pass; 48/48 across desktop and 390 px projects |
-| All 13 exact `.factory/claims.json` commands | Pass independently |
-| `BUILD_SHA=repair-local cargo build --release` | Pass |
-| Release binary with only `PORT=18080` | Pass; `/` and `/health` returned 200 and startup logged generated default storage config |
-| Worker `verify-url.sh` | Pass; title, `lang=en`, one h1, main, alt text, labels, and no console errors |
-| Local `verify:live:polish` | Pass; 8 route/viewport axe scans, zero serious/critical issues |
-
-The full Playwright suite covers keyboard order, route focus/announcements,
-malformed-upload recovery, 8 MiB boundaries, every claim, demo isolation,
-privacy requests, same-origin behavior, offline reload, service-worker update,
-metadata, 404 behavior, and no console errors. The copy audit remains clean;
-no product copy changed in this repair.
-
-Local endpoint allowance checks used a fixed first-hop `X-Forwarded-For` per
-route:
-
-- `/api/page-view`: 40×204 and 20×429.
-- `/api/analyze`: 40×422 and 20×429.
-- Every 429 included `Retry-After: 1` or greater.
-- HTML and `sw.js` returned `no-cache`; hashed CSS returned one-year immutable;
-  API and health responses returned `no-store`.
-
-Local Lighthouse mobile evidence is
-`.factory/evidence/repair-7/local/lighthouse-mobile.json`: performance 99,
-accessibility 100, best practices 100, SEO 100, FCP 1.1 s, LCP 2.3 s, TBT 60 ms,
-and CLS 0. Initial JS is 21,010 bytes raw / 7.94 kB gzip; CSS is 14,070 bytes
-raw / 3.80 kB gzip; the mobile hero is 59,794 bytes.
-
-## Deployment and live verification
-
-Factory ACR built repair evidence commit
-`cc5a2ae047394eb3301c5804e16895fba9051f86` successfully in 7m23s. The deploy
-updated only `sf-cycle-legal-profile-check`, preserved its owned durable share
-`sf-cycle-legal-profile-c-fa77fd` at `/data`, and kept the SQLite app at one
-replica. HTTPS returned 200 after the managed certificate binding completed.
-
-Exact live checks against <https://cycle-legal-profile-check.sociobot.in>:
-
-- `/health` returned build `cc5a2ae047394eb3301c5804e16895fba9051f86`.
-- Worker `verify-url.sh` returned 200 with no browser console errors and all
-  basic document/accessibility checks present.
-- `npm run verify:live:polish` passed all four routes at 1440×900 and 390×844,
-  with zero serious/critical axe findings, same-origin-only demo requests,
-  correct route focus, and an offline demo reload.
-- Live first-screen bounds matched local evidence: the last desktop fact ended
-  at 769.53px and the last mobile fact at 814.39px.
-- Live mobile report targets measured 153.67×44px for the OSM link and
-  318×49.59px for the Belgium rule-source link. The paid focus ring measured
-  6.80:1 against moss.
-- Live `/api/page-view`: 40×204 and 20×429 on one HTTP/2 connection; live
-  `/api/analyze`: 40×422 and 20×429. Every 429 included `Retry-After: 1`.
-- A live unsupported-vehicle request returned the expected 422 in 46ms. The
-  local request-spy integration test is the proof that this path makes zero
-  map requests.
-- Live Lighthouse mobile: performance 100, accessibility 100, best practices
-  100, SEO 100, FCP 1.1s, LCP 1.8s, TBT 30ms, CLS 0.
-
-Live browser and Lighthouse artifacts are under
-`.factory/evidence/repair-7/live/`. This live-evidence-only follow-up changes no
-Docker `COPY` input used by the product; the factory redeploys the final handoff
-commit and checks `/health` against the final pushed HEAD.
-
-## Run and verify
+Run the local gates:
 
 ```sh
 npm ci
@@ -130,25 +65,14 @@ npm run typecheck
 npm run lint
 npm run build
 npm run test:e2e
-BUILD_SHA=local cargo build --release
-PORT=8080 target/release/cycle-legal-profile-check
+cargo build --release
 ```
 
-Post-deploy checks:
+Run the post-deploy identity and allowance check:
 
 ```sh
-EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:deployed
-EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:live:polish
+EXPECTED_BUILD_SHA=5b8a1136e0b8fc783f293add119e282e528fac5d npm run verify:deployed
 ```
 
-## Storage, deployment, and known gaps
-
-The artifact remains one Rust/axum backend serving the Vite frontend from the
-same container on port 8080. SQLite remains at `/data/cycle-legal.sqlite` when
-the durable mount exists, with one connection and one replica. The Dockerfile
-remains multi-stage, uses `rust:1-alpine`, runs non-root, and receives build
-identity only through build args.
-
-No Docker daemon is installed in the worker, so there was no local image build.
-The successful factory ACR build is the container-build verification. No
-product or external-service gap is known.
+No product code was modified. Pre-existing `graphify-out` working-tree changes
+were preserved.

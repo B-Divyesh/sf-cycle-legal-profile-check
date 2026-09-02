@@ -9,7 +9,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "analysis",
       "source_file": "frontend/src/types.ts",
@@ -21,7 +21,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "finding",
       "source_file": "frontend/src/types.ts",
@@ -33,7 +33,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "severity",
       "source_file": "frontend/src/types.ts",
@@ -44,7 +44,7 @@
       "label": "announceRoute()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "announceroute()",
       "source_file": "frontend/src/main.ts",
@@ -55,7 +55,7 @@
       "label": "appPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "apppage()",
       "source_file": "frontend/src/main.ts",
@@ -66,7 +66,7 @@
       "label": "bind()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "bind()",
       "source_file": "frontend/src/main.ts",
@@ -77,7 +77,7 @@
       "label": "cachedLicenseInactive()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "cachedlicenseinactive()",
       "source_file": "frontend/src/main.ts",
@@ -88,7 +88,7 @@
       "label": "cachedUnlock()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "cachedunlock()",
       "source_file": "frontend/src/main.ts",
@@ -99,7 +99,7 @@
       "label": "checker()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "checker()",
       "source_file": "frontend/src/main.ts",
@@ -110,7 +110,7 @@
       "label": "clearBrowserData()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "clearbrowserdata()",
       "source_file": "frontend/src/main.ts",
@@ -121,7 +121,7 @@
       "label": "cloneDemoReport()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "clonedemoreport()",
       "source_file": "frontend/src/main.ts",
@@ -132,7 +132,7 @@
       "label": "consumeLicense()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "consumelicense()",
       "source_file": "frontend/src/main.ts",
@@ -143,7 +143,7 @@
       "label": "demoBanner()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "demobanner()",
       "source_file": "frontend/src/main.ts",
@@ -154,7 +154,7 @@
       "label": "demoWorkspace()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "demoworkspace()",
       "source_file": "frontend/src/main.ts",
@@ -165,7 +165,7 @@
       "label": "discardDemoData()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "discarddemodata()",
       "source_file": "frontend/src/main.ts",
@@ -176,7 +176,7 @@
       "label": "escapeHtml()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "escapehtml()",
       "source_file": "frontend/src/main.ts",
@@ -187,7 +187,7 @@
       "label": "findingItem()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "findingitem()",
       "source_file": "frontend/src/main.ts",
@@ -198,7 +198,7 @@
       "label": "footer()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "footer()",
       "source_file": "frontend/src/main.ts",
@@ -209,7 +209,7 @@
       "label": "header()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "header()",
       "source_file": "frontend/src/main.ts",
@@ -220,7 +220,7 @@
       "label": "hero()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "hero()",
       "source_file": "frontend/src/main.ts",
@@ -231,7 +231,7 @@
       "label": "icon()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "icon()",
       "source_file": "frontend/src/main.ts",
@@ -242,7 +242,7 @@
       "label": "isDemoRoute()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "isdemoroute()",
       "source_file": "frontend/src/main.ts",
@@ -253,7 +253,7 @@
       "label": "legalPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "legalpage()",
       "source_file": "frontend/src/main.ts",
@@ -264,7 +264,7 @@
       "label": "markDemoActive()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "markdemoactive()",
       "source_file": "frontend/src/main.ts",
@@ -275,7 +275,7 @@
       "label": "paySection()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "paysection()",
       "source_file": "frontend/src/main.ts",
@@ -286,7 +286,7 @@
       "label": "render()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "frontend/src/main.ts",
@@ -297,7 +297,7 @@
       "label": "resetDemo()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "resetdemo()",
       "source_file": "frontend/src/main.ts",
@@ -308,7 +308,7 @@
       "label": "restore()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "restore()",
       "source_file": "frontend/src/main.ts",
@@ -319,7 +319,7 @@
       "label": "resultView()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "resultview()",
       "source_file": "frontend/src/main.ts",
@@ -330,7 +330,7 @@
       "label": "submitCheck()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "submitcheck()",
       "source_file": "frontend/src/main.ts",
@@ -341,7 +341,7 @@
       "label": "syncRouteMode()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "syncroutemode()",
       "source_file": "frontend/src/main.ts",
@@ -352,7 +352,7 @@
       "label": "updateRouteMetadata()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "updateroutemetadata()",
       "source_file": "frontend/src/main.ts",
@@ -363,7 +363,7 @@
       "label": "verifyLicense()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "verifylicense()",
       "source_file": "frontend/src/main.ts",
@@ -374,7 +374,7 @@
       "label": "checklistCsv()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "checklistcsv()",
       "source_file": "frontend/src/ui.ts",
@@ -385,7 +385,7 @@
       "label": "csvCell()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "csvcell()",
       "source_file": "frontend/src/ui.ts",
@@ -396,7 +396,7 @@
       "label": "downloadChecklist()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "downloadchecklist()",
       "source_file": "frontend/src/ui.ts",
@@ -407,7 +407,7 @@
       "label": "verdictCopy()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "verdictcopy()",
       "source_file": "frontend/src/ui.ts",
@@ -499,12 +499,12 @@
       "source_location": ""
     },
     {
-      "id": "intoresponse",
-      "label": "IntoResponse",
+      "id": "error",
+      "label": "Error",
       "_origin": "ast",
       "community": 0,
       "file_type": "code",
-      "norm_label": "intoresponse",
+      "norm_label": "error",
       "source_file": "",
       "source_location": ""
     },
@@ -519,32 +519,12 @@
       "source_location": ""
     },
     {
-      "id": "json",
-      "label": "Json",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "json",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "next",
       "label": "Next",
       "_origin": "ast",
       "community": 0,
       "file_type": "code",
       "norm_label": "next",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "option",
-      "label": "Option",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "option",
       "source_file": "",
       "source_location": ""
     },
@@ -565,16 +545,6 @@
       "community": 0,
       "file_type": "code",
       "norm_label": "request",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "response",
-      "label": "Response",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "response",
       "source_file": "",
       "source_location": ""
     },
@@ -626,7 +596,7 @@
       "file_type": "code",
       "norm_label": "analyzer_capacity_429_has_retry_after()",
       "source_file": "src/main.rs",
-      "source_location": "L987"
+      "source_location": "L1067"
     },
     {
       "id": "src_main_api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second",
@@ -636,27 +606,7 @@
       "file_type": "code",
       "norm_label": "api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second()",
       "source_file": "src/main.rs",
-      "source_location": "L938"
-    },
-    {
-      "id": "src_main_apierror",
-      "label": "ApiError",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "apierror",
-      "source_file": "src/main.rs",
-      "source_location": "L414"
-    },
-    {
-      "id": "src_main_apierror_into_response",
-      "label": ".into_response()",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": ".into_response()",
-      "source_file": "src/main.rs",
-      "source_location": "L416"
+      "source_location": "L1018"
     },
     {
       "id": "src_main_appstate",
@@ -676,7 +626,7 @@
       "file_type": "code",
       "norm_label": "build_router()",
       "source_file": "src/main.rs",
-      "source_location": "L186"
+      "source_location": "L202"
     },
     {
       "id": "src_main_build_sha",
@@ -686,7 +636,7 @@
       "file_type": "code",
       "norm_label": "build_sha()",
       "source_file": "src/main.rs",
-      "source_location": "L270"
+      "source_location": "L286"
     },
     {
       "id": "src_main_cache_policy",
@@ -696,7 +646,7 @@
       "file_type": "code",
       "norm_label": "cache_policy()",
       "source_file": "src/main.rs",
-      "source_location": "L295"
+      "source_location": "L311"
     },
     {
       "id": "src_main_client_ip_addresses_are_not_persisted",
@@ -706,7 +656,27 @@
       "file_type": "code",
       "norm_label": "client_ip_addresses_are_not_persisted()",
       "source_file": "src/main.rs",
-      "source_location": "L726"
+      "source_location": "L806"
+    },
+    {
+      "id": "src_main_database_path_uses_dotfile_locking_and_local_fallback",
+      "label": "database_path_uses_dotfile_locking_and_local_fallback()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "database_path_uses_dotfile_locking_and_local_fallback()",
+      "source_file": "src/main.rs",
+      "source_location": "L528"
+    },
+    {
+      "id": "src_main_database_url_for_paths",
+      "label": "database_url_for_paths()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "database_url_for_paths()",
+      "source_file": "src/main.rs",
+      "source_location": "L170"
     },
     {
       "id": "src_main_default_database_url",
@@ -716,7 +686,7 @@
       "file_type": "code",
       "norm_label": "default_database_url()",
       "source_file": "src/main.rs",
-      "source_location": "L174"
+      "source_location": "L166"
     },
     {
       "id": "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
@@ -726,7 +696,7 @@
       "file_type": "code",
       "norm_label": "demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404()",
       "source_file": "src/main.rs",
-      "source_location": "L772"
+      "source_location": "L852"
     },
     {
       "id": "src_main_errorbody",
@@ -756,7 +726,7 @@
       "file_type": "code",
       "norm_label": "fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route()",
       "source_file": "src/main.rs",
-      "source_location": "L874"
+      "source_location": "L954"
     },
     {
       "id": "src_main_forwarded_client_parser_accepts_ingress_address_forms",
@@ -766,7 +736,7 @@
       "file_type": "code",
       "norm_label": "forwarded_client_parser_accepts_ingress_address_forms()",
       "source_file": "src/main.rs",
-      "source_location": "L970"
+      "source_location": "L1050"
     },
     {
       "id": "src_main_get",
@@ -776,27 +746,7 @@
       "file_type": "code",
       "norm_label": "get()",
       "source_file": "src/main.rs",
-      "source_location": "L505"
-    },
-    {
-      "id": "src_main_gpx_analysis_never_persists_route_data",
-      "label": "gpx_analysis_never_persists_route_data()",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "gpx_analysis_never_persists_route_data()",
-      "source_file": "src/main.rs",
-      "source_location": "L608"
-    },
-    {
-      "id": "src_main_health",
-      "label": "health()",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "health()",
-      "source_file": "src/main.rs",
-      "source_location": "L266"
+      "source_location": "L585"
     },
     {
       "id": "src_main_health_never_reports_the_old_unknown_sentinel",
@@ -806,7 +756,7 @@
       "file_type": "code",
       "norm_label": "health_never_reports_the_old_unknown_sentinel()",
       "source_file": "src/main.rs",
-      "source_location": "L813"
+      "source_location": "L893"
     },
     {
       "id": "src_main_is_hashed_asset",
@@ -816,7 +766,7 @@
       "file_type": "code",
       "norm_label": "is_hashed_asset()",
       "source_file": "src/main.rs",
-      "source_location": "L308"
+      "source_location": "L324"
     },
     {
       "id": "src_main_legal_routes_are_successful_direct_documents",
@@ -826,7 +776,7 @@
       "file_type": "code",
       "norm_label": "legal_routes_are_successful_direct_documents()",
       "source_file": "src/main.rs",
-      "source_location": "L757"
+      "source_location": "L837"
     },
     {
       "id": "src_main_main",
@@ -839,14 +789,14 @@
       "source_location": "L111"
     },
     {
-      "id": "src_main_overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name",
-      "label": "overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name()",
+      "id": "src_main_open_database",
+      "label": "open_database()",
       "_origin": "ast",
       "community": 0,
       "file_type": "code",
-      "norm_label": "overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name()",
+      "norm_label": "open_database()",
       "source_file": "src/main.rs",
-      "source_location": "L639"
+      "source_location": "L185"
     },
     {
       "id": "src_main_page_view",
@@ -856,7 +806,7 @@
       "file_type": "code",
       "norm_label": "page_view()",
       "source_file": "src/main.rs",
-      "source_location": "L319"
+      "source_location": "L335"
     },
     {
       "id": "src_main_page_views_persist_only_an_aggregate_counter",
@@ -866,17 +816,7 @@
       "file_type": "code",
       "norm_label": "page_views_persist_only_an_aggregate_counter()",
       "source_file": "src/main.rs",
-      "source_location": "L708"
-    },
-    {
-      "id": "src_main_rate_limit_response",
-      "label": "rate_limit_response()",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "rate_limit_response()",
-      "source_file": "src/main.rs",
-      "source_location": "L229"
+      "source_location": "L788"
     },
     {
       "id": "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
@@ -886,7 +826,7 @@
       "file_type": "code",
       "norm_label": "response_cache_policy_separates_updates_from_immutable_bundles()",
       "source_file": "src/main.rs",
-      "source_location": "L789"
+      "source_location": "L869"
     },
     {
       "id": "src_main_response_policy",
@@ -896,7 +836,47 @@
       "file_type": "code",
       "norm_label": "response_policy()",
       "source_file": "src/main.rs",
-      "source_location": "L286"
+      "source_location": "L302"
+    },
+    {
+      "id": "src_main_retained_data_directory_persists_database_across_restart",
+      "label": "retained_data_directory_persists_database_across_restart()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "retained_data_directory_persists_database_across_restart()",
+      "source_file": "src/main.rs",
+      "source_location": "L491"
+    },
+    {
+      "id": "src_main_rs_option",
+      "label": "Option",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "option",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_main_rs_string",
+      "label": "String",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "string",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_main_rs_vec",
+      "label": "Vec",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "vec",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "src_main_run_fixed_ip_burst",
@@ -906,7 +886,7 @@
       "file_type": "code",
       "norm_label": "run_fixed_ip_burst()",
       "source_file": "src/main.rs",
-      "source_location": "L825"
+      "source_location": "L905"
     },
     {
       "id": "src_main_shutdown",
@@ -916,7 +896,7 @@
       "file_type": "code",
       "norm_label": "shutdown()",
       "source_file": "src/main.rs",
-      "source_location": "L428"
+      "source_location": "L444"
     },
     {
       "id": "src_main_static_fixture",
@@ -926,7 +906,7 @@
       "file_type": "code",
       "norm_label": "static_fixture()",
       "source_file": "src/main.rs",
-      "source_location": "L474"
+      "source_location": "L554"
     },
     {
       "id": "src_main_test_state",
@@ -936,7 +916,7 @@
       "file_type": "code",
       "norm_label": "test_state()",
       "source_file": "src/main.rs",
-      "source_location": "L453"
+      "source_location": "L469"
     },
     {
       "id": "src_main_unsupported_region_is_rejected_before_billing",
@@ -946,7 +926,7 @@
       "file_type": "code",
       "norm_label": "unsupported_region_is_rejected_before_billing()",
       "source_file": "src/main.rs",
-      "source_location": "L513"
+      "source_location": "L593"
     },
     {
       "id": "src_main_unsupported_vehicle_is_rejected_before_any_map_request",
@@ -956,7 +936,7 @@
       "file_type": "code",
       "norm_label": "unsupported_vehicle_is_rejected_before_any_map_request()",
       "source_file": "src/main.rs",
-      "source_location": "L542"
+      "source_location": "L622"
     },
     {
       "id": "src_main_verify_paid",
@@ -966,7 +946,7 @@
       "file_type": "code",
       "norm_label": "verify_paid()",
       "source_file": "src/main.rs",
-      "source_location": "L393"
+      "source_location": "L409"
     },
     {
       "id": "src_main_verifyresponse",
@@ -979,36 +959,6 @@
       "source_location": "L106"
     },
     {
-      "id": "state",
-      "label": "State",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "state",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "statuscode",
-      "label": "StatusCode",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "statuscode",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "string",
-      "label": "String",
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "string",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "tempdir",
       "label": "TempDir",
       "_origin": "ast",
@@ -1019,114 +969,494 @@
       "source_location": ""
     },
     {
-      "id": "value",
-      "label": "Value",
+      "id": "geopoint",
+      "label": "GeoPoint",
       "_origin": "ast",
-      "community": 0,
+      "community": 1,
       "file_type": "code",
-      "norm_label": "value",
+      "norm_label": "geopoint",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "vec",
+      "id": "hashmap",
+      "label": "HashMap",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "hashmap",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "overpassway",
+      "label": "OverpassWay",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "overpassway",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "point",
+      "label": "Point",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "point",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "rulepack",
+      "label": "RulePack",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "rulepack",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "severity",
+      "label": "Severity",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "severity",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_analyzer",
+      "label": "analyzer.rs",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "analyzer.rs",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_analyzer_analyze",
+      "label": "analyze()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "analyze()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L104"
+    },
+    {
+      "id": "src_analyzer_analyzeerror",
+      "label": "AnalyzeError",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "analyzeerror",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_analyzer_analyzercontract",
+      "label": "AnalyzerContract",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "analyzercontract",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L436"
+    },
+    {
+      "id": "src_analyzer_analyzercontractcase",
+      "label": "AnalyzerContractCase",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "analyzercontractcase",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L441"
+    },
+    {
+      "id": "src_analyzer_assess_speed_pedelec_region",
+      "label": "assess_speed_pedelec_region()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "assess_speed_pedelec_region()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L256"
+    },
+    {
+      "id": "src_analyzer_assess_tags",
+      "label": "assess_tags()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "assess_tags()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L197"
+    },
+    {
+      "id": "src_analyzer_bicycle_no_is_prohibited",
+      "label": "bicycle_no_is_prohibited()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "bicycle_no_is_prohibited()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L550"
+    },
+    {
+      "id": "src_analyzer_contract_points",
+      "label": "contract_points()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "contract_points()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L505"
+    },
+    {
+      "id": "src_analyzer_contract_way",
+      "label": "contract_way()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "contract_way()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L520"
+    },
+    {
+      "id": "src_analyzer_distance_to_way",
+      "label": "distance_to_way()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "distance_to_way()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L397"
+    },
+    {
+      "id": "src_analyzer_evaluationpoint",
+      "label": "EvaluationPoint",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "evaluationpoint",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L494"
+    },
+    {
+      "id": "src_analyzer_evaluationway",
+      "label": "EvaluationWay",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "evaluationway",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L500"
+    },
+    {
+      "id": "src_analyzer_expecteddecision",
+      "label": "ExpectedDecision",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "expecteddecision",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L453"
+    },
+    {
+      "id": "src_analyzer_fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty",
+      "label": "fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L700"
+    },
+    {
+      "id": "src_analyzer_germany_pack_links_to_the_current_ministry_source",
+      "label": "germany_pack_links_to_the_current_ministry_source()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "germany_pack_links_to_the_current_ministry_source()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L572"
+    },
+    {
+      "id": "src_analyzer_haversine",
+      "label": "haversine()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "haversine()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L389"
+    },
+    {
+      "id": "src_analyzer_labeled_hundred_route_evaluation_detects_at_least_ninety_percent",
+      "label": "labeled_hundred_route_evaluation_detects_at_least_ninety_percent()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "labeled_hundred_route_evaluation_detects_at_least_ninety_percent()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L776"
+    },
+    {
+      "id": "src_analyzer_matching_radius_is_thirty_five_metres",
+      "label": "matching_radius_is_thirty_five_metres()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "matching_radius_is_thirty_five_metres()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L661"
+    },
+    {
+      "id": "src_analyzer_overpass_query",
+      "label": "overpass_query()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "overpass_query()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L90"
+    },
+    {
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "parse_gpx()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_analyzer_parses_and_measures_gpx",
+      "label": "parses_and_measures_gpx()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "parses_and_measures_gpx()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L538"
+    },
+    {
+      "id": "src_analyzer_point_segment_km",
+      "label": "point_segment_km()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "point_segment_km()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L406"
+    },
+    {
+      "id": "src_analyzer_regional_cycleway_rules_are_distinct_and_cautious",
+      "label": "regional_cycleway_rules_are_distinct_and_cautious()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "regional_cycleway_rules_are_distinct_and_cautious()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L585"
+    },
+    {
+      "id": "src_analyzer_rejects_short_gpx",
+      "label": "rejects_short_gpx()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "rejects_short_gpx()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L543"
+    },
+    {
+      "id": "src_analyzer_relevant_tags",
+      "label": "relevant_tags()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "relevant_tags()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L324"
+    },
+    {
+      "id": "src_analyzer_round1",
+      "label": "round1()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "round1()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L386"
+    },
+    {
+      "id": "src_analyzer_routeevaluationcase",
+      "label": "RouteEvaluationCase",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "routeevaluationcase",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L466"
+    },
+    {
+      "id": "src_analyzer_routeevaluationcorpus",
+      "label": "RouteEvaluationCorpus",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "routeevaluationcorpus",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L459"
+    },
+    {
+      "id": "src_analyzer_routelabelbasis",
+      "label": "RouteLabelBasis",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "routelabelbasis",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L478"
+    },
+    {
+      "id": "src_analyzer_routesource",
+      "label": "RouteSource",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "routesource",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L484"
+    },
+    {
+      "id": "src_analyzer_rs_analysis",
+      "label": "Analysis",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "analysis",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_analyzer_rs_option",
+      "label": "Option",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "option",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_analyzer_rs_result",
+      "label": "Result",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "result",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_analyzer_rs_string",
+      "label": "String",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "string",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_analyzer_rs_vec",
       "label": "Vec",
       "_origin": "ast",
-      "community": 0,
+      "community": 1,
       "file_type": "code",
       "norm_label": "vec",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "frontend_src_main",
-      "label": "main.ts",
+      "id": "src_analyzer_rule_pack",
+      "label": "rule_pack()",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "main.ts",
-      "source_file": "frontend/src/main.ts",
-      "source_location": "L1"
+      "norm_label": "rule_pack()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L344"
     },
     {
-      "id": "frontend_src_main_demo_report",
-      "label": "DEMO_REPORT",
+      "id": "src_analyzer_sample_points",
+      "label": "sample_points()",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "demo_report",
-      "source_file": "frontend/src/main.ts",
-      "source_location": "L13"
+      "norm_label": "sample_points()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L70"
     },
     {
-      "id": "frontend_src_main_demomode",
-      "label": "demoMode",
+      "id": "src_analyzer_sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length",
+      "label": "sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length()",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "demomode",
-      "source_file": "frontend/src/main.ts",
-      "source_location": "L46"
+      "norm_label": "sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L619"
     },
     {
-      "id": "frontend_src_main_licenseinactive",
-      "label": "licenseInactive",
+      "id": "src_analyzer_severity_rank",
+      "label": "severity_rank()",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "licenseinactive",
-      "source_file": "frontend/src/main.ts",
-      "source_location": "L52"
+      "norm_label": "severity_rank()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L379"
     },
     {
-      "id": "frontend_src_main_receivedlicense",
-      "label": "receivedLicense",
+      "id": "src_analyzer_speed_pedelec_cycleway_is_uncertain",
+      "label": "speed_pedelec_cycleway_is_uncertain()",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "receivedlicense",
-      "source_file": "frontend/src/main.ts",
-      "source_location": "L343"
+      "norm_label": "speed_pedelec_cycleway_is_uncertain()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L555"
     },
     {
-      "id": "frontend_src_main_unlocked",
-      "label": "unlocked",
+      "id": "src_analyzer_unmatched_route_is_review",
+      "label": "unmatched_route_is_review()",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "unlocked",
-      "source_file": "frontend/src/main.ts",
-      "source_location": "L51"
+      "norm_label": "unmatched_route_is_review()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L563"
     },
     {
-      "id": "frontend_src_rules_test",
-      "label": "rules.test.ts",
+      "id": "src_analyzer_validate_vehicle",
+      "label": "validate_vehicle()",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "rules.test.ts",
-      "source_file": "frontend/src/rules.test.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_types",
-      "label": "types.ts",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "types.ts",
-      "source_file": "frontend/src/types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_ui",
-      "label": "ui.ts",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "ui.ts",
-      "source_file": "frontend/src/ui.ts",
-      "source_location": "L1"
+      "norm_label": "validate_vehicle()",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L24"
     },
     {
       "id": "frontend_public_sw",
@@ -1169,32 +1499,42 @@
       "source_location": "L1"
     },
     {
-      "id": "geopoint",
-      "label": "GeoPoint",
+      "id": "tests_runtime_contract",
+      "label": "runtime_contract.rs",
       "_origin": "ast",
       "community": 12,
       "file_type": "code",
-      "norm_label": "geopoint",
-      "source_file": "",
-      "source_location": ""
+      "norm_label": "runtime_contract.rs",
+      "source_file": "tests/runtime_contract.rs",
+      "source_location": "L1"
     },
     {
-      "id": "hashmap",
-      "label": "HashMap",
+      "id": "tests_runtime_contract_binary_starts_with_only_port_and_creates_database",
+      "label": "binary_starts_with_only_port_and_creates_database()",
+      "_origin": "ast",
+      "community": 12,
+      "file_type": "code",
+      "norm_label": "binary_starts_with_only_port_and_creates_database()",
+      "source_file": "tests/runtime_contract.rs",
+      "source_location": "L10"
+    },
+    {
+      "id": "analysis",
+      "label": "Analysis",
       "_origin": "ast",
       "community": 13,
       "file_type": "code",
-      "norm_label": "hashmap",
+      "norm_label": "analysis",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "overpassway",
-      "label": "OverpassWay",
+      "id": "option",
+      "label": "Option",
       "_origin": "ast",
       "community": 14,
       "file_type": "code",
-      "norm_label": "overpassway",
+      "norm_label": "option",
       "source_file": "",
       "source_location": ""
     },
@@ -1212,500 +1552,140 @@
       "version": "1.0.0"
     },
     {
-      "id": "point",
-      "label": "Point",
-      "_origin": "ast",
-      "community": 16,
-      "file_type": "code",
-      "norm_label": "point",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "rulepack",
-      "label": "RulePack",
-      "_origin": "ast",
-      "community": 17,
-      "file_type": "code",
-      "norm_label": "rulepack",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "severity",
-      "label": "Severity",
-      "_origin": "ast",
-      "community": 18,
-      "file_type": "code",
-      "norm_label": "severity",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_analyzer_rs_analysis",
-      "label": "Analysis",
-      "_origin": "ast",
-      "community": 19,
-      "file_type": "code",
-      "norm_label": "analysis",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "analysis",
-      "label": "Analysis",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "analysis",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "analyzerequest",
-      "label": "AnalyzeRequest",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "analyzerequest",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "result",
       "label": "Result",
       "_origin": "ast",
-      "community": 2,
+      "community": 16,
       "file_type": "code",
       "norm_label": "result",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_analyzer",
-      "label": "analyzer.rs",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "analyzer.rs",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_analyzer_analyze",
-      "label": "analyze()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "analyze()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L104"
-    },
-    {
-      "id": "src_analyzer_analyzeerror",
-      "label": "AnalyzeError",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "analyzeerror",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_analyzer_analyzercontract",
-      "label": "AnalyzerContract",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "analyzercontract",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L436"
-    },
-    {
-      "id": "src_analyzer_analyzercontractcase",
-      "label": "AnalyzerContractCase",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "analyzercontractcase",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L441"
-    },
-    {
-      "id": "src_analyzer_assess_speed_pedelec_region",
-      "label": "assess_speed_pedelec_region()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "assess_speed_pedelec_region()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L256"
-    },
-    {
-      "id": "src_analyzer_assess_tags",
-      "label": "assess_tags()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "assess_tags()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L197"
-    },
-    {
-      "id": "src_analyzer_bicycle_no_is_prohibited",
-      "label": "bicycle_no_is_prohibited()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "bicycle_no_is_prohibited()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L503"
-    },
-    {
-      "id": "src_analyzer_contract_points",
-      "label": "contract_points()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "contract_points()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L458"
-    },
-    {
-      "id": "src_analyzer_contract_way",
-      "label": "contract_way()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "contract_way()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L473"
-    },
-    {
-      "id": "src_analyzer_distance_to_way",
-      "label": "distance_to_way()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "distance_to_way()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L397"
-    },
-    {
-      "id": "src_analyzer_expecteddecision",
-      "label": "ExpectedDecision",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "expecteddecision",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L453"
-    },
-    {
-      "id": "src_analyzer_fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty",
-      "label": "fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L653"
-    },
-    {
-      "id": "src_analyzer_germany_pack_links_to_the_current_ministry_source",
-      "label": "germany_pack_links_to_the_current_ministry_source()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "germany_pack_links_to_the_current_ministry_source()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L525"
-    },
-    {
-      "id": "src_analyzer_haversine",
-      "label": "haversine()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "haversine()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L389"
-    },
-    {
-      "id": "src_analyzer_matching_radius_is_thirty_five_metres",
-      "label": "matching_radius_is_thirty_five_metres()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "matching_radius_is_thirty_five_metres()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L614"
-    },
-    {
-      "id": "src_analyzer_overpass_query",
-      "label": "overpass_query()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "overpass_query()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L90"
-    },
-    {
-      "id": "src_analyzer_parse_gpx",
-      "label": "parse_gpx()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "parse_gpx()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L32"
-    },
-    {
-      "id": "src_analyzer_parses_and_measures_gpx",
-      "label": "parses_and_measures_gpx()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "parses_and_measures_gpx()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L491"
-    },
-    {
-      "id": "src_analyzer_point_segment_km",
-      "label": "point_segment_km()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "point_segment_km()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L406"
-    },
-    {
-      "id": "src_analyzer_regional_cycleway_rules_are_distinct_and_cautious",
-      "label": "regional_cycleway_rules_are_distinct_and_cautious()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "regional_cycleway_rules_are_distinct_and_cautious()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L538"
-    },
-    {
-      "id": "src_analyzer_rejects_short_gpx",
-      "label": "rejects_short_gpx()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "rejects_short_gpx()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L496"
-    },
-    {
-      "id": "src_analyzer_relevant_tags",
-      "label": "relevant_tags()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "relevant_tags()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L324"
-    },
-    {
-      "id": "src_analyzer_round1",
-      "label": "round1()",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "round1()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L386"
-    },
-    {
       "id": "src_analyzer_rs_hashmap",
       "label": "HashMap",
       "_origin": "ast",
-      "community": 2,
+      "community": 17,
       "file_type": "code",
       "norm_label": "hashmap",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_analyzer_rs_option",
-      "label": "Option",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "option",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_analyzer_rs_string",
+      "id": "string",
       "label": "String",
       "_origin": "ast",
-      "community": 2,
+      "community": 18,
       "file_type": "code",
       "norm_label": "string",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_analyzer_rs_vec",
+      "id": "vec",
       "label": "Vec",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "file_type": "code",
       "norm_label": "vec",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_analyzer_rule_pack",
-      "label": "rule_pack()",
+      "id": "frontend_src_main",
+      "label": "main.ts",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "rule_pack()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L344"
+      "norm_label": "main.ts",
+      "source_file": "frontend/src/main.ts",
+      "source_location": "L1"
     },
     {
-      "id": "src_analyzer_sample_points",
-      "label": "sample_points()",
+      "id": "frontend_src_main_demo_report",
+      "label": "DEMO_REPORT",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "sample_points()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L70"
+      "norm_label": "demo_report",
+      "source_file": "frontend/src/main.ts",
+      "source_location": "L13"
     },
     {
-      "id": "src_analyzer_sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length",
-      "label": "sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length()",
+      "id": "frontend_src_main_demomode",
+      "label": "demoMode",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L572"
+      "norm_label": "demomode",
+      "source_file": "frontend/src/main.ts",
+      "source_location": "L46"
     },
     {
-      "id": "src_analyzer_speed_pedelec_cycleway_is_uncertain",
-      "label": "speed_pedelec_cycleway_is_uncertain()",
+      "id": "frontend_src_main_licenseinactive",
+      "label": "licenseInactive",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "speed_pedelec_cycleway_is_uncertain()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L508"
+      "norm_label": "licenseinactive",
+      "source_file": "frontend/src/main.ts",
+      "source_location": "L52"
     },
     {
-      "id": "src_analyzer_unmatched_route_is_review",
-      "label": "unmatched_route_is_review()",
+      "id": "frontend_src_main_receivedlicense",
+      "label": "receivedLicense",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "unmatched_route_is_review()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L516"
+      "norm_label": "receivedlicense",
+      "source_file": "frontend/src/main.ts",
+      "source_location": "L343"
     },
     {
-      "id": "src_analyzer_validate_vehicle",
-      "label": "validate_vehicle()",
+      "id": "frontend_src_main_unlocked",
+      "label": "unlocked",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "validate_vehicle()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L24"
+      "norm_label": "unlocked",
+      "source_file": "frontend/src/main.ts",
+      "source_location": "L51"
     },
     {
-      "id": "src_main_analyze_route",
-      "label": "analyze_route()",
+      "id": "frontend_src_rules_test",
+      "label": "rules.test.ts",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "analyze_route()",
-      "source_file": "src/main.rs",
-      "source_location": "L328"
+      "norm_label": "rules.test.ts",
+      "source_file": "frontend/src/rules.test.ts",
+      "source_location": "L1"
     },
     {
-      "id": "src_model_point",
-      "label": "Point",
+      "id": "frontend_src_types",
+      "label": "types.ts",
       "_origin": "ast",
       "community": 2,
       "file_type": "code",
-      "norm_label": "point",
-      "source_file": "src/model.rs",
-      "source_location": "L5"
+      "norm_label": "types.ts",
+      "source_file": "frontend/src/types.ts",
+      "source_location": "L1"
     },
     {
-      "id": "src_analyzer_rs_result",
-      "label": "Result",
+      "id": "frontend_src_ui",
+      "label": "ui.ts",
       "_origin": "ast",
-      "community": 20,
+      "community": 2,
       "file_type": "code",
-      "norm_label": "result",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_main_rs_analysis",
-      "label": "Analysis",
-      "_origin": "ast",
-      "community": 21,
-      "file_type": "code",
-      "norm_label": "analysis",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_main_rs_option",
-      "label": "Option",
-      "_origin": "ast",
-      "community": 22,
-      "file_type": "code",
-      "norm_label": "option",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_main_rs_result",
-      "label": "Result",
-      "_origin": "ast",
-      "community": 23,
-      "file_type": "code",
-      "norm_label": "result",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_main_rs_string",
-      "label": "String",
-      "_origin": "ast",
-      "community": 24,
-      "file_type": "code",
-      "norm_label": "string",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_main_rs_vec",
-      "label": "Vec",
-      "_origin": "ast",
-      "community": 25,
-      "file_type": "code",
-      "norm_label": "vec",
-      "source_file": "",
-      "source_location": ""
+      "norm_label": "ui.ts",
+      "source_file": "frontend/src/ui.ts",
+      "source_location": "L1"
     },
     {
       "id": "vite_config",
       "label": "vite.config.ts",
       "_origin": "ast",
-      "community": 26,
+      "community": 20,
       "file_type": "code",
       "norm_label": "vite.config.ts",
       "source_file": "vite.config.ts",
@@ -2012,390 +1992,20 @@
       "source_location": "L24"
     },
     {
-      "id": "tsconfig",
-      "label": "tsconfig.json",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "tsconfig.json",
-      "source_file": "tsconfig.json",
-      "source_location": "L1"
-    },
-    {
-      "id": "tsconfig_compileroptions",
-      "label": "compilerOptions",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "compileroptions",
-      "source_file": "tsconfig.json",
-      "source_location": "L2"
-    },
-    {
-      "id": "tsconfig_compileroptions_lib",
-      "label": "lib",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "lib",
-      "source_file": "tsconfig.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "tsconfig_compileroptions_module",
-      "label": "module",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "module",
-      "source_file": "tsconfig.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "tsconfig_compileroptions_moduleresolution",
-      "label": "moduleResolution",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "moduleresolution",
-      "source_file": "tsconfig.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "tsconfig_compileroptions_noemit",
-      "label": "noEmit",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "noemit",
-      "source_file": "tsconfig.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "tsconfig_compileroptions_skiplibcheck",
-      "label": "skipLibCheck",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "skiplibcheck",
-      "source_file": "tsconfig.json",
-      "source_location": "L11"
-    },
-    {
-      "id": "tsconfig_compileroptions_strict",
-      "label": "strict",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "strict",
-      "source_file": "tsconfig.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "tsconfig_compileroptions_target",
-      "label": "target",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "target",
-      "source_file": "tsconfig.json",
-      "source_location": "L3"
-    },
-    {
-      "id": "tsconfig_compileroptions_types",
-      "label": "types",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "types",
-      "source_file": "tsconfig.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "tsconfig_compileroptions_usedefineforclassfields",
-      "label": "useDefineForClassFields",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "usedefineforclassfields",
-      "source_file": "tsconfig.json",
-      "source_location": "L4"
-    },
-    {
-      "id": "tsconfig_include",
-      "label": "include",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "include",
-      "source_file": "tsconfig.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "ref_dom",
-      "label": "DOM",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "dom",
-      "source_file": "tsconfig.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "ref_dom_iterable",
-      "label": "DOM.Iterable",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "dom.iterable",
-      "source_file": "tsconfig.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "ref_es2022",
-      "label": "ES2022",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "es2022",
-      "source_file": "tsconfig.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "ref_frontend_src",
-      "label": "frontend/src",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "frontend/src",
-      "source_file": "tsconfig.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "ref_node",
-      "label": "node",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "node",
-      "source_file": "tsconfig.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "ref_playwright_config_ts",
-      "label": "playwright.config.ts",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "playwright.config.ts",
-      "source_file": "tsconfig.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "ref_tests_e2e",
-      "label": "tests/e2e",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "tests/e2e",
-      "source_file": "tsconfig.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "ref_vite_client",
-      "label": "vite/client",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "vite/client",
-      "source_file": "tsconfig.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "ref_vite_config_ts",
-      "label": "vite.config.ts",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "vite.config.ts",
-      "source_file": "tsconfig.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "ref_vitest_globals",
-      "label": "vitest/globals",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "vitest/globals",
-      "source_file": "tsconfig.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "ref_webworker",
-      "label": "WebWorker",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "concept",
-      "norm_label": "webworker",
-      "source_file": "tsconfig.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_analyzer_severity_rank",
-      "label": "severity_rank()",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "severity_rank()",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L379"
-    },
-    {
-      "id": "src_model",
-      "label": "model.rs",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "model.rs",
-      "source_file": "src/model.rs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_model_analysis",
-      "label": "Analysis",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "analysis",
-      "source_file": "src/model.rs",
-      "source_location": "L57"
-    },
-    {
-      "id": "src_model_analyzerequest",
+      "id": "analyzerequest",
       "label": "AnalyzeRequest",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "file_type": "code",
       "norm_label": "analyzerequest",
-      "source_file": "src/model.rs",
-      "source_location": "L12"
-    },
-    {
-      "id": "src_model_finding",
-      "label": "Finding",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "finding",
-      "source_file": "src/model.rs",
-      "source_location": "L28"
-    },
-    {
-      "id": "src_model_geopoint",
-      "label": "GeoPoint",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "geopoint",
-      "source_file": "src/model.rs",
-      "source_location": "L86"
-    },
-    {
-      "id": "src_model_overpassresponse",
-      "label": "OverpassResponse",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "overpassresponse",
-      "source_file": "src/model.rs",
-      "source_location": "L72"
-    },
-    {
-      "id": "src_model_overpassway",
-      "label": "OverpassWay",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "overpassway",
-      "source_file": "src/model.rs",
-      "source_location": "L77"
-    },
-    {
-      "id": "src_model_rs_hashmap",
-      "label": "HashMap",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "hashmap",
       "source_file": "",
       "source_location": ""
-    },
-    {
-      "id": "src_model_rs_option",
-      "label": "Option",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "option",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_model_rs_string",
-      "label": "String",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "string",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_model_rs_vec",
-      "label": "Vec",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "vec",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_model_rulepack",
-      "label": "RulePack",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "rulepack",
-      "source_file": "src/model.rs",
-      "source_location": "L50"
-    },
-    {
-      "id": "src_model_severity",
-      "label": "Severity",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "severity",
-      "source_file": "src/model.rs",
-      "source_location": "L21"
-    },
-    {
-      "id": "src_model_source",
-      "label": "Source",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "source",
-      "source_file": "src/model.rs",
-      "source_location": "L44"
     },
     {
       "id": "governorerror",
       "label": "GovernorError",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "file_type": "code",
       "norm_label": "governorerror",
       "source_file": "",
@@ -2405,9 +2015,29 @@
       "id": "httprequest",
       "label": "HttpRequest",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "file_type": "code",
       "norm_label": "httprequest",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "intoresponse",
+      "label": "IntoResponse",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "intoresponse",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "json",
+      "label": "Json",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "json",
       "source_file": "",
       "source_location": ""
     },
@@ -2415,7 +2045,7 @@
       "id": "key",
       "label": "Key",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "file_type": "code",
       "norm_label": "key",
       "source_file": "",
@@ -2425,17 +2055,57 @@
       "id": "keyextractor",
       "label": "KeyExtractor",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "file_type": "code",
       "norm_label": "keyextractor",
       "source_file": "",
       "source_location": ""
     },
     {
+      "id": "response",
+      "label": "Response",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "response",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_main_analyze_route",
+      "label": "analyze_route()",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "analyze_route()",
+      "source_file": "src/main.rs",
+      "source_location": "L344"
+    },
+    {
+      "id": "src_main_apierror",
+      "label": "ApiError",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "apierror",
+      "source_file": "src/main.rs",
+      "source_location": "L430"
+    },
+    {
+      "id": "src_main_apierror_into_response",
+      "label": ".into_response()",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": ".into_response()",
+      "source_file": "src/main.rs",
+      "source_location": "L432"
+    },
+    {
       "id": "src_main_firstforwardedipkeyextractor",
       "label": "FirstForwardedIpKeyExtractor",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "file_type": "code",
       "norm_label": "firstforwardedipkeyextractor",
       "source_file": "src/main.rs",
@@ -2445,21 +2115,491 @@
       "id": "src_main_firstforwardedipkeyextractor_extract",
       "label": ".extract()",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "file_type": "code",
       "norm_label": ".extract()",
       "source_file": "src/main.rs",
       "source_location": "L55"
     },
     {
+      "id": "src_main_gpx_analysis_never_persists_route_data",
+      "label": "gpx_analysis_never_persists_route_data()",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "gpx_analysis_never_persists_route_data()",
+      "source_file": "src/main.rs",
+      "source_location": "L688"
+    },
+    {
+      "id": "src_main_health",
+      "label": "health()",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "health()",
+      "source_file": "src/main.rs",
+      "source_location": "L282"
+    },
+    {
+      "id": "src_main_overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name",
+      "label": "overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name()",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name()",
+      "source_file": "src/main.rs",
+      "source_location": "L719"
+    },
+    {
+      "id": "src_main_rate_limit_response",
+      "label": "rate_limit_response()",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "rate_limit_response()",
+      "source_file": "src/main.rs",
+      "source_location": "L245"
+    },
+    {
+      "id": "src_main_rs_analysis",
+      "label": "Analysis",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "analysis",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_main_rs_result",
+      "label": "Result",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "result",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "state",
+      "label": "State",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "state",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "statuscode",
+      "label": "StatusCode",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "statuscode",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "t",
       "label": "T",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "file_type": "code",
       "norm_label": "t",
       "source_file": "",
       "source_location": ""
+    },
+    {
+      "id": "value",
+      "label": "Value",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "value",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "tsconfig",
+      "label": "tsconfig.json",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "tsconfig.json",
+      "source_file": "tsconfig.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "compileroptions",
+      "source_file": "tsconfig.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "tsconfig_compileroptions_lib",
+      "label": "lib",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "lib",
+      "source_file": "tsconfig.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "tsconfig_compileroptions_module",
+      "label": "module",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "module",
+      "source_file": "tsconfig.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "tsconfig_compileroptions_moduleresolution",
+      "label": "moduleResolution",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "moduleresolution",
+      "source_file": "tsconfig.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "tsconfig_compileroptions_noemit",
+      "label": "noEmit",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "noemit",
+      "source_file": "tsconfig.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "tsconfig_compileroptions_skiplibcheck",
+      "label": "skipLibCheck",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "skiplibcheck",
+      "source_file": "tsconfig.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "tsconfig_compileroptions_strict",
+      "label": "strict",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "strict",
+      "source_file": "tsconfig.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "tsconfig_compileroptions_target",
+      "label": "target",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "target",
+      "source_file": "tsconfig.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "tsconfig_compileroptions_types",
+      "label": "types",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "types",
+      "source_file": "tsconfig.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "tsconfig_compileroptions_usedefineforclassfields",
+      "label": "useDefineForClassFields",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "usedefineforclassfields",
+      "source_file": "tsconfig.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "tsconfig_include",
+      "label": "include",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "include",
+      "source_file": "tsconfig.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "ref_dom",
+      "label": "DOM",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "dom",
+      "source_file": "tsconfig.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "ref_dom_iterable",
+      "label": "DOM.Iterable",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "dom.iterable",
+      "source_file": "tsconfig.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "ref_es2022",
+      "label": "ES2022",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "es2022",
+      "source_file": "tsconfig.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "ref_frontend_src",
+      "label": "frontend/src",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "frontend/src",
+      "source_file": "tsconfig.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "ref_node",
+      "label": "node",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "node",
+      "source_file": "tsconfig.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "ref_playwright_config_ts",
+      "label": "playwright.config.ts",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "playwright.config.ts",
+      "source_file": "tsconfig.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "ref_tests_e2e",
+      "label": "tests/e2e",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "tests/e2e",
+      "source_file": "tsconfig.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "ref_vite_client",
+      "label": "vite/client",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "vite/client",
+      "source_file": "tsconfig.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "ref_vite_config_ts",
+      "label": "vite.config.ts",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "vite.config.ts",
+      "source_file": "tsconfig.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "ref_vitest_globals",
+      "label": "vitest/globals",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "vitest/globals",
+      "source_file": "tsconfig.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "ref_webworker",
+      "label": "WebWorker",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "concept",
+      "norm_label": "webworker",
+      "source_file": "tsconfig.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_model",
+      "label": "model.rs",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "model.rs",
+      "source_file": "src/model.rs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_model_analysis",
+      "label": "Analysis",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "analysis",
+      "source_file": "src/model.rs",
+      "source_location": "L57"
+    },
+    {
+      "id": "src_model_analyzerequest",
+      "label": "AnalyzeRequest",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "analyzerequest",
+      "source_file": "src/model.rs",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_model_finding",
+      "label": "Finding",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "finding",
+      "source_file": "src/model.rs",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_model_geopoint",
+      "label": "GeoPoint",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "geopoint",
+      "source_file": "src/model.rs",
+      "source_location": "L86"
+    },
+    {
+      "id": "src_model_overpassresponse",
+      "label": "OverpassResponse",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "overpassresponse",
+      "source_file": "src/model.rs",
+      "source_location": "L72"
+    },
+    {
+      "id": "src_model_overpassway",
+      "label": "OverpassWay",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "overpassway",
+      "source_file": "src/model.rs",
+      "source_location": "L77"
+    },
+    {
+      "id": "src_model_point",
+      "label": "Point",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "point",
+      "source_file": "src/model.rs",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_model_rs_hashmap",
+      "label": "HashMap",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "hashmap",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_model_rs_option",
+      "label": "Option",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "option",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_model_rs_string",
+      "label": "String",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "string",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_model_rs_vec",
+      "label": "Vec",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "vec",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_model_rulepack",
+      "label": "RulePack",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "rulepack",
+      "source_file": "src/model.rs",
+      "source_location": "L50"
+    },
+    {
+      "id": "src_model_severity",
+      "label": "Severity",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "severity",
+      "source_file": "src/model.rs",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_model_source",
+      "label": "Source",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "source",
+      "source_file": "src/model.rs",
+      "source_location": "L44"
     },
     {
       "id": "tests_e2e_app_spec",
@@ -3154,7 +3294,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L682",
+      "source_location": "L729",
       "weight": 1.0
     },
     {
@@ -3166,7 +3306,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L695",
+      "source_location": "L742",
       "weight": 1.0
     },
     {
@@ -3178,7 +3318,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L701",
+      "source_location": "L748",
       "weight": 1.0
     },
     {
@@ -3190,7 +3330,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L526",
+      "source_location": "L573",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_labeled_hundred_route_evaluation_detects_at_least_ninety_percent",
+      "target": "src_analyzer_parse_gpx",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L840",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_labeled_hundred_route_evaluation_detects_at_least_ninety_percent",
+      "target": "src_analyzer_analyze",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L842",
       "weight": 1.0
     },
     {
@@ -3202,7 +3366,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L634",
+      "source_location": "L681",
       "weight": 1.0
     },
     {
@@ -3214,7 +3378,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L641",
+      "source_location": "L688",
       "weight": 1.0
     },
     {
@@ -3250,7 +3414,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L492",
+      "source_location": "L539",
       "weight": 1.0
     },
     {
@@ -3274,7 +3438,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L540",
+      "source_location": "L587",
       "weight": 1.0
     },
     {
@@ -3286,7 +3450,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L595",
+      "source_location": "L642",
       "weight": 1.0
     },
     {
@@ -3298,7 +3462,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L518",
+      "source_location": "L565",
       "weight": 1.0
     },
     {
@@ -3310,7 +3474,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/analyzer.rs",
-      "source_location": "L519",
+      "source_location": "L566",
       "weight": 1.0
     },
     {
@@ -3322,7 +3486,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L333",
+      "source_location": "L349",
       "weight": 1.0
     },
     {
@@ -3334,7 +3498,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L353",
+      "source_location": "L369",
       "weight": 1.0
     },
     {
@@ -3346,7 +3510,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L390",
+      "source_location": "L406",
       "weight": 1.0
     },
     {
@@ -3358,7 +3522,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L988",
+      "source_location": "L1068",
       "weight": 1.0
     },
     {
@@ -3370,7 +3534,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L989",
+      "source_location": "L1069",
       "weight": 1.0
     },
     {
@@ -3382,7 +3546,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L996",
+      "source_location": "L1076",
       "weight": 1.0
     },
     {
@@ -3394,7 +3558,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L939",
+      "source_location": "L1019",
       "weight": 1.0
     },
     {
@@ -3406,7 +3570,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L940",
+      "source_location": "L1020",
       "weight": 1.0
     },
     {
@@ -3418,7 +3582,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L940",
+      "source_location": "L1020",
       "weight": 1.0
     },
     {
@@ -3430,7 +3594,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L417",
+      "source_location": "L433",
       "weight": 1.0
     },
     {
@@ -3442,7 +3606,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L211",
+      "source_location": "L227",
       "weight": 1.0
     },
     {
@@ -3454,7 +3618,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L298",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -3466,7 +3630,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L727",
+      "source_location": "L807",
       "weight": 1.0
     },
     {
@@ -3478,7 +3642,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L728",
+      "source_location": "L808",
       "weight": 1.0
     },
     {
@@ -3490,7 +3654,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L729",
+      "source_location": "L809",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_database_path_uses_dotfile_locking_and_local_fallback",
+      "target": "src_main_database_url_for_paths",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L532",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_database_path_uses_dotfile_locking_and_local_fallback",
+      "target": "src_main_open_database",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L539",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_default_database_url",
+      "target": "src_main_database_url_for_paths",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -3502,7 +3702,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L773",
+      "source_location": "L853",
       "weight": 1.0
     },
     {
@@ -3514,7 +3714,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L774",
+      "source_location": "L854",
       "weight": 1.0
     },
     {
@@ -3526,7 +3726,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L774",
+      "source_location": "L854",
       "weight": 1.0
     },
     {
@@ -3538,7 +3738,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L776",
+      "source_location": "L856",
       "weight": 1.0
     },
     {
@@ -3562,7 +3762,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L885",
+      "source_location": "L965",
       "weight": 1.0
     },
     {
@@ -3574,7 +3774,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L886",
+      "source_location": "L966",
       "weight": 1.0
     },
     {
@@ -3586,7 +3786,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L886",
+      "source_location": "L966",
       "weight": 1.0
     },
     {
@@ -3598,7 +3798,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L892",
+      "source_location": "L972",
       "weight": 1.0
     },
     {
@@ -3610,7 +3810,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L609",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
@@ -3622,7 +3822,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L610",
+      "source_location": "L690",
       "weight": 1.0
     },
     {
@@ -3634,7 +3834,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L611",
+      "source_location": "L691",
       "weight": 1.0
     },
     {
@@ -3646,7 +3846,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L612",
+      "source_location": "L692",
       "weight": 1.0
     },
     {
@@ -3658,7 +3858,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L267",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -3670,7 +3870,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L814",
+      "source_location": "L894",
       "weight": 1.0
     },
     {
@@ -3682,7 +3882,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L815",
+      "source_location": "L895",
       "weight": 1.0
     },
     {
@@ -3694,7 +3894,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L815",
+      "source_location": "L895",
       "weight": 1.0
     },
     {
@@ -3706,7 +3906,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L815",
+      "source_location": "L895",
       "weight": 1.0
     },
     {
@@ -3718,7 +3918,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L758",
+      "source_location": "L838",
       "weight": 1.0
     },
     {
@@ -3730,7 +3930,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L759",
+      "source_location": "L839",
       "weight": 1.0
     },
     {
@@ -3742,7 +3942,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L759",
+      "source_location": "L839",
       "weight": 1.0
     },
     {
@@ -3754,7 +3954,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L761",
+      "source_location": "L841",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_main",
+      "target": "src_main_open_database",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -3766,7 +3978,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L147",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -3778,7 +3990,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L169",
+      "source_location": "L161",
       "weight": 1.0
     },
     {
@@ -3790,7 +4002,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L651",
+      "source_location": "L731",
       "weight": 1.0
     },
     {
@@ -3802,7 +4014,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L665",
+      "source_location": "L745",
       "weight": 1.0
     },
     {
@@ -3814,7 +4026,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L673",
+      "source_location": "L753",
       "weight": 1.0
     },
     {
@@ -3826,7 +4038,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L674",
+      "source_location": "L754",
       "weight": 1.0
     },
     {
@@ -3838,7 +4050,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L709",
+      "source_location": "L789",
       "weight": 1.0
     },
     {
@@ -3850,7 +4062,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L259",
+      "source_location": "L275",
       "weight": 1.0
     },
     {
@@ -3862,7 +4074,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L259",
+      "source_location": "L275",
       "weight": 1.0
     },
     {
@@ -3874,7 +4086,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L790",
+      "source_location": "L870",
       "weight": 1.0
     },
     {
@@ -3886,7 +4098,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L791",
+      "source_location": "L871",
       "weight": 1.0
     },
     {
@@ -3898,7 +4110,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L791",
+      "source_location": "L871",
       "weight": 1.0
     },
     {
@@ -3910,7 +4122,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L802",
+      "source_location": "L882",
       "weight": 1.0
     },
     {
@@ -3922,7 +4134,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L287",
+      "source_location": "L303",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_retained_data_directory_persists_database_across_restart",
+      "target": "src_main_database_url_for_paths",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L496",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_retained_data_directory_persists_database_across_restart",
+      "target": "src_main_open_database",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.rs",
+      "source_location": "L505",
       "weight": 1.0
     },
     {
@@ -3934,7 +4170,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L514",
+      "source_location": "L594",
       "weight": 1.0
     },
     {
@@ -3946,7 +4182,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L515",
+      "source_location": "L595",
       "weight": 1.0
     },
     {
@@ -3958,7 +4194,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L515",
+      "source_location": "L595",
       "weight": 1.0
     },
     {
@@ -3970,7 +4206,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L551",
+      "source_location": "L631",
       "weight": 1.0
     },
     {
@@ -3982,7 +4218,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L565",
+      "source_location": "L645",
       "weight": 1.0
     },
     {
@@ -3994,7 +4230,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L573",
+      "source_location": "L653",
       "weight": 1.0
     },
     {
@@ -4006,7 +4242,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L574",
+      "source_location": "L654",
       "weight": 1.0
     },
     {
@@ -4018,7 +4254,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L403",
+      "source_location": "L419",
       "weight": 1.0
     },
     {
@@ -4059,7 +4295,7 @@
     },
     {
       "source": "src_analyzer_analyzercontractcase",
-      "target": "src_analyzer_rs_hashmap",
+      "target": "hashmap",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4094,8 +4330,32 @@
       "weight": 1.0
     },
     {
+      "source": "src_analyzer_evaluationway",
+      "target": "hashmap",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L501",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_evaluationway",
+      "target": "src_analyzer_rs_vec",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L502",
+      "weight": 1.0
+    },
+    {
       "source": "src_analyzer_expecteddecision",
-      "target": "src_model_severity",
+      "target": "severity",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4118,6 +4378,114 @@
       "weight": 1.0
     },
     {
+      "source": "src_analyzer_routeevaluationcase",
+      "target": "src_analyzer_rs_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L470",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routeevaluationcase",
+      "target": "src_analyzer_routelabelbasis",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L471",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routeevaluationcase",
+      "target": "src_analyzer_routesource",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L472",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routeevaluationcase",
+      "target": "src_analyzer_rs_vec",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L473",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routeevaluationcase",
+      "target": "src_analyzer_evaluationway",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L474",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routeevaluationcorpus",
+      "target": "src_analyzer_rs_vec",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L462",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routelabelbasis",
+      "target": "src_analyzer_rs_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L480",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routesource",
+      "target": "src_analyzer_rs_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L490",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_apierror",
+      "target": "src_main_rs_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/main.rs",
+      "source_location": "L430",
+      "weight": 1.0
+    },
+    {
       "source": "src_main_apierror",
       "target": "statuscode",
       "relation": "references",
@@ -4126,19 +4494,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "src/main.rs",
-      "source_location": "L414",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main_apierror",
-      "target": "string",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "field",
-      "source_file": "src/main.rs",
-      "source_location": "L414",
+      "source_location": "L430",
       "weight": 1.0
     },
     {
@@ -4167,7 +4523,7 @@
     },
     {
       "source": "src_main_appstate",
-      "target": "string",
+      "target": "src_main_rs_string",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4191,7 +4547,7 @@
     },
     {
       "source": "src_main_errorbody",
-      "target": "string",
+      "target": "src_main_rs_string",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4383,7 +4739,7 @@
     },
     {
       "source": "src_analyzer_analyze",
-      "target": "src_model_analysis",
+      "target": "src_analyzer_rs_analysis",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4443,14 +4799,14 @@
     },
     {
       "source": "src_analyzer_contract_points",
-      "target": "src_model_point",
+      "target": "point",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/analyzer.rs",
-      "source_location": "L458",
+      "source_location": "L505",
       "weight": 1.0
     },
     {
@@ -4462,7 +4818,43 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/analyzer.rs",
-      "source_location": "L473",
+      "source_location": "L520",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_evaluationway",
+      "target": "src_analyzer_rs_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L501",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_evaluationway",
+      "target": "geopoint",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L502",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_parse_gpx",
+      "target": "point",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -4502,18 +4894,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_analyzer_parse_gpx",
-      "target": "src_model_point",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "generic_arg",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L32",
-      "weight": 1.0
-    },
-    {
       "source": "src_analyzer_relevant_tags",
       "target": "src_analyzer_rs_string",
       "relation": "references",
@@ -4526,8 +4906,32 @@
       "weight": 1.0
     },
     {
+      "source": "src_analyzer_routeevaluationcase",
+      "target": "src_analyzer_evaluationpoint",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L473",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_routeevaluationcorpus",
+      "target": "src_analyzer_routeevaluationcase",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L462",
+      "weight": 1.0
+    },
+    {
       "source": "src_analyzer_sample_points",
-      "target": "src_model_point",
+      "target": "point",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4551,18 +4955,6 @@
     },
     {
       "source": "src_main_analyze_route",
-      "target": "analysis",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "generic_arg",
-      "source_file": "src/main.rs",
-      "source_location": "L328",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main_analyze_route",
       "target": "analyzerequest",
       "relation": "references",
       "_origin": "ast",
@@ -4570,7 +4962,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L328",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -4582,7 +4974,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L328",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -4594,7 +4986,19 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L328",
+      "source_location": "L344",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_analyze_route",
+      "target": "src_main_rs_analysis",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/main.rs",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -4618,7 +5022,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L186",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -4630,7 +5034,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L186",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -4690,7 +5094,31 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L266",
+      "source_location": "L282",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_open_database",
+      "target": "error",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/main.rs",
+      "source_location": "L185",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_open_database",
+      "target": "sqlitepool",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "src/main.rs",
+      "source_location": "L185",
       "weight": 1.0
     },
     {
@@ -4702,7 +5130,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L319",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -4714,7 +5142,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L319",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -4726,7 +5154,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L825",
+      "source_location": "L905",
       "weight": 1.0
     },
     {
@@ -4738,7 +5166,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/main.rs",
-      "source_location": "L453",
+      "source_location": "L469",
       "weight": 1.0
     },
     {
@@ -5222,6 +5650,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_analyzer",
+      "target": "error",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
       "source": "src_main",
       "target": "src_model",
       "relation": "imports_from",
@@ -5266,7 +5706,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/main.rs",
-      "source_location": "L450",
+      "source_location": "L466",
       "weight": 1.0
     },
     {
@@ -5283,6 +5723,30 @@
     },
     {
       "source": "src_analyzer_analyze",
+      "target": "overpassway",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_analyze",
+      "target": "point",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/analyzer.rs",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer_analyze",
       "target": "src_analyzer_rs_string",
       "relation": "references",
       "_origin": "ast",
@@ -5294,32 +5758,8 @@
       "weight": 1.0
     },
     {
-      "source": "src_analyzer_analyze",
-      "target": "src_model_overpassway",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L104",
-      "weight": 1.0
-    },
-    {
-      "source": "src_analyzer_analyze",
-      "target": "src_model_point",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "src/analyzer.rs",
-      "source_location": "L104",
-      "weight": 1.0
-    },
-    {
       "source": "src_analyzer_assess_speed_pedelec_region",
-      "target": "src_analyzer_rs_hashmap",
+      "target": "hashmap",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5331,7 +5771,7 @@
     },
     {
       "source": "src_analyzer_assess_tags",
-      "target": "src_analyzer_rs_hashmap",
+      "target": "hashmap",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5343,19 +5783,19 @@
     },
     {
       "source": "src_analyzer_contract_way",
-      "target": "src_analyzer_rs_hashmap",
+      "target": "hashmap",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/analyzer.rs",
-      "source_location": "L473",
+      "source_location": "L520",
       "weight": 1.0
     },
     {
       "source": "src_analyzer_distance_to_way",
-      "target": "src_model_overpassway",
+      "target": "overpassway",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5367,7 +5807,7 @@
     },
     {
       "source": "src_analyzer_distance_to_way",
-      "target": "src_model_point",
+      "target": "point",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5379,7 +5819,7 @@
     },
     {
       "source": "src_analyzer_haversine",
-      "target": "src_model_point",
+      "target": "point",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5391,7 +5831,7 @@
     },
     {
       "source": "src_analyzer_overpass_query",
-      "target": "src_model_point",
+      "target": "point",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5403,7 +5843,7 @@
     },
     {
       "source": "src_analyzer_point_segment_km",
-      "target": "src_model_geopoint",
+      "target": "geopoint",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5415,7 +5855,7 @@
     },
     {
       "source": "src_analyzer_point_segment_km",
-      "target": "src_model_point",
+      "target": "point",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5427,7 +5867,7 @@
     },
     {
       "source": "src_analyzer_severity_rank",
-      "target": "src_model_severity",
+      "target": "severity",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5446,7 +5886,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L328",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -5458,7 +5898,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L186",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -5470,7 +5910,19 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L186",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_database_url_for_paths",
+      "target": "path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/main.rs",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -5494,7 +5946,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L505",
+      "source_location": "L585",
       "weight": 1.0
     },
     {
@@ -5506,7 +5958,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L319",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -5518,7 +5970,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L229",
+      "source_location": "L245",
       "weight": 1.0
     },
     {
@@ -5530,7 +5982,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L286",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
@@ -5542,7 +5994,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L286",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
@@ -5554,19 +6006,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L825",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main_verify_paid",
-      "target": "option",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "src/main.rs",
-      "source_location": "L393",
+      "source_location": "L905",
       "weight": 1.0
     },
     {
@@ -5578,12 +6018,24 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/main.rs",
-      "source_location": "L393",
+      "source_location": "L409",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_verify_paid",
+      "target": "src_main_rs_option",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/main.rs",
+      "source_location": "L409",
       "weight": 1.0
     },
     {
       "source": "src_analyzer_analyze",
-      "target": "result",
+      "target": "src_analyzer_rs_result",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5595,7 +6047,7 @@
     },
     {
       "source": "src_analyzer_assess_speed_pedelec_region",
-      "target": "src_model_severity",
+      "target": "severity",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5607,7 +6059,7 @@
     },
     {
       "source": "src_analyzer_assess_tags",
-      "target": "src_model_severity",
+      "target": "severity",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5626,19 +6078,19 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/analyzer.rs",
-      "source_location": "L458",
+      "source_location": "L505",
       "weight": 1.0
     },
     {
       "source": "src_analyzer_contract_way",
-      "target": "src_model_overpassway",
+      "target": "overpassway",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/analyzer.rs",
-      "source_location": "L473",
+      "source_location": "L520",
       "weight": 1.0
     },
     {
@@ -5655,7 +6107,7 @@
     },
     {
       "source": "src_analyzer_parse_gpx",
-      "target": "result",
+      "target": "src_analyzer_rs_result",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5667,7 +6119,7 @@
     },
     {
       "source": "src_analyzer_relevant_tags",
-      "target": "src_analyzer_rs_hashmap",
+      "target": "hashmap",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5679,7 +6131,7 @@
     },
     {
       "source": "src_analyzer_rule_pack",
-      "target": "src_model_rulepack",
+      "target": "rulepack",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5703,7 +6155,7 @@
     },
     {
       "source": "src_analyzer_validate_vehicle",
-      "target": "result",
+      "target": "src_analyzer_rs_result",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5715,14 +6167,14 @@
     },
     {
       "source": "src_main_analyze_route",
-      "target": "result",
+      "target": "src_main_rs_result",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L328",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -5734,7 +6186,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L416",
+      "source_location": "L432",
       "weight": 1.0
     },
     {
@@ -5746,24 +6198,36 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L186",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
-      "source": "src_main_default_database_url",
-      "target": "string",
+      "source": "src_main_database_url_for_paths",
+      "target": "src_main_rs_string",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L174",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_default_database_url",
+      "target": "src_main_rs_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "src/main.rs",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
       "source": "src_main_first_forwarded_ip",
-      "target": "option",
+      "target": "src_main_rs_option",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5775,7 +6239,7 @@
     },
     {
       "source": "src_main_firstforwardedipkeyextractor_extract",
-      "target": "result",
+      "target": "src_main_rs_result",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5794,7 +6258,19 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L505",
+      "source_location": "L585",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_open_database",
+      "target": "src_main_rs_result",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "src/main.rs",
+      "source_location": "L185",
       "weight": 1.0
     },
     {
@@ -5806,7 +6282,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L319",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -5818,7 +6294,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L229",
+      "source_location": "L245",
       "weight": 1.0
     },
     {
@@ -5830,19 +6306,19 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L286",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
       "source": "src_main_run_fixed_ip_burst",
-      "target": "vec",
+      "target": "src_main_rs_vec",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L825",
+      "source_location": "L905",
       "weight": 1.0
     },
     {
@@ -5854,7 +6330,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L474",
+      "source_location": "L554",
       "weight": 1.0
     },
     {
@@ -5866,7 +6342,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/main.rs",
-      "source_location": "L453",
+      "source_location": "L469",
       "weight": 1.0
     },
     {
@@ -6817,13 +7293,79 @@
     },
     {
       "source": "src_analyzer",
+      "target": "src_analyzer_routeevaluationcorpus",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L459",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_routeevaluationcase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L466",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_routelabelbasis",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L478",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_routesource",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L484",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_evaluationpoint",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L494",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_evaluationway",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L500",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
       "target": "src_analyzer_contract_points",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L458",
+      "source_location": "L505",
       "weight": 1.0
     },
     {
@@ -6834,7 +7376,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L473",
+      "source_location": "L520",
       "weight": 1.0
     },
     {
@@ -6845,7 +7387,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L491",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
@@ -6856,7 +7398,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L496",
+      "source_location": "L543",
       "weight": 1.0
     },
     {
@@ -6867,7 +7409,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L503",
+      "source_location": "L550",
       "weight": 1.0
     },
     {
@@ -6878,7 +7420,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L508",
+      "source_location": "L555",
       "weight": 1.0
     },
     {
@@ -6889,7 +7431,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L516",
+      "source_location": "L563",
       "weight": 1.0
     },
     {
@@ -6900,7 +7442,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L525",
+      "source_location": "L572",
       "weight": 1.0
     },
     {
@@ -6911,7 +7453,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L538",
+      "source_location": "L585",
       "weight": 1.0
     },
     {
@@ -6922,7 +7464,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L572",
+      "source_location": "L619",
       "weight": 1.0
     },
     {
@@ -6933,18 +7475,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
-      "source_location": "L614",
-      "weight": 1.0
-    },
-    {
-      "source": "src_analyzer",
-      "target": "src_analyzer_fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/analyzer.rs",
-      "source_location": "L653",
+      "source_location": "L661",
       "weight": 1.0
     },
     {
@@ -6956,6 +7487,28 @@
       "confidence_score": 1.0,
       "source_file": "src/analyzer.rs",
       "source_location": "L70",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L700",
+      "weight": 1.0
+    },
+    {
+      "source": "src_analyzer",
+      "target": "src_analyzer_labeled_hundred_route_evaluation_detects_at_least_ninety_percent",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/analyzer.rs",
+      "source_location": "L776",
       "weight": 1.0
     },
     {
@@ -6982,6 +7535,28 @@
     },
     {
       "source": "src_main",
+      "target": "src_main_api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L1018",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_forwarded_client_parser_accepts_ingress_address_forms",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L1050",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
       "target": "src_main_verifyresponse",
       "relation": "contains",
       "_origin": "ast",
@@ -6989,6 +7564,17 @@
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
       "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_analyzer_capacity_429_has_retry_after",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L1067",
       "weight": 1.0
     },
     {
@@ -7010,7 +7596,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L174",
+      "source_location": "L166",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_database_url_for_paths",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_open_database",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L185",
       "weight": 1.0
     },
     {
@@ -7021,7 +7629,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L186",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -7032,7 +7640,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L229",
+      "source_location": "L245",
       "weight": 1.0
     },
     {
@@ -7043,7 +7651,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L266",
+      "source_location": "L282",
       "weight": 1.0
     },
     {
@@ -7054,7 +7662,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L270",
+      "source_location": "L286",
       "weight": 1.0
     },
     {
@@ -7065,7 +7673,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L286",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
@@ -7076,7 +7684,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L295",
+      "source_location": "L311",
       "weight": 1.0
     },
     {
@@ -7087,7 +7695,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L308",
+      "source_location": "L324",
       "weight": 1.0
     },
     {
@@ -7098,7 +7706,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L319",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -7109,7 +7717,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L328",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -7120,7 +7728,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L393",
+      "source_location": "L409",
       "weight": 1.0
     },
     {
@@ -7131,7 +7739,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L414",
+      "source_location": "L430",
       "weight": 1.0
     },
     {
@@ -7142,7 +7750,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L428",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -7153,18 +7761,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L453",
+      "source_location": "L469",
       "weight": 1.0
     },
     {
       "source": "src_main",
-      "target": "src_main_static_fixture",
+      "target": "src_main_retained_data_directory_persists_database_across_restart",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L474",
+      "source_location": "L491",
       "weight": 1.0
     },
     {
@@ -7180,13 +7788,35 @@
     },
     {
       "source": "src_main",
+      "target": "src_main_database_path_uses_dotfile_locking_and_local_fallback",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L528",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_static_fixture",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L554",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
       "target": "src_main_get",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L505",
+      "source_location": "L585",
       "weight": 1.0
     },
     {
@@ -7197,7 +7827,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L513",
+      "source_location": "L593",
       "weight": 1.0
     },
     {
@@ -7208,7 +7838,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L542",
+      "source_location": "L622",
       "weight": 1.0
     },
     {
@@ -7219,7 +7849,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L608",
+      "source_location": "L688",
       "weight": 1.0
     },
     {
@@ -7230,18 +7860,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L639",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_main_page_views_persist_only_an_aggregate_counter",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/main.rs",
-      "source_location": "L708",
+      "source_location": "L719",
       "weight": 1.0
     },
     {
@@ -7257,13 +7876,24 @@
     },
     {
       "source": "src_main",
+      "target": "src_main_page_views_persist_only_an_aggregate_counter",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.rs",
+      "source_location": "L788",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
       "target": "src_main_client_ip_addresses_are_not_persisted",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L726",
+      "source_location": "L806",
       "weight": 1.0
     },
     {
@@ -7274,7 +7904,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L757",
+      "source_location": "L837",
       "weight": 1.0
     },
     {
@@ -7285,7 +7915,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L772",
+      "source_location": "L852",
       "weight": 1.0
     },
     {
@@ -7296,7 +7926,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L789",
+      "source_location": "L869",
       "weight": 1.0
     },
     {
@@ -7307,7 +7937,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L813",
+      "source_location": "L893",
       "weight": 1.0
     },
     {
@@ -7318,18 +7948,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L825",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/main.rs",
-      "source_location": "L874",
+      "source_location": "L905",
       "weight": 1.0
     },
     {
@@ -7345,35 +7964,13 @@
     },
     {
       "source": "src_main",
-      "target": "src_main_api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second",
+      "target": "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L938",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_main_forwarded_client_parser_accepts_ingress_address_forms",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/main.rs",
-      "source_location": "L970",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_main_analyzer_capacity_429_has_retry_after",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/main.rs",
-      "source_location": "L987",
+      "source_location": "L954",
       "weight": 1.0
     },
     {
@@ -7531,6 +8128,17 @@
       "weight": 1.0
     },
     {
+      "source": "tests_runtime_contract",
+      "target": "tests_runtime_contract_binary_starts_with_only_port_and_creates_database",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/runtime_contract.rs",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
       "source": "tsconfig",
       "target": "tsconfig_include",
       "relation": "contains",
@@ -7659,7 +8267,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L415",
+      "source_location": "L431",
       "weight": 1.0
     },
     {
@@ -7681,7 +8289,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/main.rs",
-      "source_location": "L416",
+      "source_location": "L432",
       "weight": 1.0
     },
     {
@@ -7776,7 +8384,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L344",
+      "source_location": "L360",
       "weight": 1.0
     },
     {
@@ -7788,7 +8396,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L359",
+      "source_location": "L375",
       "weight": 1.0
     },
     {
@@ -7800,7 +8408,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L361",
+      "source_location": "L377",
       "weight": 1.0
     },
     {
@@ -7812,10 +8420,10 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "src/main.rs",
-      "source_location": "L388",
+      "source_location": "L404",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "57ebcc208d3874aac9ec00a19dd72eacb2bb5147"
+  "built_at_commit": "4272655a211a573ffb04a5b0f590369bb2351127"
 }

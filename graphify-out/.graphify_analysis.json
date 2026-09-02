@@ -4,27 +4,24 @@
       "arc",
       "asref",
       "client",
-      "intoresponse",
+      "error",
       "ipaddr",
-      "json",
       "next",
-      "option",
       "path",
       "request",
-      "response",
       "router",
       "semaphore",
       "sqlitepool",
       "src_main",
       "src_main_analyzer_capacity_429_has_retry_after",
       "src_main_api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second",
-      "src_main_apierror",
-      "src_main_apierror_into_response",
       "src_main_appstate",
       "src_main_build_router",
       "src_main_build_sha",
       "src_main_cache_policy",
       "src_main_client_ip_addresses_are_not_persisted",
+      "src_main_database_path_uses_dotfile_locking_and_local_fallback",
+      "src_main_database_url_for_paths",
       "src_main_default_database_url",
       "src_main_demo_and_discoverability_routes_are_direct_and_unknown_routes_use_404",
       "src_main_errorbody",
@@ -32,18 +29,19 @@
       "src_main_fixed_first_forwarded_ip_bursts_are_limited_on_every_api_route",
       "src_main_forwarded_client_parser_accepts_ingress_address_forms",
       "src_main_get",
-      "src_main_gpx_analysis_never_persists_route_data",
-      "src_main_health",
       "src_main_health_never_reports_the_old_unknown_sentinel",
       "src_main_is_hashed_asset",
       "src_main_legal_routes_are_successful_direct_documents",
       "src_main_main",
-      "src_main_overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name",
+      "src_main_open_database",
       "src_main_page_view",
       "src_main_page_views_persist_only_an_aggregate_counter",
-      "src_main_rate_limit_response",
       "src_main_response_cache_policy_separates_updates_from_immutable_bundles",
       "src_main_response_policy",
+      "src_main_retained_data_directory_persists_database_across_restart",
+      "src_main_rs_option",
+      "src_main_rs_string",
+      "src_main_rs_vec",
       "src_main_run_fixed_ip_burst",
       "src_main_shutdown",
       "src_main_static_fixture",
@@ -52,14 +50,60 @@
       "src_main_unsupported_vehicle_is_rejected_before_any_map_request",
       "src_main_verify_paid",
       "src_main_verifyresponse",
-      "state",
-      "statuscode",
-      "string",
-      "tempdir",
-      "value",
-      "vec"
+      "tempdir"
     ],
     "1": [
+      "geopoint",
+      "hashmap",
+      "overpassway",
+      "point",
+      "rulepack",
+      "severity",
+      "src_analyzer",
+      "src_analyzer_analyze",
+      "src_analyzer_analyzeerror",
+      "src_analyzer_analyzercontract",
+      "src_analyzer_analyzercontractcase",
+      "src_analyzer_assess_speed_pedelec_region",
+      "src_analyzer_assess_tags",
+      "src_analyzer_bicycle_no_is_prohibited",
+      "src_analyzer_contract_points",
+      "src_analyzer_contract_way",
+      "src_analyzer_distance_to_way",
+      "src_analyzer_evaluationpoint",
+      "src_analyzer_evaluationway",
+      "src_analyzer_expecteddecision",
+      "src_analyzer_fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty",
+      "src_analyzer_germany_pack_links_to_the_current_ministry_source",
+      "src_analyzer_haversine",
+      "src_analyzer_labeled_hundred_route_evaluation_detects_at_least_ninety_percent",
+      "src_analyzer_matching_radius_is_thirty_five_metres",
+      "src_analyzer_overpass_query",
+      "src_analyzer_parse_gpx",
+      "src_analyzer_parses_and_measures_gpx",
+      "src_analyzer_point_segment_km",
+      "src_analyzer_regional_cycleway_rules_are_distinct_and_cautious",
+      "src_analyzer_rejects_short_gpx",
+      "src_analyzer_relevant_tags",
+      "src_analyzer_round1",
+      "src_analyzer_routeevaluationcase",
+      "src_analyzer_routeevaluationcorpus",
+      "src_analyzer_routelabelbasis",
+      "src_analyzer_routesource",
+      "src_analyzer_rs_analysis",
+      "src_analyzer_rs_option",
+      "src_analyzer_rs_result",
+      "src_analyzer_rs_string",
+      "src_analyzer_rs_vec",
+      "src_analyzer_rule_pack",
+      "src_analyzer_sample_points",
+      "src_analyzer_sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length",
+      "src_analyzer_severity_rank",
+      "src_analyzer_speed_pedelec_cycleway_is_uncertain",
+      "src_analyzer_unmatched_route_is_review",
+      "src_analyzer_validate_vehicle"
+    ],
+    "2": [
       "frontend_src_main",
       "frontend_src_main_announceroute",
       "frontend_src_main_apppage",
@@ -107,47 +151,6 @@
       "frontend_src_ui_downloadchecklist",
       "frontend_src_ui_verdictcopy"
     ],
-    "2": [
-      "analysis",
-      "analyzerequest",
-      "result",
-      "src_analyzer",
-      "src_analyzer_analyze",
-      "src_analyzer_analyzeerror",
-      "src_analyzer_analyzercontract",
-      "src_analyzer_analyzercontractcase",
-      "src_analyzer_assess_speed_pedelec_region",
-      "src_analyzer_assess_tags",
-      "src_analyzer_bicycle_no_is_prohibited",
-      "src_analyzer_contract_points",
-      "src_analyzer_contract_way",
-      "src_analyzer_distance_to_way",
-      "src_analyzer_expecteddecision",
-      "src_analyzer_fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty",
-      "src_analyzer_germany_pack_links_to_the_current_ministry_source",
-      "src_analyzer_haversine",
-      "src_analyzer_matching_radius_is_thirty_five_metres",
-      "src_analyzer_overpass_query",
-      "src_analyzer_parse_gpx",
-      "src_analyzer_parses_and_measures_gpx",
-      "src_analyzer_point_segment_km",
-      "src_analyzer_regional_cycleway_rules_are_distinct_and_cautious",
-      "src_analyzer_rejects_short_gpx",
-      "src_analyzer_relevant_tags",
-      "src_analyzer_round1",
-      "src_analyzer_rs_hashmap",
-      "src_analyzer_rs_option",
-      "src_analyzer_rs_string",
-      "src_analyzer_rs_vec",
-      "src_analyzer_rule_pack",
-      "src_analyzer_sample_points",
-      "src_analyzer_sampling_rule_uses_eighty_metres_or_one_sixtieth_of_route_length",
-      "src_analyzer_speed_pedelec_cycleway_is_uncertain",
-      "src_analyzer_unmatched_route_is_review",
-      "src_analyzer_validate_vehicle",
-      "src_main_analyze_route",
-      "src_model_point"
-    ],
     "3": [
       "axe_core_playwright",
       "concurrently",
@@ -181,6 +184,31 @@
       "vitest"
     ],
     "4": [
+      "analyzerequest",
+      "governorerror",
+      "httprequest",
+      "intoresponse",
+      "json",
+      "key",
+      "keyextractor",
+      "response",
+      "src_main_analyze_route",
+      "src_main_apierror",
+      "src_main_apierror_into_response",
+      "src_main_firstforwardedipkeyextractor",
+      "src_main_firstforwardedipkeyextractor_extract",
+      "src_main_gpx_analysis_never_persists_route_data",
+      "src_main_health",
+      "src_main_overpass_receives_sampled_coordinates_without_the_gpx_file_or_track_name",
+      "src_main_rate_limit_response",
+      "src_main_rs_analysis",
+      "src_main_rs_result",
+      "state",
+      "statuscode",
+      "t",
+      "value"
+    ],
+    "5": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_es2022",
@@ -205,8 +233,7 @@
       "tsconfig_compileroptions_usedefineforclassfields",
       "tsconfig_include"
     ],
-    "5": [
-      "src_analyzer_severity_rank",
+    "6": [
       "src_model",
       "src_model_analysis",
       "src_model_analyzerequest",
@@ -214,6 +241,7 @@
       "src_model_geopoint",
       "src_model_overpassresponse",
       "src_model_overpassway",
+      "src_model_point",
       "src_model_rs_hashmap",
       "src_model_rs_option",
       "src_model_rs_string",
@@ -221,15 +249,6 @@
       "src_model_rulepack",
       "src_model_severity",
       "src_model_source"
-    ],
-    "6": [
-      "governorerror",
-      "httprequest",
-      "key",
-      "keyextractor",
-      "src_main_firstforwardedipkeyextractor",
-      "src_main_firstforwardedipkeyextractor_extract",
-      "t"
     ],
     "7": [
       "tests_e2e_app_spec",
@@ -258,59 +277,42 @@
       "playwright_config"
     ],
     "12": [
-      "geopoint"
+      "tests_runtime_contract",
+      "tests_runtime_contract_binary_starts_with_only_port_and_creates_database"
     ],
     "13": [
-      "hashmap"
+      "analysis"
     ],
     "14": [
-      "overpassway"
+      "option"
     ],
     "15": [
       "pkg_cycle_legal_profile_check"
     ],
     "16": [
-      "point"
+      "result"
     ],
     "17": [
-      "rulepack"
+      "src_analyzer_rs_hashmap"
     ],
     "18": [
-      "severity"
+      "string"
     ],
     "19": [
-      "src_analyzer_rs_analysis"
+      "vec"
     ],
     "20": [
-      "src_analyzer_rs_result"
-    ],
-    "21": [
-      "src_main_rs_analysis"
-    ],
-    "22": [
-      "src_main_rs_option"
-    ],
-    "23": [
-      "src_main_rs_result"
-    ],
-    "24": [
-      "src_main_rs_string"
-    ],
-    "25": [
-      "src_main_rs_vec"
-    ],
-    "26": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.08020050125313283,
-    "1": 0.09855072463768116,
-    "2": 0.12685560053981107,
+    "0": 0.09306122448979592,
+    "1": 0.10374149659863946,
+    "2": 0.09855072463768116,
     "3": 0.06666666666666667,
-    "4": 0.08695652173913043,
-    "5": 0.3047619047619048,
-    "6": 0.2857142857142857,
+    "4": 0.11857707509881422,
+    "5": 0.08695652173913043,
+    "6": 0.3047619047619048,
     "7": 0.6,
     "8": 0.5,
     "9": 0.6666666666666666,
@@ -324,29 +326,18 @@
     "17": 1.0,
     "18": 1.0,
     "19": 1.0,
-    "20": 1.0,
-    "21": 1.0,
-    "22": 1.0,
-    "23": 1.0,
-    "24": 1.0,
-    "25": 1.0,
-    "26": 1.0
+    "20": 1.0
   },
   "gods": [
+    {
+      "id": "src_analyzer_analyze",
+      "label": "analyze()",
+      "degree": 19
+    },
     {
       "id": "src_main_build_router",
       "label": "build_router()",
       "degree": 18
-    },
-    {
-      "id": "src_analyzer_analyze",
-      "label": "analyze()",
-      "degree": 18
-    },
-    {
-      "id": "src_main_test_state",
-      "label": "test_state()",
-      "degree": 16
     },
     {
       "id": "src_main_analyze_route",
@@ -354,9 +345,19 @@
       "degree": 16
     },
     {
+      "id": "src_main_test_state",
+      "label": "test_state()",
+      "degree": 16
+    },
+    {
       "id": "src_main_static_fixture",
       "label": "static_fixture()",
       "degree": 12
+    },
+    {
+      "id": "src_analyzer_parse_gpx",
+      "label": "parse_gpx()",
+      "degree": 11
     },
     {
       "id": "src_main_appstate",
@@ -369,43 +370,49 @@
       "degree": 10
     },
     {
-      "id": "src_main_get",
-      "label": "get()",
-      "degree": 10
-    },
-    {
-      "id": "src_analyzer_parse_gpx",
-      "label": "parse_gpx()",
-      "degree": 10
-    },
-    {
       "id": "package_scripts",
       "label": "scripts",
+      "degree": 10
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
       "degree": 10
     }
   ],
   "surprises": [
     {
-      "source": "analyze()",
-      "target": "Analysis",
+      "source": "analyze_route()",
+      "target": "validate_vehicle()",
       "source_files": [
-        "src/analyzer.rs",
-        "src/model.rs"
+        "src/main.rs",
+        "src/analyzer.rs"
       ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "bridges separate communities"
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "analyze()",
-      "target": "OverpassWay",
+      "source": "analyze_route()",
+      "target": "parse_gpx()",
       "source_files": [
-        "src/analyzer.rs",
-        "src/model.rs"
+        "src/main.rs",
+        "src/analyzer.rs"
       ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "bridges separate communities"
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "analyze_route()",
+      "target": "overpass_query()",
+      "source_files": [
+        "src/main.rs",
+        "src/analyzer.rs"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
       "source": "analyze_route()",
@@ -416,29 +423,18 @@
       ],
       "confidence": "INFERRED",
       "relation": "calls",
-      "why": "inferred connection - not explicitly stated in source"
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "assess_speed_pedelec_region()",
-      "target": "Severity",
+      "source": "bind()",
+      "target": "downloadChecklist()",
       "source_files": [
-        "src/analyzer.rs",
-        "src/model.rs"
+        "frontend/src/main.ts",
+        "frontend/src/ui.ts"
       ],
       "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "bridges separate communities"
-    },
-    {
-      "source": "assess_tags()",
-      "target": "Severity",
-      "source_files": [
-        "src/analyzer.rs",
-        "src/model.rs"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "bridges separate communities"
+      "relation": "calls",
+      "why": "cross-file semantic connection"
     }
   ],
   "tokens": {

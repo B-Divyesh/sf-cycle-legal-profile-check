@@ -41,6 +41,9 @@ All commands below ran from this repair workspace after a clean `npm ci`.
 | Release runtime with only `PORT=18092` | `/health` returned `{"build":"dev","status":"ok"}`; `/`, `/privacy`, and `/terms` each returned HTTP 200; startup logged generated default database configuration |
 | `/opt/fleet/lib/verify-url.sh` | HTTP 200; title present; `lang=en`; one `h1`; one `main`; zero images without alt; zero unlabeled buttons; zero console/page errors |
 | Local Lighthouse mobile | Performance 99, Accessibility 100, Best Practices 100, SEO 100; FCP 1.2 s, LCP 2.1 s, TBT 0 ms, CLS 0, total transfer 240 KiB |
+| First live repair deploy | ACR run `ch1t6` built image `sf-cycle-legal-profile-check:f78f4a50897c` successfully; the owned app kept `sf-cycle-legal-profile-c-fa77fd` mounted at `/data` and HTTPS returned 200 |
+| Live identity and API allowance | `/health` returned `f78f4a50897ca75ae64160016631327893982c65`; one HTTP/2 session made 60 page-view requests: 40 × 204, 20 × 429, every 429 with `Retry-After: 1` |
+| Live desktop and 390px verification | All landing, demo, privacy, and terms routes returned 200 with zero serious/critical axe findings; demo made no API/external request; offline demo reload, keyboard focus/history, Escape menu focus restore, 44px report targets, browser-data removal, and designed 404 passed |
 
 The full browser suite covers keyboard navigation, visible focus, 44px targets,
 route announcements, desktop and 390px layouts, axe serious/critical findings,

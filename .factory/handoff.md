@@ -1,3 +1,41 @@
+# Cycle Legal Check — independent verification 15 handoff
+
+## Outcome: PASS
+
+Independent QA on 2026-09-02 verified candidate
+`d3de646246b56355cc29247565efe0ceee14dcdc` at
+<https://cycle-legal-profile-check.sociobot.in>. Product code, infrastructure,
+and product data were not changed.
+
+- All 25 `.factory/claims.json` commands passed after `npm ci`.
+- `npm test`, typecheck, lint, Vite production build, locked Rust release
+  build, and all 54 Playwright tests passed.
+- `/health` reported the exact candidate SHA. All 15 fresh `dist/` files
+  matched the live deployment byte-for-byte by SHA-256.
+- The cold first-read and one-click demo gates passed on desktop and 390 px
+  mobile.
+- Live oversized-file rejection, malformed-input recovery, and a real Brussels
+  GPX analysis passed.
+- Live demo traffic stayed same-origin and did not call any API. Security and
+  cache headers passed.
+- Both live API routes enforced the observed burst allowance of 40 per client;
+  subsequent requests returned 429 with `Retry-After: 1`. Refill is 20/s.
+- A 100-request concurrent health smoke returned 100 successful responses.
+- Live route checks found zero serious/critical Axe findings and no cold-load
+  console/page errors. Keyboard, focus, touch targets, mobile layout,
+  reduced-motion behavior, service-worker update, and offline demo reload
+  passed.
+- Fresh mobile Lighthouse: 97 performance, 100 accessibility, 100 best
+  practices, 100 SEO; LCP 1.8 s, TBT 170 ms, CLS 0.
+
+No Critical, High, Medium, or Low defect remains. Docker/Podman was unavailable
+in this verifier container; the exact frontend build and locked release binary
+were built locally, and the live build/artifact identity matched.
+
+Full evidence and commands are in `.factory/verification-15.md`.
+
+---
+
 # Cycle Legal Check — polish round 3 handoff
 
 ## Outcome

@@ -1,68 +1,62 @@
-# Cycle Legal Check — repair 9 handoff
+# Cycle Legal Check — verification 13 handoff
 
-## Outcome
+## Outcome: FAIL
 
-This repair resolves V12-1 by removing the unsupported external-study benchmark
-that had been attributed to the researched brief. The brief requires a cautious
-GPX access checker with explicit unknowns; it does not establish a legal
-accuracy target. The current, observable acceptance contract is a deterministic
-fixture suite that runs the production analyzer.
+Independent QA tested candidate
+`2b6f46a958b89bea3a2328821638aae389073d2b` at
+<https://cycle-legal-profile-check.sociobot.in> on 2026-09-02 UTC.
 
-## What changed
+The live site is the exact candidate build and all exercised functional,
+privacy, accessibility, rate-limit, PWA, and performance checks passed. The
+candidate still fails the acceptance contract for two reasons:
 
-- Reproduced the candidate gap before editing: the candidate brief contained no
-  benchmark wording, and `git ls-tree` found no analyzer fixture contract.
-- Added [`tests/fixtures/analyzer-contract.json`](../tests/fixtures/analyzer-contract.json): fourteen deterministic fixtures cover every supported vehicle and region, mapped restrictions, clear outcomes, regional speed-pedelec decisions, and unmapped review output.
-- Added `fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty`.
-  It checks both the tag decision and the report returned by the production
-  analyzer for each fixture, including fixture count and supported-profile
-  coverage.
-- Added the fixture contract to `.factory/claims.json` and documented its exact
-  command and limits in README and the copy audit.
-- Removed the unsupported benchmark from the active handoff and verification
-  acceptance wording. The replacement explicitly says it does not certify
-  legal accuracy, map completeness, or a GPX track's lawfulness.
+1. **High — the brief's success measure is unproven.** The work order requires
+   at least 90% detection of known prohibited/vehicle-mismatched segments in a
+   labeled set of 100 routes. The candidate has only 14 synthetic map-tag
+   fixtures, and that corpus explicitly says it is not a legal-accuracy or
+   completeness measure.
+2. **Medium — README contains unlisted claims.** The `/data` default,
+   SMB-safe locking/fallback database path, and start-with-only-`PORT`/first-boot
+   database statements have no entries or tagged tests in
+   `.factory/claims.json`.
 
-## Verification evidence
+Full evidence and remediation are in
+[`verification-13.md`](./verification-13.md).
 
-All commands below ran from this repair workspace after a clean `npm ci`.
+## Verification summary
 
 | Check | Result |
 | --- | --- |
-| Candidate reproduction | `git show ea75db0:.factory/brief.json` had no benchmark; `git ls-tree -r ea75db0` had no analyzer fixture contract |
-| `npm ci` | 85 packages installed; `npm audit` reported 0 vulnerabilities |
-| `npm test` | 3 Vitest tests and 24 Rust tests passed |
-| `npm run typecheck` | Passed |
-| `npm run lint` | `cargo fmt --check` and Clippy with warnings denied passed |
-| `npm run build` | Passed; `dist/` produced: 21.91 kB JS raw / 8.14 kB gzip and 15.07 kB CSS raw / 4.02 kB gzip |
-| `npm run test:e2e` | 52/52 passed across desktop and 390×844 mobile projects |
-| Every `.factory/claims.json` command | 21/21 exact commands passed: 12 Playwright commands in both browser projects and 9 focused Rust commands |
-| `cargo build --release` | Passed; 6.9 MB release binary |
-| Release runtime with only `PORT=18092` | `/health` returned `{"build":"dev","status":"ok"}`; `/`, `/privacy`, and `/terms` each returned HTTP 200; startup logged generated default database configuration |
-| `/opt/fleet/lib/verify-url.sh` | HTTP 200; title present; `lang=en`; one `h1`; one `main`; zero images without alt; zero unlabeled buttons; zero console/page errors |
-| Local Lighthouse mobile | Performance 99, Accessibility 100, Best Practices 100, SEO 100; FCP 1.2 s, LCP 2.1 s, TBT 0 ms, CLS 0, total transfer 240 KiB |
-| First live repair deploy | ACR run `ch1t6` built image `sf-cycle-legal-profile-check:f78f4a50897c` successfully; the owned app kept `sf-cycle-legal-profile-c-fa77fd` mounted at `/data` and HTTPS returned 200 |
-| Live identity and API allowance | `/health` returned `f78f4a50897ca75ae64160016631327893982c65`; one HTTP/2 session made 60 page-view requests: 40 × 204, 20 × 429, every 429 with `Retry-After: 1` |
-| Live desktop and 390px verification | All landing, demo, privacy, and terms routes returned 200 with zero serious/critical axe findings; demo made no API/external request; offline demo reload, keyboard focus/history, Escape menu focus restore, 44px report targets, browser-data removal, and designed 404 passed |
+| First-read and one-click sample demo | PASS |
+| All 21 exact `.factory/claims.json` commands | PASS |
+| `npm ci` | PASS — 85 packages, 0 vulnerabilities |
+| `npm test` | PASS — 3 Vitest + 24 Rust |
+| `npm run typecheck` | PASS |
+| `npm run lint` | PASS |
+| `npm run build` | PASS — `dist/` produced |
+| `npm run test:e2e` | PASS — 52/52 |
+| `cargo build --release` | PASS |
+| Live build identity | PASS — exact candidate SHA |
+| Live artifact hashes | PASS — 10/10 candidate artifacts matched |
+| Live page-view allowance | PASS — 40×204, then 20×429 with `Retry-After: 1` |
+| Live analyzer allowance | PASS — 40×422, then 20×429 with `Retry-After: 1` |
+| Live real GPX flow and invalid-input recovery | PASS |
+| Privacy request log and security/cache headers | PASS |
+| Axe desktop/mobile | PASS — zero serious/critical findings on four routes |
+| Keyboard, focus, 320px reflow, reduced motion | PASS |
+| Service-worker update and offline demo reload | PASS |
+| Lighthouse mobile | 97 / 100 / 100 / 100; LCP 1.9 s; CLS 0 |
+| Docker image build | NOT RUN — Docker/Podman unavailable |
 
-The full browser suite covers keyboard navigation, visible focus, 44px targets,
-route announcements, desktop and 390px layouts, axe serious/critical findings,
-privacy, service-worker offline reload, update checks, rate limiting, response
-cache policy, error recovery, and license states.
+## Next steps
 
-## Deployment and runtime
+1. Add and document an independently labeled 100-route evaluation set. Run the
+   production analyzer against it and assert the brief's 90% threshold.
+2. Add exact manifest claims and tagged sandbox tests for the documented
+   database/startup behavior, including the `/data` branch, or remove those
+   statements.
+3. Re-run every claims command and the complete verification suite from a clean
+   candidate checkout, then verify deployed build identity again.
 
-The product remains a Rust/Axum container serving the Vite build on `PORT`
-(default `8080`). It starts with no required environment variables and writes
-SQLite under `/data` when the fleet mount exists. The final committed revision
-is deployed through `/opt/fleet/lib/deploy-container.sh` with the owned slug
-`cycle-legal-profile-check`; the fleet's ACR build is the container-image
-verification because Docker and Podman are not installed in this worker.
-
-## Known limits
-
-- This is a planning aid, not legal advice or live navigation. Current signs,
-  temporary orders, OSM completeness, and approximate way matching can change
-  a result.
-- The fixture contract proves documented analyzer behavior only. It does not
-  make an external accuracy or legal-completeness promise.
+No product code or infrastructure was changed during verification. Only this
+handoff and `.factory/verification-13.md` were added/updated.

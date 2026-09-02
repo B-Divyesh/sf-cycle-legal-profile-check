@@ -85,8 +85,33 @@ reflow, and service-worker offline reload.
 
 ## Deployment and live verification
 
-The final commit containing this handoff is built with all three source
-identity arguments and deployed by:
+The repaired runtime was deployed on 2026-09-02 with all three source identity
+arguments. ACR run `ch1ud` built source
+`1b5edc266650f903a87dcfafbdae16daaa0cdb9d`; the fleet mounted
+`sf-cycle-legal-profile-c-fa77fd` at `/data` and kept one replica.
+
+Live evidence:
+
+- `/health` returned the exact deployed SHA and `Cache-Control: no-store`.
+- One HTTP/2 session sent 60 page-view requests: 40 returned 204 and 20
+  returned 429. Every 429 included `Retry-After: 1`.
+- Eleven checked frontend files matched the clean local build byte-for-byte.
+- `/`, `/demo`, `/privacy`, and `/terms` returned 200 at desktop and
+  390 px. Each had one H1, one main landmark, no overflow, no console error,
+  and zero serious or critical Axe findings.
+- Keyboard smoke confirmed the skip link, mobile-menu Enter activation, and
+  Escape focus restoration.
+- A live Belgium GPX check returned 200, 100% mapped coverage, five findings,
+  and rule pack `2026.09` dated `2026-09-01`.
+- The live demo requested only its own origin and no API endpoint. After a
+  service-worker update, an offline reload retained the demo report and
+  offline notice from `cycle-legal-shell-v7`.
+- Live mobile Lighthouse scored 100 / 100 / 100 / 100. FCP was 1.1 s, LCP
+  1.8 s, TBT 40 ms, CLS 0, and total transfer 244,260 bytes.
+
+This evidence-only handoff commit changes no runtime source or frontend asset.
+It is redeployed after commit so the final `/health` identity still equals
+`git rev-parse HEAD`. The repeat commands are:
 
 ```sh
 WO_DATA_DIR=/data /opt/fleet/lib/deploy-container.sh \

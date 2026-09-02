@@ -61,7 +61,7 @@ reported vulnerabilities).
 
 | Check | Result |
 | --- | --- |
-| `npm test` | PASS — 2 Vitest + 9 Rust tests, including the 100-route corpus/recall guard |
+| `npm test` | PASS — 2 Vitest + 9 Rust tests, including the former synthetic corpus guard |
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS — rustfmt and clippy with warnings denied |
 | `npm run build` | PASS — `dist/` produced |

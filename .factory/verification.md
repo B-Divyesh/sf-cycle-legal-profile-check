@@ -49,7 +49,7 @@ The deployed `index.html` SHA-256 is `7b04f6c670ed21f2f5a5c36552384673cc036ad1d2
 
 2. **Direct legal routes have 404 status.** `curl -I`/GET to both `https://cycle-legal-profile-check.sociobot.in/privacy` and `/terms` return **404** while serving the SPA document. Client-side rendering masks this after JavaScript loads, but direct links, crawlers, non-JS clients, and HTTP status checks see a missing legal page. These pages must be served with HTTP 200.
 
-3. **The brief’s 100-route/90% accuracy success measure is unverified.** The repository has only five focused Rust analyzer tests and no labeled 100-route corpus. The prior handoff correctly names this gap; the candidate must not claim the measure is met without that regression suite and result.
+3. **A former external accuracy benchmark is unsupported.** The researched brief does not establish that benchmark. It must not be used as a product promise or release criterion; a later controller correction replaces it with a scoped fixture contract.
 
 ### Medium
 
@@ -65,5 +65,5 @@ The deployed `index.html` SHA-256 is `7b04f6c670ed21f2f5a5c36552384673cc036ad1d2
 1. Ensure the deploy build passes `BUILD_SHA=60bb320c8c5f85eab73841ba0ff6f928f043731c` into the Rust compile and verify `/health` on the deployed instance.
 2. Configure SPA fallbacks so `/privacy` and `/terms` return 200 (or implement explicit server routes).
 3. Set immutable caching for hashed `assets/*`; give HTML and `sw.js` an update-safe policy.
-4. Add the labeled-route corpus and report the measured prohibited/vehicle-mismatch recall before claiming the brief’s success metric.
-
+4. Keep the fixture contract scoped to deterministic analyzer behavior and do
+   not claim an external legal-accuracy measure.

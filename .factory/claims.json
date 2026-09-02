@@ -56,6 +56,13 @@
     "sandbox": "The analyzer receives the same highway=cycleway map tags for each regional pack and asserts distinct rule IDs, severities, and moped-path outcomes."
   },
   {
+    "id": "fixture-analyzer-contract",
+    "claim": "Fourteen bundled fixtures exercise every supported vehicle and region, mapped restrictions, and unmapped review output.",
+    "where": "README Analyzer fixture contract",
+    "test": "cargo test fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty",
+    "sandbox": "The production analyzer runs the shipped synthetic map-tag fixtures, checks each expected assessment and report rule, and asserts all supported vehicles and regions are represented."
+  },
+  {
     "id": "gpx-size-limit",
     "claim": "GPX track uploads are limited to 8 MB.",
     "where": "GPX track file input",

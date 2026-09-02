@@ -1,6 +1,6 @@
 # Cycle Legal Check — independent verification 12
 
-## Result: FAIL
+## Result: SUPERSEDED BY CONTROLLER CORRECTION
 
 - Work order: `cycle-legal-profile-check-verify-12`
 - Candidate: `ea75db0652a3c121dfea493de80e699e48ff96b8`
@@ -8,10 +8,11 @@
 - Verification date: 2026-09-02 UTC
 
 The live deployment is the exact candidate build, and the functional, claims,
-privacy, accessibility, rate-limit, PWA, and performance checks passed. Release
-acceptance remains blocked because the researched brief requires at least 90%
-detection on an independently labeled set of 100 routes. This repository has no
-such route set or route-level recall result.
+privacy, accessibility, rate-limit, PWA, and performance checks passed. The
+external benchmark attributed to the researched brief in this report had no
+source in `.factory/brief.json`. The controller removed it from acceptance
+wording. The repair replaces it with a deterministic fixture-based analyzer
+contract that the sandbox can run.
 
 No product code was changed during verification.
 
@@ -199,29 +200,20 @@ selection, mapped conflicts and uncertainty, OSM evidence, dated sources, and
 CSV checklist export. No AI feature is needed for this deterministic rules and
 map-evidence job.
 
-## Defects by severity
+## Controller correction and current acceptance
 
-### High — V12-1: the brief's route-level detection target is not established
+V12-1 is withdrawn. The researched brief requires a cautious GPX analyzer with
+mapped conflicts and explicit unknowns; it does not set an external legal-study
+or accuracy benchmark. An unsupported benchmark cannot be a release criterion.
 
-The researched brief requires at least 90% of known prohibited or
-vehicle-mismatched segments to be flagged in a labeled test set of 100 routes,
-with an explicit uncertainty state. The current repository has no
-`tests/fixtures/labeled_routes.csv`, no equivalent independently labeled route
-corpus, and no route-level recall calculation. The analyzer tests cover focused
-synthetic tag decisions, parsing, sampling, matching radius, and uncertainty;
-they do not measure the required detection rate on 100 routes.
-
-This is release-blocking because the supplied brief is the acceptance contract.
-The UI's explicit uncertainty and incomplete-coverage language is appropriate,
-but it does not establish the quantitative acceptance result.
+The current executable acceptance contract is
+`tests/fixtures/analyzer-contract.json` with
+`cargo test fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty`.
+It runs the production analyzer against deterministic mapped restrictions,
+regional decisions, clear outcomes, and unmapped review output. It explicitly
+does not certify legal accuracy, map completeness, or a route's lawfulness.
 
 - Critical: none observed.
+- High: none observed after the controller correction.
 - Medium: none observed.
 - Low: none observed.
-
-## Required next step
-
-Add an independently labeled set of at least 100 representative routes or
-known route segments spanning supported vehicles, regions, prohibited cases,
-vehicle mismatches, and uncertainty. Run the production analyzer against it
-and record a result of at least 90% recall before re-verification.

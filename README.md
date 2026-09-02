@@ -72,6 +72,20 @@ outcome. Unmatched and vehicle-ambiguous sections are marked for review.
 
 OpenStreetMap data is © OpenStreetMap contributors and licensed under ODbL. Every report includes source links and source dates. See `/privacy` and `/terms` in the running app.
 
+## Analyzer fixture contract
+
+[`tests/fixtures/analyzer-contract.json`](tests/fixtures/analyzer-contract.json)
+contains fourteen deterministic map-tag fixtures. They exercise every supported
+vehicle and regional pack, mapped restrictions, and unmapped review output
+through the production analyzer.
+
+```sh
+cargo test fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty
+```
+
+This contract proves the documented behavior of this build. It does not measure
+legal accuracy, map completeness, or whether a specific GPX track is lawful.
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).

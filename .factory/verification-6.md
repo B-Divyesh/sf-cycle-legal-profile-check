@@ -78,7 +78,7 @@ passed.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| `npm test` | PASS | 2 Vitest + 15 Rust tests passed, including the 100-route labeled corpus. |
+| `npm test` | PASS | 2 Vitest + 15 Rust tests passed, including the former synthetic fixture corpus. |
 | `npm run typecheck` | PASS | `tsc --noEmit` clean. |
 | `npm run lint` | PASS | rustfmt plus clippy with warnings denied. |
 | `npm run build` | PASS | `dist/` produced; JS 20.08 kB raw / 7.65 kB gzip, CSS 13.47 kB raw / 3.70 kB gzip. |

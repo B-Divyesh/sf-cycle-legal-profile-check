@@ -1,4 +1,4 @@
-# Copy audit — 2026-09-01
+# Copy audit — 2026-09-02
 
 The audited route is `/` in its clean, signed-out state. Labels, proper names,
 file names, and legal links are excluded. Sentence-equivalent lines are
@@ -61,6 +61,10 @@ separately. No row exceeds 22 words or uses a banned marketing term.
 | The default is `/data/cycle-legal.sqlite` when `/data` exists. | 10 | Pass |
 | It uses SMB-safe locking there. | 6 | Pass |
 | Otherwise, it uses `./cycle-legal.sqlite`. | 6 | Pass |
+| Contains fourteen deterministic map-tag fixtures. | 6 | Pass — `fixture-analyzer-contract` |
+| They exercise every supported vehicle and regional pack, mapped restrictions, and unmapped review output through the production analyzer. | 16 | Pass — `fixture-analyzer-contract` |
+| This contract proves the documented behavior of this build. | 9 | Pass — `fixture-analyzer-contract` |
+| It does not measure legal accuracy, map completeness, or whether a specific GPX track is lawful. | 15 | Pass — necessary limitation |
 
 ## Terminology
 

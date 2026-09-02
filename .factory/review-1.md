@@ -284,7 +284,7 @@ match the deployed assets exactly.
   crawler-file, 404, and deployed-limiter findings are fixed in the matched
   live build and current code. Evidence includes live `/health` returning
   `d562c39c…`, direct-route status checks, the clean-clone upload and
-  44 px-navigation tests (4/4), the 100-route corpus test, and the fixed-IP
+  44 px-navigation tests (4/4), the former fixture-corpus test, and the fixed-IP
   limiter Rust test. The external checkout endpoint itself was not contacted,
   as required by the service-scope restriction.
 - The brief does not imply an AI step. GPX import and CSV export already cover

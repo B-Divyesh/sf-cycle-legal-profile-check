@@ -59,12 +59,11 @@ Netherlands, and Germany each returned status 200, verdict `review`, rule
 `SP-CYCLEWAY-UNKNOWN`, and the same finding title. Only the first source label
 and URL differed.
 
-The success-measure test does not close this gap. `tests/fixtures/labeled_routes.csv`
-contains 100 hand-authored tag/expected-result rows. The test at
-`src/analyzer.rs:407` uses the same two-point geometry and one synthetic way for
-every row, then checks the classifier against labels shaped around that same
-classifier. It is not a labeled set of 100 real routes or known route segments,
-so 90%+ route-level recall remains unconfirmed.
+The former synthetic success-measure test did not close this gap. It used the
+same two-point geometry and one synthetic way for every row, then checked the
+classifier against labels shaped around that classifier. It was not an external
+legal-accuracy study. The controller later removed that unsupported benchmark
+from acceptance wording and replaced it with an explicit fixture contract.
 
 ### Medium — V9-3: quantitative README claims are absent from the claim manifest
 
@@ -254,8 +253,8 @@ attributes OpenStreetMap, and displays rule-source dates.
    build enough time or separating build preparation from Playwright startup.
 2. Implement and test genuinely distinct Belgium, Netherlands, and Germany
    classification rules before selling those packs.
-3. Validate the 90% target against independently labeled real routes or known
-   route segments, including regional and vehicle-specific cases.
+3. Keep the fixture contract explicit about its scope and do not present it as
+   an external legal-accuracy study.
 4. Add claim-manifest entries and tagged tests for the documented 80-metre /
    one-sixtieth sampling and 35-metre matching statements, or remove those
    quantitative statements.

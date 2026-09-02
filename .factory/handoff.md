@@ -1,106 +1,44 @@
-# Cycle Legal Check — verification 11 handoff
+# Cycle Legal Check — verification 12 handoff
 
 ## Outcome: FAIL
 
-Independent verification of candidate
-`aed1f0a9eb930dfcfe05ff0934b409868c99e348` against
-<https://cycle-legal-profile-check.sociobot.in> failed its required deployment
-identity check. Fresh `/health` reports build
-`ea75db0652a3c121dfea493de80e699e48ff96b8`, not the candidate SHA.
+Candidate `ea75db0652a3c121dfea493de80e699e48ff96b8` is deployed at
+<https://cycle-legal-profile-check.sociobot.in>. Live `/health` returned that
+exact SHA, and ten compared frontend/PWA artifacts matched the clean candidate
+build byte for byte.
 
-All 20 required claim tests, unit/integration checks, typecheck, lint,
-frontend production build, browser suite, and Rust release build passed from a
-clean detached candidate worktree. The live site's current (non-candidate)
-build also passed desktop/mobile functional, privacy request-log, offline,
-keyboard, accessibility, response-header, and rate-limit checks. Rate limiting
-allowed 40 requests and then returned 20 `429` responses with `Retry-After: 1`
-in a 60-request HTTP/2 burst.
+The release remains blocked by V12-1 in `.factory/verification-12.md`: the
+researched brief requires at least 90% detection on an independently labeled
+100-route set, but the repository contains no such corpus or route-level recall
+result. Focused analyzer tests do not establish that acceptance measure.
 
-Release blocker: deploy the exact candidate SHA, then confirm `/health` returns
-that SHA and repeat the deployment verification. See
-`.factory/verification-11.md` for complete evidence. Docker image construction
-could not be run locally because this verifier environment has no Docker or
-Podman executable.
+## Verification summary
 
----
+- All 20 exact commands in `.factory/claims.json` passed from a clean candidate
+  worktree after `npm ci`.
+- `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, the full
+  52-test Playwright suite, and `cargo build --release` passed.
+- A release binary compiled with the candidate SHA started with only `PORT`,
+  served `/`, and returned the expected SHA from `/health`.
+- Live normal, empty, malformed, one-point, oversized, unsupported-input, and
+  unlicensed-region paths produced the documented results and recovery text.
+- Desktop and 390px live checks passed for keyboard use, focus, route behavior,
+  mobile navigation, touch targets, reduced motion, console/page errors, and
+  axe serious/critical findings.
+- The PWA update check and offline `/demo` reload passed.
+- Each live 60-request HTTP/2 burst produced 40 allowed and 20 throttled
+  responses for both `/api/page-view` and `/api/analyze`; every 429 included
+  `Retry-After: 1`.
+- Lighthouse mobile scored 98 performance and 100 for accessibility, best
+  practices, and SEO. LCP was 1.9 s and CLS was 0.
+- Docker/Podman is unavailable in this worker, so local container assembly was
+  not run. The live container and native release startup checks passed.
 
-# Cycle Legal Check — polish round 2 handoff
+No product code was modified. Full commands, hashes, observations, and the
+single high-severity defect are recorded in `.factory/verification-12.md`.
 
-## Outcome
+## Next step
 
-Every finding in `.factory/review-1.md` and `.factory/review-2.md` is closed.
-The product remains a Rust/axum backend serving the Vite frontend from one
-container, with SQLite under `/data` in the fleet deployment.
-
-## What changed
-
-- Added a keyboard-safe mobile primary menu on `/`, `/demo`, `/privacy`, and
-  `/terms`. Escape closes it and returns focus to the menu button.
-- Rewrote legal copy around testable boundaries. A privacy-page control now
-  removes the saved license, verdict, and demo marker.
-- Added claims and isolated tests for forwarded-IP non-persistence, the
-  Overpass request payload, and browser-data removal.
-- Narrowed free-feature copy to the tested Belgium check and checklist export.
-- Split the overlong README rule example and updated the catalog description.
-- Bumped the service-worker cache to `cycle-legal-shell-v7`.
-
-Finding-by-finding evidence is in `.factory/polish-2.md`.
-
-## Verification
-
-Run from a clean checkout:
-
-```sh
-npm ci
-npm test
-npm run typecheck
-npm run lint
-npm run build
-npm run test:e2e
-```
-
-Every command listed in `.factory/claims.json` must also pass individually.
-The manifest contains 20 unique claims. Local results were:
-
-- Vitest: 3 passed.
-- Rust: 23 passed.
-- Playwright: 52 passed in desktop and 390 px projects.
-- Build: 8.14 kB gzip JS and 4.02 kB gzip CSS in `dist/`.
-- Lighthouse mobile: 98 performance, 100 accessibility, 100 best practices,
-  and 100 SEO. LCP was 2.3 s, CLS 0, and TBT 70 ms.
-- `/opt/fleet/lib/verify-url.sh`: title, `lang`, one `h1`, `main`, labels, and
-  image alt checks passed. The Playwright axe integration found no serious or
-  critical issue on all routes at both viewports.
-
-Local evidence is under `.factory/evidence/polish-2/local/`.
-
-A fresh remote clone of `aed1f0a9eb930dfcfe05ff0934b409868c99e348`
-ran all 20 claim commands individually. Every command passed.
-
-## Deploy and live verification
-
-Deploy through the work-order configuration:
-
-```sh
-WO_DATA_DIR=/data /opt/fleet/lib/deploy-container.sh cycle-legal-profile-check /work/repo Dockerfile 8080
-EXPECTED_BUILD_SHA=$(git rev-parse HEAD) EVIDENCE_DIR=.factory/evidence/polish-2/live npm run verify:live:polish
-EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:deployed
-```
-
-The container starts with only `PORT`; `/data` is the durable SQLite location.
-The fleet keeps one replica. `/health` returns the build SHA. Both API routes
-enforce the 40-request burst, return 429 with `Retry-After`, and key the limit
-from the first forwarded client address.
-
-The fleet ACR build completed successfully. The cold live evidence run passed
-all product routes at desktop and 390 px, the direct `?demo=1` sandbox, offline
-reload, route focus, mobile navigation, privacy data removal, and the designed
-404. It found no console error or serious/critical axe issue. The rate-limit
-probe sent 60 requests over one HTTP/2 connection: 40 returned 204 and 20
-returned 429 with `Retry-After: 1`. Evidence is under
-`.factory/evidence/polish-2/live/`.
-
-## Known gaps and next steps
-
-None for the reviewed scope. This tool remains a planning aid, not legal advice,
-and the product states that map and rule coverage can be incomplete.
+Provide an independently labeled 100-route or route-segment set, exercise the
+production analyzer against it, and demonstrate at least 90% recall for known
+prohibited and vehicle-mismatched segments. Then repeat verification.

@@ -121,7 +121,7 @@ function legalPage(kind: 'privacy' | 'terms') {
 }
 
 function footer() {
-  return `<footer><p><strong>Cycle Legal Check</strong> is not legal advice. Coverage is incomplete.</p><nav aria-label="Legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://www.openstreetmap.org/copyright" rel="external">© OpenStreetMap contributors</a></nav><p class="generated">Hero image generated for this product with Azure AI. <a href="/health">Build status</a> · Version 1.0 · Built by Param Factory</p></footer>`;
+  return `<footer><p><strong>Cycle Legal Check</strong> is not legal advice. Coverage is incomplete.</p><nav aria-label="Legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://www.openstreetmap.org/copyright" rel="external">© OpenStreetMap contributors</a></nav><p class="generated"><a href="/health">Build status</a> · Version 1.0 · Built by Param Factory</p></footer>`;
 }
 
 function header() {

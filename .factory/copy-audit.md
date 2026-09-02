@@ -34,7 +34,6 @@ separately. No row exceeds 22 words or uses a banned marketing term.
 | “No conflict found” does not mean legal clearance. | 8 | Pass — necessary limitation |
 | Cycle Legal Check is not legal advice. | 7 | Pass — necessary limitation |
 | Coverage is incomplete. | 3 | Pass — necessary limitation |
-| Hero image generated for this product with Azure AI. | 9 | Pass — asset provenance |
 
 ## Privacy and terms copy added in polish round 2
 

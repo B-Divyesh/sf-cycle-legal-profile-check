@@ -353,6 +353,16 @@ test('product routes expose unique metadata and no serious accessibility violati
   }
 });
 
+test('shared footers keep the legal limitation and build link without non-actionable asset provenance', async ({ page }) => {
+  for (const path of ['/', '/demo', '/privacy', '/terms']) {
+    await page.goto(path);
+    const footer = page.locator('footer');
+    await expect(footer).toContainText('Cycle Legal Check is not legal advice. Coverage is incomplete.');
+    await expect(footer.getByRole('link', { name: 'Build status' })).toHaveAttribute('href', '/health');
+    await expect(footer).not.toContainText(/generated for this product|Azure AI/i);
+  }
+});
+
 test('server exposes build identity and update-safe cache policy', async ({ page }) => {
   const health = await page.request.get('/health');
   expect(health.status()).toBe(200);

@@ -455,6 +455,53 @@ mod tests {
         rule_id: String,
     }
 
+    #[derive(Debug, Deserialize)]
+    struct RouteEvaluationCorpus {
+        threshold_percent: f64,
+        corpus_size: usize,
+        routes: Vec<RouteEvaluationCase>,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct RouteEvaluationCase {
+        id: String,
+        region: String,
+        vehicle: String,
+        label: String,
+        label_basis: RouteLabelBasis,
+        source: RouteSource,
+        route_points: Vec<EvaluationPoint>,
+        way: EvaluationWay,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct RouteLabelBasis {
+        source_tag: String,
+        source_value: String,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct RouteSource {
+        #[serde(rename = "type")]
+        source_type: String,
+        way_id: i64,
+        url: String,
+        snapshot_at: String,
+        license: String,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct EvaluationPoint {
+        lat: f64,
+        lon: f64,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct EvaluationWay {
+        tags: HashMap<String, String>,
+        geometry: Vec<GeoPoint>,
+    }
+
     fn contract_points() -> Vec<Point> {
         vec![
             Point {
@@ -723,5 +770,112 @@ mod tests {
                 case.expected_report.rule_id
             );
         }
+    }
+
+    #[test]
+    fn labeled_hundred_route_evaluation_detects_at_least_ninety_percent() {
+        let corpus: RouteEvaluationCorpus =
+            serde_json::from_str(include_str!("../tests/fixtures/route-evaluation-100.json"))
+                .expect("the shipped route evaluation must be valid JSON");
+
+        assert_eq!(corpus.corpus_size, 100);
+        assert_eq!(corpus.routes.len(), 100);
+        assert_eq!(corpus.threshold_percent, 90.0);
+
+        let mut route_ids = HashSet::new();
+        let mut way_ids = HashSet::new();
+        let mut regions = HashSet::new();
+        let mut vehicles = HashSet::new();
+        let mut detected = 0usize;
+
+        for route in &corpus.routes {
+            assert!(
+                route_ids.insert(route.id.as_str()),
+                "{} route ID is duplicated",
+                route.id
+            );
+            assert!(
+                way_ids.insert(route.source.way_id),
+                "{} OSM way is duplicated",
+                route.id
+            );
+            assert_eq!(route.label, "prohibited_or_vehicle_mismatch");
+            assert_eq!(route.source.source_type, "openstreetmap_way_snapshot");
+            assert_eq!(
+                route.source.url,
+                format!("https://www.openstreetmap.org/way/{}", route.source.way_id)
+            );
+            assert!(route.source.snapshot_at.ends_with('Z'));
+            assert_eq!(route.source.license, "ODbL 1.0");
+            assert!(matches!(
+                route.label_basis.source_tag.as_str(),
+                "bicycle" | "speed_pedelec"
+            ));
+            assert!(matches!(
+                route.label_basis.source_value.as_str(),
+                "no" | "private"
+            ));
+            assert_eq!(
+                route.way.tags.get(&route.label_basis.source_tag),
+                Some(&route.label_basis.source_value),
+                "{} must retain the independently supplied source tag",
+                route.id
+            );
+            if route.label_basis.source_tag == "speed_pedelec" {
+                assert_eq!(route.vehicle, "speed_pedelec");
+            }
+            assert_eq!(route.route_points.len(), 2);
+            assert!(route.way.geometry.len() >= 2);
+
+            regions.insert(route.region.as_str());
+            vehicles.insert(route.vehicle.as_str());
+            let gpx = format!(
+                "<gpx><trk><name>{}</name><trkseg><trkpt lat='{}' lon='{}'/><trkpt lat='{}' lon='{}'/></trkseg></trk></gpx>",
+                route.id,
+                route.route_points[0].lat,
+                route.route_points[0].lon,
+                route.route_points[1].lat,
+                route.route_points[1].lon
+            );
+            let (name, points) = parse_gpx(&gpx)
+                .unwrap_or_else(|error| panic!("{} route GPX must parse: {error}", route.id));
+            let report = analyze(
+                name,
+                &points,
+                &[OverpassWay {
+                    id: route.source.way_id,
+                    tags: route.way.tags.clone(),
+                    geometry: route.way.geometry.clone(),
+                }],
+                &route.vehicle,
+                &route.region,
+                true,
+            )
+            .unwrap_or_else(|error| panic!("{} must analyze: {error}", route.id));
+
+            if report.findings.iter().any(|finding| {
+                finding.severity == Severity::Prohibited
+                    && finding.osm_way_id == Some(route.source.way_id)
+            }) {
+                detected += 1;
+            }
+        }
+
+        assert_eq!(regions, HashSet::from(["BE", "NL", "DE"]));
+        assert_eq!(
+            vehicles,
+            HashSet::from(["bicycle", "ebike_25", "speed_pedelec"])
+        );
+        let detection_percent = detected as f64 / corpus.routes.len() as f64 * 100.0;
+        eprintln!(
+            "100-route evaluation: {detected}/{} conflicts detected ({detection_percent:.1}%)",
+            corpus.routes.len()
+        );
+        assert!(
+            detection_percent >= corpus.threshold_percent,
+            "detected {detection_percent:.1}% ({detected}/{}) but the corpus threshold is {:.1}%",
+            corpus.routes.len(),
+            corpus.threshold_percent
+        );
     }
 }

@@ -1,0 +1,7441 @@
+{
+  "schema_version": 1,
+  "title": "Cycle Legal Check independently labeled 100-route evaluation",
+  "purpose": "Measures whether the production analyzer flags explicit mapped prohibitions on 100 stored route segments. It does not measure legal accuracy, map completeness, temporary restrictions, or whether a route is lawful.",
+  "threshold_percent": 90,
+  "corpus_size": 100,
+  "provenance": {
+    "publisher": "OpenStreetMap contributors",
+    "source": "https://www.openstreetmap.org",
+    "license": "Open Database License 1.0",
+    "retrieval": "Overpass API `out tags geom`; static snapshots retained below so tests make no network request.",
+    "snapshots": {
+      "BE": "2026-09-02T02:18:09Z",
+      "NL": "2026-09-02T02:19:10Z",
+      "DE": "2026-09-02T02:20:12Z"
+    },
+    "queries": {
+      "BE": "[out:json][timeout:90];way(49.5,2.5,51.6,6.5)[\"highway\"][\"speed_pedelec\"~\"^(no|private)$\"];out tags geom 34;",
+      "NL": "[out:json][timeout:90];way(51.7,3.3,53.6,7.3)[\"highway\"][\"bicycle\"~\"^(no|private)$\"];out tags geom 33;",
+      "DE": "[out:json][timeout:90];way(52.25,12.85,52.75,13.85)[\"highway\"][\"bicycle\"~\"^(no|private)$\"];out tags geom 33;"
+    },
+    "label_policy": "A route is positive only when its stored source way has an explicit `bicycle=no|private` or `speed_pedelec=no|private` tag applicable to the selected vehicle. Those contributor-supplied tags are the independent labels.",
+    "selection_policy": "First 34 Belgium speed-pedelec, 33 Netherlands bicycle-access, and 33 Berlin bicycle-access ways returned by the recorded bounded queries. Netherlands and Germany cases alternate bicycle and 25 km/h e-bike profiles.",
+    "audit_note": "Every route has a unique OSM way URL, stored tag evidence, vehicle, region, and source geometry. Expected rule IDs are assigned from the published label policy, not copied from analyzer results."
+  },
+  "routes": [
+    {
+      "id": "be-osm-way-4434270",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4434270,
+        "url": "https://www.openstreetmap.org/way/4434270",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 50.990084,
+          "lon": 5.7049277
+        },
+        {
+          "lat": 50.9899998,
+          "lon": 5.7049556
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "secondary",
+          "horse": "no",
+          "lanes": "1",
+          "maxspeed": "70",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Kolenmijn Limburg-Maaslaan",
+          "oneway": "yes",
+          "speed_pedelec": "no",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 50.990084,
+            "lon": 5.7049277
+          },
+          {
+            "lat": 50.9899998,
+            "lon": 5.7049556
+          },
+          {
+            "lat": 50.9897917,
+            "lon": 5.7049678
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4484614",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4484614,
+        "url": "https://www.openstreetmap.org/way/4484614",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2178623,
+          "lon": 4.4616475
+        },
+        {
+          "lat": 51.2179348,
+          "lon": 4.4616861
+        }
+      ],
+      "way": {
+        "tags": {
+          "highway": "path",
+          "horse": "no",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no",
+          "surface": "asphalt",
+          "width": "2"
+        },
+        "geometry": [
+          {
+            "lat": 51.2178623,
+            "lon": 4.4616475
+          },
+          {
+            "lat": 51.2179348,
+            "lon": 4.4616861
+          },
+          {
+            "lat": 51.2179007,
+            "lon": 4.462516
+          },
+          {
+            "lat": 51.2178736,
+            "lon": 4.4631108
+          },
+          {
+            "lat": 51.2177206,
+            "lon": 4.4667
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4487223",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4487223,
+        "url": "https://www.openstreetmap.org/way/4487223",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2154013,
+          "lon": 4.4589204
+        },
+        {
+          "lat": 51.2156017,
+          "lon": 4.4586866
+        }
+      ],
+      "way": {
+        "tags": {
+          "highway": "path",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no",
+          "surface": "compacted",
+          "width": "4"
+        },
+        "geometry": [
+          {
+            "lat": 51.2154013,
+            "lon": 4.4589204
+          },
+          {
+            "lat": 51.2156017,
+            "lon": 4.4586866
+          },
+          {
+            "lat": 51.2156845,
+            "lon": 4.458585
+          },
+          {
+            "lat": 51.2157687,
+            "lon": 4.458471
+          },
+          {
+            "lat": 51.2160427,
+            "lon": 4.4580521
+          },
+          {
+            "lat": 51.2161614,
+            "lon": 4.4578051
+          },
+          {
+            "lat": 51.2162402,
+            "lon": 4.4576324
+          },
+          {
+            "lat": 51.2163118,
+            "lon": 4.4574655
+          },
+          {
+            "lat": 51.2163861,
+            "lon": 4.4572565
+          },
+          {
+            "lat": 51.2164694,
+            "lon": 4.4569735
+          },
+          {
+            "lat": 51.216656,
+            "lon": 4.4564334
+          },
+          {
+            "lat": 51.2166826,
+            "lon": 4.4563666
+          },
+          {
+            "lat": 51.2167127,
+            "lon": 4.4563176
+          },
+          {
+            "lat": 51.216748,
+            "lon": 4.4562813
+          },
+          {
+            "lat": 51.2167828,
+            "lon": 4.4562568
+          },
+          {
+            "lat": 51.2170169,
+            "lon": 4.4561755
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4487226",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4487226,
+        "url": "https://www.openstreetmap.org/way/4487226",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2154013,
+          "lon": 4.4589204
+        },
+        {
+          "lat": 51.2157048,
+          "lon": 4.4591255
+        }
+      ],
+      "way": {
+        "tags": {
+          "foot": "yes",
+          "highway": "path",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "no",
+          "speed_pedelec": "no",
+          "surface": "ground",
+          "width": "2"
+        },
+        "geometry": [
+          {
+            "lat": 51.2154013,
+            "lon": 4.4589204
+          },
+          {
+            "lat": 51.2157048,
+            "lon": 4.4591255
+          },
+          {
+            "lat": 51.2158226,
+            "lon": 4.4592078
+          },
+          {
+            "lat": 51.2162085,
+            "lon": 4.4594789
+          },
+          {
+            "lat": 51.2163069,
+            "lon": 4.459545
+          },
+          {
+            "lat": 51.216669,
+            "lon": 4.4599553
+          },
+          {
+            "lat": 51.2175732,
+            "lon": 4.4608627
+          },
+          {
+            "lat": 51.2177403,
+            "lon": 4.4610495
+          },
+          {
+            "lat": 51.2178851,
+            "lon": 4.4610763
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4487228",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4487228,
+        "url": "https://www.openstreetmap.org/way/4487228",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2170169,
+          "lon": 4.4561755
+        },
+        {
+          "lat": 51.217094,
+          "lon": 4.4567799
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "path",
+          "layer": "1",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no",
+          "surface": "compacted"
+        },
+        "geometry": [
+          {
+            "lat": 51.2170169,
+            "lon": 4.4561755
+          },
+          {
+            "lat": 51.217094,
+            "lon": 4.4567799
+          },
+          {
+            "lat": 51.2171096,
+            "lon": 4.4569023
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4487229",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4487229,
+        "url": "https://www.openstreetmap.org/way/4487229",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2171273,
+          "lon": 4.4570434
+        },
+        {
+          "lat": 51.2173152,
+          "lon": 4.4586676
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "path",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no"
+        },
+        "geometry": [
+          {
+            "lat": 51.2171273,
+            "lon": 4.4570434
+          },
+          {
+            "lat": 51.2173152,
+            "lon": 4.4586676
+          },
+          {
+            "lat": 51.2175732,
+            "lon": 4.4608627
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4487230",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4487230,
+        "url": "https://www.openstreetmap.org/way/4487230",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2168678,
+          "lon": 4.4547489
+        },
+        {
+          "lat": 51.2168798,
+          "lon": 4.4544229
+        }
+      ],
+      "way": {
+        "tags": {
+          "access": "yes",
+          "bicycle": "permissive",
+          "foot": "yes",
+          "highway": "path",
+          "horse": "no",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "no",
+          "note": "Op Mapillary zichtbaar: afgesloten op 07-06-2023 ter hoogte van de voetbalvelden. Onduidelijk of het ganse pad is afgesloten.",
+          "speed_pedelec": "no"
+        },
+        "geometry": [
+          {
+            "lat": 51.2168678,
+            "lon": 4.4547489
+          },
+          {
+            "lat": 51.2168798,
+            "lon": 4.4544229
+          },
+          {
+            "lat": 51.216902,
+            "lon": 4.454139
+          },
+          {
+            "lat": 51.216933,
+            "lon": 4.4538302
+          },
+          {
+            "lat": 51.2169926,
+            "lon": 4.4534622
+          },
+          {
+            "lat": 51.2171165,
+            "lon": 4.4529516
+          },
+          {
+            "lat": 51.2171703,
+            "lon": 4.4527783
+          },
+          {
+            "lat": 51.2172191,
+            "lon": 4.4526773
+          },
+          {
+            "lat": 51.2173383,
+            "lon": 4.4525553
+          },
+          {
+            "lat": 51.2174657,
+            "lon": 4.4524906
+          },
+          {
+            "lat": 51.2175446,
+            "lon": 4.4525008
+          },
+          {
+            "lat": 51.2176545,
+            "lon": 4.4526369
+          },
+          {
+            "lat": 51.2177824,
+            "lon": 4.4527967
+          },
+          {
+            "lat": 51.2180365,
+            "lon": 4.4528205
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4487232",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4487232,
+        "url": "https://www.openstreetmap.org/way/4487232",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2174302,
+          "lon": 4.4559622
+        },
+        {
+          "lat": 51.2177178,
+          "lon": 4.4556116
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "path",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no"
+        },
+        "geometry": [
+          {
+            "lat": 51.2174302,
+            "lon": 4.4559622
+          },
+          {
+            "lat": 51.2177178,
+            "lon": 4.4556116
+          },
+          {
+            "lat": 51.2177557,
+            "lon": 4.4555776
+          },
+          {
+            "lat": 51.2177845,
+            "lon": 4.4555518
+          },
+          {
+            "lat": 51.2178886,
+            "lon": 4.4554652
+          },
+          {
+            "lat": 51.217993,
+            "lon": 4.4553977
+          },
+          {
+            "lat": 51.2180601,
+            "lon": 4.4553694
+          },
+          {
+            "lat": 51.218142,
+            "lon": 4.4553491
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-4820514",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4820514,
+        "url": "https://www.openstreetmap.org/way/4820514",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 50.9904147,
+          "lon": 5.7049874
+        },
+        {
+          "lat": 50.9904006,
+          "lon": 5.7049201
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "secondary",
+          "horse": "no",
+          "junction": "roundabout",
+          "lanes": "1",
+          "maxspeed": "70",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Kolenmijn Limburg-Maaslaan",
+          "speed_pedelec": "no",
+          "surface": "concrete"
+        },
+        "geometry": [
+          {
+            "lat": 50.9904147,
+            "lon": 5.7049874
+          },
+          {
+            "lat": 50.9904006,
+            "lon": 5.7049201
+          },
+          {
+            "lat": 50.9903763,
+            "lon": 5.7048606
+          },
+          {
+            "lat": 50.9903432,
+            "lon": 5.704813
+          },
+          {
+            "lat": 50.9903036,
+            "lon": 5.7047802
+          },
+          {
+            "lat": 50.9902601,
+            "lon": 5.7047644
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-7331731",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 7331731,
+        "url": "https://www.openstreetmap.org/way/7331731",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.0367253,
+          "lon": 3.7164442
+        },
+        {
+          "lat": 51.0367452,
+          "lon": 3.7164816
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "designated",
+          "cycleway:surface": "paving_stones",
+          "cycleway:width": "2",
+          "foot": "designated",
+          "footway:surface": "compacted",
+          "highway": "path",
+          "horse": "no",
+          "mofa": "designated",
+          "moped": "no",
+          "note": "Aangepast volgens https://wiki.openstreetmap.org/wiki/Road_signs_in_Belgium/D_Mandatory_signs#D9",
+          "oneway": "no",
+          "segregated": "yes",
+          "source:cycleway:width": "ARCore",
+          "speed_pedelec": "no",
+          "traffic_sign": "BE:D9"
+        },
+        "geometry": [
+          {
+            "lat": 51.0367253,
+            "lon": 3.7164442
+          },
+          {
+            "lat": 51.0367452,
+            "lon": 3.7164816
+          },
+          {
+            "lat": 51.0368157,
+            "lon": 3.7165528
+          },
+          {
+            "lat": 51.0379226,
+            "lon": 3.7174655
+          },
+          {
+            "lat": 51.0380201,
+            "lon": 3.7175491
+          },
+          {
+            "lat": 51.0385018,
+            "lon": 3.7179619
+          },
+          {
+            "lat": 51.038584,
+            "lon": 3.7180323
+          },
+          {
+            "lat": 51.0386712,
+            "lon": 3.718107
+          },
+          {
+            "lat": 51.0392266,
+            "lon": 3.7185829
+          },
+          {
+            "lat": 51.0393604,
+            "lon": 3.7186987
+          },
+          {
+            "lat": 51.0394498,
+            "lon": 3.7187748
+          },
+          {
+            "lat": 51.0395325,
+            "lon": 3.7188461
+          },
+          {
+            "lat": 51.0395983,
+            "lon": 3.7189028
+          },
+          {
+            "lat": 51.0401277,
+            "lon": 3.7193591
+          },
+          {
+            "lat": 51.0402298,
+            "lon": 3.7194481
+          },
+          {
+            "lat": 51.0407292,
+            "lon": 3.7198786
+          },
+          {
+            "lat": 51.0408155,
+            "lon": 3.719962
+          },
+          {
+            "lat": 51.0408649,
+            "lon": 3.7200348
+          },
+          {
+            "lat": 51.040921,
+            "lon": 3.7201287
+          },
+          {
+            "lat": 51.0409606,
+            "lon": 3.7202212
+          },
+          {
+            "lat": 51.0409868,
+            "lon": 3.7203366
+          },
+          {
+            "lat": 51.0410079,
+            "lon": 3.7204841
+          },
+          {
+            "lat": 51.0410171,
+            "lon": 3.7205458
+          },
+          {
+            "lat": 51.04105,
+            "lon": 3.7206279
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-8081426",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 8081426,
+        "url": "https://www.openstreetmap.org/way/8081426",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2175394,
+          "lon": 4.4684404
+        },
+        {
+          "lat": 51.2175088,
+          "lon": 4.4683929
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "path",
+          "incline": "0%",
+          "lit": "yes",
+          "maxspeed": "6",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no",
+          "surface": "sett"
+        },
+        "geometry": [
+          {
+            "lat": 51.2175394,
+            "lon": 4.4684404
+          },
+          {
+            "lat": 51.2175088,
+            "lon": 4.4683929
+          },
+          {
+            "lat": 51.2169632,
+            "lon": 4.4676182
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-8152279",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 8152279,
+        "url": "https://www.openstreetmap.org/way/8152279",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.0237172,
+          "lon": 4.3169151
+        },
+        {
+          "lat": 51.0235661,
+          "lon": 4.3181352
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "tertiary",
+          "lanes": "2",
+          "maxspeed:backward": "50",
+          "maxspeed:forward": "70",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Molenhoek",
+          "speed_pedelec": "no",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 51.0237172,
+            "lon": 4.3169151
+          },
+          {
+            "lat": 51.0235661,
+            "lon": 4.3181352
+          },
+          {
+            "lat": 51.0233601,
+            "lon": 4.3198465
+          },
+          {
+            "lat": 51.0233512,
+            "lon": 4.3199207
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-8576810",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 8576810,
+        "url": "https://www.openstreetmap.org/way/8576810",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2171974,
+          "lon": 4.4770319
+        },
+        {
+          "lat": 51.2185411,
+          "lon": 4.4772009
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "designated",
+          "foot": "designated",
+          "highway": "cycleway",
+          "lit": "yes",
+          "mofa": "no",
+          "moped": "no",
+          "oneway": "no",
+          "segregated": "no",
+          "speed_pedelec": "no",
+          "surface": "concrete"
+        },
+        "geometry": [
+          {
+            "lat": 51.2171974,
+            "lon": 4.4770319
+          },
+          {
+            "lat": 51.2185411,
+            "lon": 4.4772009
+          },
+          {
+            "lat": 51.2186262,
+            "lon": 4.4771973
+          },
+          {
+            "lat": 51.2186976,
+            "lon": 4.4771655
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-9653497",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 9653497,
+        "url": "https://www.openstreetmap.org/way/9653497",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.1385493,
+          "lon": 5.4534292
+        },
+        {
+          "lat": 51.1385001,
+          "lon": 5.4534426
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "tertiary",
+          "lanes": "1",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Kiezel Kleine Brogel",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N748",
+          "speed_pedelec": "no",
+          "surface": "concrete"
+        },
+        "geometry": [
+          {
+            "lat": 51.1385493,
+            "lon": 5.4534292
+          },
+          {
+            "lat": 51.1385001,
+            "lon": 5.4534426
+          },
+          {
+            "lat": 51.1384369,
+            "lon": 5.4534532
+          },
+          {
+            "lat": 51.138365,
+            "lon": 5.453462
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-9653671",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 9653671,
+        "url": "https://www.openstreetmap.org/way/9653671",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.1386604,
+          "lon": 5.4537478
+        },
+        {
+          "lat": 51.1386934,
+          "lon": 5.4538843
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "primary",
+          "lanes": "1",
+          "maxspeed": "90",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Noordweg",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N73",
+          "speed_pedelec": "no",
+          "surface": "concrete",
+          "toll:hgv": "yes"
+        },
+        "geometry": [
+          {
+            "lat": 51.1386604,
+            "lon": 5.4537478
+          },
+          {
+            "lat": 51.1386934,
+            "lon": 5.4538843
+          },
+          {
+            "lat": 51.1387302,
+            "lon": 5.4545311
+          },
+          {
+            "lat": 51.1387703,
+            "lon": 5.455035
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-10661813",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 10661813,
+        "url": "https://www.openstreetmap.org/way/10661813",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.1853521,
+          "lon": 4.4119256
+        },
+        {
+          "lat": 51.184908,
+          "lon": 4.4122204
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "permissive",
+          "highway": "path",
+          "horse": "private",
+          "incline": "0%",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "service",
+          "note": "bordje C3+M2",
+          "speed_pedelec": "no",
+          "surface": "compacted",
+          "vehicle": "no"
+        },
+        "geometry": [
+          {
+            "lat": 51.1853521,
+            "lon": 4.4119256
+          },
+          {
+            "lat": 51.184908,
+            "lon": 4.4122204
+          },
+          {
+            "lat": 51.184052,
+            "lon": 4.4128166
+          },
+          {
+            "lat": 51.1822802,
+            "lon": 4.4140508
+          },
+          {
+            "lat": 51.182155,
+            "lon": 4.414138
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-13223835",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 13223835,
+        "url": "https://www.openstreetmap.org/way/13223835",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.0945046,
+          "lon": 3.4390564
+        },
+        {
+          "lat": 51.0937932,
+          "lon": 3.4393777
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "carriageway_ref": "h2",
+          "foot": "no",
+          "highway": "trunk",
+          "lanes": "2",
+          "layer": "1",
+          "maxspeed": "90",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Knokkebaan",
+          "old_name": "Knokkeweg",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N44",
+          "speed_pedelec": "no",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 51.0945046,
+            "lon": 3.4390564
+          },
+          {
+            "lat": 51.0937932,
+            "lon": 3.4393777
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-13223870",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 13223870,
+        "url": "https://www.openstreetmap.org/way/13223870",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.0945349,
+          "lon": 3.4392537
+        },
+        {
+          "lat": 51.0972,
+          "lon": 3.4380856
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "carriageway_ref": "h1",
+          "foot": "no",
+          "highway": "trunk",
+          "lanes": "2",
+          "maxspeed": "90",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Knokkebaan",
+          "old_name": "Knokkeweg",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N44",
+          "speed_pedelec": "no",
+          "surface": "concrete"
+        },
+        "geometry": [
+          {
+            "lat": 51.0945349,
+            "lon": 3.4392537
+          },
+          {
+            "lat": 51.0972,
+            "lon": 3.4380856
+          },
+          {
+            "lat": 51.0978142,
+            "lon": 3.4378151
+          },
+          {
+            "lat": 51.0984715,
+            "lon": 3.43754
+          },
+          {
+            "lat": 51.0986413,
+            "lon": 3.4374741
+          },
+          {
+            "lat": 51.0990642,
+            "lon": 3.4373164
+          },
+          {
+            "lat": 51.0996715,
+            "lon": 3.4371129
+          },
+          {
+            "lat": 51.1002323,
+            "lon": 3.4369438
+          },
+          {
+            "lat": 51.100758,
+            "lon": 3.4367897
+          },
+          {
+            "lat": 51.1023111,
+            "lon": 3.4363388
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-13268823",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 13268823,
+        "url": "https://www.openstreetmap.org/way/13268823",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 50.9898931,
+          "lon": 3.2742231
+        },
+        {
+          "lat": 50.9898642,
+          "lon": 3.274137
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "trunk",
+          "lanes": "2",
+          "maxspeed": "90",
+          "maxweight:signed": "no",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Ringlaan Robert Depaepe",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N37",
+          "speed_pedelec": "no",
+          "traffic_sign": "BE:C19;C9-C11"
+        },
+        "geometry": [
+          {
+            "lat": 50.9898931,
+            "lon": 3.2742231
+          },
+          {
+            "lat": 50.9898642,
+            "lon": 3.274137
+          },
+          {
+            "lat": 50.9891678,
+            "lon": 3.2720634
+          },
+          {
+            "lat": 50.9882352,
+            "lon": 3.269246
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-13697830",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 13697830,
+        "url": "https://www.openstreetmap.org/way/13697830",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 50.9871682,
+          "lon": 3.265996
+        },
+        {
+          "lat": 50.9871111,
+          "lon": 3.2658205
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "foot": "no",
+          "highway": "trunk",
+          "lanes": "2",
+          "layer": "1",
+          "maxheight": "none",
+          "maxspeed": "90",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Ringlaan Robert Depaepe",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N37",
+          "speed_pedelec": "no",
+          "surface": "concrete",
+          "traffic_sign": "BE:C19;C9-C11"
+        },
+        "geometry": [
+          {
+            "lat": 50.9871682,
+            "lon": 3.265996
+          },
+          {
+            "lat": 50.9871111,
+            "lon": 3.2658205
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-13697845",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 13697845,
+        "url": "https://www.openstreetmap.org/way/13697845",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 50.9871111,
+          "lon": 3.2658205
+        },
+        {
+          "lat": 50.9870305,
+          "lon": 3.2655449
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "trunk",
+          "lanes": "2",
+          "maxheight": "none",
+          "maxspeed": "90",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Ringlaan Robert Depaepe",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N37",
+          "speed_pedelec": "no",
+          "surface": "concrete",
+          "traffic_sign": "BE:C19;C9-C11"
+        },
+        "geometry": [
+          {
+            "lat": 50.9871111,
+            "lon": 3.2658205
+          },
+          {
+            "lat": 50.9870305,
+            "lon": 3.2655449
+          },
+          {
+            "lat": 50.9865491,
+            "lon": 3.2637046
+          },
+          {
+            "lat": 50.986284,
+            "lon": 3.2622847
+          },
+          {
+            "lat": 50.9861733,
+            "lon": 3.2615751
+          },
+          {
+            "lat": 50.986072,
+            "lon": 3.2608537
+          },
+          {
+            "lat": 50.9859608,
+            "lon": 3.2598415
+          },
+          {
+            "lat": 50.9858814,
+            "lon": 3.2588083
+          },
+          {
+            "lat": 50.9858537,
+            "lon": 3.2583675
+          },
+          {
+            "lat": 50.985841,
+            "lon": 3.2579377
+          },
+          {
+            "lat": 50.985811,
+            "lon": 3.2569594
+          },
+          {
+            "lat": 50.9858137,
+            "lon": 3.256155
+          },
+          {
+            "lat": 50.9858169,
+            "lon": 3.2560711
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-17443921",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 17443921,
+        "url": "https://www.openstreetmap.org/way/17443921",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.211547,
+          "lon": 4.4644666
+        },
+        {
+          "lat": 51.2115673,
+          "lon": 4.4643807
+        }
+      ],
+      "way": {
+        "tags": {
+          "highway": "unclassified",
+          "lit": "yes",
+          "mofa": "no",
+          "moped": "no",
+          "oneway": "yes",
+          "speed_pedelec": "no",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 51.211547,
+            "lon": 4.4644666
+          },
+          {
+            "lat": 51.2115673,
+            "lon": 4.4643807
+          },
+          {
+            "lat": 51.2115818,
+            "lon": 4.464319
+          },
+          {
+            "lat": 51.2116092,
+            "lon": 4.4642029
+          },
+          {
+            "lat": 51.2116205,
+            "lon": 4.4641551
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-17732105",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 17732105,
+        "url": "https://www.openstreetmap.org/way/17732105",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 50.9236111,
+          "lon": 5.371067
+        },
+        {
+          "lat": 50.923663,
+          "lon": 5.3713332
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "change:lanes": "no|no",
+          "highway": "secondary",
+          "lanes": "2",
+          "lanes:backward": "1",
+          "lanes:forward": "1",
+          "maxspeed": "70",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Diepenbekerweg",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N2",
+          "speed_pedelec": "no",
+          "surface": "asphalt",
+          "toll:hgv": "yes"
+        },
+        "geometry": [
+          {
+            "lat": 50.9236111,
+            "lon": 5.371067
+          },
+          {
+            "lat": 50.923663,
+            "lon": 5.3713332
+          },
+          {
+            "lat": 50.9237006,
+            "lon": 5.3716324
+          },
+          {
+            "lat": 50.9237267,
+            "lon": 5.3719285
+          },
+          {
+            "lat": 50.9237332,
+            "lon": 5.372201
+          },
+          {
+            "lat": 50.9237211,
+            "lon": 5.3726295
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-19747580",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 19747580,
+        "url": "https://www.openstreetmap.org/way/19747580",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.1385493,
+          "lon": 5.4534292
+        },
+        {
+          "lat": 51.1385463,
+          "lon": 5.4535087
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "primary",
+          "junction": "roundabout",
+          "lanes": "1",
+          "maxspeed": "90",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Noordweg",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N73;N748",
+          "speed_pedelec": "no",
+          "surface": "concrete"
+        },
+        "geometry": [
+          {
+            "lat": 51.1385493,
+            "lon": 5.4534292
+          },
+          {
+            "lat": 51.1385463,
+            "lon": 5.4535087
+          },
+          {
+            "lat": 51.1385553,
+            "lon": 5.4535991
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-19747690",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 19747690,
+        "url": "https://www.openstreetmap.org/way/19747690",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.1388486,
+          "lon": 5.4535891
+        },
+        {
+          "lat": 51.138888,
+          "lon": 5.4535612
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "secondary",
+          "lanes": "1",
+          "maxspeed": "70",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Kiezel Kleine Brogel",
+          "oneway": "yes",
+          "operator": "Agentschap Wegen en Verkeer",
+          "ref": "N748",
+          "speed_pedelec": "no",
+          "surface": "concrete"
+        },
+        "geometry": [
+          {
+            "lat": 51.1388486,
+            "lon": 5.4535891
+          },
+          {
+            "lat": 51.138888,
+            "lon": 5.4535612
+          },
+          {
+            "lat": 51.1389411,
+            "lon": 5.453536
+          },
+          {
+            "lat": 51.1390209,
+            "lon": 5.4535163
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-19801056",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 19801056,
+        "url": "https://www.openstreetmap.org/way/19801056",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2174741,
+          "lon": 4.4705573
+        },
+        {
+          "lat": 51.2174615,
+          "lon": 4.4708111
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "permissive",
+          "cycleway:both": "no",
+          "foot": "yes",
+          "highway": "path",
+          "horse": "no",
+          "incline": "0%",
+          "lane_markings": "no",
+          "lit": "yes",
+          "maxspeed": "6",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "delivery;service",
+          "name": "Parkweg",
+          "note": "Provincie Antwerpen heeft najaar 2025 toegankelijkheid aangepast, fietsers zijn nu 'gast', voetgangers 'koning', diverse bordjes reeds op prent, andere nog te doen.",
+          "oneway": "no",
+          "sidewalk": "no",
+          "speed_pedelec": "no",
+          "surface": "paving_stones",
+          "width": "5"
+        },
+        "geometry": [
+          {
+            "lat": 51.2174741,
+            "lon": 4.4705573
+          },
+          {
+            "lat": 51.2174615,
+            "lon": 4.4708111
+          },
+          {
+            "lat": 51.2173904,
+            "lon": 4.4722246
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-19801058",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 19801058,
+        "url": "https://www.openstreetmap.org/way/19801058",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2171974,
+          "lon": 4.4770319
+        },
+        {
+          "lat": 51.2171839,
+          "lon": 4.4773505
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "permissive",
+          "cycleway:both": "no",
+          "foot": "yes",
+          "highway": "path",
+          "horse": "no",
+          "incline": "0%",
+          "lane_markings": "no",
+          "lit": "yes",
+          "maxspeed": "6",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "permit",
+          "name": "Parkweg",
+          "note": "Provincie Antwerpen heeft najaar 2025 toegankelijkheid aangepast, fietsers zijn nu 'gast', voetgangers 'koning', diverse bordjes reeds op prent, andere nog te doen.",
+          "oneway": "no",
+          "sidewalk": "no",
+          "smoothness": "intermediate",
+          "speed_pedelec": "no",
+          "surface": "paving_stones",
+          "width": "5"
+        },
+        "geometry": [
+          {
+            "lat": 51.2171974,
+            "lon": 4.4770319
+          },
+          {
+            "lat": 51.2171839,
+            "lon": 4.4773505
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-19801059",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 19801059,
+        "url": "https://www.openstreetmap.org/way/19801059",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2171616,
+          "lon": 4.4777823
+        },
+        {
+          "lat": 51.2170466,
+          "lon": 4.480384
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "permissive",
+          "cycleway:both": "no",
+          "foot": "yes",
+          "highway": "path",
+          "horse": "no",
+          "incline": "0%",
+          "lane_markings": "no",
+          "lit": "yes",
+          "maxspeed": "6",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "permit",
+          "name": "Parkweg",
+          "note": "Provincie Antwerpen heeft najaar 2025 toegankelijkheid aangepast, fietsers zijn nu 'gast', voetgangers 'koning', diverse bordjes reeds op prent, andere nog te doen.",
+          "oneway": "no",
+          "sidewalk": "no",
+          "smoothness": "good",
+          "speed_pedelec": "no",
+          "surface": "asphalt",
+          "width": "5"
+        },
+        "geometry": [
+          {
+            "lat": 51.2171616,
+            "lon": 4.4777823
+          },
+          {
+            "lat": 51.2170466,
+            "lon": 4.480384
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-20454903",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 20454903,
+        "url": "https://www.openstreetmap.org/way/20454903",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2127214,
+          "lon": 4.4651579
+        },
+        {
+          "lat": 51.2129747,
+          "lon": 4.4648913
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "permissive",
+          "highway": "path",
+          "horse": "no",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no",
+          "surface": "compacted"
+        },
+        "geometry": [
+          {
+            "lat": 51.2127214,
+            "lon": 4.4651579
+          },
+          {
+            "lat": 51.2129747,
+            "lon": 4.4648913
+          },
+          {
+            "lat": 51.213104,
+            "lon": 4.4647648
+          },
+          {
+            "lat": 51.2133207,
+            "lon": 4.4646521
+          },
+          {
+            "lat": 51.2134013,
+            "lon": 4.4646334
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-20454944",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 20454944,
+        "url": "https://www.openstreetmap.org/way/20454944",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2127214,
+          "lon": 4.4651579
+        },
+        {
+          "lat": 51.2127112,
+          "lon": 4.4651541
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "permissive",
+          "highway": "path",
+          "horse": "no",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "speed_pedelec": "no",
+          "surface": "compacted"
+        },
+        "geometry": [
+          {
+            "lat": 51.2127214,
+            "lon": 4.4651579
+          },
+          {
+            "lat": 51.2127112,
+            "lon": 4.4651541
+          },
+          {
+            "lat": 51.2125775,
+            "lon": 4.465244
+          },
+          {
+            "lat": 51.2124269,
+            "lon": 4.4653399
+          },
+          {
+            "lat": 51.2122689,
+            "lon": 4.4654459
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-20455135",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 20455135,
+        "url": "https://www.openstreetmap.org/way/20455135",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2114834,
+          "lon": 4.4659385
+        },
+        {
+          "lat": 51.2115085,
+          "lon": 4.4661137
+        }
+      ],
+      "way": {
+        "tags": {
+          "highway": "service",
+          "lit": "no",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "destination",
+          "speed_pedelec": "no",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 51.2114834,
+            "lon": 4.4659385
+          },
+          {
+            "lat": 51.2115085,
+            "lon": 4.4661137
+          },
+          {
+            "lat": 51.2115226,
+            "lon": 4.4662118
+          },
+          {
+            "lat": 51.2115568,
+            "lon": 4.4665428
+          },
+          {
+            "lat": 51.2115621,
+            "lon": 4.466702
+          },
+          {
+            "lat": 51.2115608,
+            "lon": 4.4669516
+          },
+          {
+            "lat": 51.211548,
+            "lon": 4.4673128
+          },
+          {
+            "lat": 51.2115222,
+            "lon": 4.4677689
+          },
+          {
+            "lat": 51.2114926,
+            "lon": 4.4682415
+          },
+          {
+            "lat": 51.2114469,
+            "lon": 4.4686983
+          },
+          {
+            "lat": 51.2114248,
+            "lon": 4.4689733
+          },
+          {
+            "lat": 51.2114299,
+            "lon": 4.4692293
+          },
+          {
+            "lat": 51.2114512,
+            "lon": 4.4694674
+          },
+          {
+            "lat": 51.2114879,
+            "lon": 4.4697471
+          },
+          {
+            "lat": 51.2115556,
+            "lon": 4.4701152
+          },
+          {
+            "lat": 51.2116433,
+            "lon": 4.4704875
+          },
+          {
+            "lat": 51.21172,
+            "lon": 4.4707728
+          },
+          {
+            "lat": 51.2117944,
+            "lon": 4.4710051
+          },
+          {
+            "lat": 51.2118616,
+            "lon": 4.4711647
+          },
+          {
+            "lat": 51.211943,
+            "lon": 4.4713239
+          },
+          {
+            "lat": 51.2121023,
+            "lon": 4.4716038
+          },
+          {
+            "lat": 51.2122869,
+            "lon": 4.4719226
+          },
+          {
+            "lat": 51.2123698,
+            "lon": 4.4720853
+          },
+          {
+            "lat": 51.2124199,
+            "lon": 4.4721836
+          },
+          {
+            "lat": 51.2125734,
+            "lon": 4.472508
+          },
+          {
+            "lat": 51.2127705,
+            "lon": 4.4729734
+          },
+          {
+            "lat": 51.2129156,
+            "lon": 4.4733489
+          },
+          {
+            "lat": 51.2131589,
+            "lon": 4.4740298
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-20556244",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 20556244,
+        "url": "https://www.openstreetmap.org/way/20556244",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.0524786,
+          "lon": 3.7253093
+        },
+        {
+          "lat": 51.0524452,
+          "lon": 3.7250449
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bicycle:conditional": "yes @ (18:00-11:00)",
+          "emergency": "yes",
+          "exceptional_permit": "BE:gent:autovrij_gebied",
+          "highway": "living_street",
+          "maxspeed": "20",
+          "mofa": "no",
+          "mofa:conditional": "yes @ (18:00-11:00)",
+          "name": "Korte Kruisstraat",
+          "note": "voetgangersstraat tussen 11 en 18 uur",
+          "private": "exceptional_permit",
+          "speed_pedelec": "no",
+          "speed_pedelec:conditional": "yes @ (18:00-11:00)",
+          "surface": "sett",
+          "vehicle": "no",
+          "vehicle:conditional": "private @ (18:00-11:00)",
+          "wikidata": "Q115807549"
+        },
+        "geometry": [
+          {
+            "lat": 51.0524786,
+            "lon": 3.7253093
+          },
+          {
+            "lat": 51.0524452,
+            "lon": 3.7250449
+          },
+          {
+            "lat": 51.0524066,
+            "lon": 3.724862
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-22886217",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 22886217,
+        "url": "https://www.openstreetmap.org/way/22886217",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2334565,
+          "lon": 5.4395225
+        },
+        {
+          "lat": 51.2329395,
+          "lon": 5.4393941
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "yes",
+          "bridge": "yes",
+          "highway": "cycleway",
+          "horse": "no",
+          "layer": "1",
+          "mofa": "yes",
+          "moped": "no",
+          "motor_vehicle": "no",
+          "oneway": "no",
+          "railway": "razed",
+          "smoothness": "good",
+          "speed_pedelec": "no",
+          "surface": "concrete",
+          "width": "3.3"
+        },
+        "geometry": [
+          {
+            "lat": 51.2334565,
+            "lon": 5.4395225
+          },
+          {
+            "lat": 51.2329395,
+            "lon": 5.4393941
+          }
+        ]
+      }
+    },
+    {
+      "id": "be-osm-way-22886218",
+      "region": "BE",
+      "vehicle": "speed_pedelec",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "speed_pedelec",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 22886218,
+        "url": "https://www.openstreetmap.org/way/22886218",
+        "snapshot_at": "2026-09-02T02:18:09Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 51.2329395,
+          "lon": 5.4393941
+        },
+        {
+          "lat": 51.2322048,
+          "lon": 5.4392342
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "yes",
+          "highway": "cycleway",
+          "horse": "no",
+          "mofa": "yes",
+          "moped": "no",
+          "motor_vehicle": "no",
+          "oneway": "no",
+          "railway": "razed",
+          "smoothness": "good",
+          "speed_pedelec": "no",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 51.2329395,
+            "lon": 5.4393941
+          },
+          {
+            "lat": 51.2322048,
+            "lon": 5.4392342
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-2952999",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 2952999,
+        "url": "https://www.openstreetmap.org/way/2952999",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0776909,
+          "lon": 5.1177934
+        },
+        {
+          "lat": 52.0775928,
+          "lon": 5.1181293
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "name": "Pieter Bernagiestraat"
+        },
+        "geometry": [
+          {
+            "lat": 52.0776909,
+            "lon": 5.1177934
+          },
+          {
+            "lat": 52.0775928,
+            "lon": 5.1181293
+          },
+          {
+            "lat": 52.0775513,
+            "lon": 5.1182669
+          },
+          {
+            "lat": 52.0775085,
+            "lon": 5.118398
+          },
+          {
+            "lat": 52.0774577,
+            "lon": 5.1185533
+          },
+          {
+            "lat": 52.0774113,
+            "lon": 5.1187233
+          },
+          {
+            "lat": 52.0773903,
+            "lon": 5.1188437
+          },
+          {
+            "lat": 52.0773569,
+            "lon": 5.1190815
+          },
+          {
+            "lat": 52.0773394,
+            "lon": 5.1192063
+          },
+          {
+            "lat": 52.0773114,
+            "lon": 5.1193212
+          },
+          {
+            "lat": 52.0772691,
+            "lon": 5.1194428
+          },
+          {
+            "lat": 52.0772442,
+            "lon": 5.1195147
+          },
+          {
+            "lat": 52.0771776,
+            "lon": 5.1197131
+          },
+          {
+            "lat": 52.0770903,
+            "lon": 5.1199581
+          },
+          {
+            "lat": 52.0770343,
+            "lon": 5.1201279
+          },
+          {
+            "lat": 52.0769743,
+            "lon": 5.1203557
+          },
+          {
+            "lat": 52.0769317,
+            "lon": 5.120549
+          },
+          {
+            "lat": 52.0769293,
+            "lon": 5.1205598
+          },
+          {
+            "lat": 52.0768927,
+            "lon": 5.1206951
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-2976724",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 2976724,
+        "url": "https://www.openstreetmap.org/way/2976724",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0818684,
+          "lon": 5.1235265
+        },
+        {
+          "lat": 52.0818692,
+          "lon": 5.1235128
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "lit": "yes",
+          "name": "Twijnstraat aan de Werf"
+        },
+        "geometry": [
+          {
+            "lat": 52.0818684,
+            "lon": 5.1235265
+          },
+          {
+            "lat": 52.0818692,
+            "lon": 5.1235128
+          },
+          {
+            "lat": 52.0821464,
+            "lon": 5.1230748
+          },
+          {
+            "lat": 52.0821836,
+            "lon": 5.1230114
+          },
+          {
+            "lat": 52.0822381,
+            "lon": 5.1229522
+          },
+          {
+            "lat": 52.0823143,
+            "lon": 5.1228911
+          },
+          {
+            "lat": 52.0824123,
+            "lon": 5.1228284
+          },
+          {
+            "lat": 52.082529,
+            "lon": 5.1227891
+          },
+          {
+            "lat": 52.0826643,
+            "lon": 5.1227874
+          },
+          {
+            "lat": 52.0829382,
+            "lon": 5.1228424
+          },
+          {
+            "lat": 52.0829565,
+            "lon": 5.122846
+          },
+          {
+            "lat": 52.0829642,
+            "lon": 5.1228536
+          },
+          {
+            "lat": 52.0833365,
+            "lon": 5.1229557
+          },
+          {
+            "lat": 52.0836407,
+            "lon": 5.1230618
+          },
+          {
+            "lat": 52.0836463,
+            "lon": 5.1230762
+          },
+          {
+            "lat": 52.0837025,
+            "lon": 5.1230948
+          },
+          {
+            "lat": 52.0837312,
+            "lon": 5.1231211
+          },
+          {
+            "lat": 52.0837505,
+            "lon": 5.123171
+          },
+          {
+            "lat": 52.0837538,
+            "lon": 5.1232264
+          },
+          {
+            "lat": 52.0837459,
+            "lon": 5.1232278
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4003673",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4003673,
+        "url": "https://www.openstreetmap.org/way/4003673",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0893265,
+          "lon": 5.0986846
+        },
+        {
+          "lat": 52.0891257,
+          "lon": 5.098982
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.0893265,
+            "lon": 5.0986846
+          },
+          {
+            "lat": 52.0891257,
+            "lon": 5.098982
+          },
+          {
+            "lat": 52.0891248,
+            "lon": 5.0990259
+          },
+          {
+            "lat": 52.0891964,
+            "lon": 5.0992893
+          },
+          {
+            "lat": 52.0892536,
+            "lon": 5.0994907
+          },
+          {
+            "lat": 52.0893026,
+            "lon": 5.0996556
+          },
+          {
+            "lat": 52.0895149,
+            "lon": 5.0995594
+          },
+          {
+            "lat": 52.0896102,
+            "lon": 5.0995192
+          },
+          {
+            "lat": 52.0896274,
+            "lon": 5.099524
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4007771",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4007771,
+        "url": "https://www.openstreetmap.org/way/4007771",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0847962,
+          "lon": 5.0898708
+        },
+        {
+          "lat": 52.0847541,
+          "lon": 5.0899573
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "geometry": [
+          {
+            "lat": 52.0847962,
+            "lon": 5.0898708
+          },
+          {
+            "lat": 52.0847541,
+            "lon": 5.0899573
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4013033",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4013033,
+        "url": "https://www.openstreetmap.org/way/4013033",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0890767,
+          "lon": 5.1275219
+        },
+        {
+          "lat": 52.0890553,
+          "lon": 5.1275285
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "yes",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Bruntenhof",
+          "surface": "paving_stones"
+        },
+        "geometry": [
+          {
+            "lat": 52.0890767,
+            "lon": 5.1275219
+          },
+          {
+            "lat": 52.0890553,
+            "lon": 5.1275285
+          },
+          {
+            "lat": 52.0887286,
+            "lon": 5.1276223
+          },
+          {
+            "lat": 52.0881396,
+            "lon": 5.1278086
+          },
+          {
+            "lat": 52.0880988,
+            "lon": 5.127823
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4233382",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4233382,
+        "url": "https://www.openstreetmap.org/way/4233382",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0834625,
+          "lon": 5.0882685
+        },
+        {
+          "lat": 52.083634,
+          "lon": 5.0879442
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "name": "Jochem Uytdehaageplantsoen",
+          "surface": "paved"
+        },
+        "geometry": [
+          {
+            "lat": 52.0834625,
+            "lon": 5.0882685
+          },
+          {
+            "lat": 52.083634,
+            "lon": 5.0879442
+          },
+          {
+            "lat": 52.083755,
+            "lon": 5.087715
+          },
+          {
+            "lat": 52.0837495,
+            "lon": 5.0875483
+          },
+          {
+            "lat": 52.0837481,
+            "lon": 5.0873717
+          },
+          {
+            "lat": 52.0837413,
+            "lon": 5.0870597
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4396051",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4396051,
+        "url": "https://www.openstreetmap.org/way/4396051",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0918094,
+          "lon": 5.1188939
+        },
+        {
+          "lat": 52.0918341,
+          "lon": 5.1189239
+        }
+      ],
+      "way": {
+        "tags": {
+          "access": "no",
+          "bicycle": "no",
+          "foot": "yes",
+          "highway": "path",
+          "horse": "no",
+          "motor_vehicle": "no"
+        },
+        "geometry": [
+          {
+            "lat": 52.0918094,
+            "lon": 5.1188939
+          },
+          {
+            "lat": 52.0918341,
+            "lon": 5.1189239
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4412926",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4412926,
+        "url": "https://www.openstreetmap.org/way/4412926",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0964532,
+          "lon": 5.1076478
+        },
+        {
+          "lat": 52.0965163,
+          "lon": 5.1077169
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "geometry": [
+          {
+            "lat": 52.0964532,
+            "lon": 5.1076478
+          },
+          {
+            "lat": 52.0965163,
+            "lon": 5.1077169
+          },
+          {
+            "lat": 52.0966102,
+            "lon": 5.1078325
+          },
+          {
+            "lat": 52.0966492,
+            "lon": 5.1078928
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4420750",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4420750,
+        "url": "https://www.openstreetmap.org/way/4420750",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.1797374,
+          "lon": 7.0398008
+        },
+        {
+          "lat": 52.1793288,
+          "lon": 7.0398303
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "pedestrian",
+          "horse": "yes",
+          "lit": "yes",
+          "name": "Merschstraße",
+          "surface": "paving_stones",
+          "wheelchair": "yes"
+        },
+        "geometry": [
+          {
+            "lat": 52.1797374,
+            "lon": 7.0398008
+          },
+          {
+            "lat": 52.1793288,
+            "lon": 7.0398303
+          },
+          {
+            "lat": 52.1790442,
+            "lon": 7.0398474
+          },
+          {
+            "lat": 52.1789287,
+            "lon": 7.0398341
+          },
+          {
+            "lat": 52.1788363,
+            "lon": 7.0398049
+          },
+          {
+            "lat": 52.1787595,
+            "lon": 7.0397688
+          },
+          {
+            "lat": 52.1786484,
+            "lon": 7.0397006
+          },
+          {
+            "lat": 52.1785484,
+            "lon": 7.0396017
+          },
+          {
+            "lat": 52.178471,
+            "lon": 7.0395404
+          },
+          {
+            "lat": 52.1783447,
+            "lon": 7.0396088
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4436686",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4436686,
+        "url": "https://www.openstreetmap.org/way/4436686",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.3567309,
+          "lon": 4.9699627
+        },
+        {
+          "lat": 52.3567614,
+          "lon": 4.9699844
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "bridge:ref": "2013",
+          "highway": "footway",
+          "lanes": "2",
+          "layer": "2",
+          "name": "Nesciobrug",
+          "surface": "asphalt",
+          "width": "2"
+        },
+        "geometry": [
+          {
+            "lat": 52.3567309,
+            "lon": 4.9699627
+          },
+          {
+            "lat": 52.3567614,
+            "lon": 4.9699844
+          },
+          {
+            "lat": 52.3567888,
+            "lon": 4.9700203
+          },
+          {
+            "lat": 52.3568308,
+            "lon": 4.970091
+          },
+          {
+            "lat": 52.3568539,
+            "lon": 4.9701294
+          },
+          {
+            "lat": 52.3568858,
+            "lon": 4.970178
+          },
+          {
+            "lat": 52.3569143,
+            "lon": 4.9702195
+          },
+          {
+            "lat": 52.356946,
+            "lon": 4.9702631
+          },
+          {
+            "lat": 52.3569815,
+            "lon": 4.9703105
+          },
+          {
+            "lat": 52.3570177,
+            "lon": 4.9703565
+          },
+          {
+            "lat": 52.3570594,
+            "lon": 4.9704036
+          },
+          {
+            "lat": 52.3571375,
+            "lon": 4.9704886
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4454079",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4454079,
+        "url": "https://www.openstreetmap.org/way/4454079",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.094216,
+          "lon": 4.2640344
+        },
+        {
+          "lat": 52.094182,
+          "lon": 4.2643401
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "horse": "no"
+        },
+        "geometry": [
+          {
+            "lat": 52.094216,
+            "lon": 4.2640344
+          },
+          {
+            "lat": 52.094182,
+            "lon": 4.2643401
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4464315",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4464315,
+        "url": "https://www.openstreetmap.org/way/4464315",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 53.2063394,
+          "lon": 6.541138
+        },
+        {
+          "lat": 53.2063505,
+          "lon": 6.5411733
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "dog": "leashed",
+          "highway": "footway",
+          "surface": "ground"
+        },
+        "geometry": [
+          {
+            "lat": 53.2063394,
+            "lon": 6.541138
+          },
+          {
+            "lat": 53.2063505,
+            "lon": 6.5411733
+          },
+          {
+            "lat": 53.2064306,
+            "lon": 6.5414574
+          },
+          {
+            "lat": 53.2065396,
+            "lon": 6.5418264
+          },
+          {
+            "lat": 53.2067946,
+            "lon": 6.5426892
+          },
+          {
+            "lat": 53.206996,
+            "lon": 6.54344
+          },
+          {
+            "lat": 53.2072608,
+            "lon": 6.5447196
+          },
+          {
+            "lat": 53.2072683,
+            "lon": 6.5447565
+          },
+          {
+            "lat": 53.2073545,
+            "lon": 6.5451175
+          },
+          {
+            "lat": 53.207544,
+            "lon": 6.5459498
+          },
+          {
+            "lat": 53.2077976,
+            "lon": 6.5470412
+          },
+          {
+            "lat": 53.2078079,
+            "lon": 6.5471459
+          },
+          {
+            "lat": 53.2077989,
+            "lon": 6.5472536
+          },
+          {
+            "lat": 53.2077742,
+            "lon": 6.547353
+          },
+          {
+            "lat": 53.2077536,
+            "lon": 6.5473969
+          },
+          {
+            "lat": 53.2075383,
+            "lon": 6.5475693
+          },
+          {
+            "lat": 53.2074599,
+            "lon": 6.5476378
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4472199",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4472199,
+        "url": "https://www.openstreetmap.org/way/4472199",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9934831,
+          "lon": 6.4993077
+        },
+        {
+          "lat": 52.9935148,
+          "lon": 6.4993743
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "primary",
+          "junction": "roundabout",
+          "lanes": "1",
+          "lit": "yes",
+          "maxspeed": "80",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Smilderrotonde",
+          "operator": "Provincie Drenthe",
+          "ref": "N371",
+          "surface": "asphalt",
+          "zone:traffic": "NL:rural"
+        },
+        "geometry": [
+          {
+            "lat": 52.9934831,
+            "lon": 6.4993077
+          },
+          {
+            "lat": 52.9935148,
+            "lon": 6.4993743
+          },
+          {
+            "lat": 52.9935569,
+            "lon": 6.4994224
+          },
+          {
+            "lat": 52.9936057,
+            "lon": 6.4994477
+          },
+          {
+            "lat": 52.9936568,
+            "lon": 6.4994481
+          },
+          {
+            "lat": 52.9937058,
+            "lon": 6.4994235
+          },
+          {
+            "lat": 52.9937481,
+            "lon": 6.499376
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4516285",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4516285,
+        "url": "https://www.openstreetmap.org/way/4516285",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.1619464,
+          "lon": 5.9036898
+        },
+        {
+          "lat": 52.1620687,
+          "lon": 5.9037598
+        }
+      ],
+      "way": {
+        "tags": {
+          "access:conditional": "no @ (sunset-sunrise)",
+          "bicycle": "no",
+          "foot:conditional": "permissive @ (sunrise-sunset)",
+          "highway": "track",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "forestry",
+          "surface": "compacted",
+          "tracktype": "grade4"
+        },
+        "geometry": [
+          {
+            "lat": 52.1619464,
+            "lon": 5.9036898
+          },
+          {
+            "lat": 52.1620687,
+            "lon": 5.9037598
+          },
+          {
+            "lat": 52.1625656,
+            "lon": 5.9040092
+          },
+          {
+            "lat": 52.1634464,
+            "lon": 5.9044902
+          },
+          {
+            "lat": 52.1635898,
+            "lon": 5.90457
+          },
+          {
+            "lat": 52.1640498,
+            "lon": 5.9046242
+          },
+          {
+            "lat": 52.1646869,
+            "lon": 5.9047806
+          },
+          {
+            "lat": 52.1652764,
+            "lon": 5.9050252
+          },
+          {
+            "lat": 52.1661462,
+            "lon": 5.905339
+          },
+          {
+            "lat": 52.1662234,
+            "lon": 5.9054015
+          },
+          {
+            "lat": 52.1662867,
+            "lon": 5.9054699
+          },
+          {
+            "lat": 52.1662991,
+            "lon": 5.9054833
+          },
+          {
+            "lat": 52.1664934,
+            "lon": 5.9057014
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4516295",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4516295,
+        "url": "https://www.openstreetmap.org/way/4516295",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.1668493,
+          "lon": 5.916433
+        },
+        {
+          "lat": 52.1675406,
+          "lon": 5.9164812
+        }
+      ],
+      "way": {
+        "tags": {
+          "access:conditional": "no @ (sunset-sunrise)",
+          "bicycle": "no",
+          "foot:conditional": "permissive @ (sunrise-sunset)",
+          "highway": "track",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "forestry",
+          "surface": "compacted",
+          "tracktype": "grade2"
+        },
+        "geometry": [
+          {
+            "lat": 52.1668493,
+            "lon": 5.916433
+          },
+          {
+            "lat": 52.1675406,
+            "lon": 5.9164812
+          },
+          {
+            "lat": 52.1678482,
+            "lon": 5.9164776
+          },
+          {
+            "lat": 52.1679126,
+            "lon": 5.9165053
+          },
+          {
+            "lat": 52.1679278,
+            "lon": 5.916526
+          },
+          {
+            "lat": 52.1683748,
+            "lon": 5.9171355
+          },
+          {
+            "lat": 52.1684839,
+            "lon": 5.9171105
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4516296",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4516296,
+        "url": "https://www.openstreetmap.org/way/4516296",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.1661218,
+          "lon": 5.9134413
+        },
+        {
+          "lat": 52.1661078,
+          "lon": 5.9135192
+        }
+      ],
+      "way": {
+        "tags": {
+          "access:conditional": "no @ (sunset-sunrise)",
+          "bicycle": "no",
+          "dog": "unleashed",
+          "foot:conditional": "permissive @ (sunrise-sunset)",
+          "highway": "track",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "forestry",
+          "surface": "compacted",
+          "tracktype": "grade4"
+        },
+        "geometry": [
+          {
+            "lat": 52.1661218,
+            "lon": 5.9134413
+          },
+          {
+            "lat": 52.1661078,
+            "lon": 5.9135192
+          },
+          {
+            "lat": 52.1661066,
+            "lon": 5.9135918
+          },
+          {
+            "lat": 52.166122,
+            "lon": 5.9137059
+          },
+          {
+            "lat": 52.166143,
+            "lon": 5.9138606
+          },
+          {
+            "lat": 52.1661502,
+            "lon": 5.9139937
+          },
+          {
+            "lat": 52.1661325,
+            "lon": 5.9146021
+          },
+          {
+            "lat": 52.1661193,
+            "lon": 5.9150814
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4520566",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4520566,
+        "url": "https://www.openstreetmap.org/way/4520566",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.0842648,
+          "lon": 5.101163
+        },
+        {
+          "lat": 52.0844151,
+          "lon": 5.1013457
+        }
+      ],
+      "way": {
+        "tags": {
+          "access": "permissive",
+          "bicycle": "no",
+          "foot": "yes",
+          "highway": "pedestrian",
+          "noname": "yes",
+          "source": "survey and bing aerial imaging",
+          "surface": "paving_stones",
+          "tunnel": "building_passage",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.0842648,
+            "lon": 5.101163
+          },
+          {
+            "lat": 52.0844151,
+            "lon": 5.1013457
+          },
+          {
+            "lat": 52.0843696,
+            "lon": 5.1017121
+          },
+          {
+            "lat": 52.085833,
+            "lon": 5.1037032
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4577228",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4577228,
+        "url": "https://www.openstreetmap.org/way/4577228",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.1633295,
+          "lon": 5.9217068
+        },
+        {
+          "lat": 52.1633483,
+          "lon": 5.9215341
+        }
+      ],
+      "way": {
+        "tags": {
+          "access:conditional": "no @ (sunset-sunrise)",
+          "bicycle": "no",
+          "dog": "unleashed",
+          "foot:conditional": "permissive @ (sunrise-sunset)",
+          "highway": "track",
+          "mofa": "no",
+          "moped": "no",
+          "motor_vehicle": "forestry",
+          "surface": "compacted",
+          "tracktype": "grade4"
+        },
+        "geometry": [
+          {
+            "lat": 52.1633295,
+            "lon": 5.9217068
+          },
+          {
+            "lat": 52.1633483,
+            "lon": 5.9215341
+          },
+          {
+            "lat": 52.1633544,
+            "lon": 5.9213747
+          },
+          {
+            "lat": 52.163148,
+            "lon": 5.9206022
+          },
+          {
+            "lat": 52.1630032,
+            "lon": 5.9200403
+          },
+          {
+            "lat": 52.1629769,
+            "lon": 5.9198107
+          },
+          {
+            "lat": 52.1628354,
+            "lon": 5.9192987
+          },
+          {
+            "lat": 52.1627629,
+            "lon": 5.9191166
+          },
+          {
+            "lat": 52.1626906,
+            "lon": 5.9189379
+          },
+          {
+            "lat": 52.1626572,
+            "lon": 5.9188168
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4591408",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4591408,
+        "url": "https://www.openstreetmap.org/way/4591408",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.1236704,
+          "lon": 5.9605109
+        },
+        {
+          "lat": 52.123618,
+          "lon": 5.9604827
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "track",
+          "motor_vehicle": "no",
+          "note": "recent afgesloten voor fietsen (survey 28-02-2021)"
+        },
+        "geometry": [
+          {
+            "lat": 52.1236704,
+            "lon": 5.9605109
+          },
+          {
+            "lat": 52.123618,
+            "lon": 5.9604827
+          },
+          {
+            "lat": 52.1235807,
+            "lon": 5.9604655
+          },
+          {
+            "lat": 52.1231421,
+            "lon": 5.9604008
+          },
+          {
+            "lat": 52.1227007,
+            "lon": 5.9603209
+          },
+          {
+            "lat": 52.1225668,
+            "lon": 5.9603425
+          },
+          {
+            "lat": 52.12245,
+            "lon": 5.960449
+          },
+          {
+            "lat": 52.1222432,
+            "lon": 5.9604812
+          },
+          {
+            "lat": 52.1205928,
+            "lon": 5.9604749
+          },
+          {
+            "lat": 52.1205187,
+            "lon": 5.9604505
+          },
+          {
+            "lat": 52.1186589,
+            "lon": 5.9593304
+          },
+          {
+            "lat": 52.117007,
+            "lon": 5.9586041
+          },
+          {
+            "lat": 52.1165988,
+            "lon": 5.9585811
+          },
+          {
+            "lat": 52.1161019,
+            "lon": 5.958483
+          },
+          {
+            "lat": 52.1144959,
+            "lon": 5.9583993
+          },
+          {
+            "lat": 52.114273,
+            "lon": 5.9584581
+          },
+          {
+            "lat": 52.1139216,
+            "lon": 5.9590643
+          },
+          {
+            "lat": 52.1138649,
+            "lon": 5.9591545
+          },
+          {
+            "lat": 52.1138052,
+            "lon": 5.9591682
+          },
+          {
+            "lat": 52.1137135,
+            "lon": 5.9591771
+          },
+          {
+            "lat": 52.1135643,
+            "lon": 5.9591574
+          },
+          {
+            "lat": 52.1134456,
+            "lon": 5.9591442
+          },
+          {
+            "lat": 52.1118121,
+            "lon": 5.9586575
+          },
+          {
+            "lat": 52.1115758,
+            "lon": 5.9585603
+          },
+          {
+            "lat": 52.1114043,
+            "lon": 5.9585056
+          },
+          {
+            "lat": 52.1112456,
+            "lon": 5.9584716
+          },
+          {
+            "lat": 52.110989,
+            "lon": 5.9583981
+          },
+          {
+            "lat": 52.1107481,
+            "lon": 5.958348
+          },
+          {
+            "lat": 52.1101989,
+            "lon": 5.9601546
+          },
+          {
+            "lat": 52.109232,
+            "lon": 5.9587491
+          },
+          {
+            "lat": 52.1084118,
+            "lon": 5.9585164
+          },
+          {
+            "lat": 52.1065359,
+            "lon": 5.9579529
+          },
+          {
+            "lat": 52.1065157,
+            "lon": 5.9579921
+          },
+          {
+            "lat": 52.1080933,
+            "lon": 5.9652898
+          },
+          {
+            "lat": 52.1064633,
+            "lon": 5.9666594
+          },
+          {
+            "lat": 52.1064051,
+            "lon": 5.9667397
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4611934",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4611934,
+        "url": "https://www.openstreetmap.org/way/4611934",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 53.0279747,
+          "lon": 6.5754619
+        },
+        {
+          "lat": 53.0280519,
+          "lon": 6.5754637
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "primary",
+          "junction": "intersection",
+          "lanes": "3",
+          "lit": "yes",
+          "maxspeed": "50",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Peelo Oost",
+          "name:etymology:wikidata": "Q14066791",
+          "oneway": "yes",
+          "placement": "right_of:2",
+          "surface": "asphalt",
+          "turn:lanes": "left|through|through",
+          "wikidata": "Q88534136",
+          "winter_service": "yes",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 53.0279747,
+            "lon": 6.5754619
+          },
+          {
+            "lat": 53.0280519,
+            "lon": 6.5754637
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664118",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664118,
+        "url": "https://www.openstreetmap.org/way/4664118",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9927246,
+          "lon": 6.5222783
+        },
+        {
+          "lat": 52.9927853,
+          "lon": 6.5222576
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "residential",
+          "lanes": "3",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Zoom",
+          "oneway": "yes",
+          "surface": "asphalt",
+          "turn:lanes": "left|through|right",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.9927246,
+            "lon": 6.5222783
+          },
+          {
+            "lat": 52.9927853,
+            "lon": 6.5222576
+          },
+          {
+            "lat": 52.9928118,
+            "lon": 6.5222485
+          },
+          {
+            "lat": 52.9928227,
+            "lon": 6.5222445
+          },
+          {
+            "lat": 52.9928411,
+            "lon": 6.5222375
+          },
+          {
+            "lat": 52.9929355,
+            "lon": 6.5222029
+          },
+          {
+            "lat": 52.9929636,
+            "lon": 6.5221934
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664128",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664128,
+        "url": "https://www.openstreetmap.org/way/4664128",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9929452,
+          "lon": 6.5220519
+        },
+        {
+          "lat": 52.9928414,
+          "lon": 6.5220923
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination:symbol": "restaurant;hotel",
+          "highway": "residential",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Zoom",
+          "oneway": "yes",
+          "surface": "asphalt",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.9929452,
+            "lon": 6.5220519
+          },
+          {
+            "lat": 52.9928414,
+            "lon": 6.5220923
+          },
+          {
+            "lat": 52.9928213,
+            "lon": 6.5221014
+          },
+          {
+            "lat": 52.9927923,
+            "lon": 6.5221163
+          },
+          {
+            "lat": 52.9927124,
+            "lon": 6.5221574
+          },
+          {
+            "lat": 52.9926196,
+            "lon": 6.5222766
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664132",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664132,
+        "url": "https://www.openstreetmap.org/way/4664132",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9926196,
+          "lon": 6.5222766
+        },
+        {
+          "lat": 52.9925398,
+          "lon": 6.5223149
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "residential",
+          "maxspeed": "50",
+          "name": "Zoom",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.9926196,
+            "lon": 6.5222766
+          },
+          {
+            "lat": 52.9925398,
+            "lon": 6.5223149
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664140",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664140,
+        "url": "https://www.openstreetmap.org/way/4664140",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 53.0116123,
+          "lon": 6.5690837
+        },
+        {
+          "lat": 53.0115839,
+          "lon": 6.5692723
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "primary",
+          "junction": "intersection",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Europaweg-Noord",
+          "name:etymology:wikidata": "Q46",
+          "oneway": "yes",
+          "placement": "right_of:2",
+          "ref": "RING",
+          "surface": "asphalt",
+          "turn:lanes": "left|through|through",
+          "wikidata": "Q19122332",
+          "winter_service": "yes",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 53.0116123,
+            "lon": 6.5690837
+          },
+          {
+            "lat": 53.0115839,
+            "lon": 6.5692723
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664163",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664163,
+        "url": "https://www.openstreetmap.org/way/4664163",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 53.0115839,
+          "lon": 6.5692723
+        },
+        {
+          "lat": 53.0116468,
+          "lon": 6.5693105
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "primary",
+          "junction": "intersection",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Peelo",
+          "name:etymology:wikidata": "Q14066791",
+          "oneway": "yes",
+          "placement": "middle_of:2",
+          "surface": "asphalt",
+          "turn:lanes": "left|through",
+          "wikidata": "Q19409556",
+          "winter_service": "yes",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 53.0115839,
+            "lon": 6.5692723
+          },
+          {
+            "lat": 53.0116468,
+            "lon": 6.5693105
+          },
+          {
+            "lat": 53.0117044,
+            "lon": 6.569346
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664185",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664185,
+        "url": "https://www.openstreetmap.org/way/4664185",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9990361,
+          "lon": 6.5635316
+        },
+        {
+          "lat": 52.9990458,
+          "lon": 6.5637933
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "secondary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Het Kanaal",
+          "name:etymology:wikidata": "Q1996464",
+          "official_name": "het Kanaal",
+          "sidewalk": "no",
+          "smoothness": "excellent",
+          "surface": "asphalt",
+          "wikidata": "Q19251717",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.9990361,
+            "lon": 6.5635316
+          },
+          {
+            "lat": 52.9990458,
+            "lon": 6.5637933
+          },
+          {
+            "lat": 52.9990518,
+            "lon": 6.5642391
+          },
+          {
+            "lat": 52.9990486,
+            "lon": 6.5645738
+          },
+          {
+            "lat": 52.9990385,
+            "lon": 6.5648633
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664193",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664193,
+        "url": "https://www.openstreetmap.org/way/4664193",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9916337,
+          "lon": 6.5123361
+        },
+        {
+          "lat": 52.9916084,
+          "lon": 6.5122622
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination": "Smilde;Norg;Drachten",
+          "destination:ref": "N371",
+          "foot": "no",
+          "highway": "primary",
+          "lanes": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Balkenweg",
+          "name:etymology:wikidata": "Q88536772",
+          "oneway": "yes",
+          "operator": "Gemeente Assen",
+          "ref": "N371",
+          "surface": "asphalt",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.9916337,
+            "lon": 6.5123361
+          },
+          {
+            "lat": 52.9916084,
+            "lon": 6.5122622
+          },
+          {
+            "lat": 52.9915896,
+            "lon": 6.5121622
+          },
+          {
+            "lat": 52.9915434,
+            "lon": 6.5118323
+          },
+          {
+            "lat": 52.9915229,
+            "lon": 6.5115696
+          },
+          {
+            "lat": 52.9915184,
+            "lon": 6.5113512
+          },
+          {
+            "lat": 52.9915273,
+            "lon": 6.5111344
+          },
+          {
+            "lat": 52.9915453,
+            "lon": 6.5109368
+          },
+          {
+            "lat": 52.9915634,
+            "lon": 6.5108185
+          },
+          {
+            "lat": 52.9916264,
+            "lon": 6.5104451
+          },
+          {
+            "lat": 52.9916437,
+            "lon": 6.510302
+          },
+          {
+            "lat": 52.991658,
+            "lon": 6.5101614
+          },
+          {
+            "lat": 52.9916645,
+            "lon": 6.510043
+          },
+          {
+            "lat": 52.9916654,
+            "lon": 6.5099037
+          },
+          {
+            "lat": 52.9916596,
+            "lon": 6.509787
+          },
+          {
+            "lat": 52.9916198,
+            "lon": 6.5094034
+          },
+          {
+            "lat": 52.9915945,
+            "lon": 6.5092261
+          },
+          {
+            "lat": 52.9915523,
+            "lon": 6.5089819
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664212",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664212,
+        "url": "https://www.openstreetmap.org/way/4664212",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 53.0174167,
+          "lon": 6.595116
+        },
+        {
+          "lat": 53.0173685,
+          "lon": 6.5950826
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "tertiary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "mofa": "no",
+          "name": "Andrej Sacharovweg",
+          "name:etymology:wikidata": "Q997",
+          "surface": "asphalt",
+          "wikidata": "Q18935639",
+          "winter_service": "yes"
+        },
+        "geometry": [
+          {
+            "lat": 53.0174167,
+            "lon": 6.595116
+          },
+          {
+            "lat": 53.0173685,
+            "lon": 6.5950826
+          },
+          {
+            "lat": 53.0173098,
+            "lon": 6.5950295
+          },
+          {
+            "lat": 53.017239,
+            "lon": 6.5949537
+          },
+          {
+            "lat": 53.0171967,
+            "lon": 6.59489
+          },
+          {
+            "lat": 53.0168583,
+            "lon": 6.5943081
+          },
+          {
+            "lat": 53.0166669,
+            "lon": 6.5939802
+          },
+          {
+            "lat": 53.0165208,
+            "lon": 6.5937228
+          },
+          {
+            "lat": 53.0164909,
+            "lon": 6.5936718
+          },
+          {
+            "lat": 53.0164382,
+            "lon": 6.5935792
+          },
+          {
+            "lat": 53.0163969,
+            "lon": 6.5935034
+          },
+          {
+            "lat": 53.0163646,
+            "lon": 6.5934302
+          },
+          {
+            "lat": 53.0163123,
+            "lon": 6.593285
+          },
+          {
+            "lat": 53.0162702,
+            "lon": 6.5931321
+          },
+          {
+            "lat": 53.0162355,
+            "lon": 6.5929489
+          },
+          {
+            "lat": 53.0162177,
+            "lon": 6.5928335
+          },
+          {
+            "lat": 53.0161437,
+            "lon": 6.5923638
+          },
+          {
+            "lat": 53.0161059,
+            "lon": 6.5921152
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664229",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664229,
+        "url": "https://www.openstreetmap.org/way/4664229",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9510479,
+          "lon": 6.5499695
+        },
+        {
+          "lat": 52.9511495,
+          "lon": 6.5496255
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "unclassified",
+          "maxspeed": "60",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Asserweg",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.9510479,
+            "lon": 6.5499695
+          },
+          {
+            "lat": 52.9511495,
+            "lon": 6.5496255
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664248",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664248,
+        "url": "https://www.openstreetmap.org/way/4664248",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9915775,
+          "lon": 6.5100354
+        },
+        {
+          "lat": 52.991566,
+          "lon": 6.5101344
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination:colour:lanes": "white;;|",
+          "destination:lanes": "Kloosterveen;Assen;Groningen|Assen;Groningen",
+          "destination:symbol:lanes": ";;motorway|;motorway",
+          "foot": "no",
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "mofa": "no",
+          "moped": "no",
+          "name": "Balkenweg",
+          "name:etymology:wikidata": "Q88536772",
+          "oneway": "yes",
+          "operator": "Gemeente Assen",
+          "ref": "N371",
+          "surface": "asphalt",
+          "turn:lanes": "left;through|through",
+          "zone:traffic": "NL:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.9915775,
+            "lon": 6.5100354
+          },
+          {
+            "lat": 52.991566,
+            "lon": 6.5101344
+          },
+          {
+            "lat": 52.9915428,
+            "lon": 6.5103288
+          },
+          {
+            "lat": 52.9915058,
+            "lon": 6.5105511
+          },
+          {
+            "lat": 52.9914575,
+            "lon": 6.510836
+          },
+          {
+            "lat": 52.9914409,
+            "lon": 6.5109867
+          },
+          {
+            "lat": 52.9914265,
+            "lon": 6.5111336
+          },
+          {
+            "lat": 52.9914211,
+            "lon": 6.5112611
+          },
+          {
+            "lat": 52.9914174,
+            "lon": 6.5113815
+          },
+          {
+            "lat": 52.9914191,
+            "lon": 6.5114973
+          },
+          {
+            "lat": 52.9914234,
+            "lon": 6.5116074
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664272",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664272,
+        "url": "https://www.openstreetmap.org/way/4664272",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9989462,
+          "lon": 6.5876828
+        },
+        {
+          "lat": 52.9988565,
+          "lon": 6.5873053
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "covered": "no",
+          "foot": "no",
+          "gritting": "yes",
+          "highway": "tertiary",
+          "lit": "yes",
+          "maxspeed": "30",
+          "mofa": "no",
+          "name": "Lonerstraat",
+          "name:etymology:wikidata": "Q2308227",
+          "oneway": "no",
+          "snowplowing": "yes",
+          "surface": "paving_stones",
+          "wikidata": "Q19329447"
+        },
+        "geometry": [
+          {
+            "lat": 52.9989462,
+            "lon": 6.5876828
+          },
+          {
+            "lat": 52.9988565,
+            "lon": 6.5873053
+          },
+          {
+            "lat": 52.9987555,
+            "lon": 6.5867304
+          },
+          {
+            "lat": 52.9985503,
+            "lon": 6.5854475
+          },
+          {
+            "lat": 52.9984187,
+            "lon": 6.5846616
+          },
+          {
+            "lat": 52.9983622,
+            "lon": 6.5844336
+          },
+          {
+            "lat": 52.9982977,
+            "lon": 6.5842285
+          },
+          {
+            "lat": 52.9981142,
+            "lon": 6.5837901
+          },
+          {
+            "lat": 52.998017,
+            "lon": 6.5836206
+          },
+          {
+            "lat": 52.9976833,
+            "lon": 6.5831043
+          },
+          {
+            "lat": 52.997533,
+            "lon": 6.582834
+          },
+          {
+            "lat": 52.9974477,
+            "lon": 6.5826416
+          },
+          {
+            "lat": 52.9973657,
+            "lon": 6.5824292
+          },
+          {
+            "lat": 52.9972944,
+            "lon": 6.582202
+          },
+          {
+            "lat": 52.9970773,
+            "lon": 6.5814279
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664375",
+      "region": "NL",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664375,
+        "url": "https://www.openstreetmap.org/way/4664375",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.9711676,
+          "lon": 6.5404928
+        },
+        {
+          "lat": 52.9717179,
+          "lon": 6.5411727
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "highway": "tertiary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "60",
+          "mofa": "no",
+          "moped": "no",
+          "name": "De Haar",
+          "name:etymology:wikidata": "Q2451504",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.9711676,
+            "lon": 6.5404928
+          },
+          {
+            "lat": 52.9717179,
+            "lon": 6.5411727
+          }
+        ]
+      }
+    },
+    {
+      "id": "nl-osm-way-4664438",
+      "region": "NL",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4664438,
+        "url": "https://www.openstreetmap.org/way/4664438",
+        "snapshot_at": "2026-09-02T02:19:10Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 53.0007773,
+          "lon": 6.5916435
+        },
+        {
+          "lat": 53.0005062,
+          "lon": 6.5911437
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "no",
+          "gritting": "yes",
+          "highway": "tertiary",
+          "lane_markings": "no",
+          "lit": "yes",
+          "maxspeed": "30",
+          "mofa": "no",
+          "name": "Lonerstraat",
+          "name:etymology:wikidata": "Q2308227",
+          "oneway": "no",
+          "snowplowing": "yes",
+          "surface": "paving_stones",
+          "wikidata": "Q19329447"
+        },
+        "geometry": [
+          {
+            "lat": 53.0007773,
+            "lon": 6.5916435
+          },
+          {
+            "lat": 53.0005062,
+            "lon": 6.5911437
+          },
+          {
+            "lat": 52.999803,
+            "lon": 6.5898407
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4068038",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4068038,
+        "url": "https://www.openstreetmap.org/way/4068038",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5126421,
+          "lon": 13.3235011
+        },
+        {
+          "lat": 52.5128357,
+          "lon": 13.3263518
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "dual_carriageway": "yes",
+          "foot": "use_sidepath",
+          "highway": "primary",
+          "lanes": "3",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Straße des 17. Juni",
+          "name:etymology:wikidata": "Q157682",
+          "name:etymology:wikipedia": "de:Aufstand vom 17. Juni 1953",
+          "oneway": "yes",
+          "parking:both": "separate",
+          "ref": "B 2;B 5",
+          "sidewalk": "no",
+          "smoothness": "excellent",
+          "surface": "asphalt",
+          "wikidata": "Q317094",
+          "wikimedia_commons": "Category:Straße des 17. Juni (Berlin)",
+          "wikipedia": "de:Straße des 17. Juni",
+          "zone:traffic": "DE:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.5126421,
+            "lon": 13.3235011
+          },
+          {
+            "lat": 52.5128357,
+            "lon": 13.3263518
+          },
+          {
+            "lat": 52.5128435,
+            "lon": 13.3264751
+          },
+          {
+            "lat": 52.5128542,
+            "lon": 13.3266442
+          },
+          {
+            "lat": 52.5128625,
+            "lon": 13.3267744
+          },
+          {
+            "lat": 52.5128822,
+            "lon": 13.3270677
+          },
+          {
+            "lat": 52.5128884,
+            "lon": 13.3271636
+          },
+          {
+            "lat": 52.5129758,
+            "lon": 13.3285094
+          },
+          {
+            "lat": 52.513058,
+            "lon": 13.3297961
+          },
+          {
+            "lat": 52.5130673,
+            "lon": 13.3299497
+          },
+          {
+            "lat": 52.513069,
+            "lon": 13.3299976
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4068043",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4068043,
+        "url": "https://www.openstreetmap.org/way/4068043",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.495258,
+          "lon": 13.4623811
+        },
+        {
+          "lat": 52.4964744,
+          "lon": 13.4638639
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "bridge:name": "Elsenbrücke",
+          "bridge:structure": "beam",
+          "check_date": "2022-08-08",
+          "foot": "no",
+          "highway": "primary",
+          "lanes": "2",
+          "layer": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "maxweight": "30",
+          "name": "Elsenbrücke",
+          "name:etymology:wikidata": "Q25239",
+          "name:etymology:wikipedia": "de:Erlen (Gattung)",
+          "oneway": "yes",
+          "parking:both": "no",
+          "ref": "B 96a",
+          "shoulder": "no",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.495258,
+            "lon": 13.4623811
+          },
+          {
+            "lat": 52.4964744,
+            "lon": 13.4638639
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4068091",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4068091,
+        "url": "https://www.openstreetmap.org/way/4068091",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5095657,
+          "lon": 13.5196481
+        },
+        {
+          "lat": 52.5095451,
+          "lon": 13.5206916
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "no",
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Alt-Friedrichsfelde",
+          "name:etymology:wikidata": "Q563588",
+          "name:etymology:wikipedia": "de:Berlin-Friedrichsfelde",
+          "oneway": "yes",
+          "parking:both": "no",
+          "postal_code": "10315",
+          "ref": "B 1;B 5",
+          "shoulder": "no",
+          "sidewalk": "no",
+          "smoothness": "good",
+          "surface": "asphalt",
+          "wikidata": "Q432910",
+          "wikipedia": "de:Alt-Friedrichsfelde"
+        },
+        "geometry": [
+          {
+            "lat": 52.5095657,
+            "lon": 13.5196481
+          },
+          {
+            "lat": 52.5095451,
+            "lon": 13.5206916
+          },
+          {
+            "lat": 52.5095643,
+            "lon": 13.5214821
+          },
+          {
+            "lat": 52.5096005,
+            "lon": 13.5222737
+          },
+          {
+            "lat": 52.5097064,
+            "lon": 13.5233478
+          },
+          {
+            "lat": 52.5098177,
+            "lon": 13.5242377
+          },
+          {
+            "lat": 52.509877,
+            "lon": 13.5248914
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4405314",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4405314,
+        "url": "https://www.openstreetmap.org/way/4405314",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4783053,
+          "lon": 13.3369266
+        },
+        {
+          "lat": 52.478311,
+          "lon": 13.3372699
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "no",
+          "highway": "secondary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "motorroad": "yes",
+          "name": "Wexstraße",
+          "name:etymology:wikidata": "Q1290358",
+          "oneway": "yes",
+          "parking:both": "no",
+          "surface": "asphalt",
+          "wikidata": "Q63226054"
+        },
+        "geometry": [
+          {
+            "lat": 52.4783053,
+            "lon": 13.3369266
+          },
+          {
+            "lat": 52.478311,
+            "lon": 13.3372699
+          },
+          {
+            "lat": 52.4783328,
+            "lon": 13.3376176
+          },
+          {
+            "lat": 52.4783523,
+            "lon": 13.3382431
+          },
+          {
+            "lat": 52.4783817,
+            "lon": 13.3399714
+          },
+          {
+            "lat": 52.4783968,
+            "lon": 13.3409733
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4407322",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4407322,
+        "url": "https://www.openstreetmap.org/way/4407322",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4096291,
+          "lon": 13.5250723
+        },
+        {
+          "lat": 52.4094955,
+          "lon": 13.5249837
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "horse": "no",
+          "lit": "no",
+          "smoothness": "intermediate",
+          "surface": "pebblestone"
+        },
+        "geometry": [
+          {
+            "lat": 52.4096291,
+            "lon": 13.5250723
+          },
+          {
+            "lat": 52.4094955,
+            "lon": 13.5249837
+          },
+          {
+            "lat": 52.4094745,
+            "lon": 13.5249697
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4412687",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4412687,
+        "url": "https://www.openstreetmap.org/way/4412687",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5251218,
+          "lon": 13.3679721
+        },
+        {
+          "lat": 52.5254228,
+          "lon": 13.3679869
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "no",
+          "highway": "trunk",
+          "image": "https://commons.wikimedia.org/wiki/File:Tiergartentunnel_Einfahrt_M-C-Str.jpg",
+          "lanes": "4",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Tunnel Tiergarten Spreebogen",
+          "name:etymology:wikidata": "Q694020",
+          "name:etymology:wikipedia": "de:Großer Tiergarten",
+          "oneway": "yes",
+          "parking:both": "no",
+          "postal_code": "10557",
+          "shoulder": "no",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "turn:lanes": "left|through|right|right",
+          "wikidata": "Q14912349",
+          "wikimedia_commons": "Category:Tiergartentunnel (road tunnel)",
+          "wikipedia": "de:Tunnel Tiergarten Spreebogen",
+          "zone:traffic": "DE:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.5251218,
+            "lon": 13.3679721
+          },
+          {
+            "lat": 52.5254228,
+            "lon": 13.3679869
+          },
+          {
+            "lat": 52.5257131,
+            "lon": 13.3679802
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4412689",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4412689,
+        "url": "https://www.openstreetmap.org/way/4412689",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5251053,
+          "lon": 13.3678046
+        },
+        {
+          "lat": 52.5247921,
+          "lon": 13.3678377
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "no",
+          "highway": "trunk",
+          "image": "https://commons.wikimedia.org/wiki/File:Tiergartentunnel_Einfahrt_M-C-Str.jpg",
+          "lanes": "1",
+          "layer": "-2",
+          "lit": "24/7",
+          "maxheight": "default",
+          "maxspeed": "50",
+          "maxspeed:variable": "yes",
+          "name": "Tunnel Tiergarten Spreebogen",
+          "name:etymology:wikidata": "Q694020",
+          "name:etymology:wikipedia": "de:Großer Tiergarten",
+          "oneway": "yes",
+          "parking:both": "no",
+          "postal_code": "10557",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "tunnel": "yes",
+          "wikidata": "Q14912349",
+          "wikimedia_commons": "Category:Tiergartentunnel (road tunnel)",
+          "wikipedia": "de:Tunnel Tiergarten Spreebogen",
+          "zone:traffic": "DE:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.5251053,
+            "lon": 13.3678046
+          },
+          {
+            "lat": 52.5247921,
+            "lon": 13.3678377
+          },
+          {
+            "lat": 52.5246211,
+            "lon": 13.3678913
+          },
+          {
+            "lat": 52.5244978,
+            "lon": 13.3679208
+          },
+          {
+            "lat": 52.5241736,
+            "lon": 13.3680734
+          },
+          {
+            "lat": 52.5240389,
+            "lon": 13.3681696
+          },
+          {
+            "lat": 52.5239286,
+            "lon": 13.3682746
+          },
+          {
+            "lat": 52.5238346,
+            "lon": 13.3683927
+          },
+          {
+            "lat": 52.5237127,
+            "lon": 13.3685804
+          },
+          {
+            "lat": 52.5235646,
+            "lon": 13.3688033
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4412690",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4412690,
+        "url": "https://www.openstreetmap.org/way/4412690",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.523381,
+          "lon": 13.3697574
+        },
+        {
+          "lat": 52.5234825,
+          "lon": 13.3693827
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "no",
+          "highway": "trunk",
+          "image": "https://commons.wikimedia.org/wiki/File:Tiergartentunnel_Einfahrt_M-C-Str.jpg",
+          "lanes": "2",
+          "layer": "-2",
+          "lit": "24/7",
+          "maxheight": "default",
+          "maxspeed": "50",
+          "maxspeed:variable": "yes",
+          "name": "Tunnel Tiergarten Spreebogen",
+          "name:etymology:wikidata": "Q694020",
+          "name:etymology:wikipedia": "de:Großer Tiergarten",
+          "oneway": "yes",
+          "parking:both": "no",
+          "postal_code": "10557",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "tunnel": "yes",
+          "wikidata": "Q14912349",
+          "wikimedia_commons": "Category:Tiergartentunnel (road tunnel)",
+          "wikipedia": "de:Tunnel Tiergarten Spreebogen",
+          "zone:traffic": "DE:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.523381,
+            "lon": 13.3697574
+          },
+          {
+            "lat": 52.5234825,
+            "lon": 13.3693827
+          },
+          {
+            "lat": 52.5235407,
+            "lon": 13.36918
+          },
+          {
+            "lat": 52.5236228,
+            "lon": 13.3689399
+          },
+          {
+            "lat": 52.5236745,
+            "lon": 13.3688198
+          },
+          {
+            "lat": 52.5238258,
+            "lon": 13.3685455
+          },
+          {
+            "lat": 52.5239694,
+            "lon": 13.3683363
+          },
+          {
+            "lat": 52.5241087,
+            "lon": 13.3681857
+          },
+          {
+            "lat": 52.5242915,
+            "lon": 13.3680655
+          },
+          {
+            "lat": 52.5244634,
+            "lon": 13.3680054
+          },
+          {
+            "lat": 52.5246423,
+            "lon": 13.3679795
+          },
+          {
+            "lat": 52.5248132,
+            "lon": 13.367966
+          },
+          {
+            "lat": 52.5251218,
+            "lon": 13.3679721
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4420828",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4420828,
+        "url": "https://www.openstreetmap.org/way/4420828",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4325957,
+          "lon": 13.1917868
+        },
+        {
+          "lat": 52.4326569,
+          "lon": 13.1916556
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "lit": "yes",
+          "name": "Rosemeyerweg",
+          "name:etymology:wikidata": "Q60403",
+          "name:etymology:wikipedia": "de:Bernd Rosemeyer",
+          "smoothness": "good",
+          "surface": "paving_stones",
+          "traffic_sign": "DE:239",
+          "wikidata": "Q112789887"
+        },
+        "geometry": [
+          {
+            "lat": 52.4325957,
+            "lon": 13.1917868
+          },
+          {
+            "lat": 52.4326569,
+            "lon": 13.1916556
+          },
+          {
+            "lat": 52.4327452,
+            "lon": 13.1914211
+          },
+          {
+            "lat": 52.4328005,
+            "lon": 13.1912481
+          },
+          {
+            "lat": 52.4328544,
+            "lon": 13.1910588
+          },
+          {
+            "lat": 52.432906,
+            "lon": 13.1908297
+          },
+          {
+            "lat": 52.4329636,
+            "lon": 13.1905843
+          },
+          {
+            "lat": 52.4330319,
+            "lon": 13.1903728
+          },
+          {
+            "lat": 52.4331439,
+            "lon": 13.1900961
+          },
+          {
+            "lat": 52.4332539,
+            "lon": 13.1898681
+          },
+          {
+            "lat": 52.4335904,
+            "lon": 13.189334
+          },
+          {
+            "lat": 52.4336247,
+            "lon": 13.1893204
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4448932",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4448932,
+        "url": "https://www.openstreetmap.org/way/4448932",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.529313,
+          "lon": 13.1096158
+        },
+        {
+          "lat": 52.5293808,
+          "lon": 13.1070768
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "dual_carriageway": "yes",
+          "highway": "trunk",
+          "lanes": "2",
+          "lit": "no",
+          "maxspeed": "100",
+          "motorroad": "no",
+          "oneway": "yes",
+          "ref": "B 5",
+          "surface": "asphalt",
+          "toll:hgv": "yes",
+          "toll:operator": "Toll Collect",
+          "zone:traffic": "DE:rural"
+        },
+        "geometry": [
+          {
+            "lat": 52.529313,
+            "lon": 13.1096158
+          },
+          {
+            "lat": 52.5293808,
+            "lon": 13.1070768
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4449081",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4449081,
+        "url": "https://www.openstreetmap.org/way/4449081",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5277333,
+          "lon": 13.1104649
+        },
+        {
+          "lat": 52.5278922,
+          "lon": 13.1105689
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination": "Berlin",
+          "highway": "trunk_link",
+          "lanes": "1",
+          "lit": "no",
+          "motorroad": "no",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.5277333,
+            "lon": 13.1104649
+          },
+          {
+            "lat": 52.5278922,
+            "lon": 13.1105689
+          },
+          {
+            "lat": 52.527954,
+            "lon": 13.1106513
+          },
+          {
+            "lat": 52.5279677,
+            "lon": 13.1106696
+          },
+          {
+            "lat": 52.528002,
+            "lon": 13.110732
+          },
+          {
+            "lat": 52.5280296,
+            "lon": 13.1107928
+          },
+          {
+            "lat": 52.5280693,
+            "lon": 13.1108997
+          },
+          {
+            "lat": 52.528091,
+            "lon": 13.1110105
+          },
+          {
+            "lat": 52.5281048,
+            "lon": 13.1111379
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4449082",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4449082,
+        "url": "https://www.openstreetmap.org/way/4449082",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5291555,
+          "lon": 13.1112535
+        },
+        {
+          "lat": 52.5291054,
+          "lon": 13.1117251
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination": "Potsdam;Seeburg;Falkensee",
+          "highway": "trunk_link",
+          "lanes": "1",
+          "lit": "no",
+          "maxspeed": "50",
+          "motorroad": "no",
+          "oneway": "yes",
+          "placement": "transition",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.5291555,
+            "lon": 13.1112535
+          },
+          {
+            "lat": 52.5291054,
+            "lon": 13.1117251
+          },
+          {
+            "lat": 52.5290763,
+            "lon": 13.1119178
+          },
+          {
+            "lat": 52.5290494,
+            "lon": 13.1120607
+          },
+          {
+            "lat": 52.5289937,
+            "lon": 13.1122261
+          },
+          {
+            "lat": 52.5289296,
+            "lon": 13.1123416
+          },
+          {
+            "lat": 52.5288578,
+            "lon": 13.1124375
+          },
+          {
+            "lat": 52.528795,
+            "lon": 13.1125014
+          },
+          {
+            "lat": 52.5287119,
+            "lon": 13.1125497
+          },
+          {
+            "lat": 52.528614,
+            "lon": 13.1125663
+          },
+          {
+            "lat": 52.5285471,
+            "lon": 13.1125712
+          },
+          {
+            "lat": 52.5284549,
+            "lon": 13.1125591
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4449083",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4449083,
+        "url": "https://www.openstreetmap.org/way/4449083",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.529313,
+          "lon": 13.1096158
+        },
+        {
+          "lat": 52.5293731,
+          "lon": 13.1092391
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination": "Potsdam;Seeburg;Falkensee",
+          "highway": "trunk_link",
+          "lit": "no",
+          "maxspeed": "50",
+          "motorroad": "no",
+          "oneway": "yes",
+          "placement": "transition",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.529313,
+            "lon": 13.1096158
+          },
+          {
+            "lat": 52.5293731,
+            "lon": 13.1092391
+          },
+          {
+            "lat": 52.529432,
+            "lon": 13.1089892
+          },
+          {
+            "lat": 52.5294769,
+            "lon": 13.1088304
+          },
+          {
+            "lat": 52.5295185,
+            "lon": 13.1087323
+          },
+          {
+            "lat": 52.5295764,
+            "lon": 13.1086433
+          },
+          {
+            "lat": 52.5296527,
+            "lon": 13.1085607
+          },
+          {
+            "lat": 52.5297644,
+            "lon": 13.1084924
+          },
+          {
+            "lat": 52.5298507,
+            "lon": 13.1084669
+          },
+          {
+            "lat": 52.529979,
+            "lon": 13.1084544
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4449084",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4449084,
+        "url": "https://www.openstreetmap.org/way/4449084",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.529979,
+          "lon": 13.1084544
+        },
+        {
+          "lat": 52.5297871,
+          "lon": 13.1083486
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination": "Nauen;Berliner Ring",
+          "highway": "trunk_link",
+          "lit": "no",
+          "motorroad": "no",
+          "oneway": "yes",
+          "placement": "transition",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.529979,
+            "lon": 13.1084544
+          },
+          {
+            "lat": 52.5297871,
+            "lon": 13.1083486
+          },
+          {
+            "lat": 52.5296663,
+            "lon": 13.1082439
+          },
+          {
+            "lat": 52.5295711,
+            "lon": 13.108137
+          },
+          {
+            "lat": 52.5294843,
+            "lon": 13.1079492
+          },
+          {
+            "lat": 52.5294456,
+            "lon": 13.1077974
+          },
+          {
+            "lat": 52.5294287,
+            "lon": 13.1077099
+          },
+          {
+            "lat": 52.5293808,
+            "lon": 13.1070768
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4449225",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4449225,
+        "url": "https://www.openstreetmap.org/way/4449225",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4541501,
+          "lon": 13.3193085
+        },
+        {
+          "lat": 52.4541614,
+          "lon": 13.3193849
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "destination": "Schöneberg",
+          "destination:ref": "A 103",
+          "foot": "no",
+          "highway": "motorway",
+          "lanes": "2",
+          "lit": "no",
+          "maxspeed": "60",
+          "note:name": "Der reg_name, sowie ggf. der loc_name sind dem zugehörigen Wikipediaartikel entnommen.",
+          "oneway": "yes",
+          "postal_code": "12165",
+          "reg_name": "Westtangente Steglitz",
+          "surface": "asphalt",
+          "urban": "yes",
+          "width": "7"
+        },
+        "geometry": [
+          {
+            "lat": 52.4541501,
+            "lon": 13.3193085
+          },
+          {
+            "lat": 52.4541614,
+            "lon": 13.3193849
+          },
+          {
+            "lat": 52.4541727,
+            "lon": 13.3194442
+          },
+          {
+            "lat": 52.4541972,
+            "lon": 13.3195527
+          },
+          {
+            "lat": 52.4542359,
+            "lon": 13.319674
+          },
+          {
+            "lat": 52.4544479,
+            "lon": 13.3201281
+          },
+          {
+            "lat": 52.4545687,
+            "lon": 13.3203606
+          },
+          {
+            "lat": 52.4548365,
+            "lon": 13.3208609
+          },
+          {
+            "lat": 52.4550769,
+            "lon": 13.3212683
+          },
+          {
+            "lat": 52.4552726,
+            "lon": 13.3216054
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4463298",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4463298,
+        "url": "https://www.openstreetmap.org/way/4463298",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4566439,
+          "lon": 13.3232851
+        },
+        {
+          "lat": 52.4565402,
+          "lon": 13.3230837
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "cycleway": "no",
+          "destination": "Schloßstraße",
+          "destination:ref": "B 1",
+          "foot": "no",
+          "highway": "motorway_link",
+          "lanes": "1",
+          "layer": "1",
+          "lit": "no",
+          "maxspeed": "60",
+          "note:name": "Der reg_name, sowie ggf. der loc_name sind dem zugehörigen Wikipediaartikel entnommen.",
+          "oneway": "yes",
+          "postal_code": "12165",
+          "reg_name": "Westtangente Steglitz",
+          "surface": "asphalt",
+          "urban": "yes",
+          "width": "5"
+        },
+        "geometry": [
+          {
+            "lat": 52.4566439,
+            "lon": 13.3232851
+          },
+          {
+            "lat": 52.4565402,
+            "lon": 13.3230837
+          },
+          {
+            "lat": 52.4563319,
+            "lon": 13.3227828
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4468432",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4468432,
+        "url": "https://www.openstreetmap.org/way/4468432",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4127469,
+          "lon": 13.5659008
+        },
+        {
+          "lat": 52.412483,
+          "lon": 13.5656397
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "foot": "no",
+          "highway": "primary",
+          "lanes": "2",
+          "layer": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "motorroad": "yes",
+          "name": "Am Seegraben",
+          "oneway": "yes",
+          "parking:both": "no",
+          "parking:left:reason": "dual_carriage",
+          "ref": "B 96a",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "toll:hgv": "yes",
+          "toll:operator": "Toll Collect"
+        },
+        "geometry": [
+          {
+            "lat": 52.4127469,
+            "lon": 13.5659008
+          },
+          {
+            "lat": 52.412483,
+            "lon": 13.5656397
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4469696",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4469696,
+        "url": "https://www.openstreetmap.org/way/4469696",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.3723045,
+          "lon": 13.1494959
+        },
+        {
+          "lat": 52.3723078,
+          "lon": 13.1507054
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "dual_carriageway": "yes",
+          "foot": "no",
+          "highway": "trunk",
+          "lanes": "3",
+          "layer": "1",
+          "lit": "no",
+          "maxspeed": "80",
+          "maxweight:signed": "no",
+          "oneway": "yes",
+          "placement": "left_of:2",
+          "ref": "L 40",
+          "surface": "asphalt",
+          "turn:lanes": "none|none|slight_right"
+        },
+        "geometry": [
+          {
+            "lat": 52.3723045,
+            "lon": 13.1494959
+          },
+          {
+            "lat": 52.3723078,
+            "lon": 13.1507054
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4469698",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4469698,
+        "url": "https://www.openstreetmap.org/way/4469698",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.372411,
+          "lon": 13.1507023
+        },
+        {
+          "lat": 52.3723971,
+          "lon": 13.1494931
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "dual_carriageway": "yes",
+          "foot": "no",
+          "highway": "trunk",
+          "lanes": "3",
+          "layer": "1",
+          "lit": "no",
+          "maxspeed": "80",
+          "maxweight:signed": "no",
+          "oneway": "yes",
+          "placement": "left_of:2",
+          "ref": "L 40",
+          "surface": "asphalt",
+          "turn:lanes": "none|none|merge_to_left"
+        },
+        "geometry": [
+          {
+            "lat": 52.372411,
+            "lon": 13.1507023
+          },
+          {
+            "lat": 52.3723971,
+            "lon": 13.1494931
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4475904",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4475904,
+        "url": "https://www.openstreetmap.org/way/4475904",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4321879,
+          "lon": 13.1927411
+        },
+        {
+          "lat": 52.4322042,
+          "lon": 13.1926986
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "lit": "yes",
+          "name": "Rosemeyersteg",
+          "name:etymology:wikidata": "Q60403",
+          "name:etymology:wikipedia": "de:Bernd Rosemeyer",
+          "surface": "paving_stones",
+          "traffic_sign": "DE:239"
+        },
+        "geometry": [
+          {
+            "lat": 52.4321879,
+            "lon": 13.1927411
+          },
+          {
+            "lat": 52.4322042,
+            "lon": 13.1926986
+          },
+          {
+            "lat": 52.4322095,
+            "lon": 13.1926847
+          },
+          {
+            "lat": 52.4322362,
+            "lon": 13.1926152
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4475905",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4475905,
+        "url": "https://www.openstreetmap.org/way/4475905",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4322362,
+          "lon": 13.1926152
+        },
+        {
+          "lat": 52.4325957,
+          "lon": 13.1917868
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "bridge": "yes",
+          "highway": "footway",
+          "layer": "2",
+          "lit": "yes",
+          "name": "Rosemeyersteg",
+          "name:etymology:wikidata": "Q60403",
+          "name:etymology:wikipedia": "de:Bernd Rosemeyer",
+          "smoothness": "excellent",
+          "surface": "asphalt",
+          "traffic_sign": "DE:239"
+        },
+        "geometry": [
+          {
+            "lat": 52.4322362,
+            "lon": 13.1926152
+          },
+          {
+            "lat": 52.4325957,
+            "lon": 13.1917868
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4535326",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4535326,
+        "url": "https://www.openstreetmap.org/way/4535326",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4783132,
+          "lon": 13.3342344
+        },
+        {
+          "lat": 52.4782281,
+          "lon": 13.3345545
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "no",
+          "highway": "secondary",
+          "lanes": "3",
+          "layer": "-1",
+          "lit": "24/7",
+          "maxheight": "default",
+          "maxspeed": "50",
+          "motorroad": "yes",
+          "name": "Wexstraße",
+          "name:etymology:wikidata": "Q1290358",
+          "name:etymology:wikipedia": "de:Eduard Wex",
+          "oneway": "yes",
+          "parking:both": "no",
+          "shoulder": "no",
+          "surface": "asphalt",
+          "tunnel": "yes",
+          "wikidata": "Q63226054"
+        },
+        "geometry": [
+          {
+            "lat": 52.4783132,
+            "lon": 13.3342344
+          },
+          {
+            "lat": 52.4782281,
+            "lon": 13.3345545
+          },
+          {
+            "lat": 52.4781794,
+            "lon": 13.334842
+          },
+          {
+            "lat": 52.4781565,
+            "lon": 13.3350987
+          },
+          {
+            "lat": 52.478152,
+            "lon": 13.3352973
+          },
+          {
+            "lat": 52.4781574,
+            "lon": 13.3354668
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4537990",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4537990,
+        "url": "https://www.openstreetmap.org/way/4537990",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5605513,
+          "lon": 13.3217089
+        },
+        {
+          "lat": 52.5604413,
+          "lon": 13.3218502
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "use_sidepath",
+          "highway": "primary_link",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "oneway": "yes",
+          "parking:both": "no",
+          "parking:both:reason": "junction",
+          "postal_code": "13405",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "smoothness": "good",
+          "surface": "asphalt",
+          "zone:traffic": "DE:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.5605513,
+            "lon": 13.3217089
+          },
+          {
+            "lat": 52.5604413,
+            "lon": 13.3218502
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4537991",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4537991,
+        "url": "https://www.openstreetmap.org/way/4537991",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5604413,
+          "lon": 13.3218502
+        },
+        {
+          "lat": 52.5605709,
+          "lon": 13.3218854
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "use_sidepath",
+          "highway": "secondary_link",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "oneway": "yes",
+          "parking:both": "no",
+          "parking:both:reason": "junction",
+          "postal_code": "13405",
+          "sidewalk": "no",
+          "smoothness": "good",
+          "surface": "asphalt",
+          "zone:traffic": "DE:urban"
+        },
+        "geometry": [
+          {
+            "lat": 52.5604413,
+            "lon": 13.3218502
+          },
+          {
+            "lat": 52.5605709,
+            "lon": 13.3218854
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4553258",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4553258,
+        "url": "https://www.openstreetmap.org/way/4553258",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5294084,
+          "lon": 13.2704837
+        },
+        {
+          "lat": 52.5294267,
+          "lon": 13.2702308
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "path",
+          "postal_code": "13629",
+          "surface": "ground"
+        },
+        "geometry": [
+          {
+            "lat": 52.5294084,
+            "lon": 13.2704837
+          },
+          {
+            "lat": 52.5294267,
+            "lon": 13.2702308
+          },
+          {
+            "lat": 52.529461,
+            "lon": 13.2695213
+          },
+          {
+            "lat": 52.5294935,
+            "lon": 13.2687377
+          },
+          {
+            "lat": 52.5294586,
+            "lon": 13.2679091
+          },
+          {
+            "lat": 52.5294602,
+            "lon": 13.2678491
+          },
+          {
+            "lat": 52.5294756,
+            "lon": 13.2678102
+          },
+          {
+            "lat": 52.529508,
+            "lon": 13.2677648
+          },
+          {
+            "lat": 52.5295288,
+            "lon": 13.2677766
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4557338",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4557338,
+        "url": "https://www.openstreetmap.org/way/4557338",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4627864,
+          "lon": 13.5152072
+        },
+        {
+          "lat": 52.4626357,
+          "lon": 13.5149889
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "foot": "permissive",
+          "highway": "footway",
+          "lit": "no",
+          "name": "Wilhelminenhofpassage",
+          "postal_code": "12459",
+          "surface": "paving_stones"
+        },
+        "geometry": [
+          {
+            "lat": 52.4627864,
+            "lon": 13.5152072
+          },
+          {
+            "lat": 52.4626357,
+            "lon": 13.5149889
+          },
+          {
+            "lat": 52.4624665,
+            "lon": 13.5148195
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4575459",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4575459,
+        "url": "https://www.openstreetmap.org/way/4575459",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4766699,
+          "lon": 13.3285867
+        },
+        {
+          "lat": 52.47667,
+          "lon": 13.3285788
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "lit": "yes",
+          "surface": "paving_stones"
+        },
+        "geometry": [
+          {
+            "lat": 52.4766699,
+            "lon": 13.3285867
+          },
+          {
+            "lat": 52.47667,
+            "lon": 13.3285788
+          },
+          {
+            "lat": 52.4766724,
+            "lon": 13.3283908
+          },
+          {
+            "lat": 52.4766725,
+            "lon": 13.3283839
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4582255",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4582255,
+        "url": "https://www.openstreetmap.org/way/4582255",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4938607,
+          "lon": 13.3103957
+        },
+        {
+          "lat": 52.4938634,
+          "lon": 13.3106459
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "is_sidepath": "no",
+          "lit": "yes",
+          "name": "Pommersche Straße",
+          "name:etymology:wikidata": "Q104520",
+          "sett:length": "0.05",
+          "smoothness": "intermediate",
+          "source:width": "Luftbild 2024",
+          "surface": "sett",
+          "traffic_sign": "none",
+          "width": "3"
+        },
+        "geometry": [
+          {
+            "lat": 52.4938607,
+            "lon": 13.3103957
+          },
+          {
+            "lat": 52.4938634,
+            "lon": 13.3106459
+          },
+          {
+            "lat": 52.4938444,
+            "lon": 13.3111848
+          },
+          {
+            "lat": 52.4938412,
+            "lon": 13.3113063
+          },
+          {
+            "lat": 52.4938324,
+            "lon": 13.3114623
+          },
+          {
+            "lat": 52.4938412,
+            "lon": 13.3114669
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4583118",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4583118,
+        "url": "https://www.openstreetmap.org/way/4583118",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4809316,
+          "lon": 13.3333251
+        },
+        {
+          "lat": 52.4809047,
+          "lon": 13.333387
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "lit": "no",
+          "surface": "compacted"
+        },
+        "geometry": [
+          {
+            "lat": 52.4809316,
+            "lon": 13.3333251
+          },
+          {
+            "lat": 52.4809047,
+            "lon": 13.333387
+          },
+          {
+            "lat": 52.4808578,
+            "lon": 13.3334728
+          },
+          {
+            "lat": 52.480765,
+            "lon": 13.3335889
+          },
+          {
+            "lat": 52.480706,
+            "lon": 13.3336749
+          },
+          {
+            "lat": 52.4806551,
+            "lon": 13.3337573
+          },
+          {
+            "lat": 52.480688,
+            "lon": 13.3338432
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4583390",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4583390,
+        "url": "https://www.openstreetmap.org/way/4583390",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.4961139,
+          "lon": 13.3418521
+        },
+        {
+          "lat": 52.4961116,
+          "lon": 13.3418283
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Viktoria-Luise-Platz",
+          "name:etymology:wikidata": "Q57529",
+          "parking:both": "no",
+          "postal_code": "10777",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "smoothness": "excellent",
+          "surface": "asphalt",
+          "traffic_sign": "DE:242.1,DE:254"
+        },
+        "geometry": [
+          {
+            "lat": 52.4961139,
+            "lon": 13.3418521
+          },
+          {
+            "lat": 52.4961116,
+            "lon": 13.3418283
+          },
+          {
+            "lat": 52.49611,
+            "lon": 13.3418122
+          },
+          {
+            "lat": 52.4961033,
+            "lon": 13.3417814
+          },
+          {
+            "lat": 52.4960848,
+            "lon": 13.3416958
+          },
+          {
+            "lat": 52.4959282,
+            "lon": 13.3412383
+          },
+          {
+            "lat": 52.4958511,
+            "lon": 13.3410208
+          },
+          {
+            "lat": 52.495791,
+            "lon": 13.3409217
+          },
+          {
+            "lat": 52.4957883,
+            "lon": 13.3409167
+          },
+          {
+            "lat": 52.4957771,
+            "lon": 13.3408981
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4588811",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4588811,
+        "url": "https://www.openstreetmap.org/way/4588811",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5381171,
+          "lon": 13.2468647
+        },
+        {
+          "lat": 52.5381344,
+          "lon": 13.2470373
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "cycleway:both": "no",
+          "foot": "no",
+          "highway": "secondary_link",
+          "horse": "no",
+          "image": "https://commons.wikimedia.org/wiki/File:Nonnedammallee_Siemensstadt_1_2013-05-23.jpg",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Nonnendammallee",
+          "name:etymology:wikidata": "Q817051",
+          "name:etymology:wikipedia": "de:Benediktinerinnenkloster Spandau",
+          "oneway": "yes",
+          "parking:both": "no",
+          "postal_code": "13599",
+          "sidewalk": "no",
+          "smoothness": "good",
+          "surface": "asphalt",
+          "wikidata": "Q19963755",
+          "wikimedia_commons": "Category:Nonnendammallee (Berlin-Siemensstadt)"
+        },
+        "geometry": [
+          {
+            "lat": 52.5381171,
+            "lon": 13.2468647
+          },
+          {
+            "lat": 52.5381344,
+            "lon": 13.2470373
+          },
+          {
+            "lat": 52.5381461,
+            "lon": 13.2470951
+          },
+          {
+            "lat": 52.5381609,
+            "lon": 13.2471372
+          },
+          {
+            "lat": 52.5381995,
+            "lon": 13.2471719
+          },
+          {
+            "lat": 52.5382447,
+            "lon": 13.2471793
+          },
+          {
+            "lat": 52.5382905,
+            "lon": 13.2471588
+          },
+          {
+            "lat": 52.5383217,
+            "lon": 13.2471212
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4592214",
+      "region": "DE",
+      "vehicle": "ebike_25",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4592214,
+        "url": "https://www.openstreetmap.org/way/4592214",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.5343793,
+          "lon": 13.3431609
+        },
+        {
+          "lat": 52.5342939,
+          "lon": 13.3431584
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "check_date": "2025-09-07",
+          "construction": "living_street",
+          "foot": "no",
+          "highway": "construction",
+          "horse": "no",
+          "lit": "yes",
+          "motor_vehicle": "no",
+          "name": "Putlitzstraße",
+          "name:etymology:wikidata": "Q1493606",
+          "name:etymology:wikipedia": "de:Gans zu Putlitz",
+          "oneway": "no",
+          "parking:both": "no",
+          "parking:both:reason": "living_street",
+          "postal_code": "10551",
+          "surface": "asphalt"
+        },
+        "geometry": [
+          {
+            "lat": 52.5343793,
+            "lon": 13.3431609
+          },
+          {
+            "lat": 52.5342939,
+            "lon": 13.3431584
+          },
+          {
+            "lat": 52.534268,
+            "lon": 13.3431577
+          },
+          {
+            "lat": 52.5336418,
+            "lon": 13.3431394
+          }
+        ]
+      }
+    },
+    {
+      "id": "de-osm-way-4610525",
+      "region": "DE",
+      "vehicle": "bicycle",
+      "label": "prohibited_or_vehicle_mismatch",
+      "label_basis": {
+        "source_tag": "bicycle",
+        "source_value": "no",
+        "method": "Explicit prohibition supplied by an OpenStreetMap contributor; the analyzer output did not assign this label."
+      },
+      "source": {
+        "type": "openstreetmap_way_snapshot",
+        "way_id": 4610525,
+        "url": "https://www.openstreetmap.org/way/4610525",
+        "snapshot_at": "2026-09-02T02:20:12Z",
+        "license": "ODbL 1.0"
+      },
+      "route_points": [
+        {
+          "lat": 52.519272,
+          "lon": 13.3972095
+        },
+        {
+          "lat": 52.5191987,
+          "lon": 13.3973026
+        }
+      ],
+      "way": {
+        "tags": {
+          "bicycle": "no",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Am Zeughaus",
+          "name:etymology:wikidata": "Q196970",
+          "postal_code": "10117",
+          "surface": "paving_stones",
+          "width": "3",
+          "wikidata": "Q95546159",
+          "wikimedia_commons": "Category:Am Zeughaus (Berlin-Mitte)"
+        },
+        "geometry": [
+          {
+            "lat": 52.519272,
+            "lon": 13.3972095
+          },
+          {
+            "lat": 52.5191987,
+            "lon": 13.3973026
+          },
+          {
+            "lat": 52.5191151,
+            "lon": 13.397369
+          },
+          {
+            "lat": 52.5189062,
+            "lon": 13.3975063
+          },
+          {
+            "lat": 52.5187286,
+            "lon": 13.3976007
+          },
+          {
+            "lat": 52.5186007,
+            "lon": 13.3976574
+          },
+          {
+            "lat": 52.5182354,
+            "lon": 13.3977831
+          },
+          {
+            "lat": 52.5179831,
+            "lon": 13.3978952
+          },
+          {
+            "lat": 52.5179569,
+            "lon": 13.3979068
+          },
+          {
+            "lat": 52.5177059,
+            "lon": 13.3979531
+          },
+          {
+            "lat": 52.5176954,
+            "lon": 13.397955
+          },
+          {
+            "lat": 52.5176426,
+            "lon": 13.3979639
+          }
+        ]
+      }
+    }
+  ]
+}

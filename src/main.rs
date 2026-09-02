@@ -120,17 +120,9 @@ async fn main() {
     let database_url = supplied_database_url
         .clone()
         .unwrap_or_else(default_database_url);
-    let database_options = database_url
-        .parse::<SqliteConnectOptions>()
-        .expect("valid sqlite configuration")
-        .create_if_missing(true)
-        .busy_timeout(Duration::from_secs(30));
-    let db = SqlitePoolOptions::new()
-        .max_connections(1)
-        .connect_with(database_options)
+    let db = open_database(&database_url)
         .await
-        .expect("connect sqlite");
-    sqlx::query("CREATE TABLE IF NOT EXISTS counters (key TEXT PRIMARY KEY, value INTEGER NOT NULL DEFAULT 0)").execute(&db).await.expect("create counters");
+        .expect("initialize sqlite database");
     let state = Arc::new(AppState {
         client: reqwest::Client::builder()
             .timeout(Duration::from_secs(24))
@@ -172,15 +164,39 @@ async fn main() {
 }
 
 fn default_database_url() -> String {
-    if Path::new("/data").is_dir() {
+    database_url_for_paths(Path::new("/data"), Path::new("cycle-legal.sqlite"))
+}
+
+fn database_url_for_paths(data_dir: &Path, local_database: &Path) -> String {
+    if data_dir.is_dir() {
         // Azure Files uses SMB semantics that do not provide SQLite's usual
         // POSIX byte-range locks. This VFS uses a sidecar lock directory and
         // is safe with the deployment's enforced one-replica/one-connection
         // configuration.
-        "sqlite:///data/cycle-legal.sqlite?mode=rwc&vfs=unix-dotfile".into()
+        format!(
+            "sqlite://{}?mode=rwc&vfs=unix-dotfile",
+            data_dir.join("cycle-legal.sqlite").display()
+        )
     } else {
-        "sqlite://cycle-legal.sqlite?mode=rwc".into()
+        format!("sqlite://{}?mode=rwc", local_database.display())
     }
+}
+
+async fn open_database(database_url: &str) -> Result<SqlitePool, sqlx::Error> {
+    let database_options = database_url
+        .parse::<SqliteConnectOptions>()?
+        .create_if_missing(true)
+        .busy_timeout(Duration::from_secs(30));
+    let db = SqlitePoolOptions::new()
+        .max_connections(1)
+        .connect_with(database_options)
+        .await?;
+    sqlx::query(
+        "CREATE TABLE IF NOT EXISTS counters (key TEXT PRIMARY KEY, value INTEGER NOT NULL DEFAULT 0)",
+    )
+    .execute(&db)
+    .await?;
+    Ok(db)
 }
 
 fn build_router(state: Arc<AppState>, static_root: impl AsRef<Path>) -> Router {
@@ -469,6 +485,70 @@ mod tests {
             billing_base: "http://127.0.0.1/billing".into(),
             analysis_slots: Arc::new(Semaphore::new(8)),
         })
+    }
+
+    #[tokio::test]
+    async fn retained_data_directory_persists_database_across_restart() {
+        let fixture = tempfile::tempdir().expect("temporary runtime root");
+        let data_dir = fixture.path().join("data");
+        std::fs::create_dir(&data_dir).expect("mounted data directory");
+        let local_database = fixture.path().join("local.sqlite");
+        let database_url = database_url_for_paths(&data_dir, &local_database);
+
+        assert_eq!(
+            database_url,
+            format!(
+                "sqlite://{}?mode=rwc&vfs=unix-dotfile",
+                data_dir.join("cycle-legal.sqlite").display()
+            )
+        );
+        let first_boot = open_database(&database_url)
+            .await
+            .expect("first database boot");
+        sqlx::query("INSERT INTO counters(key, value) VALUES('page_views', 7)")
+            .execute(&first_boot)
+            .await
+            .expect("write retained aggregate");
+        first_boot.close().await;
+
+        let second_boot = open_database(&database_url)
+            .await
+            .expect("second database boot");
+        let retained: i64 =
+            sqlx::query_scalar("SELECT value FROM counters WHERE key = 'page_views'")
+                .fetch_one(&second_boot)
+                .await
+                .expect("read retained aggregate");
+        assert_eq!(retained, 7);
+        assert!(data_dir.join("cycle-legal.sqlite").is_file());
+        assert!(!local_database.exists());
+    }
+
+    #[tokio::test]
+    async fn database_path_uses_dotfile_locking_and_local_fallback() {
+        let fixture = tempfile::tempdir().expect("temporary runtime root");
+        let missing_data_dir = fixture.path().join("missing-data");
+        let local_database = fixture.path().join("cycle-legal.sqlite");
+        let fallback_url = database_url_for_paths(&missing_data_dir, &local_database);
+
+        assert_eq!(
+            fallback_url,
+            format!("sqlite://{}?mode=rwc", local_database.display())
+        );
+        assert!(!fallback_url.contains("vfs=unix-dotfile"));
+        let fallback = open_database(&fallback_url)
+            .await
+            .expect("fallback database must open");
+        fallback.close().await;
+        assert!(local_database.is_file());
+
+        let mounted_data_dir = fixture.path().join("data");
+        std::fs::create_dir(&mounted_data_dir).expect("mounted data directory");
+        let mounted_url = database_url_for_paths(&mounted_data_dir, &local_database);
+        assert!(
+            mounted_url.ends_with("/data/cycle-legal.sqlite?mode=rwc&vfs=unix-dotfile"),
+            "mounted data must select SQLite's unix-dotfile VFS: {mounted_url}"
+        );
     }
 
     fn static_fixture() -> TempDir {

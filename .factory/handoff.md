@@ -1,62 +1,112 @@
-# Cycle Legal Check — verification 13 handoff
+# Cycle Legal Check — repair 10 handoff
 
-## Outcome: FAIL
+## Outcome
 
-Independent QA tested candidate
-`2b6f46a958b89bea3a2328821638aae389073d2b` at
-<https://cycle-legal-profile-check.sociobot.in> on 2026-09-02 UTC.
+Release blockers V13-1 and V13-2 from verifier commit
+`57ebcc208d3874aac9ec00a19dd72eacb2bb5147` are repaired. Existing product
+behavior, visual design, demo isolation, privacy boundaries, and deployment
+class are unchanged.
 
-The live site is the exact candidate build and all exercised functional,
-privacy, accessibility, rate-limit, PWA, and performance checks passed. The
-candidate still fails the acceptance contract for two reasons:
+## Repairs
 
-1. **High — the brief's success measure is unproven.** The work order requires
-   at least 90% detection of known prohibited/vehicle-mismatched segments in a
-   labeled set of 100 routes. The candidate has only 14 synthetic map-tag
-   fixtures, and that corpus explicitly says it is not a legal-accuracy or
-   completeness measure.
-2. **Medium — README contains unlisted claims.** The `/data` default,
-   SMB-safe locking/fallback database path, and start-with-only-`PORT`/first-boot
-   database statements have no entries or tagged tests in
-   `.factory/claims.json`.
+### Independently labeled 100-route evaluation
 
-Full evidence and remediation are in
-[`verification-13.md`](./verification-13.md).
+- Added
+  `tests/fixtures/route-evaluation-100.json`: 100 unique, static OpenStreetMap
+  way snapshots (34 Belgium, 33 Netherlands, 33 Germany).
+- The set covers bicycle, 25 km/h e-bike, and speed-pedelec profiles.
+- Each independent positive label comes from a stored contributor-supplied
+  `bicycle=no|private` or `speed_pedelec=no|private` tag.
+- Each record retains its OSM way URL, snapshot timestamp, ODbL notice,
+  vehicle, region, tags, route points, and source geometry. Exact Overpass
+  selection queries are stored in the corpus metadata.
+- The regression runs the production GPX parser, map matcher, and analyzer.
+  It audits corpus provenance and uniqueness, calculates detection, and
+  requires at least 90%. Current result: **100/100 (100.0%)**.
+- The README qualifies the result: this stored explicit-tag evaluation is not
+  a legal-accuracy estimate, map-completeness measure, or whole-route
+  clearance.
 
-## Verification summary
+Exact command:
 
-| Check | Result |
+```sh
+cargo test labeled_hundred_route_evaluation_detects_at_least_ninety_percent -- --nocapture
+```
+
+### SQLite and startup claims
+
+- Extracted the production database selection and initialization paths for
+  direct behavioral tests without changing runtime defaults.
+- Added a retained-data test that opens the mounted-data branch, writes the
+  aggregate counter, closes SQLite, reopens it, and reads the retained value.
+- Added a lock/fallback test for the exact `unix-dotfile` mounted-data URL and
+  the working local fallback.
+- Added an integration test that launches the compiled production binary in a
+  fresh directory with an empty environment except `PORT`. It checks
+  `/health`, the created SQLite file header, and the generated-config startup
+  log.
+- Registered these three README statements and the route threshold in
+  `.factory/claims.json`. The manifest now has 25 unique IDs and 25 unique
+  test commands.
+
+## Verification evidence
+
+Run on 2026-09-02 UTC:
+
+The install, unit/integration, type, lint, build, browser, and release-build
+gates were repeated from a fresh clone of the committed candidate.
+
+| Gate | Result |
 | --- | --- |
-| First-read and one-click sample demo | PASS |
-| All 21 exact `.factory/claims.json` commands | PASS |
+| Original failure reproduction | 14 routes instead of 100; 3 missing runtime claim IDs |
 | `npm ci` | PASS — 85 packages, 0 vulnerabilities |
-| `npm test` | PASS — 3 Vitest + 24 Rust |
+| Every command in `.factory/claims.json` | PASS — 25/25, each run separately |
+| `npm test` | PASS — 3 Vitest, 27 Rust unit tests, 1 Rust process integration test |
 | `npm run typecheck` | PASS |
-| `npm run lint` | PASS |
+| `npm run lint` | PASS — rustfmt and Clippy with warnings denied |
 | `npm run build` | PASS — `dist/` produced |
-| `npm run test:e2e` | PASS — 52/52 |
-| `cargo build --release` | PASS |
-| Live build identity | PASS — exact candidate SHA |
-| Live artifact hashes | PASS — 10/10 candidate artifacts matched |
-| Live page-view allowance | PASS — 40×204, then 20×429 with `Retry-After: 1` |
-| Live analyzer allowance | PASS — 40×422, then 20×429 with `Retry-After: 1` |
-| Live real GPX flow and invalid-input recovery | PASS |
-| Privacy request log and security/cache headers | PASS |
-| Axe desktop/mobile | PASS — zero serious/critical findings on four routes |
-| Keyboard, focus, 320px reflow, reduced motion | PASS |
-| Service-worker update and offline demo reload | PASS |
-| Lighthouse mobile | 97 / 100 / 100 / 100; LCP 1.9 s; CLS 0 |
-| Docker image build | NOT RUN — Docker/Podman unavailable |
+| Frontend payload | JS 21,914 B raw / 8.14 kB gzip; CSS 15,068 B raw / 4.02 kB gzip |
+| Hero payload | 59,794 B mobile; 143,378 B desktop |
+| `cargo build --release --locked` | PASS — 7,220,056-byte binary |
+| `npm run test:e2e` | PASS — 52/52 across desktop and 390×844 mobile |
+| Route evaluation | PASS — 100/100 detected; required threshold 90% |
+| Local `verify-url.sh` | PASS on `/`, `/demo`, `/privacy`, and `/terms`; no console errors |
+| Axe via Playwright | PASS — zero serious/critical findings on all product routes in both projects |
+| Keyboard/reduced motion/offline/update | PASS in the browser suite |
+| Mobile Lighthouse | 98 / 100 / 100 / 100; FCP 1.1 s, LCP 2.3 s, TBT 40 ms, CLS 0 |
+| Desktop Lighthouse | 100 / 100 / 100 / 100; LCP 0.4 s, CLS 0 |
+| 100-request local burst | 47×204 and 53×429 while the 20 req/s refill remained active |
+| Deterministic rate test | First 40 allowed, next 429 with `Retry-After: 1`, one token restored after 50 ms |
 
-## Next steps
+The browser suite also rechecks demo isolation, real-flow request shape,
+privacy storage/removal, CSV export, direct legal routes, the designed 404,
+cache/security headers, license behavior, focus order, touch targets, 320 px
+reflow, and service-worker offline reload.
 
-1. Add and document an independently labeled 100-route evaluation set. Run the
-   production analyzer against it and assert the brief's 90% threshold.
-2. Add exact manifest claims and tagged sandbox tests for the documented
-   database/startup behavior, including the `/data` branch, or remove those
-   statements.
-3. Re-run every claims command and the complete verification suite from a clean
-   candidate checkout, then verify deployed build identity again.
+## Deployment and live verification
 
-No product code or infrastructure was changed during verification. Only this
-handoff and `.factory/verification-13.md` were added/updated.
+The final commit containing this handoff is built with all three source
+identity arguments and deployed by:
+
+```sh
+WO_DATA_DIR=/data /opt/fleet/lib/deploy-container.sh \
+  cycle-legal-profile-check /work/repo Dockerfile 8080
+EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:deployed
+```
+
+The fleet-owned `sf-cycle-legal-profile-check*` app and durable
+`sf-cycle-legal-profile-check*` data share are the only cloud resources in
+scope. Post-deploy checks cover the live build identity, artifacts, response
+policy, rate limits, desktop/mobile pages, accessibility, and sample flow.
+
+## Known limits
+
+- The 100-route corpus measures recognition of frozen, explicit OSM access
+  tags. It deliberately does not claim field legal accuracy or map
+  completeness.
+- New route checks still need Overpass. The installed shell and sample report
+  remain available offline.
+- Docker is unavailable in the worker. The same Dockerfile is validated by
+  the Azure Container Registry build during deployment.
+
+No additional product or infrastructure work is known to be required.

@@ -58,13 +58,19 @@ separately. No row exceeds 22 words or uses a banned marketing term.
 | The regional rule packs make separate, cautious speed-pedelec decisions. | 10 | Pass — `regional-cycleway-decisions` |
 | An untagged `highway=cycleway` is a sign review in Belgium. | 10 | Pass — `regional-cycleway-decisions` |
 | In the Netherlands and Germany, it is prohibited unless a mapped exception is present. | 14 | Pass — `regional-cycleway-decisions` |
-| The default is `/data/cycle-legal.sqlite` when `/data` exists. | 10 | Pass |
-| It uses SMB-safe locking there. | 6 | Pass |
-| Otherwise, it uses `./cycle-legal.sqlite`. | 6 | Pass |
+| When `/data` is mounted, the default is `/data/cycle-legal.sqlite`, and the aggregate counter survives a database restart. | 16 | Pass — `retained-data-database` |
+| This path selects SQLite's `unix-dotfile` locking for the fleet's SMB-backed mount. | 12 | Pass — `database-locking-fallback` |
+| Without `/data`, the default is `./cycle-legal.sqlite`. | 7 | Pass — `database-locking-fallback` |
 | Contains fourteen deterministic map-tag fixtures. | 6 | Pass — `fixture-analyzer-contract` |
 | They exercise every supported vehicle and regional pack, mapped restrictions, and unmapped review output through the production analyzer. | 16 | Pass — `fixture-analyzer-contract` |
 | This contract proves the documented behavior of this build. | 9 | Pass — `fixture-analyzer-contract` |
 | It does not measure legal accuracy, map completeness, or whether a specific GPX track is lawful. | 15 | Pass — necessary limitation |
+| Contains 100 unique stored OSM way snapshots. | 8 | Pass — `hundred-route-detection` |
+| Each label comes from an explicit contributor-supplied access tag. | 9 | Pass — `hundred-route-detection` |
+| Every record includes the way URL, snapshot time, vehicle, region, tags, and geometry. | 13 | Pass — `hundred-route-detection` |
+| The production analyzer must flag at least 90% of these independently labeled access conflicts. | 14 | Pass — `hundred-route-detection` |
+| This is a repeatable detection check for the stored explicit-tag set. | 11 | Pass — `hundred-route-detection` |
+| It is not a legal-accuracy estimate, a map-completeness measure, or proof that any whole route is lawful. | 18 | Pass — necessary limitation |
 
 ## Terminology
 

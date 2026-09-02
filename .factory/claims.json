@@ -145,5 +145,33 @@
     "where": "README Verify",
     "test": "cargo test api_rate_limit_allows_forty_then_replenishes_at_twenty_per_second",
     "sandbox": "A fixed forwarded client address receives 40 page-view responses, a 429 with Retry-After, then one renewed allowance after the 50-millisecond refill interval."
+  },
+  {
+    "id": "hundred-route-detection",
+    "claim": "The production analyzer flags at least 90% of 100 independently labeled explicit access conflicts in the bundled OSM route corpus.",
+    "where": "README Labeled route evaluation",
+    "test": "cargo test labeled_hundred_route_evaluation_detects_at_least_ninety_percent",
+    "sandbox": "The production GPX parser, map matcher, and analyzer run against 100 unique stored OSM way snapshots; the test audits each independent source label and asserts at least 90 detections."
+  },
+  {
+    "id": "retained-data-database",
+    "claim": "When /data is mounted, the default SQLite database is /data/cycle-legal.sqlite and its aggregate counter survives a database restart.",
+    "where": "README Run locally",
+    "test": "cargo test retained_data_directory_persists_database_across_restart",
+    "sandbox": "A temporary mounted-data directory uses the production database selector; the test writes an aggregate, closes the pool, reopens it, and reads the retained value."
+  },
+  {
+    "id": "database-locking-fallback",
+    "claim": "The /data database selects SQLite unix-dotfile locking; without /data, the default is ./cycle-legal.sqlite.",
+    "where": "README Run locally",
+    "test": "cargo test database_path_uses_dotfile_locking_and_local_fallback",
+    "sandbox": "Temporary mounted and absent data-directory fixtures assert the exact production SQLite URLs, open the fallback database, and verify its file is created locally."
+  },
+  {
+    "id": "port-only-startup",
+    "claim": "The production binary starts with only PORT set and creates its SQLite database on first boot.",
+    "where": "README Run locally",
+    "test": "cargo test binary_starts_with_only_port_and_creates_database",
+    "sandbox": "The compiled binary starts in a fresh release-like directory with an empty environment except PORT; the test calls /health, inspects the SQLite header, and checks the generated-config startup log."
   }
 ]

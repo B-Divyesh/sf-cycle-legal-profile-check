@@ -33,7 +33,10 @@ Configuration is optional:
 
 - `PORT` — HTTP port; defaults to `8080`.
 - `DATABASE_URL` — optional SQLite URL override.
-  The default is `/data/cycle-legal.sqlite` when `/data` exists. It uses SMB-safe locking there. Otherwise, it uses `./cycle-legal.sqlite`.
+  When `/data` is mounted, the default is `/data/cycle-legal.sqlite`, and
+  the aggregate counter survives a database restart. This path selects
+  SQLite's `unix-dotfile` locking for the fleet's SMB-backed mount. Without
+  `/data`, the default is `./cycle-legal.sqlite`.
 - `OVERPASS_URL` — Overpass interpreter URL.
 - `BILLING_API_BASE` — Sociobot billing API base.
 - `BUILD_SHA` — build identifier returned by `/health`.
@@ -85,6 +88,25 @@ cargo test fixture_backed_analyzer_contract_covers_supported_profiles_and_uncert
 
 This contract proves the documented behavior of this build. It does not measure
 legal accuracy, map completeness, or whether a specific GPX track is lawful.
+
+## Labeled route evaluation
+
+[`tests/fixtures/route-evaluation-100.json`](tests/fixtures/route-evaluation-100.json)
+contains 100 unique stored OSM way snapshots. Each label comes from an explicit
+contributor-supplied `bicycle=no|private` or
+`speed_pedelec=no|private` tag. Every record includes the way URL, snapshot
+time, vehicle, region, tags, and geometry.
+
+The production analyzer must flag at least 90% of these independently labeled
+access conflicts:
+
+```sh
+cargo test labeled_hundred_route_evaluation_detects_at_least_ninety_percent
+```
+
+This is a repeatable detection check for the stored explicit-tag set. It is not
+a legal-accuracy estimate, a map-completeness measure, or proof that any whole
+route is lawful.
 
 ## License
 

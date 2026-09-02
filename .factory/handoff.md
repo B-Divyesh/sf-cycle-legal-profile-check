@@ -1,3 +1,87 @@
+# Cycle Legal Check — polish round 3 handoff
+
+## Outcome
+
+Round 3 closes the final adversarial-review finding. The shared footer no
+longer says “Hero image generated for this product with Azure AI.” That
+non-actionable visitor sentence has been removed from every application route.
+The original asset provenance remains in `.factory/design.md`, where it
+belongs.
+
+Repair commits pushed to `main`:
+
+- `f1ef15b25bd8b11b49744cebacc183a529ab0976` removes the footer sentence,
+  updates the copy audit and catalog description, and adds a browser
+  regression check.
+- `f7d1a047dbf5cfdcc6f8eb4599ef1b051cd9ac8c` adds the same assertion to the
+  live all-route verifier.
+
+The deployed live build is
+`f7d1a047dbf5cfdcc6f8eb4599ef1b051cd9ac8c` at
+<https://cycle-legal-profile-check.sociobot.in>. Scoped ACR build run `ch1vx`
+succeeded. The app retains its single-replica durable `/data` mount on scoped
+share `sf-cycle-legal-profile-c-fa77fd`.
+
+## Verification
+
+From a fresh clone of the repair commit:
+
+- `npm ci` — PASS; no package vulnerabilities reported.
+- Every one of the 25 commands in `.factory/claims.json` — PASS, run
+  individually from its demo-safe test path.
+- `npm test` — PASS: 3 Vitest, 27 Rust unit, and 1 runtime-contract test.
+- `npm run typecheck`, `npm run lint`, `npm run build`, and `cargo build
+  --release --locked` — PASS.
+- `npm run test:e2e` — PASS: 54/54. It covers axe, keyboard/focus, mobile
+  reflow, direct routes/404, legal controls, privacy requests, demo isolation,
+  and offline reload.
+
+Live checks:
+
+- `EXPECTED_BUILD_SHA=$(git rev-parse HEAD) EVIDENCE_DIR=.factory/evidence/polish-3/live npm run verify:live:polish` — PASS.
+  It cold-loaded `/`, `/demo`, `/privacy`, and `/terms` at 1440×900 and
+  390×844. Every route had status 200, one H1 and main landmark, no horizontal
+  overflow or console errors, zero serious/critical axe findings, and a footer
+  free of the removed provenance line. It also passed direct demo isolation,
+  offline reload, mobile navigation, privacy storage removal, route focus, and
+  44 px report targets. Evidence is in `.factory/evidence/polish-3/live/`.
+- `EXPECTED_BUILD_SHA=$(git rev-parse HEAD) npm run verify:deployed` — PASS.
+  `/health` returned the deployed SHA. One HTTP/2 session made 60 page-view
+  calls: 40 returned 204 and 20 returned 429 with `Retry-After: 1`.
+
+Direct visual inspection passed for:
+
+- `.factory/evidence/polish-3/live/landing-desktop.png`
+- `.factory/evidence/polish-3/live/landing-mobile.png`
+- `.factory/evidence/polish-3/live/404-desktop.png`
+
+## Run and deploy
+
+```sh
+npm ci
+npm run build
+cargo run
+```
+
+Open <http://localhost:8080>; `/demo` is the isolated sample path. Deploy with
+the factory work-order command:
+
+```sh
+WO_DATA_DIR=/data /opt/fleet/lib/deploy-container.sh \
+  cycle-legal-profile-check /work/repo Dockerfile 8080
+```
+
+## Known gaps and next steps
+
+No review finding remains open. The documented limits remain intentional: map
+evidence can be incomplete, reports are not legal advice, and real route
+checks need Overpass connectivity. No follow-up product work is required for
+this round.
+
+---
+
+## Historical reviewer records
+
 # Cycle Legal Check — review 3 handoff
 
 ## Reviewer update — 2026-09-02 UTC

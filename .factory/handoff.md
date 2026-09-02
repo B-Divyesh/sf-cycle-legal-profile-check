@@ -1,3 +1,25 @@
+# Cycle Legal Check — review 3 handoff
+
+## Reviewer update — 2026-09-02 UTC
+
+This work order performed an adversarial review only. Product source, assets,
+and infrastructure were not changed.
+
+- Wrote `.factory/review-3.md` and committed it.
+- Used fresh 390 px and desktop live browser contexts, the direct demo route,
+  request logging, storage-separation checks, route/focus checks, the prior
+  review/polish records, and a clean local clone.
+- Installed dependencies in the clean clone and ran all 25 distinct
+  `.factory/claims.json` commands separately; all passed. `npm test`,
+  typecheck, lint, build, and the full Playwright suite were also run.
+- Result: **FAIL**, with one minor finding, `F-3-1`. The shared footer says
+  “Hero image generated for this product with Azure AI.” The sentence is an
+  unlisted provenance claim and does not provide a cyclist actionable product
+  information. Remove it from the product footer; `.factory/design.md`
+  already records the required asset provenance.
+
+The pre-existing repair-10 evidence follows for history.
+
 # Cycle Legal Check — repair 10 handoff
 
 ## Outcome

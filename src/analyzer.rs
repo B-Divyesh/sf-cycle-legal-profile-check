@@ -693,10 +693,11 @@ mod tests {
             }
 
             let points = contract_points();
-            let ways = case
-                .mapped
-                .then(|| vec![contract_way(index as i64 + 1, case.tags.clone())])
-                .unwrap_or_default();
+            let ways = if case.mapped {
+                vec![contract_way(index as i64 + 1, case.tags.clone())]
+            } else {
+                Vec::new()
+            };
             let report = analyze(
                 format!("fixture: {}", case.id),
                 &points,

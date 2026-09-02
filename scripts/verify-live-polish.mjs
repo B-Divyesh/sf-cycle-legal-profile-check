@@ -20,6 +20,7 @@ const report = {
   routeFocus: false,
   mobileNavigation: false,
   legalClaims: false,
+  footerProvenanceClear: false,
 };
 
 function contrastRatio(foreground, background) {
@@ -66,6 +67,10 @@ try {
       assert.equal(await page.locator('main').count(), 1);
       assert.equal(await page.getByRole('heading', { name: route.h1 }).isVisible(), true);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
+      const footer = page.locator('footer');
+      assert.match(await footer.textContent() ?? '', /Cycle Legal Check is not legal advice\. Coverage is incomplete\./);
+      assert.equal(/generated for this product|Azure AI/i.test(await footer.textContent() ?? ''), false, `${route.path} footer provenance copy`);
+      assert.equal(await footer.getByRole('link', { name: 'Build status' }).getAttribute('href'), '/health');
       const axe = await new AxeBuilder({ page }).analyze();
       const serious = axe.violations.filter(item => ['serious', 'critical'].includes(item.impact ?? ''));
       assert.deepEqual(serious, [], `${route.path} ${viewport.name} axe`);
@@ -141,6 +146,7 @@ try {
     }
     await context.close();
   }
+  report.footerProvenanceClear = true;
 
   const routeContext = await browser.newContext();
   const routePage = await routeContext.newPage();

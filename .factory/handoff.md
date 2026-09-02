@@ -1,3 +1,25 @@
+# Cycle Legal Check — adversarial review 4 handoff
+
+## Outcome: PASS
+
+Reviewer-only work order completed on 2026-09-02 UTC. Product source, assets,
+deployment, and product data were not changed.
+
+- Wrote `.factory/review-4.md`; it records a zero-finding adversarial review.
+- Used fresh live desktop and 390 px contexts, direct `/demo` and `?demo=1`,
+  request logging, storage-separation checks, reset/start-real checks, route
+  focus/navigation checks, metadata/404 checks, and same-origin link crawling.
+- In a detached clean clone, ran each of the 25 declared claim commands. All
+  passed. `npm test`, typecheck, lint, and the production build also passed.
+- A full parallel Playwright run hit a Chromium SIGSEGV while creating a browser
+  context; the exact affected `billing-refunds` claim command was rerun and
+  passed 2/2. This was an executor browser crash, not a product assertion.
+
+The reviewer commit contains documentation only. No known product finding or
+follow-up remains.
+
+---
+
 # Cycle Legal Check — independent verification 15 handoff
 
 ## Outcome: PASS

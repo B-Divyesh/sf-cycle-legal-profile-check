@@ -365,6 +365,11 @@
       "degree": 11
     },
     {
+      "id": "frontend_src_main_apppage",
+      "label": "appPage()",
+      "degree": 10
+    },
+    {
       "id": "src_main_get",
       "label": "get()",
       "degree": 10
@@ -372,11 +377,6 @@
     {
       "id": "package_scripts",
       "label": "scripts",
-      "degree": 10
-    },
-    {
-      "id": "tsconfig_compileroptions",
-      "label": "compilerOptions",
       "degree": 10
     }
   ],

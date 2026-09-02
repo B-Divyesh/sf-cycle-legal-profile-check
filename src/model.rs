@@ -16,7 +16,7 @@ pub struct AnalyzeRequest {
     pub license: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "lowercase")]
 pub enum Severity {
     Prohibited,

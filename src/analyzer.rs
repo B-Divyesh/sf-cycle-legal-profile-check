@@ -430,6 +430,63 @@ fn point_segment_km(p: Point, a: &GeoPoint, b: &GeoPoint) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serde::Deserialize;
+
+    #[derive(Debug, Deserialize)]
+    struct AnalyzerContract {
+        cases: Vec<AnalyzerContractCase>,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct AnalyzerContractCase {
+        id: String,
+        vehicle: String,
+        region: String,
+        tags: HashMap<String, String>,
+        mapped: bool,
+        map_available: bool,
+        expected_assessment: Option<ExpectedDecision>,
+        expected_report: ExpectedDecision,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct ExpectedDecision {
+        severity: Severity,
+        rule_id: String,
+    }
+
+    fn contract_points() -> Vec<Point> {
+        vec![
+            Point {
+                lat: 50.0,
+                lon: 4.0,
+                km: 0.0,
+            },
+            Point {
+                lat: 50.001,
+                lon: 4.0,
+                km: 0.111,
+            },
+        ]
+    }
+
+    fn contract_way(id: i64, tags: HashMap<String, String>) -> OverpassWay {
+        OverpassWay {
+            id,
+            tags,
+            geometry: vec![
+                GeoPoint {
+                    lat: 49.999,
+                    lon: 4.0,
+                },
+                GeoPoint {
+                    lat: 50.002,
+                    lon: 4.0,
+                },
+            ],
+        }
+    }
+
     #[test]
     fn parses_and_measures_gpx() {
         let (_, points)=parse_gpx("<gpx><trk><name>Test</name><trkseg><trkpt lat='50' lon='4'/><trkpt lat='50.01' lon='4'/></trkseg></trk></gpx>").unwrap();
@@ -590,5 +647,80 @@ mod tests {
             },
         ]);
         assert!(query.contains("way(around:35,50.000000,4.000000)[highway]"));
+    }
+
+    #[test]
+    fn fixture_backed_analyzer_contract_covers_supported_profiles_and_uncertainty() {
+        let contract: AnalyzerContract =
+            serde_json::from_str(include_str!("../tests/fixtures/analyzer-contract.json"))
+                .expect("the shipped analyzer contract is valid JSON");
+
+        assert_eq!(
+            contract.cases.len(),
+            14,
+            "keep the documented fixture scope deliberate"
+        );
+        let supported_vehicles: HashSet<_> = contract
+            .cases
+            .iter()
+            .map(|case| case.vehicle.as_str())
+            .collect();
+        assert_eq!(
+            supported_vehicles,
+            HashSet::from(["bicycle", "ebike_25", "speed_pedelec"])
+        );
+        let supported_regions: HashSet<_> = contract
+            .cases
+            .iter()
+            .map(|case| case.region.as_str())
+            .collect();
+        assert_eq!(supported_regions, HashSet::from(["BE", "NL", "DE"]));
+        assert!(contract.cases.iter().any(|case| !case.mapped));
+
+        for (index, case) in contract.cases.into_iter().enumerate() {
+            if let Some(expected) = &case.expected_assessment {
+                let assessment = assess_tags(&case.tags, &case.vehicle, &case.region);
+                assert_eq!(
+                    assessment.0, expected.severity,
+                    "{} assessment severity",
+                    case.id
+                );
+                assert_eq!(
+                    assessment.2, expected.rule_id,
+                    "{} assessment rule",
+                    case.id
+                );
+            }
+
+            let points = contract_points();
+            let ways = case
+                .mapped
+                .then(|| vec![contract_way(index as i64 + 1, case.tags.clone())])
+                .unwrap_or_default();
+            let report = analyze(
+                format!("fixture: {}", case.id),
+                &points,
+                &ways,
+                &case.vehicle,
+                &case.region,
+                case.map_available,
+            )
+            .unwrap_or_else(|error| panic!("{} should analyze: {error}", case.id));
+
+            assert_eq!(
+                report.verdict, case.expected_report.severity,
+                "{} report verdict",
+                case.id
+            );
+            assert!(
+                report
+                    .findings
+                    .iter()
+                    .any(|finding| finding.rule_id == case.expected_report.rule_id),
+                "{} report must include {}",
+                case.id,
+                case.expected_report.rule_id
+            );
+        }
     }
 }

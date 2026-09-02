@@ -1,0 +1,145 @@
+{
+  "purpose": "A deterministic contract for the shipped rule evaluator. It is not a legal-accuracy study or a completeness measure.",
+  "cases": [
+    {
+      "id": "bicycle-explicit-prohibition",
+      "vehicle": "bicycle",
+      "region": "BE",
+      "tags": { "highway": "residential", "bicycle": "no" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "prohibited", "rule_id": "OSM-BICYCLE-NO" },
+      "expected_report": { "severity": "prohibited", "rule_id": "OSM-BICYCLE-NO" }
+    },
+    {
+      "id": "general-access-without-bicycle-exception",
+      "vehicle": "ebike_25",
+      "region": "NL",
+      "tags": { "highway": "service", "access": "private" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "prohibited", "rule_id": "OSM-ACCESS-RESTRICTED" },
+      "expected_report": { "severity": "prohibited", "rule_id": "OSM-ACCESS-RESTRICTED" }
+    },
+    {
+      "id": "ebike-explicit-bicycle-permission",
+      "vehicle": "ebike_25",
+      "region": "DE",
+      "tags": { "highway": "residential", "bicycle": "designated" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "clear", "rule_id": "BIKE-EXPLICIT-YES" },
+      "expected_report": { "severity": "clear", "rule_id": "PACK-PASS" }
+    },
+    {
+      "id": "bicycle-default-clear",
+      "vehicle": "bicycle",
+      "region": "BE",
+      "tags": { "highway": "residential" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "clear", "rule_id": "BIKE-DEFAULT" },
+      "expected_report": { "severity": "clear", "rule_id": "PACK-PASS" }
+    },
+    {
+      "id": "speed-pedelec-explicit-prohibition",
+      "vehicle": "speed_pedelec",
+      "region": "BE",
+      "tags": { "highway": "cycleway", "speed_pedelec": "no" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "prohibited", "rule_id": "SP-EXPLICIT-NO" },
+      "expected_report": { "severity": "prohibited", "rule_id": "SP-EXPLICIT-NO" }
+    },
+    {
+      "id": "speed-pedelec-explicit-permission",
+      "vehicle": "speed_pedelec",
+      "region": "NL",
+      "tags": { "highway": "cycleway", "speed_pedelec": "yes" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "clear", "rule_id": "SP-EXPLICIT-YES" },
+      "expected_report": { "severity": "clear", "rule_id": "PACK-PASS" }
+    },
+    {
+      "id": "speed-pedelec-moped-prohibition",
+      "vehicle": "speed_pedelec",
+      "region": "DE",
+      "tags": { "highway": "tertiary", "moped": "no" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "prohibited", "rule_id": "SP-MOPED-NO" },
+      "expected_report": { "severity": "prohibited", "rule_id": "SP-MOPED-NO" }
+    },
+    {
+      "id": "belgium-cycleway-needs-sign-review",
+      "vehicle": "speed_pedelec",
+      "region": "BE",
+      "tags": { "highway": "cycleway" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "review", "rule_id": "BE-SP-CYCLEWAY-SIGN-CHECK" },
+      "expected_report": { "severity": "review", "rule_id": "BE-SP-CYCLEWAY-SIGN-CHECK" }
+    },
+    {
+      "id": "netherlands-cycleway-without-moped-path",
+      "vehicle": "speed_pedelec",
+      "region": "NL",
+      "tags": { "highway": "cycleway" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "prohibited", "rule_id": "NL-SP-CYCLEWAY-NO-MOPED-PATH" },
+      "expected_report": { "severity": "prohibited", "rule_id": "NL-SP-CYCLEWAY-NO-MOPED-PATH" }
+    },
+    {
+      "id": "germany-cycleway-without-exception",
+      "vehicle": "speed_pedelec",
+      "region": "DE",
+      "tags": { "highway": "cycleway" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "prohibited", "rule_id": "DE-SP-CYCLEWAY-NO-EXCEPTION" },
+      "expected_report": { "severity": "prohibited", "rule_id": "DE-SP-CYCLEWAY-NO-EXCEPTION" }
+    },
+    {
+      "id": "netherlands-mapped-moped-path",
+      "vehicle": "speed_pedelec",
+      "region": "NL",
+      "tags": { "highway": "cycleway", "moped": "designated" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "clear", "rule_id": "NL-SP-MOPED-PATH-YES" },
+      "expected_report": { "severity": "clear", "rule_id": "PACK-PASS" }
+    },
+    {
+      "id": "germany-moped-tag-still-needs-sign-review",
+      "vehicle": "speed_pedelec",
+      "region": "DE",
+      "tags": { "highway": "cycleway", "moped": "yes" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "review", "rule_id": "DE-SP-CYCLEWAY-SIGNED-EXCEPTION" },
+      "expected_report": { "severity": "review", "rule_id": "DE-SP-CYCLEWAY-SIGNED-EXCEPTION" }
+    },
+    {
+      "id": "speed-pedelec-road-class-unknown",
+      "vehicle": "speed_pedelec",
+      "region": "BE",
+      "tags": { "highway": "residential" },
+      "mapped": true,
+      "map_available": true,
+      "expected_assessment": { "severity": "review", "rule_id": "BE-SP-TAG-UNKNOWN" },
+      "expected_report": { "severity": "review", "rule_id": "BE-SP-TAG-UNKNOWN" }
+    },
+    {
+      "id": "unmapped-section-is-review",
+      "vehicle": "bicycle",
+      "region": "BE",
+      "tags": {},
+      "mapped": false,
+      "map_available": true,
+      "expected_assessment": null,
+      "expected_report": { "severity": "review", "rule_id": "COVERAGE-UNKNOWN" }
+    }
+  ]
+}

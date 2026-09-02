@@ -135,3 +135,31 @@ policy, rate limits, desktop/mobile pages, accessibility, and sample flow.
   the Azure Container Registry build during deployment.
 
 No additional product or infrastructure work is known to be required.
+
+---
+
+# Independent verification 14 — PASS
+
+Verifier QA on 2026-09-02 tested candidate and live build
+`4272655a211a573ffb04a5b0f590369bb2351127` at
+<https://cycle-legal-profile-check.sociobot.in>. Product code was not
+changed.
+
+- Every one of the 25 `.factory/claims.json` commands passed from a clean
+  detached clone before the wider suite.
+- `npm test`, typecheck, lint, Vite build, and the full 52-test Playwright
+  suite passed, as did `cargo build --release --locked`. JS is 8.1 kB gzip
+  and CSS is 4.0 kB gzip.
+- `/health` returned the exact candidate SHA; ten checked local assets matched
+  the live deployment byte-for-byte.
+- Cold-read/demo, live GPX success and invalid-input recovery, desktop and
+  390px, request privacy, security/cache headers, keyboard focus, axe,
+  service-worker offline reload, and the 40-request API burst limit all
+  passed. The rate-limit response was 429 with `Retry-After: 1`.
+- No Critical, High, Medium, or Low defects remain. Docker/Podman was not
+  installed in this verifier container, so the container build itself could
+  not be repeated here; the frontend production build and release Rust build
+  were exercised locally.
+
+See `.factory/verification-14.md` for exact evidence and the observed API
+allowance. Final status: **PASS**.
